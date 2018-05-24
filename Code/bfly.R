@@ -54,7 +54,7 @@ dodge <- position_dodge(width = 0.5)
 colors <- c("Con" = "#8e0152", # darkest pink
             "Spr" = "#c51b7d", # medium pink
             "SnS" = "#de77ae") # lightest pink
-sns.leg <- c("Con", "Spr", "SnS")
+ns.color <- "#c51b7d"
 box.theme <- theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
                    panel.background = element_blank(), axis.line = element_line(colour = "black"),
                    legend.position = 'none')
@@ -149,13 +149,20 @@ simp.procD <- function(adv.procD.obj, p.dig = 4, crit.dig = 4){
 procD.lm(Abundance ~ Herbicide.Treatment * Year, data = bf)
   ## NS
 
+# Get plotting dataframe
+abun.pltdf <- summarySE(data = bf, measurevar = "Abundance",
+                        groupvars = c("Composite.Variable", "Herbicide.Treatment", "Year"))
+abun.pltdf$Year <- as.numeric(as.character(abun.pltdf$Year))
+
 # Plot
-abun.plt <- ggplot(bf, aes(x = Year, y = Abundance, fill = Herbicide.Treatment)) +
-  geom_boxplot(outlier.shape = 21) +
-  scale_fill_manual(values = colors) +
-  labs(x = "Herbicide Treatment", y = "Butterfly Abundance") +
-  facet_grid(. ~ Herbicide.Treatment) +
-  box.theme; abun.plt
+ggplot(abun.pltdf, aes(x = Year, y = Abundance, color = Herbicide.Treatment)) +
+  geom_path(aes(group = Herbicide.Treatment), position = dodge, lwd = .7) +
+  geom_errorbar(aes(ymax = Abundance + se, ymin = Abundance - se), position = dodge, width = .4, lwd = .8) +
+  geom_point(position = dodge, size = 2) +
+  geom_vline(xintercept = c(2014.35, 2014.5, 2014.65, 2017.35), lty = c(1, 2, 3, 1)) +
+  labs(x = "Year", y = "Butterfly Abundance") +
+  scale_color_manual(values = colors) +
+  sct.theme + theme(legend.position = c(0.4, 0.8))
 
 # ggplot2::ggsave("./Graphs/bf_abun.pdf", plot = abun.plt)
 
@@ -172,13 +179,20 @@ procD.lm(Species.Density ~ Herbicide.Treatment + Year, data = bf)
 # Get pairwise comparison info
 simp.procD(advanced.procD.lm(Species.Density ~ Herbicide.Treatment + Year, ~ 1, ~ Year, data = bf))
 
+# Get plotting dataframe
+dens.pltdf <- summarySE(data = bf, measurevar = "Species.Density",
+                        groupvars = c("Composite.Variable", "Herbicide.Treatment", "Year"))
+dens.pltdf$Year <- as.numeric(as.character(dens.pltdf$Year))
+
 # Plot
-dens.plt <- ggplot(bf, aes(x = Year, y = Species.Density, fill = Herbicide.Treatment)) +
-  geom_boxplot(outlier.shape = 21) +
-  scale_fill_manual(values = colors) +
-  labs(x = "Herbicide Treatment", y = "Butterfly Species Density") +
-  facet_grid(. ~ Herbicide.Treatment) +
-  box.theme; dens.plt
+ggplot(dens.pltdf, aes(x = Year, y = Species.Density, color = Herbicide.Treatment)) +
+  geom_path(aes(group = Herbicide.Treatment), position = dodge, lwd = .7) +
+  geom_errorbar(aes(ymax = Species.Density + se, ymin = Species.Density - se), position = dodge, width = .4, lwd = .8) +
+  geom_point(position = dodge, size = 2) +
+  geom_vline(xintercept = c(2014.35, 2014.5, 2014.65, 2017.35), lty = c(1, 2, 3, 1)) +
+  labs(x = "Year", y = "Butterfly Species Density") +
+  scale_color_manual(values = colors) +
+  sct.theme + theme(legend.position = c(0.4, 0.85))
 
 # ggplot2::ggsave("./Graphs/bf_dens.pdf", plot = dens.plt)
 
@@ -197,17 +211,20 @@ procD.lm(Diversity ~ Herbicide.Treatment + Year, data = bf)
 simp.procD(advanced.procD.lm(Diversity ~ Herbicide.Treatment + Year, ~ 1, ~ Year, data = bf))
   ## NS
 
-# Get a plotting dataframe
+# Get plotting dataframe
 dive.pltdf <- summarySE(data = bf, measurevar = "Diversity",
-                        groupvars = c("Composite.Variable", "Year", "Herbicide.Treatment"))
+                        groupvars = c("Composite.Variable", "Herbicide.Treatment", "Year"))
+dive.pltdf$Year <- as.numeric(as.character(dive.pltdf$Year))
 
 # Plot
-dive.plt <- ggplot(bf, aes(x = Year, y = Diversity, fill = Herbicide.Treatment)) +
-  geom_boxplot(outlier.shape = 21) +
-  scale_fill_manual(values = colors) +
-  labs(x = "Herbicide Treatment", y = "Butterfly Diversity") +
-  facet_grid(. ~ Herbicide.Treatment) +
-  box.theme; dive.plt
+ggplot(dive.pltdf, aes(x = Year, y = Diversity, color = Herbicide.Treatment)) +
+  geom_path(aes(group = Herbicide.Treatment), position = dodge, lwd = .7) +
+  geom_errorbar(aes(ymax = Diversity + se, ymin = Diversity - se), position = dodge, width = .4, lwd = .8) +
+  geom_point(position = dodge, size = 2) +
+  geom_vline(xintercept = c(2014.35, 2014.5, 2014.65, 2017.35), lty = c(1, 2, 3, 1)) +
+  labs(x = "Year", y = "Butterfly Diversity") +
+  scale_color_manual(values = colors) +
+  sct.theme + theme(legend.position = c(0.4, 0.8))
 
 # ggplot2::ggsave("./Graphs/bf_dive.pdf", plot = dive.plt)
 
@@ -230,7 +247,8 @@ nymp$Year <- as.factor(nymp$Year)
 nymp$Herbicide.Treatment <- factor(as.character(nymp$Herbicide.Treatment), levels = c("Con", "Spr", "SnS"))
 str(nymp$Year); unique(nymp$Herbicide.Treatment)
 
-# Analyze each of them then switch to the plotting phase
+# Analyze then plot for each family
+
 # Pieridae (whites & sulphurs)
 procD.lm(Number ~ Herbicide.Treatment * Year, data = pier)
   ## year = sig!
@@ -242,6 +260,20 @@ procD.lm(Number ~ Herbicide.Treatment + Year, data = pier)
 # Pairwise comps
 simp.procD(advanced.procD.lm(Number ~ Herbicide.Treatment + Year, ~ 1, ~ Year, data = pier))
   ## 14 = A | 15 = AB | 16 = B | 17 = A
+
+# Get plotting dataframe
+pier.pltdf <- summarySE(data = pier, measurevar = "Number", groupvars = "Year")
+pier.pltdf$Year <- as.numeric(as.character(pier.pltdf$Year))
+
+# Plot
+ggplot(pier.pltdf, aes(x = Year, y = Number, color = rep.int("Z", nrow(pier.pltdf)))) +
+  geom_path(position = dodge, lwd = .7) +
+  geom_errorbar(aes(ymax = Number + se, ymin = Number - se), position = dodge, width = .4, lwd = .8) +
+  geom_point(position = dodge, size = 2) +
+  geom_vline(xintercept = c(2014.35, 2014.5, 2014.65, 2017.35), lty = c(1, 2, 3, 1)) +
+  labs(x = "Year", y = "Pieridae Number") +
+  scale_color_manual(values = ns.color) +
+  sct.theme + theme(legend.position = "none")
 
 # Lycaenidae (blues & coppers & hairstreaks)
 procD.lm(Number ~ Herbicide.Treatment * Year, data = lyca)
@@ -255,6 +287,20 @@ procD.lm(Number ~ Herbicide.Treatment + Year, data = lyca)
 simp.procD(advanced.procD.lm(Number ~ Herbicide.Treatment + Year, ~ 1, ~ Year, data = lyca))
   ## 14 = A | 15 = B | 16 = AB | 17 = AB
 
+# Get plotting dataframe
+lyca.pltdf <- summarySE(data = lyca, measurevar = "Number", groupvars = "Year")
+lyca.pltdf$Year <- as.numeric(as.character(lyca.pltdf$Year))
+
+# Plot
+ggplot(lyca.pltdf, aes(x = Year, y = Number, color = rep.int("Z", nrow(lyca.pltdf)))) +
+  geom_path(position = dodge, lwd = .7) +
+  geom_errorbar(aes(ymax = Number + se, ymin = Number - se), position = dodge, width = .4, lwd = .8) +
+  geom_point(position = dodge, size = 2) +
+  geom_vline(xintercept = c(2014.35, 2014.5, 2014.65, 2017.35), lty = c(1, 2, 3, 1)) +
+  labs(x = "Year", y = "Lycaenidae Number") +
+  scale_color_manual(values = ns.color) +
+  sct.theme + theme(legend.position = "none")
+
 # Nymphalidae (brush foots)
 procD.lm(Number ~ Herbicide.Treatment * Year, data = nymp)
   ## interaction = sig
@@ -262,10 +308,20 @@ procD.lm(Number ~ Herbicide.Treatment * Year, data = nymp)
 simp.procD(advanced.procD.lm(Number ~ Herbicide.Treatment * Year, ~ 1, ~ Composite.Variable, data = nymp))
   ## some sig!
 
-# Plotting Stage!
+# Get plotting dataframe
+nymp.pltdf <- summarySE(data = nymp, measurevar = "Number",
+                        groupvars = c("Composite.Variable", "Herbicide.Treatment", "Year"))
+nymp.pltdf$Year <- as.numeric(as.character(nymp.pltdf$Year))
 
-
-
+# Plot
+ggplot(nymp.pltdf, aes(x = Year, y = Number, color = Herbicide.Treatment)) +
+  geom_path(aes(group = Herbicide.Treatment), position = dodge, lwd = .7) +
+  geom_errorbar(aes(ymax = Number + se, ymin = Number - se), position = dodge, width = .4, lwd = .8) +
+  geom_point(position = dodge, size = 2) +
+  geom_vline(xintercept = c(2014.35, 2014.5, 2014.65, 2017.35), lty = c(1, 2, 3, 1)) +
+  labs(x = "Year", y = "Nymphalidae Number") +
+  scale_color_manual(values = colors) +
+  sct.theme + theme(legend.position = c(0.5, 0.8))
 
 ##  ----------------------------------------------------------------------------------------------------------  ##
                        # Multivariate Analysis and Plotting ####
@@ -274,18 +330,17 @@ simp.procD(advanced.procD.lm(Number ~ Herbicide.Treatment * Year, ~ 1, ~ Composi
 rm(list = ls())
 
 # You'll want the 'simp.procD' function & my NMS function
-simp.procD <- function(adv.procD.obj, p.dig = 4, crit.dig = 4, sig.thresh = 0.05){
+simp.procD <- function(adv.procD.obj, p.dig = 4, crit.dig = 4){
   ## adv.procD.obj = object of a geomorph::advanced.procD.lm function
   ## p.dig = the number of digits you want the p value rounded to
   ## thresh = the upper threshold of the p values you want to keep
-  ## sig.thresh = What critical point do you want to start from (pre-multiple comparison adjustment)?
   
   # Get just the p values 
-  ## You can refer to the whole output later to get relevant stats when you know what you're looking for
   pairs <- adv.procD.obj$P.means.dist
+  ## You can refer to the whole output later to get relevant stats when you know what you're looking for
   
   # Want to ditch either the top diagonal or the bottom diagonal of the matrix of p-values
-  ## These are redundant with the opposite triangle of the matrix
+  ## These are the mirror image of the opposite triangle of the matrix
   ## I've arbitrarily chosen to eliminate the lower triangle, but it doesn't matter
   pairs[lower.tri(pairs, diag = T)] <- NA
   
@@ -317,8 +372,8 @@ simp.procD <- function(adv.procD.obj, p.dig = 4, crit.dig = 4, sig.thresh = 0.05
   rank <- c(1:length(results3$Comparisons)) # assign them a rank based on this order
   
   # Modify the critical point based on the rank of each sequential p value
-  results3$Alpha.Pt <- round( with(results3, ( (sig.thresh / (length(results3$Comparisons) + 1 - rank)) ) ), 
-                              digits = crit.dig)
+  results3$Crit.Pt <- round( with(results3, ( (0.05 / (length(results3$Comparisons) + 1 - rank)) ) ), 
+                             digits = crit.dig)
   ## Sequential bonferroni is calculated as show above, but in plain English it is like this:
   ## Each comparison gets it's own, sequential, critical point
   ## This is determined by dividing the standard critical point (0.05) by
@@ -329,16 +384,21 @@ simp.procD <- function(adv.procD.obj, p.dig = 4, crit.dig = 4, sig.thresh = 0.05
   ### And 0.05 / 1 = 0.05 (duh)
   
   # Though you probably want to know if the stuff is significant at a glance
-  results3$Sig <- results3$P.Values - results3$Alpha.Pt
+  results3$"P/Crit" <- results3$P.Values / results3$Crit.Pt
   
   # Now get the ranges of "significance" to be reduced to qualitative bits
-  results3$Sig <- ifelse(test = results3$Sig >= 0.05, yes = " ",
-             no = ifelse(test = results3$Sig >= 0, yes = ".",
-             no = ifelse(test = results3$Sig >= -0.01, yes = "**", no = "***")))
+  results3$Sig <- ifelse(test = results3$"P/Crit" > 2, yes = " ",
+                         no = ifelse(test = results3$"P/Crit" > 0.2, yes = ".",
+                                     no = ifelse(test = results3$"P/Crit" > 0.02, yes = "*",
+                                                 no = ifelse(test = results3$"P/Crit" > 0.002, yes = "**", no = "***"))))
   ## Viewer discretion is advized when using this bonus column
   
   # Just in case you don't want to look in the guts of this function to see what * vs. ** means:
-  message("Sig codes: P - Alpha < -0.01 '***' | ≥ -0.01 '**' | ≥ 0 '.' | ≥ 0.05 ' '")
+  message("Sig codes: P / Crit > 2 = ''
+          0.2 < P/C ≤ 2 = '.'
+          0.02 < P/C ≤ 0.2 = '*'
+          0.002 < P/C ≤ 0.02 = '**'
+          P/C ≤ 0.002 = '***'")
   
   # Get rid of the bothersome and distracting row numbering
   row.names(results3) <- NULL
@@ -396,7 +456,7 @@ bf <- read.csv("./Data/actual_bf.csv")
 
 # Fix the levels of the adaptive management column
 unique(bf$Herbicide.Treatment)
-bf$Herbicide.Treatment <- factor(as.character(bf$Herbicide.Treatment), levels = c("BO", "PBG", "GB/H+", "H+"))
+bf$Herbicide.Treatment <- factor(as.character(bf$Herbicide.Treatment), levels = c("Con", "Spr", "SnS"))
 unique(bf$Herbicide.Treatment)
 
 # Select your community similarity/distance index (use the style of vegan::vegdist)
@@ -410,11 +470,11 @@ bf17 <- subset(bf, bf$Year == 2017)
 bf18 <- subset(bf, bf$Year == 2018)
 
 # Make community matrices with no non-species columns
-bf14.rsp <- as.matrix(bf14[,-c(1:4, (ncol(bf14)-2):ncol(bf14))])
-bf15.rsp <- as.matrix(bf15[,-c(1:4, (ncol(bf15)-2):ncol(bf15))])
-bf16.rsp <- as.matrix(bf16[,-c(1:4, (ncol(bf16)-2):ncol(bf16))])
-bf17.rsp <- as.matrix(bf17[,-c(1:4, (ncol(bf17)-2):ncol(bf17))])
-bf18.rsp <- as.matrix(bf18[,-c(1:4, (ncol(bf18)-2):ncol(bf18))])
+bf14.rsp <- as.matrix(bf14[,-c(1:5, (ncol(bf14)-2):ncol(bf14))])
+bf15.rsp <- as.matrix(bf15[,-c(1:5, (ncol(bf15)-2):ncol(bf15))])
+bf16.rsp <- as.matrix(bf16[,-c(1:5, (ncol(bf16)-2):ncol(bf16))])
+bf17.rsp <- as.matrix(bf17[,-c(1:5, (ncol(bf17)-2):ncol(bf17))])
+bf18.rsp <- as.matrix(bf18[,-c(1:5, (ncol(bf18)-2):ncol(bf18))])
 
 # Get the chosen dissimilarity/distance metric for those communities 
 bf14.dst <- vegdist(bf14.rsp, method = comm.dist)
@@ -443,27 +503,23 @@ write.csv(stress, "./Summary Info/stress_bf.csv", row.names = F)
   ## ranges from 0 to 1 when engine = "monoMDS" (is a % with engine = "isoMDS")
 
 # Analyze!
-procD.lm(bf14.dst ~ Herbicide.Treatment, data = bf14) # sig
-simp.procD(advanced.procD.lm(bf14.dst ~ Herbicide.Treatment, ~ 1, ~ Herbicide.Treatment, data = bf14))
-  ## BO = A | PBG = B | GB = B | H+ = AB
+procD.lm(bf14.dst ~ Herbicide.Treatment, data = bf14)
+  ## NS
 
-procD.lm(bf15.dst ~ Herbicide.Treatment, data = bf15) # sig, but pairwise comps are marginal (real close tho)
-simp.procD(advanced.procD.lm(bf15.dst ~ Herbicide.Treatment, ~ 1, ~ Herbicide.Treatment, data = bf15))
-  ## BO = A | PBG = B | GB = B | H+ = B
+procD.lm(bf15.dst ~ Herbicide.Treatment, data = bf15)
+  ## NS
 
-procD.lm(bf16.dst ~ Herbicide.Treatment, data = bf16) # sig
-simp.procD(advanced.procD.lm(bf16.dst ~ Herbicide.Treatment, ~ 1, ~ Herbicide.Treatment, data = bf16))
-  ## BO = A | PBG = B | GB = B | H+ = C
+procD.lm(bf16.dst ~ Herbicide.Treatment, data = bf16)
+  ## NS
 
-procD.lm(bf17.dst ~ Herbicide.Treatment, data = bf17) # sig
-simp.procD(advanced.procD.lm(bf17.dst ~ Herbicide.Treatment, ~ 1, ~ Herbicide.Treatment, data = bf17))
-  ## BO = A | PBG = B | GB = B | H+ = B
+procD.lm(bf17.dst ~ Herbicide.Treatment, data = bf17)
+  ## NS
 
 # Set a quick shortcut for the legend contents of each (it'll be the same for all of 'em)
-mgmt <- c("BO", "PBG", "GB/H+", "H+")
+trt <- c("Con", "Spr", "SnS")
 
 # Make ordinations!
-nms.ord(bf14.mds, bf14$Herbicide.Treatment, g1 = "BO", g2 = "PBG", g3 = "GB/H+", g4 = "H+", legcont = mgmt)
+nms.ord(bf14.mds, bf14$Herbicide.Treatment, g1 = "Con", g2 = "Spr", g3 = "SnS", legcont = trt)
 nms.ord(bf15.mds, bf15$Herbicide.Treatment, "BO", "PBG", "GB/H+", "H+", legcont = mgmt)
 nms.ord(bf16.mds, bf16$Herbicide.Treatment, "BO", "PBG", "GB/H+", "H+", legcont = mgmt)
 nms.ord(bf17.mds, bf17$Herbicide.Treatment, "BO", "PBG", "GB/H+", "H+", legcont = mgmt)
