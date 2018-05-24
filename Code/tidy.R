@@ -1,5 +1,5 @@
 ##  --------------------------------------------------------------------------------------------------------------------------------------  ##
-                                # Lyon Thesis - Full Tidy Script
+                                # Herbicide Side Project - Tidy Code
 ##  --------------------------------------------------------------------------------------------------------------------------------------  ##
 # Written by Nicholas J Lyon
 
@@ -12,7 +12,7 @@
       # 2. Butterfly Data
 
 # Set working directory (Also, "Session" menu to "Set Working Directory" works)
-setwd("~/Documents/School/1. Iowa State/_MS Project/_AFRI Project/Lyon.Thesis-Bfly.Project")
+setwd("~/Documents/School/1. Iowa State/Collaborations/'Herbicide Project/Herbicide.WD")
 
 # Set required libraries
 library(plyr); library(stringr); library(tidyr); library(vegan)
@@ -147,36 +147,42 @@ sort(unique(flr_v7$Nectar.Plant.Name)) # ending at 117. Aren't you glad you took
 
 # Now, create patch codes and year information
 flr_v7$Site <- as.factor(str_sub(flr_v7$DataCode, 1, 3))
+flr_v7$Patch <- as.factor(str_sub(flr_v7$DataCode, 1, 5))
 flr_v7$Year <- paste0("20", str_sub(flr_v7$DataCode, 8, 9))
 
 # Add in useful variables in their own column
-flr_v7$Adaptive.Mgmt <- trmntindex$Adaptive.Mgmt[match(flr_v7$Site, trmntindex$Pasture)]
-flr_v7$Composite.Variable <- paste0(flr_v7$Year, "-", flr_v7$Adaptive.Mgmt)
+flr_v7$Herbicide.Treatment <- trmntindex$Herbicide.Treatment[match(flr_v7$Patch, trmntindex$Patch)]
+flr_v7$Composite.Variable <- paste0(flr_v7$Year, "-", flr_v7$Herbicide.Treatment)
 str(flr_v7)
 
+# Now subset out all unwanted sites
+sort(unique(flr_v7$Site))
+flr_v8 <- subset(flr_v7, flr_v7$Site == "GIL" | flr_v7$Site == "LTR" | flr_v7$Site == "PYW")
+sort(unique(flr_v8$Site))
+
 # Sum so that each pasture has only one cell per species per year
-flr_v8 <- aggregate(TransectTotals ~ Composite.Variable + Adaptive.Mgmt + Year + Site + Nectar.Plant.Name,
-                    data = flr_v7, FUN = sum)
+flr_v9 <- aggregate(TransectTotals ~ Composite.Variable + Herbicide.Treatment + Year + Site + Patch +
+                      Nectar.Plant.Name, data = flr_v8, FUN = sum)
 
 # Save a quick-and-dirty clean version
-write.csv(flr_v8, "./Data/clean_flr.csv", row.names = F)
+write.csv(flr_v9, "./Data/clean_flr.csv", row.names = F)
 
 # Might want annual totals
-aggregate(TransectTotals ~ Year, data = flr_v8, FUN = sum)
+aggregate(TransectTotals ~ Year, data = flr_v9, FUN = sum)
 
 ##  ----------------------------------------------------------  ##  
        # Floral Community Metric Calculation
 ##  ----------------------------------------------------------  ##
 # Push dataframes from long to wide format for calculations
-flr_wide <- spread(flr_v8, Nectar.Plant.Name, TransectTotals, fill = 0)
+flr_wide <- spread(flr_v9, Nectar.Plant.Name, TransectTotals, fill = 0)
 
 # Create dataframes for saving other calculations
 flr_wide_v2 <- flr_wide
 
 # Calculate abundance, density, and diversity and stuff into the bigger dataframe
-flr_wide_v2$Abundance <- as.vector(rowSums(flr_wide[,-c(1:4)]))
-flr_wide_v2$Species.Density <- as.vector(specnumber(flr_wide[,-c(1:4)]))
-flr_wide_v2$Diversity <- as.vector(diversity(flr_wide[,-c(1:4)]))
+flr_wide_v2$Abundance <- as.vector(rowSums(flr_wide[,-c(1:5)]))
+flr_wide_v2$Species.Density <- as.vector(specnumber(flr_wide[,-c(1:5)]))
+flr_wide_v2$Diversity <- as.vector(diversity(flr_wide[,-c(1:5)]))
 
 # Pre-saving check
 ncol(flr_wide_v2)
@@ -198,36 +204,46 @@ str(flr_cln)
 # Need to migrate over key information about each species
 flr_cln$L48.Status <- flrindex$L48.Status[match(flr_cln$Nectar.Plant.Name, tolower(flrindex$Common.Name))]
 flr_cln$Family <- flrindex$Family[match(flr_cln$Nectar.Plant.Name, tolower(flrindex$Common.Name))]
+flr_cln$Seedmix <- flrindex$Seedmix[match(flr_cln$Nectar.Plant.Name, tolower(flrindex$Common.Name))]
 
 # Ensure transfer was successful
 sort(unique(flr_cln$Nectar.Plant.Name[is.na(flr_cln$L48.Status)]))
 sort(unique(flr_cln$Nectar.Plant.Name[is.na(flr_cln$Family)]))
-## "factor(0)" = no NAs (success!) 
+sort(unique(flr_cln$Nectar.Plant.Name[is.na(flr_cln$Seedmix)]))
+  ## "factor(0)" = no NAs (success!) 
 
 # Make a dataframe for interesting subsets of the data
 natives <- flr_cln
-legs <- subset(flr_cln, flr_cln$Family == "Fabaceae")[,c(1:8)]
-aster <- subset(flr_cln, flr_cln$Family == "Asteraceae")[,c(1:8)]
-mint <- subset(flr_cln, flr_cln$Family == "Lamiaceae")[,c(1:8)]
+legs <- subset(flr_cln, flr_cln$Family == "Fabaceae")[, c(1:7)]
+astr <- subset(flr_cln, flr_cln$Family == "Asteraceae")[, c(1:7)]
+mint <- subset(flr_cln, flr_cln$Family == "Lamiaceae")[, c(1:7)]
+sdmx <- subset(flr_cln, flr_cln$Seedmix == "X")[, c(1:7)]
 
 # Reduce the natives dataframe to just a percentage of native spp.
-natives_v2 <- aggregate(TransectTotals ~ Composite.Variable + Year + Adaptive.Mgmt + Site + L48.Status,
-                        data = natives, FUN = sum)
+natives_v2 <- aggregate(TransectTotals ~ Composite.Variable + Year + Herbicide.Treatment + Site + Patch +
+                        L48.Status, data = natives, FUN = sum)
 natives.wide <- spread(natives_v2, L48.Status, TransectTotals, fill = 0)
 natives.wide$Percent.Native <- as.vector( ((natives.wide$N / (natives.wide$N + natives.wide$E) * 100) ) )
+
+# Get abundance and richness of seedmix species
+sdmx.wide <- spread(sdmx, Nectar.Plant.Name, TransectTotals, fill = 0)
+sdmx.wide.v2 <- sdmx.wide
+sdmx.wide.v2$Abundance <- as.vector(rowSums(sdmx.wide[,-c(1:5)]))
+sdmx.wide.v2$Species.Density <- as.vector(specnumber(sdmx.wide[,-c(1:5)]))
 
 # Get within family abundances for each of those dataframes (Legumes, Asters, and Mints)
 legs.wide <- spread(legs, Nectar.Plant.Name, TransectTotals, fill = 0)
 legs.wide$Abundance <- as.vector( rowSums(legs.wide[,-c(1:6)]))
-aster.wide <- spread(aster, Nectar.Plant.Name, TransectTotals, fill = 0)
-aster.wide$Abundance <- as.vector( rowSums(aster.wide[,-c(1:6)]))
+astr.wide <- spread(astr, Nectar.Plant.Name, TransectTotals, fill = 0)
+astr.wide$Abundance <- as.vector( rowSums(astr.wide[,-c(1:6)]))
 mint.wide <- spread(mint, Nectar.Plant.Name, TransectTotals, fill = 0)
 mint.wide$Abundance <- as.vector( rowSums(mint.wide[,-c(1:6)]))
 
 # Save interesting datafiles
 write.csv(natives.wide, "./Data/explore_flr_natives.csv", row.names = F)
-write.csv(legs.wide, "./Data/explore_legumes.csv", row.names = F)
-write.csv(aster.wide, "./Data/explore_asters.csv", row.names = F)
+write.csv(sdmx.wide.v2, "./Data/explore_sdmx.csv", row.names = F)
+write.csv(legs.wide, "./Data/explore_legms.csv", row.names = F)
+write.csv(astr.wide, "./Data/explore_astrs.csv", row.names = F)
 write.csv(mint.wide, "./Data/explore_mints.csv", row.names = F)
 
 ##  ----------------------------------------------------------------------------------------------------------  ##
@@ -292,6 +308,7 @@ sort(unique(bf_v5$BFLY.Common.Name)) # end at 46
 
 # Get site and year out of the huge serial data code
 bf_v5$Site <- str_sub(bf_v5$DataCode, 1, 3)
+bf_v5$Patch <- str_sub(bf_v5$DataCode, 1, 5)
 bf_v5$Year <- paste0("20", str_sub(bf_v5$DataCode, 8, 9))
 
 # Foolish error, but for some butterflies the number is recorded as 0; make it 1
@@ -300,33 +317,38 @@ bf_v5$Number <- as.numeric(gsub("^0$", "1", bf_v5$Number))
 sort(unique(bf_v5$Number))
 
 # Add in useful variables in their own column
-bf_v5$Adaptive.Mgmt <- trmntindex$Adaptive.Mgmt[match(bf_v5$Site, trmntindex$Pasture)]
-bf_v5$Composite.Variable <- paste0(bf_v5$Year, "-", bf_v5$Adaptive.Mgmt)
+bf_v5$Herbicide.Treatment <- trmntindex$Herbicide.Treatment[match(bf_v5$Patch, trmntindex$Patch)]
+bf_v5$Composite.Variable <- paste0(bf_v5$Year, "-", bf_v5$Herbicide.Treatment)
+
+# Now subset out all unwanted sites
+sort(unique(bf_v5$Site))
+bf_v6 <- subset(bf_v5, bf_v5$Site == "GIL" | bf_v5$Site == "LTR" | bf_v5$Site == "PYW")
+sort(unique(bf_v6$Site))
 
 # Sum across pastures
-bf_v6 <- aggregate(Number ~ Composite.Variable + Year + Adaptive.Mgmt + Site + BFLY.Common.Name,
-                   data = bf_v5, FUN = sum)
-str(bf_v6)
+bf_v7 <- aggregate(Number ~ Composite.Variable + Year + Herbicide.Treatment + Site + Patch +
+                     BFLY.Common.Name, data = bf_v6, FUN = sum)
+str(bf_v7)
 
 # Save a quick clean version
-write.csv(bf_v6, "./Data/clean_bf.csv", row.names = F)
+write.csv(bf_v7, "./Data/clean_bf.csv", row.names = F)
 
 # Get annual abundances in case that is of value
-aggregate(Number ~ Year, data = bf_v6, FUN = sum)
+aggregate(Number ~ Year, data = bf_v7, FUN = sum)
 
 ##  ----------------------------------------------------------  ##
      # Butterfly Community Metric Calculation
 ##  ----------------------------------------------------------  ##
 # Push dataframes from long to wide format for calculations
-bf_wide <- spread(bf_v6, BFLY.Common.Name, Number, fill = 0)
+bf_wide <- spread(bf_v7, BFLY.Common.Name, Number, fill = 0)
 
 # Create dataframes for saving calculations to
 bf_wide_v2 <- bf_wide
 
 # Calculate abundance, species density, and diversity for the data frame and stuff into summary dataframes
-bf_wide_v2$Abundance <- as.vector(rowSums(bf_wide[,-c(1:4)]))
-bf_wide_v2$Species.Density <- as.vector(specnumber(bf_wide[,-c(1:4)]))
-bf_wide_v2$Diversity <- as.vector(diversity(bf_wide[,-c(1:4)], index = "shannon"))
+bf_wide_v2$Abundance <- as.vector(rowSums(bf_wide[,-c(1:5)]))
+bf_wide_v2$Species.Density <- as.vector(specnumber(bf_wide[,-c(1:5)]))
+bf_wide_v2$Diversity <- as.vector(diversity(bf_wide[,-c(1:5)], index = "shannon"))
 
 # Idiot check
 ncol(bf_wide_v2)
@@ -362,22 +384,19 @@ aggregate(Number ~ SGCN, data = bf_cln, FUN = sum)
   ## Not really a lot of butterflies in any of these categories
   ## But makes sense to build the pipeline to split out at least the three biggest families
 
-# Get down to just family info (ditch species/other info variables)
-bfly.fam <- bf_cln[,c(1:4, 6, 8)]
-
-# Get the abundances
-bfly.fam.v2 <- aggregate(Number ~ Composite.Variable + Year + Adaptive.Mgmt + Site + Family,
-                         data = bfly.fam, FUN = sum)
+# Get the abundances (and ditch species/other info variables)
+bfly.fam <- aggregate(Number ~ Composite.Variable + Year + Herbicide.Treatment + Site + Family,
+                         data = bf_cln, FUN = sum)
 
 # Get the most abundant families their own dataframes!
-lycaenids <- subset(bfly.fam.v2, bfly.fam.v2$Family == "Lycaenidae")
-pierids <- subset(bfly.fam.v2, bfly.fam.v2$Family == "Pieridae")
-nymphalids <- subset(bfly.fam.v2, bfly.fam.v2$Family == "Nymphalidae")
+lyca <- subset(bfly.fam, bfly.fam$Family == "Lycaenidae")
+pier <- subset(bfly.fam, bfly.fam$Family == "Pieridae")
+nymp <- subset(bfly.fam, bfly.fam$Family == "Nymphalidae")
 
 # Save 'em
-write.csv(lycaenids, "./Data/explore_lycaenids.csv", row.names = F)
-write.csv(pierids, "./Data/explore_pierids.csv", row.names = F)
-write.csv(nymphalids, "./Data/explore_nymphalids.csv", row.names = F)
+write.csv(lyca, "./Data/explore_lycaenids.csv", row.names = F)
+write.csv(pier, "./Data/explore_pierids.csv", row.names = F)
+write.csv(nymp, "./Data/explore_nymphalids.csv", row.names = F)
 
 ##  ----------------------------------------------------------------------------------------------------------  ##
                                   # Data Dictionaries
@@ -424,7 +443,7 @@ write.csv(nymphalids, "./Data/explore_nymphalids.csv", row.names = F)
 ## Nectar.Plant.Name: Common name of the floral resource plant being observed
 ## USDA.scientific.name: Scientific name of that floral resource plant
   ### NOTE: frequently left unfilled out, addressed later
-## Section 1-5: Number of flowering ramets (i.e. stems) of that species per 20 meter section of the transect=
+## Section 1-5: Number of flowering ramets (i.e. stems) of that species per 20 meter section of the transect
 
 # Data Dictionary: "flrindex" ####
 ## Common.Name: The English name for that floral species (synonyms addressed later)
