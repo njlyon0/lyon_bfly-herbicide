@@ -407,12 +407,12 @@ simp.procD <- function(adv.procD.obj, p.dig = 4, crit.dig = 4){
   return(results3)
   
 }
-nms.ord <- function(mod, groupcol, g1, g2, g3, g4, lntp1 = 1, lntp2 = 1, lntp3 = 1, lntp4 = 1,
-                    legcont, legpos = "topright") {
+nms.3.ord <- function(mod, groupcol, g1, g2, g3, lntp1 = 1, lntp2 = 1, lntp3 = 1,
+                      legcont, legpos = "topright") {
   ## mod = object returned by metaMDS
   ## groupcol = group column in the dataframe that contains those (not the community matrix)
-  ## g1 - g4 = how each group appears in your dataframe (in quotes)
-  ## lntp1 - 4 = what sort of line each ellipse will be made of (accepts integers between 1 and 6 for diff lines)
+  ## g1 - g3 = how each group appears in your dataframe (in quotes)
+  ## lntp1 - 3 = what sort of line each ellipse will be made of (accepts integers between 1 and 6 for diff lines)
   ## legcont = single object for what you want the content of the legend to be
   ## legpos = legend position, either numeric vector of x/y coords or shorthand accepted by "legend" function
   
@@ -420,34 +420,29 @@ nms.ord <- function(mod, groupcol, g1, g2, g3, g4, lntp1 = 1, lntp2 = 1, lntp3 =
   plot(mod, display = 'sites', choice = c(1, 2), type = 'none', xlab = "", ylab = "")
   
   # Set colors (easier for you to modify if we set this now and call these objects later)
-  col1 <- "#d73027" # red
-  col2 <- "#fdae61" # yellow
-  col3 <- "#abd9e9" # light blue
-  col4 <- "#4575b4" # blue
-  
+  col1 <- "#8e0152" # darkest pink
+  col2 <- "#c51b7d" # medium pink
+  col3 <- "#de77ae" # lightest pink
   
   # Add points for each group with a different color per group
   points(mod$points[groupcol == g1, 1], mod$points[groupcol == g1, 2], pch = 21, bg = col1)
   points(mod$points[groupcol == g2, 1], mod$points[groupcol == g2, 2], pch = 22, bg = col2)
   points(mod$points[groupcol == g3, 1], mod$points[groupcol == g3, 2], pch = 23, bg = col3)
-  points(mod$points[groupcol == g4, 1], mod$points[groupcol == g4, 2], pch = 24, bg = col4)
   ## As of right now the colors are colorblind safe and each group is also given its own shape
   
   # Get a single vector of your manually set line types for the ellipses
-  lntps <- c(lntp1, lntp2, lntp3, lntp4)
+  lntps <- c(lntp1, lntp2, lntp3)
   
   # Ordinate SD ellipses around the centroid
   library(vegan) # need this package for the following function
   ordiellipse(mod, groupcol, 
-              col = c(g1 = col1, g2 = col2, g3 = col3, g4 = col4),
+              col = c(g1 = col1, g2 = col2, g3 = col3),
               display = "sites", kind = "sd", lwd = 2, lty = lntps, label = F)
   
   # Add legend
   legend(legpos, legend = legcont, bty = "n", 
-         title = paste0("Stress = ", round(mod$stress, digits = 3)),
-         ## The "title" of the legend will now be the stress of the NMS
-         pch = c(21, 22, 23, 24), cex = 1.15, 
-         pt.bg = c(col1, col2, col3, col4))
+         pch = c(21, 22, 23), cex = 1.15, 
+         pt.bg = c(col1, col2, col3))
   
 }
 
@@ -519,27 +514,26 @@ procD.lm(bf17.dst ~ Herbicide.Treatment, data = bf17)
 trt <- c("Con", "Spr", "SnS")
 
 # Make ordinations!
-nms.ord(bf14.mds, bf14$Herbicide.Treatment, g1 = "Con", g2 = "Spr", g3 = "SnS", legcont = trt)
-nms.ord(bf15.mds, bf15$Herbicide.Treatment, "BO", "PBG", "GB/H+", "H+", legcont = mgmt)
-nms.ord(bf16.mds, bf16$Herbicide.Treatment, "BO", "PBG", "GB/H+", "H+", legcont = mgmt)
-nms.ord(bf17.mds, bf17$Herbicide.Treatment, "BO", "PBG", "GB/H+", "H+", legcont = mgmt)
-#nms.ord(bf18.mds, bf18$Herbicide.Treatment, "BO", "PBG", "GB/H+", "H+", legcont = mgmt)
+nms.3.ord(bf14.mds, bf14$Herbicide.Treatment, g1 = "Con", g2 = "Spr", g3 = "SnS", legcont = trt)
+nms.3.ord(bf15.mds, bf15$Herbicide.Treatment, g1 = "Con", g2 = "Spr", g3 = "SnS", legcont = trt)
+nms.3.ord(bf16.mds, bf16$Herbicide.Treatment, g1 = "Con", g2 = "Spr", g3 = "SnS", legcont = trt)
+nms.3.ord(bf17.mds, bf17$Herbicide.Treatment, g1 = "Con", g2 = "Spr", g3 = "SnS", legcont = trt)
 
 # Save out the significant ones
 jpeg(file = "./Graphs/Multivariate/bf_nms14.jpg")
-nms.ord(bf14.mds, bf14$Herbicide.Treatment, "BO", "PBG", "GB/H+", "H+", legcont = mgmt)
+
 dev.off()
 
 jpeg(file = "./Graphs/Multivariate/bf_nms15.jpg")
-nms.ord(bf15.mds, bf15$Herbicide.Treatment, "BO", "PBG", "GB/H+", "H+", legcont = mgmt)
+
 dev.off()
 
 jpeg(file = "./Graphs/Multivariate/bf_nms16.jpg")
-nms.ord(bf16.mds, bf16$Herbicide.Treatment, "BO", "PBG", "GB/H+", "H+", legcont = mgmt)
+
 dev.off()
 
 jpeg(file = "./Graphs/Multivariate/bf_nms17.jpg")
-nms.ord(bf17.mds, bf17$Herbicide.Treatment, "BO", "PBG", "GB/H+", "H+", legcont = mgmt)
+
 dev.off()
 
 
