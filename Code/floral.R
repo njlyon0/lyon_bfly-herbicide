@@ -1,16 +1,18 @@
 ##  --------------------------------------------------------------------------------------------------------------------------------------  ##
-                                 # Lyon Thesis - Floral Resource Code
+                            # Herbicide Side Project - Floral Resource Code
 ##  --------------------------------------------------------------------------------------------------------------------------------------  ##
 # Written by Nicholas Lyon
 
-# START ####
+# PURPOSE ####
+  ## Though my thesis focus has shifted elsewhere, the anti-fescue herbicide treatments still interest me.
+  ## To that end, this analysis focuses entirely on herbicide treatment responses in grazed sites
 
 # Required libraries
 library(vegan); library(geomorph) # Calculate & Analyze
 library(ggplot2); library(Rmisc) # Plot
 
 # Set working directory
-setwd("~/Documents/School/1. Iowa State/_MS Project/_AFRI Project/Lyon.Thesis-Bfly.Project")
+setwd("~/Documents/School/1. Iowa State/Collaborations/'Herbicide Project/Herbicide.WD")
 
 ##  ----------------------------------------------------------------------------------------------------------  ##
                        # Univariate Analysis and Plotting ####
@@ -43,36 +45,36 @@ flr$Year <- as.factor(flr$Year)
 str(flr$Year)
 
 # And get the treatment levels in the right order (alpha order doesn't really make sense here)
-unique(flr$Adaptive.Mgmt)
-flr$Adaptive.Mgmt <- factor(as.character(flr$Adaptive.Mgmt), levels = c("BO", "PBG", "GB/H+", "H+"))
-unique(flr$Adaptive.Mgmt)
+unique(flr$Herbicide.Treatment)
+flr$Herbicide.Treatment <- factor(as.character(flr$Herbicide.Treatment), levels = c("Con", "Spr", "SnS"))
+unique(flr$Herbicide.Treatment)
 
 # Graphing shortcuts
 dodge <- position_dodge(width = 0.5)
-colors <- c("BO" = "#d73027", # red
-            "PBG" = "#fdae61", # yellow
-            "GB/H+" = "#abd9e9", # light blue
-            "H+" =  "#313695", # blue
-            "2014" = "#fc8d59", ## shades of orangey red for years
-            "2015" = "#ef6548",
-            "2016" = "#d7301f",
-            "2017" = "#b30000")
-adpt.leg <- c("BO", "PBG", "GB/H+", "H+")
+colors <- c("Con" = "#276419", # darkest green
+            "Spr" = "#4d9221", # medium green
+            "SnS" = "#7fbc41") # lightest green
+sns.leg <- c("Con", "Spr", "SnS")
+box.theme <- theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+                   panel.background = element_blank(), axis.line = element_line(colour = "black"),
+                   legend.position = 'none')
+sct.theme <- theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+                   panel.background = element_blank(), axis.line = element_line(colour = "black"),
+                   legend.background = element_blank(), legend.title = element_blank())
 
 # This function will take a huge pairwise comparison matrix and format it in a more intuitive way
-  ## Also does multiple comparison adjustment (obvi)
-simp.procD <- function(adv.procD.obj, p.dig = 4, crit.dig = 4, sig.thresh = 0.05){
+## Also does multiple comparison adjustment (obvi)
+simp.procD <- function(adv.procD.obj, p.dig = 4, crit.dig = 4){
   ## adv.procD.obj = object of a geomorph::advanced.procD.lm function
   ## p.dig = the number of digits you want the p value rounded to
   ## thresh = the upper threshold of the p values you want to keep
-  ## sig.thresh = What critical point do you want to start from (pre-multiple comparison adjustment)?
   
   # Get just the p values 
-  ## You can refer to the whole output later to get relevant stats when you know what you're looking for
   pairs <- adv.procD.obj$P.means.dist
+  ## You can refer to the whole output later to get relevant stats when you know what you're looking for
   
   # Want to ditch either the top diagonal or the bottom diagonal of the matrix of p-values
-  ## These are redundant with the opposite triangle of the matrix
+  ## These are the mirror image of the opposite triangle of the matrix
   ## I've arbitrarily chosen to eliminate the lower triangle, but it doesn't matter
   pairs[lower.tri(pairs, diag = T)] <- NA
   
@@ -104,8 +106,8 @@ simp.procD <- function(adv.procD.obj, p.dig = 4, crit.dig = 4, sig.thresh = 0.05
   rank <- c(1:length(results3$Comparisons)) # assign them a rank based on this order
   
   # Modify the critical point based on the rank of each sequential p value
-  results3$Alpha.Pt <- round( with(results3, ( (sig.thresh / (length(results3$Comparisons) + 1 - rank)) ) ), 
-                              digits = crit.dig)
+  results3$Crit.Pt <- round( with(results3, ( (0.05 / (length(results3$Comparisons) + 1 - rank)) ) ), 
+                             digits = crit.dig)
   ## Sequential bonferroni is calculated as show above, but in plain English it is like this:
   ## Each comparison gets it's own, sequential, critical point
   ## This is determined by dividing the standard critical point (0.05) by
@@ -116,16 +118,21 @@ simp.procD <- function(adv.procD.obj, p.dig = 4, crit.dig = 4, sig.thresh = 0.05
   ### And 0.05 / 1 = 0.05 (duh)
   
   # Though you probably want to know if the stuff is significant at a glance
-  results3$Sig <- results3$P.Values - results3$Alpha.Pt
+  results3$"P/Crit" <- results3$P.Values / results3$Crit.Pt
   
   # Now get the ranges of "significance" to be reduced to qualitative bits
-  results3$Sig <- ifelse(test = results3$Sig >= 0.05, yes = " ",
-                         no = ifelse(test = results3$Sig >= 0, yes = ".",
-                                     no = ifelse(test = results3$Sig >= -0.01, yes = "**", no = "***")))
+  results3$Sig <- ifelse(test = results3$"P/Crit" > 2, yes = " ",
+                         no = ifelse(test = results3$"P/Crit" > 0.2, yes = ".",
+                                     no = ifelse(test = results3$"P/Crit" > 0.02, yes = "*",
+                                                 no = ifelse(test = results3$"P/Crit" > 0.002, yes = "**", no = "***"))))
   ## Viewer discretion is advized when using this bonus column
   
   # Just in case you don't want to look in the guts of this function to see what * vs. ** means:
-  message("Sig codes: P - Alpha < -0.01 '***' | ≥ -0.01 '**' | ≥ 0 '.' | ≥ 0.05 ' '")
+  message("Sig codes: P / Crit > 2 = ''
+          0.2 < P/C ≤ 2 = '.'
+          0.02 < P/C ≤ 0.2 = '*'
+          0.002 < P/C ≤ 0.02 = '**'
+          P/C ≤ 0.002 = '***'")
   
   # Get rid of the bothersome and distracting row numbering
   row.names(results3) <- NULL
@@ -139,112 +146,186 @@ simp.procD <- function(adv.procD.obj, p.dig = 4, crit.dig = 4, sig.thresh = 0.05
                 # Abundance ####
 ##  ----------------------------------------------------------  ##
 # How does the abundance of butterflies vary among adaptive management methods and over time?
-procD.lm(Abundance ~ Adaptive.Mgmt * Year, data = flr)
-  ## mgmt & yr = sig, interaction = NS
+procD.lm(Abundance ~ Herbicide.Treatment * Year, data = flr)
+  ## interaction  = sig!
 
 # Pairwise comps?
-simp.procD(advanced.procD.lm(Abundance ~ Adaptive.Mgmt * Year, ~ 1, ~ Adaptive.Mgmt, data = flr))
-  ## BO = A | PBG = B | GB = AB | H+ = AB
-simp.procD(advanced.procD.lm(Abundance ~ Adaptive.Mgmt * Year, ~ 1, ~ Year, data = flr))
-  ##14 = A | 15 = A | 16 = AB | 17 = B
+simp.procD(advanced.procD.lm(Abundance ~ Herbicide.Treatment * Year, ~ 1, ~ Composite.Variable, data = flr))
+  ## none sig...
+
+# Get plotting dataframe
+abun.pltdf <- summarySE(data = flr, measurevar = "Abundance",
+                        groupvars = c("Composite.Variable", "Herbicide.Treatment", "Year"))
+abun.pltdf$Year <- as.numeric(as.character(abun.pltdf$Year))
 
 # Plot
-abun.plt <- ggplot(flr, aes(x = Adaptive.Mgmt, y = Abundance, fill = Adaptive.Mgmt)) +
-  geom_boxplot() +
-  xlab("Adaptive Management") +
-  scale_y_continuous("Floral Abundance", limits = c()) +
-  scale_fill_manual(values = colors) +
-  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
-        panel.background = element_blank(), axis.line = element_line(colour = "black"),
-        legend.position = 'none'); abun.plt
+ggplot(abun.pltdf, aes(x = Year, y = Abundance, color = Herbicide.Treatment)) +
+  geom_path(aes(group = Herbicide.Treatment), position = dodge, lwd = .7) +
+  geom_errorbar(aes(ymax = Abundance + se, ymin = Abundance - se), position = dodge, width = .4, lwd = .8) +
+  geom_point(position = dodge, size = 2) +
+  geom_vline(xintercept = c(2014.35, 2014.5, 2014.65, 2017.35), lty = c(1, 2, 3, 1)) +
+  labs(x = "Year", y = "Floral Abundance") +
+  scale_color_manual(values = colors) +
+  sct.theme + theme(legend.position = c(0.4, 0.8))
 
-ggplot2::ggsave("./Graphs/flr_abun.pdf", plot = abun.plt)
+# ggplot2::ggsave("./Graphs/flr_abun.pdf", plot = abun.plt)
 
 ##  ----------------------------------------------------------  ##
              # Species Density ####
 ##  ----------------------------------------------------------  ##
   # What about management effect on species density (~S)
-procD.lm(Species.Density ~ Adaptive.Mgmt * Year, data = flr)
-## mgmt = sig, all else = NS
+procD.lm(Species.Density ~ Herbicide.Treatment * Year, data = flr)
+## everything = sig
 
 # Pairwise comps?
-simp.procD(advanced.procD.lm(Species.Density ~ Adaptive.Mgmt * Year, ~ 1, ~ Adaptive.Mgmt, data = flr))
-  ## BO = A | PBG = AB | GB = AB | H+ = B
-simp.procD(advanced.procD.lm(Species.Density ~ Adaptive.Mgmt * Year, ~ 1, ~ Year, data = flr))
-  ##14 = A | 15 = A | 16 = AB | 17 = B
+simp.procD(advanced.procD.lm(Species.Density ~ Herbicide.Treatment * Year, ~ 1, ~ Composite.Variable, data = flr))
+  ## Some marginal significance
+
+# Get plotting dataframe
+dens.pltdf <- summarySE(data = flr, measurevar = "Species.Density",
+                        groupvars = c("Composite.Variable", "Herbicide.Treatment", "Year"))
+dens.pltdf$Year <- as.numeric(as.character(dens.pltdf$Year))
 
 # Plot
-dens.plt <- ggplot(flr, aes(x = Adaptive.Mgmt, y = Species.Density, fill = Adaptive.Mgmt)) +
-  geom_boxplot() +
-  xlab("Adaptive Management") +
-  scale_y_continuous("Floral Species Density", limits = c()) +
-  scale_fill_manual(values = colors) +
-  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
-        panel.background = element_blank(), axis.line = element_line(colour = "black"),
-        legend.position = 'none'); dens.plt
+ggplot(dens.pltdf, aes(x = Year, y = Species.Density, color = Herbicide.Treatment)) +
+  geom_path(aes(group = Herbicide.Treatment), position = dodge, lwd = .7) +
+  geom_errorbar(aes(ymax = Species.Density + se, ymin = Species.Density - se), position = dodge, width = .4, lwd = .8) +
+  geom_point(position = dodge, size = 2) +
+  geom_vline(xintercept = c(2014.35, 2014.5, 2014.65, 2017.35), lty = c(1, 2, 3, 1)) +
+  labs(x = "Year", y = "Floral Species Density") +
+  scale_color_manual(values = colors) +
+  sct.theme + theme(legend.position = c(0.4, 0.8))
 
-ggplot2::ggsave("./Graphs/flr_dens.pdf", plot = dens.plt)
+#ggplot2::ggsave("./Graphs/flr_dens.pdf", plot = dens.plt)
 
 ##  ----------------------------------------------------------  ##
                  # Diversity ####
 ##  ----------------------------------------------------------  ##
 # Run the test
-procD.lm(Diversity ~ Adaptive.Mgmt * Year, data = flr)
-# mgmt = sig, year = marginal, interaction = NS
+procD.lm(Diversity ~ Herbicide.Treatment * Year, data = flr)
+## year = marginally sig
 
-simp.procD(advanced.procD.lm(Diversity ~ Adaptive.Mgmt * Year, ~ 1, ~ Adaptive.Mgmt, data = flr))
-  ## BO = A | PBG = B | GB = AB | H+ = B
+# Get plotting dataframe
+dive.pltdf <- summarySE(data = flr, measurevar = "Diversity",
+                        groupvars = c("Composite.Variable", "Herbicide.Treatment", "Year"))
+dive.pltdf$Year <- as.numeric(as.character(dive.pltdf$Year))
 
 # Plot
-dive.plt <- ggplot(flr, aes(x = Adaptive.Mgmt, y = Diversity, fill = Adaptive.Mgmt)) +
-  geom_boxplot() +
-  xlab("Adaptive Management") +
-  scale_y_continuous("Floral Diversity", limits = c()) +
-  scale_fill_manual(values = colors) +
-  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
-        panel.background = element_blank(), axis.line = element_line(colour = "black"),
-        legend.position = 'none'); dive.plt
+ggplot(dive.pltdf, aes(x = Year, y = Diversity, color = Herbicide.Treatment)) +
+  geom_path(aes(group = Herbicide.Treatment), position = dodge, lwd = .7) +
+  geom_errorbar(aes(ymax = Diversity + se, ymin = Diversity - se), position = dodge, width = .4, lwd = .8) +
+  geom_point(position = dodge, size = 2) +
+  geom_vline(xintercept = c(2014.35, 2014.5, 2014.65, 2017.35), lty = c(1, 2, 3, 1)) +
+  labs(x = "Year", y = "Floral Diversity") +
+  scale_color_manual(values = colors) +
+  sct.theme + theme(legend.position = c(0.4, 0.8))
 
-ggplot2::ggsave("./Graphs/flr_dive.pdf", plot = dive.plt)
+#ggplot2::ggsave("./Graphs/flr_dive.pdf", plot = dive.plt)
+
+##  ----------------------------------------------------------------------------------------------------------  ##
+                          # Seedmix Success Evaluation ####
+##  ----------------------------------------------------------------------------------------------------------  ##
+# Get seedmix data
+sdmx <- read.csv("./Data/explore_sdmx.csv")
+
+# Fix the class/leveling of independent/explanatory variables
+sdmx$Year <- as.factor(sdmx$Year)
+sdmx$Herbicide.Treatment <- factor(as.character(sdmx$Herbicide.Treatment), levels = c("Con", "Spr", "SnS"))
+str(sdmx$Year); unique(sdmx$Herbicide.Treatment)
+
+# Analyze each of them then switch to the plotting phase
+procD.lm(Abundance ~ Herbicide.Treatment * Year, data = sdmx)
+  ## interaction = NS
+
+# Re-run without interaction term
+procD.lm(Abundance ~ Herbicide.Treatment + Year, data = sdmx)
+  ## Year = sig
+
+
+simp.procD(advanced.procD.lm(Abundance ~ Herbicide.Treatment + Year, ~ 1, ~ Year, data = sdmx))
+
+# Get plotting dataframe
+smx.pltdf <- summarySE(data = sdmx, measurevar = "Abundance",
+                       groupvars = c("Composite.Variable", "Herbicide.Treatment", "Year"))
+smx.pltdf$Year <- as.numeric(as.character(smx.pltdf$Year))
+
+# Plot
+ggplot(smx.pltdf, aes(x = Year, y = Abundance, color = Herbicide.Treatment)) +
+  geom_path(aes(group = Herbicide.Treatment), position = dodge, lwd = .7) +
+  geom_errorbar(aes(ymax = Abundance + se, ymin = Abundance - se), position = dodge, width = .4, lwd = .8) +
+  geom_point(position = dodge, size = 2) +
+  geom_vline(xintercept = c(2014.35, 2014.5, 2014.65, 2017.35), lty = c(1, 2, 3, 1)) +
+  labs(x = "Year", y = "Seed-mix Species Abundance") +
+  scale_color_manual(values = colors) +
+  sct.theme + theme(legend.position = c(0.4, 0.8))
 
 ##  ----------------------------------------------------------------------------------------------------------  ##
                               # Family Exploration ####
 ##  ----------------------------------------------------------------------------------------------------------  ##
 # Get the family data
-legs <- read.csv("./Data/explore_legumes.csv")
-aster <- read.csv("./Data/explore_asters.csv")
+legs <- read.csv("./Data/explore_legms.csv")
+aster <- read.csv("./Data/explore_astrs.csv")
 mint <- read.csv("./Data/explore_mints.csv")
 
 # Fix the class/leveling of independent/explanatory variables
 legs$Year <- as.factor(legs$Year)
-legs$Adaptive.Mgmt <- factor(as.character(legs$Adaptive.Mgmt), levels = c("BO", "PBG", "GB/H+", "H+"))
-str(legs$Year); unique(legs$Adaptive.Mgmt)
+legs$Herbicide.Treatment <- factor(as.character(legs$Herbicide.Treatment), levels = c("Con", "Spr", "SnS"))
+str(legs$Year); unique(legs$Herbicide.Treatment)
 aster$Year <- as.factor(aster$Year)
-aster$Adaptive.Mgmt <- factor(as.character(aster$Adaptive.Mgmt), levels = c("BO", "PBG", "GB/H+", "H+"))
-str(aster$Year); unique(aster$Adaptive.Mgmt)
+aster$Herbicide.Treatment <- factor(as.character(aster$Herbicide.Treatment), levels = c("Con", "Spr", "SnS"))
+str(aster$Year); unique(aster$Herbicide.Treatment)
 mint$Year <- as.factor(mint$Year)
-mint$Adaptive.Mgmt <- factor(as.character(mint$Adaptive.Mgmt), levels = c("BO", "PBG", "GB/H+", "H+"))
-str(mint$Year); unique(mint$Adaptive.Mgmt)
+mint$Herbicide.Treatment <- factor(as.character(mint$Herbicide.Treatment), levels = c("Con", "Spr", "SnS"))
+str(mint$Year); unique(mint$Herbicide.Treatment)
 
 # Analyze each of them then switch to the plotting phase
 # Asteraceae
-procD.lm(Abundance ~ Adaptive.Mgmt * Year, data = aster)
-  ## mgmt = sig, yr = sig, int = NS
-simp.procD(advanced.procD.lm(Abundance ~ Adaptive.Mgmt * Year, ~ 1, ~ Adaptive.Mgmt, data = aster))
+procD.lm(Abundance ~ Herbicide.Treatment * Year, data = aster)
+  ## all significant!
+simp.procD(advanced.procD.lm(Abundance ~ Herbicide.Treatment * Year, ~ 1, ~ Composite.Variable, data = aster))
 
+# Get plotting dataframe
+ast.pltdf <- summarySE(data = aster, measurevar = "Abundance",
+                        groupvars = c("Composite.Variable", "Herbicide.Treatment", "Year"))
+ast.pltdf$Year <- as.numeric(as.character(ast.pltdf$Year))
+
+# Plot
+ggplot(ast.pltdf, aes(x = Year, y = Abundance, color = Herbicide.Treatment)) +
+  geom_path(aes(group = Herbicide.Treatment), position = dodge, lwd = .7) +
+  geom_errorbar(aes(ymax = Abundance + se, ymin = Abundance - se), position = dodge, width = .4, lwd = .8) +
+  geom_point(position = dodge, size = 2) +
+  geom_vline(xintercept = c(2014.35, 2014.5, 2014.65, 2017.35), lty = c(1, 2, 3, 1)) +
+  labs(x = "Year", y = "Aster Abundance") +
+  scale_color_manual(values = colors) +
+  sct.theme + theme(legend.position = c(0.4, 0.8))
 
 # Fabaceae (legumes)
-procD.lm(Abundance ~ Adaptive.Mgmt * Year, data = legs)
-  ## mgmt = sig, others = NS
-simp.procD(advanced.procD.lm(Abundance ~ Adaptive.Mgmt * Year, ~ 1, ~ Adaptive.Mgmt, data = legs))
+procD.lm(Abundance ~ Herbicide.Treatment * Year, data = legs)
+  ## year = sig
+procD.lm(Abundance ~ Herbicide.Treatment + Year, data = legs)
 
+# Pairwise?
+simp.procD(advanced.procD.lm(Abundance ~ Herbicide.Treatment + Year, ~ 1, ~ Year, data = legs))
+
+
+# Get plotting dataframe
+lgm.pltdf <- summarySE(data = legs, measurevar = "Abundance",
+                       groupvars = c("Composite.Variable", "Herbicide.Treatment", "Year"))
+lgm.pltdf$Year <- as.numeric(as.character(lgm.pltdf$Year))
+
+# Plot
+ggplot(lgm.pltdf, aes(x = Year, y = Abundance, color = Herbicide.Treatment)) +
+  geom_path(aes(group = Herbicide.Treatment), position = dodge, lwd = .7) +
+  geom_errorbar(aes(ymax = Abundance + se, ymin = Abundance - se), position = dodge, width = .4, lwd = .8) +
+  geom_point(position = dodge, size = 2) +
+  geom_vline(xintercept = c(2014.35, 2014.5, 2014.65, 2017.35), lty = c(1, 2, 3, 1)) +
+  labs(x = "Year", y = "Legume Abundance") +
+  scale_color_manual(values = colors) +
+  sct.theme + theme(legend.position = c(0.4, 0.8))
 
 # Lamiaceae (mints)
-procD.lm(Abundance ~ Adaptive.Mgmt * Year, data = mint)
-# yr & mgmt = sig, interaction = NS
-simp.procD(advanced.procD.lm(Abundance ~ Adaptive.Mgmt * Year, ~ 1, ~ Adaptive.Mgmt, data = mint))
-
-
+procD.lm(Abundance ~ Herbicide.Treatment * Year, data = mint)
+  ## NS
 
 ##  ----------------------------------------------------------------------------------------------------------  ##
                         # Multivariate Analysis and Plotting ####
@@ -326,12 +407,12 @@ simp.procD <- function(adv.procD.obj, p.dig = 4, crit.dig = 4, sig.thresh = 0.05
   return(results3)
   
 }
-nms.ord <- function(mod, groupcol, g1, g2, g3, g4, lntp1 = 1, lntp2 = 1, lntp3 = 1, lntp4 = 1,
-                    legcont, legpos = "topright") {
+nms.3.ord <- function(mod, groupcol, g1, g2, g3, lntp1 = 1, lntp2 = 1, lntp3 = 1,
+                      legcont, legpos = "topright") {
   ## mod = object returned by metaMDS
   ## groupcol = group column in the dataframe that contains those (not the community matrix)
-  ## g1 - g4 = how each group appears in your dataframe (in quotes)
-  ## lntp1 - 4 = what sort of line each ellipse will be made of (accepts integers between 1 and 6 for diff lines)
+  ## g1 - g3 = how each group appears in your dataframe (in quotes)
+  ## lntp1 - 3 = what sort of line each ellipse will be made of (accepts integers between 1 and 6 for diff lines)
   ## legcont = single object for what you want the content of the legend to be
   ## legpos = legend position, either numeric vector of x/y coords or shorthand accepted by "legend" function
   
@@ -339,34 +420,29 @@ nms.ord <- function(mod, groupcol, g1, g2, g3, g4, lntp1 = 1, lntp2 = 1, lntp3 =
   plot(mod, display = 'sites', choice = c(1, 2), type = 'none', xlab = "", ylab = "")
   
   # Set colors (easier for you to modify if we set this now and call these objects later)
-  col1 <- "#d73027" # red
-  col2 <- "#fdae61" # yellow
-  col3 <- "#abd9e9" # light blue
-  col4 <- "#4575b4" # blue
-  
+  col1 <- "#276419" # darkest green
+  col2 <- "#4d9221" # medium green
+  col3 <- "#7fbc41" # lightest green
   
   # Add points for each group with a different color per group
   points(mod$points[groupcol == g1, 1], mod$points[groupcol == g1, 2], pch = 21, bg = col1)
   points(mod$points[groupcol == g2, 1], mod$points[groupcol == g2, 2], pch = 22, bg = col2)
   points(mod$points[groupcol == g3, 1], mod$points[groupcol == g3, 2], pch = 23, bg = col3)
-  points(mod$points[groupcol == g4, 1], mod$points[groupcol == g4, 2], pch = 24, bg = col4)
   ## As of right now the colors are colorblind safe and each group is also given its own shape
   
   # Get a single vector of your manually set line types for the ellipses
-  lntps <- c(lntp1, lntp2, lntp3, lntp4)
+  lntps <- c(lntp1, lntp2, lntp3)
   
   # Ordinate SD ellipses around the centroid
   library(vegan) # need this package for the following function
   ordiellipse(mod, groupcol, 
-              col = c(g1 = col1, g2 = col2, g3 = col3, g4 = col4),
+              col = c(g1 = col1, g2 = col2, g3 = col3),
               display = "sites", kind = "sd", lwd = 2, lty = lntps, label = F)
   
   # Add legend
   legend(legpos, legend = legcont, bty = "n", 
-         title = paste0("Stress = ", round(mod$stress, digits = 3)),
-         ## The "title" of the legend will now be the stress of the NMS
-         pch = c(21, 22, 23, 24), cex = 1.15, 
-         pt.bg = c(col1, col2, col3, col4))
+         pch = c(21, 22, 23), cex = 1.15, 
+         pt.bg = c(col1, col2, col3))
   
 }
 
@@ -374,9 +450,9 @@ nms.ord <- function(mod, groupcol, g1, g2, g3, g4, lntp1 = 1, lntp2 = 1, lntp3 =
 flr <- read.csv("./Data/actual_flr.csv")
 
 # Fix adaptive management column levels
-unique(flr$Adaptive.Mgmt)
-flr$Adaptive.Mgmt <- factor(as.character(flr$Adaptive.Mgmt), levels = c("BO", "PBG", "GB/H+", "H+"))
-unique(flr$Adaptive.Mgmt)
+unique(flr$Herbicide.Treatment)
+flr$Herbicide.Treatment <- factor(as.character(flr$Herbicide.Treatment), levels = c("Con", "Spr", "SnS"))
+unique(flr$Herbicide.Treatment)
 
 # Select your community similarity/distance index (use the style of vegan::vegdist)
 comm.dist <- "kulczynski"
@@ -389,11 +465,11 @@ flr17 <- subset(flr, flr$Year == 2017)
 flr18 <- subset(flr, flr$Year == 2018)
 
 # Make community matrices with no non-species columns
-flr14.rsp <- as.matrix(flr14[,-c(1:4, (ncol(flr14)-2):ncol(flr14))])
-flr15.rsp <- as.matrix(flr15[,-c(1:4, (ncol(flr15)-2):ncol(flr15))])
-flr16.rsp <- as.matrix(flr16[,-c(1:4, (ncol(flr16)-2):ncol(flr16))])
-flr17.rsp <- as.matrix(flr17[,-c(1:4, (ncol(flr17)-2):ncol(flr17))])
-flr18.rsp <- as.matrix(flr18[,-c(1:4, (ncol(flr18)-2):ncol(flr18))])
+flr14.rsp <- as.matrix(flr14[,-c(1:5, (ncol(flr14)-2):ncol(flr14))])
+flr15.rsp <- as.matrix(flr15[,-c(1:5, (ncol(flr15)-2):ncol(flr15))])
+flr16.rsp <- as.matrix(flr16[,-c(1:5, (ncol(flr16)-2):ncol(flr16))])
+flr17.rsp <- as.matrix(flr17[,-c(1:5, (ncol(flr17)-2):ncol(flr17))])
+flr18.rsp <- as.matrix(flr18[,-c(1:5, (ncol(flr18)-2):ncol(flr18))])
 
 # Get the chosen dissimilarity/distance metric for those communities 
 flr14.dst <- vegdist(flr14.rsp, method = comm.dist)
@@ -422,39 +498,42 @@ write.csv(stress, "./Summary Info/stress_flr.csv", row.names = F)
   ## ranges from 0 to 1 when engine = "monoMDS" (is a % with engine = "isoMDS")
 
 # Analyze!
-procD.lm(flr14.dst ~ Adaptive.Mgmt, data = flr14) # NS
+procD.lm(flr14.dst ~ Herbicide.Treatment, data = flr14)
+  ## NS
 
-procD.lm(flr15.dst ~ Adaptive.Mgmt, data = flr15) # sig
-simp.procD(advanced.procD.lm(flr15.dst ~ Adaptive.Mgmt, ~ 1, ~ Adaptive.Mgmt, data = flr15))
-  ## BO = A | PBG = B | GB = B | H+ = B
-  
-procD.lm(flr16.dst ~ Adaptive.Mgmt, data = flr16) # sig
-simp.procD(advanced.procD.lm(flr16.dst ~ Adaptive.Mgmt, ~ 1, ~ Adaptive.Mgmt, data = flr16))
-  ## BO = A | PBG = B | GB = BC | H+ = C
-  
-procD.lm(flr17.dst ~ Adaptive.Mgmt, data = flr17) # sig
-simp.procD(advanced.procD.lm(flr17.dst ~ Adaptive.Mgmt, ~ 1, ~ Adaptive.Mgmt, data = flr17))
-  ## BO = A | PBG = B | GB = AB | H+ = AB
-  
+procD.lm(flr15.dst ~ Herbicide.Treatment, data = flr15)
+  ## NS
+
+procD.lm(flr16.dst ~ Herbicide.Treatment, data = flr16)
+  ## NS
+
+procD.lm(flr17.dst ~ Herbicide.Treatment, data = flr17)
+  ## NS
+
 # Set a quick shortcut for the legend contents of each (it'll be the same for all of 'em)
-mgmt <- c("BO", "PBG", "GB/H+", "H+")
+trt <- c("Con", "Spr", "SnS")
 
 # Make ordinations!
-nms.ord(flr14.mds, flr14$Adaptive.Mgmt, g1 = "BO", g2 = "PBG", g3 = "GB/H+", g4 = "H+", legcont = mgmt)
-nms.ord(flr15.mds, flr15$Adaptive.Mgmt, "BO", "PBG", "GB/H+", "H+", legcont = mgmt)
-nms.ord(flr16.mds, flr16$Adaptive.Mgmt, "BO", "PBG", "GB/H+", "H+", legcont = mgmt)
-nms.ord(flr17.mds, flr17$Adaptive.Mgmt, "BO", "PBG", "GB/H+", "H+", legcont = mgmt)
-#nms.ord(flr18.mds, flr18$Adaptive.Mgmt, "BO", "PBG", "GB/H+", "H+", legcont = mgmt)
+nms.3.ord(flr14.mds, flr14$Herbicide.Treatment, g1 = "Con", g2 = "Spr", g3 = "SnS", legcont = trt)
+nms.3.ord(flr15.mds, flr15$Herbicide.Treatment, g1 = "Con", g2 = "Spr", g3 = "SnS", legcont = trt)
+nms.3.ord(flr16.mds, flr16$Herbicide.Treatment, g1 = "Con", g2 = "Spr", g3 = "SnS", legcont = trt)
+nms.3.ord(flr17.mds, flr17$Herbicide.Treatment, g1 = "Con", g2 = "Spr", g3 = "SnS", legcont = trt)
 
 # Save out the significant ones
-jpeg(file = "./Graphs/Multivariate/flr_nms15.jpg")
-nms.ord(flr15.mds, flr15$Adaptive.Mgmt, "BO", "PBG", "GB/H+", "H+", legcont = mgmt)
+jpeg(file = "./Graphs/flr_nms14.jpg")
+
 dev.off()
 
-jpeg(file = "./Graphs/Multivariate/flr_nms16.jpg")
-nms.ord(flr16.mds, flr16$Adaptive.Mgmt, "BO", "PBG", "GB/H+", "H+", legcont = mgmt)
+jpeg(file = "./Graphs/flr_nms15.jpg")
+
 dev.off()
 
-jpeg(file = "./Graphs/Multivariate/flr_nms17.jpg")
-nms.ord(flr17.mds, flr17$Adaptive.Mgmt, "BO", "PBG", "GB/H+", "H+", legcont = mgmt)
+jpeg(file = "./Graphs/flr_nms16.jpg")
+
 dev.off()
+
+jpeg(file = "./Graphs/flr_nms17.jpg")
+
+dev.off()
+
+

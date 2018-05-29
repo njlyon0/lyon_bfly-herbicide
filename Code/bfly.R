@@ -520,19 +520,19 @@ nms.3.ord(bf16.mds, bf16$Herbicide.Treatment, g1 = "Con", g2 = "Spr", g3 = "SnS"
 nms.3.ord(bf17.mds, bf17$Herbicide.Treatment, g1 = "Con", g2 = "Spr", g3 = "SnS", legcont = trt)
 
 # Save out the significant ones
-jpeg(file = "./Graphs/Multivariate/bf_nms14.jpg")
+jpeg(file = "./Graphs/bf_nms14.jpg")
 
 dev.off()
 
-jpeg(file = "./Graphs/Multivariate/bf_nms15.jpg")
+jpeg(file = "./Graphs/bf_nms15.jpg")
 
 dev.off()
 
-jpeg(file = "./Graphs/Multivariate/bf_nms16.jpg")
+jpeg(file = "./Graphs/bf_nms16.jpg")
 
 dev.off()
 
-jpeg(file = "./Graphs/Multivariate/bf_nms17.jpg")
+jpeg(file = "./Graphs/bf_nms17.jpg")
 
 dev.off()
 
