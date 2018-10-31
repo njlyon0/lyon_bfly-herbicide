@@ -233,6 +233,9 @@ sdmx$Year <- as.factor(sdmx$Year)
 sdmx$Herbicide.Treatment <- factor(as.character(sdmx$Herbicide.Treatment), levels = c("Con", "Spr", "SnS"))
 str(sdmx$Year); unique(sdmx$Herbicide.Treatment)
 
+# Need to know how many species were included in the seed-mix to evaluate success
+max.sdmx.spp <- 37
+
 # Analyze each of them then switch to the plotting phase
 procD.lm(Abundance ~ Herbicide.Treatment * Year, data = sdmx)
   ## interaction = NS
@@ -240,7 +243,6 @@ procD.lm(Abundance ~ Herbicide.Treatment * Year, data = sdmx)
 # Re-run without interaction term
 procD.lm(Abundance ~ Herbicide.Treatment + Year, data = sdmx)
   ## Year = sig
-
 
 simp.procD(advanced.procD.lm(Abundance ~ Herbicide.Treatment + Year, ~ 1, ~ Year, data = sdmx))
 
@@ -256,6 +258,22 @@ ggplot(smx.pltdf, aes(x = Year, y = Abundance, color = Herbicide.Treatment)) +
   geom_point(position = dodge, size = 2) +
   geom_vline(xintercept = c(2014.35, 2014.5, 2014.65, 2017.35), lty = c(1, 2, 3, 1)) +
   labs(x = "Year", y = "Seed-mix Species Abundance") +
+  scale_color_manual(values = colors) +
+  sct.theme + theme(legend.position = c(0.4, 0.8))
+
+# Get plotting dataframe
+smx.pltdf2 <- summarySE(data = sdmx, measurevar = "Species.Density",
+                       groupvars = c("Composite.Variable", "Herbicide.Treatment", "Year"))
+smx.pltdf2$Year <- as.numeric(as.character(smx.pltdf2$Year))
+
+# Plot
+ggplot(smx.pltdf2, aes(x = Year, y = Species.Density, color = Herbicide.Treatment)) +
+  geom_path(aes(group = Herbicide.Treatment), position = dodge, lwd = .7) +
+  geom_errorbar(aes(ymax = Species.Density + se, ymin = Species.Density - se), position = dodge, width = .4, lwd = .8) +
+  geom_point(position = dodge, size = 2) +
+  geom_vline(xintercept = c(2014.35, 2014.5, 2014.65, 2017.35), lty = c(1, 2, 3, 1)) +
+  geom_hline(yintercept = max.sdmx.spp, lty = 1) +
+  labs(x = "Year", y = "Seed-mix Species Species Density") +
   scale_color_manual(values = colors) +
   sct.theme + theme(legend.position = c(0.4, 0.8))
 
