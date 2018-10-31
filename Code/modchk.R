@@ -1,9 +1,10 @@
 ##  --------------------------------------------------------------------------------------------------------------------------------------  ##
-                                   # Lyon Thesis  -  Modeling Checks
+                              # Herbicide Side Project -  Modeling Checks
 ##  --------------------------------------------------------------------------------------------------------------------------------------  ##
 # Written by Nicholas Lyon
 
-# READ ME:
+# PURPOSE ####
+## 
 # Need to do a fair bit of subsetting and special plotting to appropriately examine residuals/data distributions.
 # Thus, this code will do that for each taxon being investigated and the outcomes will be reflected in the taxon-specific code
 # Outcomes come in one of two flavors: 
@@ -15,7 +16,7 @@
 # tabula rasa
 rm(list = ls())
 
-setwd("~/Documents/School/1. Iowa State/_MS Project/_AFRI Project/Lyon.Thesis-Chaps1&2-GRG")
+setwd("~/Documents/School/1. Iowa State/Collaborations/'Herbicide Project/Herbicide.WD")
 
 # Required libraries
 library(plyr); library(dtplyr); library(stringr); library(tidyr) # Clean & Explore
@@ -119,7 +120,7 @@ trns1.labs <- c("y", "log(y)", "sqrt(y)")
 trns2.labs <- c("1/y", "y^.2")
 
 ##  ----------------------------------------------------------------------------------------------------------  ##
-                         # Transformation Recommendations
+                         # Transformation Recommendations ####
 ##  ----------------------------------------------------------------------------------------------------------  ##
 # Obtained from code of following sections
 
