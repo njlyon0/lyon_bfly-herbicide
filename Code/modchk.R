@@ -20,7 +20,7 @@ setwd("~/Documents/School/1. Iowa State/Collaborations/'Herbicide Project/Herbic
 
 # Required libraries
 library(plyr); library(dtplyr); library(stringr); library(tidyr) # Clean & Explore
-library(vegan); library(geomorph) # Calculate & Analyze
+library(vegan); library(RRPP) # Calculate & Analyze
 library(ggplot2); library(gridExtra); library(cowplot) # Plot
 
 # Bomb modeling check custom functions
