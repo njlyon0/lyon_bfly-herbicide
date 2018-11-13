@@ -5,7 +5,7 @@
 
 # PURPOSE ####
 ## What is the effect on butterflies and nectar resource plants of the anti-fescue treatments?
-## Script Taxon: **Butterflies**
+## Script Taxon: **Nectar Resource Plants**
 
 # Required libraries
 library(vegan); library(RRPP) # Calculate & Analyze
@@ -18,7 +18,7 @@ setwd("~/Documents/School/1. Iowa State/Collaborations/'Herbicide Project/Herbic
 rm(list = ls())
 
 ##  ----------------------------------------------------------  ##
-# Housekeeping
+                # Housekeeping
 ##  ----------------------------------------------------------  ##
 # Pull in data
 flr <- read.csv("./Data/flr-wide.csv")
@@ -46,9 +46,9 @@ sct.theme <- theme(panel.grid.major = element_blank(), panel.grid.minor = elemen
                    panel.background = element_blank(), axis.line = element_line(colour = "black"),
                    legend.background = element_blank(), legend.title = element_blank())
 
-# Erica Baken did a neat ammendment to the RRPP summary output 
-summary.pairwise <- function (object, test.type = c("dist", "VC", "var"), angle.type = c("rad", "deg"),
-                              stat.table = T, confidence = 0.95, show.vectors = F, ...) {
+# Modification of RRPP's summary function to do multiple comparison adjustment as a matter of course
+simp.rrpp <- function (object, test.type = c("dist", "VC", "var"), angle.type = c("rad", "deg"),
+                       stat.table = T, confidence = 0.95, show.vectors = F, crit.dig = 3, ...) {
   
   test.type <- match.arg(test.type)
   angle.type <- match.arg(angle.type)
@@ -200,25 +200,15 @@ summary.pairwise <- function (object, test.type = c("dist", "VC", "var"), angle.
       }
     }
   }
-  return(tab)  # ADDED
-}
-
-# This function performs multiple comparison adjustment on the RRPP output fr pairwise comparisons
-seq.bonf <- function(pairs.file, fac, crit.dig = 3){
-  ## pairs.file = output from the modified "summary.pairwise" function in library(RRPP)
-  ## fac = factor column in the dataframe (*MUST* be treated as "Factor" by R)
-  ## crit.dig = number of digits to round alpha to (aka the critical point)
   
-  # GET DATAFRAME
-  df <- pairs.file
+  # Make new dataframe
+  df <- tab
   
-  # MULTIPLE COMPARISON ADJUSTMENT
-  ## Sequential Bonferroni adjustment is what will be used here
-  
-  # Order the rows from lowest to highest p value
+  # The following steps are necessary for performing Sequential Bonferroni multiple comparison adjustment
+  ## Order the rows from lowest to highest p value
   results <- df[order(df$"Pr > d"), ]
   
-  # Assign a rank based on that order
+  ## Assign a rank based on that order
   rank <- c(1:length(results$P))
   
   # Now modify the critical point based on that rank (hence "sequential" Bonferroni)
@@ -245,13 +235,14 @@ seq.bonf <- function(pairs.file, fac, crit.dig = 3){
   
   # And spit out the result
   return(results)
+  
 }
 
 ##  ----------------------------------------------------------------------------------------------------------  ##
                           # Univariate Analysis and Plotting ####
 ##  ----------------------------------------------------------------------------------------------------------  ##
 ##  ----------------------------------------------------------  ##
-# Abundance ####
+                 # Abundance ####
 ##  ----------------------------------------------------------  ##
 # How does the abundance of butterflies vary among herbicide treatment patches and over time?
 anova(lm.rrpp(Abundance ~ Herb.Trt * Year, data = flr, iter = 9999), effect.type = "F")
@@ -270,10 +261,10 @@ abun.trt.pairs <- summary.pairwise(pairwise(abun.trt.fit, fit.null = NULL, group
 abun.year.pairs <- summary.pairwise(pairwise(abun.year.fit, fit.null = NULL, groups = flr$Year))
 
 # Get the pairwise results from those!
-seq.bonf(pairs.file = abun.trt.pairs, fac = flr$Herb.Trt)
+abun.trt.pairs
 ## NS
 
-seq.bonf(pairs.file = abun.year.pairs, fac = flr$Year)
+abun.year.pairs
 ## 16 v 18 = sig
 
 # Plot the 'by treatment' results
@@ -304,7 +295,7 @@ ggplot(abun.pltdf, aes(x = Year, y = Abundance, color = Herb.Trt)) +
 # ggplot2::ggsave("./Graphs/flr_abun.pdf", plot = abun.plt)
 
 ##  ----------------------------------------------------------  ##
-# Species Density ####
+              # Species Density ####
 ##  ----------------------------------------------------------  ##
 # How does the species density of butterflies vary among herbicide treatment patches and over time?
 anova(lm.rrpp(Species.Density ~ Herb.Trt * Year, data = flr, iter = 9999), effect.type = "F")
@@ -323,10 +314,10 @@ dens.trt.pairs <- summary.pairwise(pairwise(dens.trt.fit, fit.null = NULL, group
 dens.year.pairs <- summary.pairwise(pairwise(dens.year.fit, fit.null = NULL, groups = flr$Year))
 
 # Get the pairwise results from those!
-seq.bonf(pairs.file = dens.trt.pairs, fac = flr$Herb.Trt)
+dens.trt.pairs
 ## NS
 
-seq.bonf(pairs.file = dens.year.pairs, fac = flr$Year)
+dens.year.pairs
 ## 16 v 18 = sig
 
 # Plot the 'by treatment' results
@@ -357,7 +348,7 @@ ggplot(dens.pltdf, aes(x = Year, y = Species.Density, color = Herb.Trt)) +
 # ggplot2::ggsave("./Graphs/flr_dens.pdf", plot = dens.plt)
 
 ##  ----------------------------------------------------------  ##
-# Diversity ####
+                  # Diversity ####
 ##  ----------------------------------------------------------  ##
 # How does the diversity of butterflies vary among herbicide treatment patches and over time?
 anova(lm.rrpp(Diversity ~ Herb.Trt * Year, data = flr, iter = 9999), effect.type = "F")
@@ -376,10 +367,10 @@ dive.trt.pairs <- summary.pairwise(pairwise(dive.trt.fit, fit.null = NULL, group
 dive.year.pairs <- summary.pairwise(pairwise(dive.year.fit, fit.null = NULL, groups = flr$Year))
 
 # Get the pairwise results from those!
-seq.bonf(pairs.file = dive.trt.pairs, fac = flr$Herb.Trt)
+dive.trt.pairs
 ## NS
 
-seq.bonf(pairs.file = dive.year.pairs, fac = flr$Year)
+dive.year.pairs
 ## 16 v 18 = sig
 
 # Plot the 'by treatment' results
@@ -410,85 +401,23 @@ ggplot(dive.pltdf, aes(x = Year, y = Diversity, color = Herb.Trt)) +
 # ggplot2::ggsave("./Graphs/flr_dive.pdf", plot = dive.plt)
 
 ##  ----------------------------------------------------------------------------------------------------------  ##
+                  # Native/Exotic/Seed-mix Analysis and Plotting ####
+##  ----------------------------------------------------------------------------------------------------------  ##
+# Get the long format flower data
+
+
+
+
+
+
+
+##  ----------------------------------------------------------------------------------------------------------  ##
                         # Multivariate Analysis and Plotting ####
 ##  ----------------------------------------------------------------------------------------------------------  ##
 # Clear environment to reduce error chances
 rm(list = ls())
 
-# You'll want the 'simp.procD' function & my NMS function
-simp.procD <- function(adv.procD.obj, p.dig = 4, crit.dig = 4, sig.thresh = 0.05){
-  ## adv.procD.obj = object of a geomorph::advanced.procD.lm function
-  ## p.dig = the number of digits you want the p value rounded to
-  ## thresh = the upper threshold of the p values you want to keep
-  ## sig.thresh = What critical point do you want to start from (pre-multiple comparison adjustment)?
-  
-  # Get just the p values 
-  ## You can refer to the whole output later to get relevant stats when you know what you're looking for
-  pairs <- adv.procD.obj$P.means.dist
-  
-  # Want to ditch either the top diagonal or the bottom diagonal of the matrix of p-values
-  ## These are redundant with the opposite triangle of the matrix
-  ## I've arbitrarily chosen to eliminate the lower triangle, but it doesn't matter
-  pairs[lower.tri(pairs, diag = T)] <- NA
-  
-  # Now get the p values out of that matrix
-  pvals <- as.vector( round(pairs, digits = p.dig) )
-  
-  # Get the list of combinations that the matrix includes
-  combos <- expand.grid(rownames(adv.procD.obj$P.means.dist), colnames(adv.procD.obj$P.means.dist))
-  
-  # Get those as vectors in their own right
-  var1.vec <- combos$Var1
-  var2.vec <- combos$Var2
-  
-  # And just in case you want one where they're combined...
-  var.vecs <- paste(combos$Var1, "-", combos$Var2)
-  
-  # Okay, now make a dataframe of both your p values and your newly created variable vectors
-  results <- data.frame(Comparisons = var.vecs,
-                        Factor.1 = var1.vec, Factor.2 = var2.vec,
-                        P.Values = pvals)
-  
-  # Ditch the NAs you inserted (aka the pvalues along the diagonal and in the triangle you eliminated)
-  results2 <- results[complete.cases(results),]
-  
-  # Sequential Bonferroni Bit
-  
-  # For sequential Bonferroni you need to rank the pairs based on ascending p value
-  results3 <- results2[order(results2$P.Values),] # order the comparisons
-  rank <- c(1:length(results3$Comparisons)) # assign them a rank based on this order
-  
-  # Modify the critical point based on the rank of each sequential p value
-  results3$Alpha.Pt <- round( with(results3, ( (sig.thresh / (length(results3$Comparisons) + 1 - rank)) ) ), 
-                              digits = crit.dig)
-  ## Sequential bonferroni is calculated as show above, but in plain English it is like this:
-  ## Each comparison gets it's own, sequential, critical point
-  ## This is determined by dividing the standard critical point (0.05) by
-  ## the total number of comparisons plus 1, minus the "rank" of the p value
-  ## where lower p values have a lower rank
-  ## The final pairwise comparison will always have a critical point of 0.05 in this method
-  ### E.g. 6 pairwise comparisons + 1 - 6 (for the sixth one) = 1
-  ### And 0.05 / 1 = 0.05 (duh)
-  
-  # Though you probably want to know if the stuff is significant at a glance
-  results3$Sig <- results3$P.Values - results3$Alpha.Pt
-  
-  # Now get the ranges of "significance" to be reduced to qualitative bits
-  results3$Sig <- ifelse(test = results3$Sig >= 0.05, yes = " ",
-                         no = ifelse(test = results3$Sig >= 0, yes = ".",
-                                     no = ifelse(test = results3$Sig >= -0.01, yes = "**", no = "***")))
-  ## Viewer discretion is advized when using this bonus column
-  
-  # Just in case you don't want to look in the guts of this function to see what * vs. ** means:
-  message("Sig codes: P - Alpha < -0.01 '***' | ≥ -0.01 '**' | ≥ 0 '.' | ≥ 0.05 ' '")
-  
-  # Get rid of the bothersome and distracting row numbering
-  row.names(results3) <- NULL
-  
-  # And spit out the result
-  return(results3)
-  
-}
+# You'll want the pairwise comparison functions & my NMS function
 nms.3.ord <- function(mod, groupcol, g1, g2, g3, lntp1 = 1, lntp2 = 1, lntp3 = 1,
                       legcont, legpos = "topright") {
   ## mod = object returned by metaMDS
@@ -502,9 +431,9 @@ nms.3.ord <- function(mod, groupcol, g1, g2, g3, lntp1 = 1, lntp2 = 1, lntp3 = 1
   plot(mod, display = 'sites', choice = c(1, 2), type = 'none', xlab = "", ylab = "")
   
   # Set colors (easier for you to modify if we set this now and call these objects later)
-  col1 <- "#276419" # darkest green
-  col2 <- "#4d9221" # medium green
-  col3 <- "#7fbc41" # lightest green
+  col1 <- "#8e0152" # darkest pink
+  col2 <- "#c51b7d" # medium pink
+  col3 <- "#de77ae" # lightest pink
   
   # Add points for each group with a different color per group
   points(mod$points[groupcol == g1, 1], mod$points[groupcol == g1, 2], pch = 21, bg = col1)
@@ -529,9 +458,9 @@ nms.3.ord <- function(mod, groupcol, g1, g2, g3, lntp1 = 1, lntp2 = 1, lntp3 = 1
 }
 
 # Pull in nice clean dataset you just created
-flr <- read.csv("./Data/actual_flr.csv")
+flr <- read.csv("./Data/flr-wide.csv")
 
-# Fix adaptive management column levels
+# Fix the levels of the adaptive management column
 unique(flr$Herb.Trt)
 flr$Herb.Trt <- factor(as.character(flr$Herb.Trt), levels = c("Con", "Spr", "SnS"))
 unique(flr$Herb.Trt)
@@ -540,18 +469,18 @@ unique(flr$Herb.Trt)
 comm.dist <- "kulczynski"
 
 #   Subset by year
-flr14 <- subset(flr, flr$Year == 2014)
-flr15 <- subset(flr, flr$Year == 2015)
-flr16 <- subset(flr, flr$Year == 2016)
-flr17 <- subset(flr, flr$Year == 2017)
-flr18 <- subset(flr, flr$Year == 2018)
+flr14 <- subset(flr, flr$Year == 14)
+flr15 <- subset(flr, flr$Year == 15)
+flr16 <- subset(flr, flr$Year == 16)
+flr17 <- subset(flr, flr$Year == 17)
+flr18 <- subset(flr, flr$Year == 18)
 
 # Make community matrices with no non-species columns
-flr14.rsp <- as.matrix(flr14[,-c(1:5, (ncol(flr14)-2):ncol(flr14))])
-flr15.rsp <- as.matrix(flr15[,-c(1:5, (ncol(flr15)-2):ncol(flr15))])
-flr16.rsp <- as.matrix(flr16[,-c(1:5, (ncol(flr16)-2):ncol(flr16))])
-flr17.rsp <- as.matrix(flr17[,-c(1:5, (ncol(flr17)-2):ncol(flr17))])
-flr18.rsp <- as.matrix(flr18[,-c(1:5, (ncol(flr18)-2):ncol(flr18))])
+flr14.rsp <- as.matrix(flr14[,-c(1:6, (ncol(flr14)-2):ncol(flr14))])
+flr15.rsp <- as.matrix(flr15[,-c(1:6, (ncol(flr15)-2):ncol(flr15))])
+flr16.rsp <- as.matrix(flr16[,-c(1:6, (ncol(flr16)-2):ncol(flr16))])
+flr17.rsp <- as.matrix(flr17[,-c(1:6, (ncol(flr17)-2):ncol(flr17))])
+flr18.rsp <- as.matrix(flr18[,-c(1:6, (ncol(flr18)-2):ncol(flr18))])
 
 # Get the chosen dissimilarity/distance metric for those communities 
 flr14.dst <- vegdist(flr14.rsp, method = comm.dist)
@@ -569,27 +498,31 @@ flr16.mds <- metaMDS(flr16.dst, distance = comm.dist, engine = "monoMDS",
                     autotransform = F, expand = F, k = 2, try = 100)
 flr17.mds <- metaMDS(flr17.dst, distance = comm.dist, engine = "monoMDS",
                     autotransform = F, expand = F, k = 2, try = 100)
-flr18.mds <- data.frame(stress = NA)
+flr18.mds <- metaMDS(flr18.dst, distance = comm.dist, engine = "monoMDS",
+                    autotransform = F, expand = F, k = 2, try = 100)
 
 # Get the stress values in their own dataframe in case it becomes useful later
 stress <- data.frame(Year = c("2014", "2015", "2016", "2017", "2018"),
                      stress.unadj = c(flr14.mds$stress, flr15.mds$stress, flr16.mds$stress, 
                                       flr17.mds$stress, flr18.mds$stress))
-stress$stress.rounded = round(stress$stress.unadj, digits = 3)
+stress$stress.rounded <- round(stress$stress.unadj, digits = 3)
 write.csv(stress, "./Summary Info/stress_flr.csv", row.names = F)
   ## ranges from 0 to 1 when engine = "monoMDS" (is a % with engine = "isoMDS")
 
 # Analyze!
-procD.lm(flr14.dst ~ Herb.Trt, data = flr14)
+anova(lm.rrpp(flr14.dst ~ Herb.Trt, data = flr14, iter = 9999), effect.type = "F")
   ## NS
 
-procD.lm(flr15.dst ~ Herb.Trt, data = flr15)
+anova(lm.rrpp(flr15.dst ~ Herb.Trt, data = flr15, iter = 9999), effect.type = "F")
   ## NS
 
-procD.lm(flr16.dst ~ Herb.Trt, data = flr16)
+anova(lm.rrpp(flr16.dst ~ Herb.Trt, data = flr16, iter = 9999), effect.type = "F")
   ## NS
 
-procD.lm(flr17.dst ~ Herb.Trt, data = flr17)
+anova(lm.rrpp(flr17.dst ~ Herb.Trt, data = flr17, iter = 9999), effect.type = "F")
+  ## NS
+
+anova(lm.rrpp(flr18.dst ~ Herb.Trt, data = flr18, iter = 9999), effect.type = "F")
   ## NS
 
 # Set a quick shortcut for the legend contents of each (it'll be the same for all of 'em)
@@ -600,6 +533,7 @@ nms.3.ord(flr14.mds, flr14$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS", legcont
 nms.3.ord(flr15.mds, flr15$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS", legcont = trt)
 nms.3.ord(flr16.mds, flr16$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS", legcont = trt)
 nms.3.ord(flr17.mds, flr17$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS", legcont = trt)
+nms.3.ord(flr18.mds, flr18$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS", legcont = trt)
 
 # Save out the significant ones
 jpeg(file = "./Graphs/flr_nms14.jpg")
@@ -615,6 +549,10 @@ jpeg(file = "./Graphs/flr_nms16.jpg")
 dev.off()
 
 jpeg(file = "./Graphs/flr_nms17.jpg")
+
+dev.off()
+
+jpeg(file = "./Graphs/flr_nms18.jpg")
 
 dev.off()
 
