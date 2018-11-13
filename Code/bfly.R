@@ -46,9 +46,9 @@ sct.theme <- theme(panel.grid.major = element_blank(), panel.grid.minor = elemen
                    panel.background = element_blank(), axis.line = element_line(colour = "black"),
                    legend.background = element_blank(), legend.title = element_blank())
 
-# Erica Baken did a neat ammendment to the RRPP summary output 
-summary.pairwise <- function (object, test.type = c("dist", "VC", "var"), angle.type = c("rad", "deg"),
-                              stat.table = T, confidence = 0.95, show.vectors = F, ...) {
+# Modification of RRPP's summary function to do multiple comparison adjustment as a matter of course
+simp.rrpp <- function (object, test.type = c("dist", "VC", "var"), angle.type = c("rad", "deg"),
+                       stat.table = T, confidence = 0.95, show.vectors = F, crit.dig = 3, ...) {
   
   test.type <- match.arg(test.type)
   angle.type <- match.arg(angle.type)
@@ -200,25 +200,15 @@ summary.pairwise <- function (object, test.type = c("dist", "VC", "var"), angle.
       }
     }
   }
-  return(tab)  # ADDED
-}
-
-# This function performs multiple comparison adjustment on the RRPP output fr pairwise comparisons
-seq.bonf <- function(pairs.file, fac, crit.dig = 3){
-  ## pairs.file = output from the modified "summary.pairwise" function in library(RRPP)
-  ## fac = factor column in the dataframe (*MUST* be treated as "Factor" by R)
-  ## crit.dig = number of digits to round alpha to (aka the critical point)
   
-  # GET DATAFRAME
-  df <- pairs.file
+  # Make new dataframe
+  df <- tab
   
-  # MULTIPLE COMPARISON ADJUSTMENT
-  ## Sequential Bonferroni adjustment is what will be used here
-  
-  # Order the rows from lowest to highest p value
+  # The following steps are necessary for performing Sequential Bonferroni multiple comparison adjustment
+  ## Order the rows from lowest to highest p value
   results <- df[order(df$"Pr > d"), ]
   
-  # Assign a rank based on that order
+  ## Assign a rank based on that order
   rank <- c(1:length(results$P))
   
   # Now modify the critical point based on that rank (hence "sequential" Bonferroni)
@@ -245,6 +235,7 @@ seq.bonf <- function(pairs.file, fac, crit.dig = 3){
   
   # And spit out the result
   return(results)
+  
 }
 
 ##  ----------------------------------------------------------------------------------------------------------  ##
@@ -270,10 +261,10 @@ abun.trt.pairs <- summary.pairwise(pairwise(abun.trt.fit, fit.null = NULL, group
 abun.year.pairs <- summary.pairwise(pairwise(abun.year.fit, fit.null = NULL, groups = bf$Year))
 
 # Get the pairwise results from those!
-seq.bonf(pairs.file = abun.trt.pairs, fac = bf$Herb.Trt)
+abun.trt.pairs
   ## NS
 
-seq.bonf(pairs.file = abun.year.pairs, fac = bf$Year)
+abun.year.pairs
   ## 16 v 18 = sig
 
 # Plot the 'by treatment' results
@@ -361,10 +352,10 @@ dive.trt.pairs <- summary.pairwise(pairwise(dive.trt.fit, fit.null = NULL, group
 dive.year.pairs <- summary.pairwise(pairwise(dive.year.fit, fit.null = NULL, groups = bf$Year))
 
 # Get the pairwise results from those!
-seq.bonf(pairs.file = dive.trt.pairs, fac = bf$Herb.Trt)
+dive.trt.pairs
 ## NS
 
-seq.bonf(pairs.file = dive.year.pairs, fac = bf$Year)
+dive.year.pairs
 ## 16 v 18 = sig
 
 # Plot the 'by treatment' results
@@ -456,7 +447,7 @@ nms.3.ord <- function(mod, groupcol, g1, g2, g3, lntp1 = 1, lntp2 = 1, lntp3 = 1
 }
 
 # Pull in nice clean dataset you just created
-bf <- read.csv("./Data/actual_bf.csv")
+bf <- read.csv("./Data/bf-wide.csv")
 
 # Fix the levels of the adaptive management column
 unique(bf$Herb.Trt)
@@ -467,18 +458,18 @@ unique(bf$Herb.Trt)
 comm.dist <- "kulczynski"
 
 #   Subset by year
-bf14 <- subset(bf, bf$Year == 2014)
-bf15 <- subset(bf, bf$Year == 2015)
-bf16 <- subset(bf, bf$Year == 2016)
-bf17 <- subset(bf, bf$Year == 2017)
-bf18 <- subset(bf, bf$Year == 2018)
+bf14 <- subset(bf, bf$Year == 14)
+bf15 <- subset(bf, bf$Year == 15)
+bf16 <- subset(bf, bf$Year == 16)
+bf17 <- subset(bf, bf$Year == 17)
+bf18 <- subset(bf, bf$Year == 18)
 
 # Make community matrices with no non-species columns
-bf14.rsp <- as.matrix(bf14[,-c(1:5, (ncol(bf14)-2):ncol(bf14))])
-bf15.rsp <- as.matrix(bf15[,-c(1:5, (ncol(bf15)-2):ncol(bf15))])
-bf16.rsp <- as.matrix(bf16[,-c(1:5, (ncol(bf16)-2):ncol(bf16))])
-bf17.rsp <- as.matrix(bf17[,-c(1:5, (ncol(bf17)-2):ncol(bf17))])
-bf18.rsp <- as.matrix(bf18[,-c(1:5, (ncol(bf18)-2):ncol(bf18))])
+bf14.rsp <- as.matrix(bf14[,-c(1:6, (ncol(bf14)-2):ncol(bf14))])
+bf15.rsp <- as.matrix(bf15[,-c(1:6, (ncol(bf15)-2):ncol(bf15))])
+bf16.rsp <- as.matrix(bf16[,-c(1:6, (ncol(bf16)-2):ncol(bf16))])
+bf17.rsp <- as.matrix(bf17[,-c(1:6, (ncol(bf17)-2):ncol(bf17))])
+bf18.rsp <- as.matrix(bf18[,-c(1:6, (ncol(bf18)-2):ncol(bf18))])
 
 # Get the chosen dissimilarity/distance metric for those communities 
 bf14.dst <- vegdist(bf14.rsp, method = comm.dist)
@@ -496,7 +487,8 @@ bf16.mds <- metaMDS(bf16.dst, distance = comm.dist, engine = "monoMDS",
                     autotransform = F, expand = F, k = 2, try = 100)
 bf17.mds <- metaMDS(bf17.dst, distance = comm.dist, engine = "monoMDS",
                     autotransform = F, expand = F, k = 2, try = 100)
-bf18.mds <- data.frame(stress = NA)
+bf18.mds <- metaMDS(bf18.dst, distance = comm.dist, engine = "monoMDS",
+                    autotransform = F, expand = F, k = 2, try = 100)
 
 # Get the stress values in their own dataframe in case it becomes useful later
 stress <- data.frame(Year = c("2014", "2015", "2016", "2017", "2018"),
@@ -507,16 +499,19 @@ write.csv(stress, "./Summary Info/stress_bf.csv", row.names = F)
   ## ranges from 0 to 1 when engine = "monoMDS" (is a % with engine = "isoMDS")
 
 # Analyze!
-procD.lm(bf14.dst ~ Herb.Trt, data = bf14)
+anova(lm.rrpp(bf14.dst ~ Herb.Trt, data = bf14, iter = 9999), effect.type = "F")
   ## NS
 
-procD.lm(bf15.dst ~ Herb.Trt, data = bf15)
+anova(lm.rrpp(bf15.dst ~ Herb.Trt, data = bf15, iter = 9999), effect.type = "F")
   ## NS
 
-procD.lm(bf16.dst ~ Herb.Trt, data = bf16)
+anova(lm.rrpp(bf16.dst ~ Herb.Trt, data = bf16, iter = 9999), effect.type = "F")
   ## NS
 
-procD.lm(bf17.dst ~ Herb.Trt, data = bf17)
+anova(lm.rrpp(bf17.dst ~ Herb.Trt, data = bf17, iter = 9999), effect.type = "F")
+  ## NS
+
+anova(lm.rrpp(bf18.dst ~ Herb.Trt, data = bf18, iter = 9999), effect.type = "F")
   ## NS
 
 # Set a quick shortcut for the legend contents of each (it'll be the same for all of 'em)
@@ -527,6 +522,7 @@ nms.3.ord(bf14.mds, bf14$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS", legcont =
 nms.3.ord(bf15.mds, bf15$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS", legcont = trt)
 nms.3.ord(bf16.mds, bf16$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS", legcont = trt)
 nms.3.ord(bf17.mds, bf17$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS", legcont = trt)
+nms.3.ord(bf18.mds, bf18$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS", legcont = trt)
 
 # Save out the significant ones
 jpeg(file = "./Graphs/bf_nms14.jpg")
@@ -545,8 +541,9 @@ jpeg(file = "./Graphs/bf_nms17.jpg")
 
 dev.off()
 
+jpeg(file = "./Graphs/bf_nms18.jpg")
 
-
+dev.off()
 
 ##  ----------------------------------------------------------------------------------------------------------  ##
                                     # Misc Notes ####
