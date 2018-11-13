@@ -8,6 +8,7 @@
 ## Script Taxon: **Nectar Resource Plants**
 
 # Required libraries
+library(tidyr) # data manipulation
 library(vegan); library(RRPP) # Calculate & Analyze
 library(ggplot2); library(Rmisc) # Plot
 
@@ -257,8 +258,8 @@ abun.trt.fit <- lm.rrpp(Abundance ~ Herb.Trt, data = flr, iter = 9999)
 abun.year.fit <- lm.rrpp(Abundance ~ Year, data = flr, iter = 9999)
 
 # And fit the pairwise comparison assessments
-abun.trt.pairs <- summary.pairwise(pairwise(abun.trt.fit, fit.null = NULL, groups = flr$Herb.Trt))
-abun.year.pairs <- summary.pairwise(pairwise(abun.year.fit, fit.null = NULL, groups = flr$Year))
+abun.trt.pairs <- simp.rrpp(pairwise(abun.trt.fit, fit.null = NULL, groups = flr$Herb.Trt))
+abun.year.pairs <- simp.rrpp(pairwise(abun.year.fit, fit.null = NULL, groups = flr$Year))
 
 # Get the pairwise results from those!
 abun.trt.pairs
@@ -310,8 +311,8 @@ dens.trt.fit <- lm.rrpp(Species.Density ~ Herb.Trt, data = flr, iter = 9999)
 dens.year.fit <- lm.rrpp(Species.Density ~ Year, data = flr, iter = 9999)
 
 # And fit the pairwise comparison assessments
-dens.trt.pairs <- summary.pairwise(pairwise(dens.trt.fit, fit.null = NULL, groups = flr$Herb.Trt))
-dens.year.pairs <- summary.pairwise(pairwise(dens.year.fit, fit.null = NULL, groups = flr$Year))
+dens.trt.pairs <- simp.rrpp(pairwise(dens.trt.fit, fit.null = NULL, groups = flr$Herb.Trt))
+dens.year.pairs <- simp.rrpp(pairwise(dens.year.fit, fit.null = NULL, groups = flr$Year))
 
 # Get the pairwise results from those!
 dens.trt.pairs
@@ -363,8 +364,8 @@ dive.trt.fit <- lm.rrpp(Diversity ~ Herb.Trt, data = flr, iter = 9999)
 dive.year.fit <- lm.rrpp(Diversity ~ Year, data = flr, iter = 9999)
 
 # And fit the pairwise comparison assessments
-dive.trt.pairs <- summary.pairwise(pairwise(dive.trt.fit, fit.null = NULL, groups = flr$Herb.Trt))
-dive.year.pairs <- summary.pairwise(pairwise(dive.year.fit, fit.null = NULL, groups = flr$Year))
+dive.trt.pairs <- simp.rrpp(pairwise(dive.trt.fit, fit.null = NULL, groups = flr$Herb.Trt))
+dive.year.pairs <- simp.rrpp(pairwise(dive.year.fit, fit.null = NULL, groups = flr$Year))
 
 # Get the pairwise results from those!
 dive.trt.pairs
@@ -403,13 +404,87 @@ ggplot(dive.pltdf, aes(x = Year, y = Diversity, color = Herb.Trt)) +
 ##  ----------------------------------------------------------------------------------------------------------  ##
                   # Native/Exotic/Seed-mix Analysis and Plotting ####
 ##  ----------------------------------------------------------------------------------------------------------  ##
+##  ----------------------------------------------------------  ##
+                  # Data Prep ####
+##  ----------------------------------------------------------  ##
 # Get the long format flower data
+flr.lng <- read.csv("./Data/flr-long.csv")
 
+# Make year a factor!
+flr.lng$Year <- as.factor(flr.lng$Year)
+str(flr.lng$Year)
 
+# And get the treatment levels in the right order (alpha order doesn't really make sense here)
+unique(flr.lng$Herb.Trt)
+flr.lng$Herb.Trt <- factor(as.character(flr.lng$Herb.Trt), levels = c("Con", "Spr", "SnS"))
+unique(flr.lng$Herb.Trt)
 
+# Get a subset for seed-mix species
+sdmx.v0 <- subset(flr.lng, flr.lng$Seedmix == "X")
 
+# Get aggregated values for each
+native.exotic.v0 <- aggregate(TransectTotals ~ Composite.Variable + Year + Site + Patch +
+                                Herb.Trt + L48.Status, FUN = sum, data = flr.lng)
+sdmx.v1 <- aggregate(TransectTotals ~ Composite.Variable + Year + Site + Patch +
+                       Herb.Trt + Nectar.Plant.Name, FUN = sum, data = sdmx.v0)
 
+# Spread both to wide format
+native.exotic.v1 <- spread(native.exotic.v0, key = "L48.Status", value = "TransectTotals", fill = 0)
+sdmx.v2 <- spread(sdmx.v1, key = "Nectar.Plant.Name", value = "TransectTotals", fill = 0)
 
+# Calculate abundance and species density for seed-mix species and percent native for native/exotics
+sdmx.v2$Abundance <- rowSums(sdmx.v2[,-c(1:5)])
+sdmx.v2$Species.Density <- vegan::specnumber(sdmx.v2[,-c(1:5)])
+native.exotic.v1$Percent.Native <- ( (native.exotic.v1$N / (native.exotic.v1$N + native.exotic.v1$E)) * 100 )
+
+# Save both as more easily called dataframes
+native.exotic <- native.exotic.v1
+sdmx <- sdmx.v2
+
+##  ----------------------------------------------------------  ##
+         # Seed-mix Analysis Plotting ####
+##  ----------------------------------------------------------  ##
+# Abundance first
+anova(lm.rrpp(Abundance ~ Herb.Trt * Year, data = sdmx, iter = 9999), effect.type = "F")
+anova(lm.rrpp(Abundance ~ Herb.Trt + Year, data = sdmx, iter = 9999), effect.type = "F")
+  ## Year was significant!
+
+# Fit the model and ask for pairwise comparisons
+sdmx.abun.year.fit <- lm.rrpp(Abundance ~ Herb.Trt + Year, data = sdmx, iter = 9999)
+sdmx.abun.year.pairs <- simp.rrpp(pairwise(sdmx.abun.year.fit, fit.null = NULL, groups = sdmx$Year))
+sdmx.abun.year.pairs
+  ## 14 v 16 = sig!
+
+# Now species density
+anova(lm.rrpp(Species.Density ~ Herb.Trt * Year, data = sdmx, iter = 9999), effect.type = "F")
+  ## interaction was significant!
+
+# Plot the species density information
+  ## Get plotting dataframe
+sdmx.dens.pltdf <- summarySE(data = sdmx, measurevar = "Species.Density",
+                        groupvars = c("Composite.Variable", "Herb.Trt", "Year"))
+sdmx.dens.pltdf$Year <- as.numeric(as.character(sdmx.dens.pltdf$Year))
+
+# Plot
+ggplot(sdmx.dens.pltdf, aes(x = Year, y = Species.Density, color = Herb.Trt)) +
+  geom_path(aes(group = Herb.Trt), position = dodge, lwd = .7) +
+  geom_errorbar(aes(ymax = Species.Density + se, ymin = Species.Density - se),
+                position = dodge, width = .4, lwd = .8) +
+  geom_point(position = dodge, size = 2) +
+  geom_vline(xintercept = c(14.35, 14.5, 14.65, 17.35), lty = c(1, 2, 3, 1)) +
+  labs(x = "Year", y = "Seedmix Plant Richness") +
+  #scale_color_manual(values = colors) +
+  sct.theme + theme(legend.position = c(0.4, 0.8))
+
+##  ----------------------------------------------------------  ##
+      # Native/Exotic Analysis & Plotting ####
+##  ----------------------------------------------------------  ##
+# Does the percent native flowers change with treatment and/or time?
+anova(lm.rrpp(Percent.Native ~ Herb.Trt * Year, data = native.exotic, iter = 9999), effect.type = "F")
+anova(lm.rrpp(Percent.Native ~ Herb.Trt + Year, data = native.exotic, iter = 9999), effect.type = "F")
+  ## NS
+
+# This means that the pattern of natives and exotics is not significantly different from the overall pattern
 
 ##  ----------------------------------------------------------------------------------------------------------  ##
                         # Multivariate Analysis and Plotting ####
