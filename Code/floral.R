@@ -4,8 +4,8 @@
 # Written by Nicholas Lyon
 
 # PURPOSE ####
-## What is the effect on butterflies and nectar resource plants of the anti-fescue treatments?
-## Script Taxon: **Nectar Resource Plants**
+  ## What is the effect on butterflies and nectar resource plants of the anti-fescue treatments?
+  ## Script Taxon: **Nectar Resource Plants**
 
 # Required libraries
 library(tidyr) # data manipulation
@@ -37,7 +37,7 @@ unique(flr$Herb.Trt)
 # Graphing shortcuts
 dodge <- position_dodge(width = 0.5)
 colors <- c("Con" = "#8c510a", # dark brown
-            "Spr" = "#flr812d", # med. brown
+            "Spr" = "#bf812d", # med. brown
             "SnS" = "#dfc27d") # light brown
 ns.color <- "#8c510a" # dark brown
 box.theme <- theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
@@ -245,7 +245,7 @@ simp.rrpp <- function (object, test.type = c("dist", "VC", "var"), angle.type = 
 ##  ----------------------------------------------------------  ##
                  # Abundance ####
 ##  ----------------------------------------------------------  ##
-# How does the abundance of butterflies vary among herbicide treatment patches and over time?
+# How does the abundance of flowers vary among herbicide treatment patches and over time?
 anova(lm.rrpp(Abundance ~ Herb.Trt * Year, data = flr, iter = 9999), effect.type = "F")
 ## interaction = NS
 
@@ -271,7 +271,7 @@ abun.year.pairs
 # Plot the 'by treatment' results
 abun.plt <- ggplot(flr, aes(x = Herb.Trt, y = Abundance, fill = Herb.Trt)) +
   geom_boxplot(outlier.shape = 21) +
-  labs(x = "Herbicide Treatment", y = "Butterfly Abundance") + 
+  labs(x = "Herbicide Treatment", y = "Floral Abundance") + 
   scale_fill_manual(values = colors) +
   box.theme; abun.plt
 
@@ -289,7 +289,7 @@ ggplot(abun.pltdf, aes(x = Year, y = Abundance, color = Herb.Trt)) +
   geom_errorbar(aes(ymax = Abundance + se, ymin = Abundance - se), position = dodge, width = .4, lwd = .8) +
   geom_point(position = dodge, size = 2) +
   geom_vline(xintercept = c(14.35, 14.5, 14.65, 17.35), lty = c(1, 2, 3, 1)) +
-  labs(x = "Year", y = "Butterfly Abundance") +
+  labs(x = "Year", y = "Flower Abundance") +
   scale_color_manual(values = colors) +
   sct.theme + theme(legend.position = c(0.4, 0.8))
 
@@ -298,7 +298,7 @@ ggplot(abun.pltdf, aes(x = Year, y = Abundance, color = Herb.Trt)) +
 ##  ----------------------------------------------------------  ##
               # Species Density ####
 ##  ----------------------------------------------------------  ##
-# How does the species density of butterflies vary among herbicide treatment patches and over time?
+# How does the species density of flowers vary among herbicide treatment patches and over time?
 anova(lm.rrpp(Species.Density ~ Herb.Trt * Year, data = flr, iter = 9999), effect.type = "F")
 ## interaction = NS
 
@@ -324,7 +324,7 @@ dens.year.pairs
 # Plot the 'by treatment' results
 dens.plt <- ggplot(flr, aes(x = Herb.Trt, y = Species.Density, fill = Herb.Trt)) +
   geom_boxplot(outlier.shape = 21) +
-  labs(x = "Herbicide Treatment", y = "Butterfly Richness") + 
+  labs(x = "Herbicide Treatment", y = "Flower Richness") + 
   scale_fill_manual(values = colors) +
   box.theme; dens.plt
 
@@ -342,7 +342,7 @@ ggplot(dens.pltdf, aes(x = Year, y = Species.Density, color = Herb.Trt)) +
   geom_errorbar(aes(ymax = Species.Density + se, ymin = Species.Density - se), position = dodge, width = .4, lwd = .8) +
   geom_point(position = dodge, size = 2) +
   geom_vline(xintercept = c(14.35, 14.5, 14.65, 17.35), lty = c(1, 2, 3, 1)) +
-  labs(x = "Year", y = "Butterfly Richness") +
+  labs(x = "Year", y = "Flower Richness") +
   scale_color_manual(values = colors) +
   sct.theme + theme(legend.position = c(0.4, 0.8))
 
@@ -351,7 +351,7 @@ ggplot(dens.pltdf, aes(x = Year, y = Species.Density, color = Herb.Trt)) +
 ##  ----------------------------------------------------------  ##
                   # Diversity ####
 ##  ----------------------------------------------------------  ##
-# How does the diversity of butterflies vary among herbicide treatment patches and over time?
+# How does the diversity of flowers vary among herbicide treatment patches and over time?
 anova(lm.rrpp(Diversity ~ Herb.Trt * Year, data = flr, iter = 9999), effect.type = "F")
 ## interaction = NS
 
@@ -377,7 +377,7 @@ dive.year.pairs
 # Plot the 'by treatment' results
 dive.plt <- ggplot(flr, aes(x = Herb.Trt, y = Diversity, fill = Herb.Trt)) +
   geom_boxplot(outlier.shape = 21) +
-  labs(x = "Herbicide Treatment", y = "Butterfly Diversity") + 
+  labs(x = "Herbicide Treatment", y = "Flower Diversity") + 
   scale_fill_manual(values = colors) +
   box.theme; dive.plt
 
@@ -395,7 +395,7 @@ ggplot(dive.pltdf, aes(x = Year, y = Diversity, color = Herb.Trt)) +
   geom_errorbar(aes(ymax = Diversity + se, ymin = Diversity - se), position = dodge, width = .4, lwd = .8) +
   geom_point(position = dodge, size = 2) +
   geom_vline(xintercept = c(14.35, 14.5, 14.65, 17.35), lty = c(1, 2, 3, 1)) +
-  labs(x = "Year", y = "Butterfly Diversity") +
+  labs(x = "Year", y = "Flower Diversity") +
   scale_color_manual(values = colors) +
   sct.theme + theme(legend.position = c(0.4, 0.8))
 
@@ -506,9 +506,9 @@ nms.3.ord <- function(mod, groupcol, g1, g2, g3, lntp1 = 1, lntp2 = 1, lntp3 = 1
   plot(mod, display = 'sites', choice = c(1, 2), type = 'none', xlab = "", ylab = "")
   
   # Set colors (easier for you to modify if we set this now and call these objects later)
-  col1 <- "#8e0152" # darkest pink
-  col2 <- "#c51b7d" # medium pink
-  col3 <- "#de77ae" # lightest pink
+  col1 <- "#8c510a" # dark brown
+  col2 <- "#bf812d" # med. brown
+  col3 <- "#dfc27d" # light brown
   
   # Add points for each group with a different color per group
   points(mod$points[groupcol == g1, 1], mod$points[groupcol == g1, 2], pch = 21, bg = col1)

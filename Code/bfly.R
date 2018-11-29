@@ -35,10 +35,10 @@ unique(bf$Herb.Trt)
 
 # Graphing shortcuts
 dodge <- position_dodge(width = 0.5)
-colors <- c("Con" = "#8c510a", # dark brown
-            "Spr" = "#bf812d", # med. brown
-            "SnS" = "#dfc27d") # light brown
-ns.color <- "#8c510a" # dark brown
+colors <- c("Con" = "#003c30", #  darkish teal
+            "Spr" = "#35978f", # med. teal
+            "SnS" = "#80cdc1") # lite teal
+ns.color <- "#003c30" # dark teal
 box.theme <- theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
                    panel.background = element_blank(), axis.line = element_line(colour = "black"),
                    legend.position = 'none')
@@ -420,9 +420,9 @@ nms.3.ord <- function(mod, groupcol, g1, g2, g3, lntp1 = 1, lntp2 = 1, lntp3 = 1
   plot(mod, display = 'sites', choice = c(1, 2), type = 'none', xlab = "", ylab = "")
   
   # Set colors (easier for you to modify if we set this now and call these objects later)
-  col1 <- "#8e0152" # darkest pink
-  col2 <- "#c51b7d" # medium pink
-  col3 <- "#de77ae" # lightest pink
+  col1 <- "#003c30" #  darkish teal
+  col2 <- "#35978f" # med. teal
+  col3 <- "#80cdc1" # lite teal
   
   # Add points for each group with a different color per group
   points(mod$points[groupcol == g1, 1], mod$points[groupcol == g1, 2], pch = 21, bg = col1)
