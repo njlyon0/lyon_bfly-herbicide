@@ -4,18 +4,13 @@
 # Written by Nicholas Lyon
 
 # PURPOSE ####
-## 
-# Need to do a fair bit of subsetting and special plotting to appropriately examine residuals/data distributions.
-# Thus, this code will do that for each taxon being investigated and the outcomes will be reflected in the taxon-specific code
-# Outcomes come in one of two flavors: 
-  ##  1) Appropriate transformation for normal distribution and
-  ##  2) Model Fit outcomes
-# This will be split by both year and taxa, so this code may even outdistance the others in terms of length
-# ALSO because I am not planning on actually using my "with round" analysis, I am leaving that out here
+  ##  This code assesses model assumptions of data and checks transformation outcomes
+  ## For both butterflies and flowers
 
 # tabula rasa
 rm(list = ls())
 
+# Set working directory
 setwd("~/Documents/School/1. Iowa State/Collaborations/'Herbicide Project/Herbicide.WD")
 
 # Required libraries
@@ -24,7 +19,6 @@ library(vegan); library(RRPP) # Calculate & Analyze
 library(ggplot2); library(gridExtra); library(cowplot) # Plot
 
 # Bomb modeling check custom functions
-  # BE SURE TO FIND OUT THE NAME OF THE STATS PERSON WHO WROTE THIS AND CITE/ACKNOWLEDGE THEM
 resid_boxplot <- function(resid){
   r <- data.frame(resid)
   ggplot(r, aes(x = " ", y = resid)) +
@@ -105,12 +99,10 @@ resid_panel <- function(resid, pred, bins = NA){
   grid.arrange(resid.plot, resid.hist, resid.qq, resid.boxplot, ncol = 2, nrow = 2)
 }
 
-# Graphing cheats
-  ## Treatment labels in the preferred order
-cgr.labs <- c("Ref", "Con", "Spr", "SnS")
-
-  ## Treatment colors 
-cgr.colors <- c("Ref" = "#0868ac", "Con" = "#43a2ca", "Spr" = "#7bccc4", "SnS" = "#bae4bc")
+# Graphing shortcuts
+trt.labs <- c("Con", "Spr", "SnS")
+bf.colors <- c("Con" = "#003c30", "Spr" = "#35978f", "SnS" = "#80cdc1") # teals
+flr.colors <- c("Con" = "#8c510a", "Spr" = "#bf812d", "SnS" = "#dfc27d") # browns
 
   ## Colors to apply to each of the ways of transforming data (makes looking across years more intuitive)
 trnsfrm.colors <- c("#fef0d9", "#fdcc8a", "#fc8d59", "#e34a33", "#b30000")
@@ -124,79 +116,59 @@ trns2.labs <- c("1/y", "y^.2")
 ##  ----------------------------------------------------------------------------------------------------------  ##
 # Obtained from code of following sections
 
-# Bfly 2014 Data
-    ## Abundance = 
-    ## SpeciesDensity = 
-    ## Diversity = 
+# Butterfly Data
+    ## Abundance =  log
+    ## Species.Density = untransformed
+    ## Diversity = log
 
-# Bfly 2015-16
-    ## Abundance = 
-    ## SpeciesDensity = 
-    ## Diversity = 
-
-# Floral 2014 Data
-    ## Abundance = 
-    ## SpeciesDensity = 
-    ## Diversity = 
-
-# Floral 2015-16
-    ## Abundance = 
-    ## SpeciesDensity = 
-    ## Diversity = 
+# Floral Data
+    ## Abundance = log
+    ## Species.Density = none
+    ## Diversity = square root
 
 ##  ----------------------------------------------------------------------------------------------------------  ##
-                              # Model Checking Outcomes
+                     # Butterfly Normality and Variance Checks ####
 ##  ----------------------------------------------------------------------------------------------------------  ##
-# Plotted to the special folder in the "Graphs" Folder
-    ## "./Graphs/Transformations/"
+# Get data and make necessary formatting changes
+bf <- read.csv("./Data/bf-wide.csv")
+bf$Year <- as.factor(bf$Year)
+bf$Herb.Trt <- factor(as.character(bf$Herb.Trt), levels = c("Con", "Spr", "SnS"))
+str(bf); str(bf$Year); unique(bf$Herb.Trt)
 
-##  ----------------------------------------------------------------------------------------------------------  ##
-                                      # Butterfly Data
-##  ----------------------------------------------------------------------------------------------------------  ##
 ##  ----------------------------------------------------------  ##
-           # Normality & Variance Checks
+                    # Variance
 ##  ----------------------------------------------------------  ##
-# Get raw data
-bf <- read.csv("./Data/Ready/bf_ready.csv")
-
-# Subset into relevant portions
-bf14 <- subset(bf, bf$Year == 2014)
-bfhyp <- subset(bf, bf$Year != 2014)
-
-##  -----------------------------  ##
-         # Variance
-##  -----------------------------  ##
 # Check within year and within treatment variances to ensure they're approximately equal
-ggplot(bf, aes(Fescue.Treatment, Abundance, color = Fescue.Treatment)) +
+ggplot(bf, aes(Herb.Trt, Abundance, fill = Herb.Trt)) +
   geom_boxplot() +
   facet_grid(. ~ Year) +
-  scale_x_discrete(limits = cgr.labs) +
-  scale_colour_manual(labels = cgr.labs, values = cgr.colors) +
+  scale_x_discrete(limits = trt.labs) +
+  scale_fill_manual(labels = trt.labs, values = bf.colors) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black"),
         legend.position = "none", legend.title = element_blank())
 
-ggplot(bf, aes(Fescue.Treatment, SpeciesDensity, color = Fescue.Treatment)) +
+ggplot(bf, aes(Herb.Trt, Species.Density, fill = Herb.Trt)) +
   geom_boxplot() +
   facet_grid(. ~ Year) +
-  scale_x_discrete(limits = cgr.labs) +
-  scale_colour_manual(labels = cgr.labs, values = cgr.colors) +
+  scale_x_discrete(limits = trt.labs) +
+  scale_fill_manual(labels = trt.labs, values = bf.colors) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black"),
         legend.position = "none", legend.title = element_blank())
 
-ggplot(bf, aes(Fescue.Treatment, Diversity, color = Fescue.Treatment)) +
+ggplot(bf, aes(Herb.Trt, Diversity, fill = Herb.Trt)) +
   geom_boxplot() +
   facet_grid(. ~ Year) +
-  scale_x_discrete(limits = cgr.labs) +
-  scale_colour_manual(labels = cgr.labs, values = cgr.colors) +
+  scale_x_discrete(limits = trt.labs) +
+  scale_fill_manual(labels = trt.labs, values = bf.colors) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black"),
         legend.position = "none", legend.title = element_blank())
 
-##  -----------------------------  ##
-      # Transformations
-##  -----------------------------  ##
+##  ----------------------------------------------------------  ##
+                 # Transformations
+##  ----------------------------------------------------------  ##
 # Check distribution of data with no, log, sqrt, inverse, and power transformations within each year
 bf.ab <- ddply(bf, c("Year"), summarise,
                None = Abundance,
@@ -247,17 +219,17 @@ bf.ab.pwr.plt <- ggplot(bf.ab, aes(x = Power)) +
         legend.position = "none", legend.title = element_blank())
 
 plot_grid(bf.ab.none.plt, bf.ab.log.plt, bf.ab.sq.plt, labels = trns1.labs, ncol = 1, nrow = 3)
-ggplot2::ggsave("./Graphs/Transformations/bf.ab.trnsfrm1.pdf", plot = last_plot())
+ggplot2::ggsave("./Graphs/Model Checks/trnsfrm.bf.ab.pdf", plot = last_plot())
 plot_grid(bf.ab.inv.plt, bf.ab.pwr.plt, labels = trns2.labs, ncol = 1, nrow = 2)
-ggplot2::ggsave("./Graphs/Transformations/bf.ab.trnsfrm2.pdf", plot = last_plot())
+ggplot2::ggsave("./Graphs/Model Checks/bf.ab.trnsfrm2.pdf", plot = last_plot())
 
 # Do likewise for species density (S / 10 min)
 bf.dn <- ddply(bf, c("Year"), summarise,
-               None = SpeciesDensity,
-               Log = log(SpeciesDensity),
-               Inverse = 1/(SpeciesDensity),
-               Power = (SpeciesDensity)^0.2,
-               Square.Root = sqrt(SpeciesDensity))
+               None = Species.Density,
+               Log = log(Species.Density),
+               Inverse = 1/(Species.Density),
+               Power = (Species.Density)^0.2,
+               Square.Root = sqrt(Species.Density))
 
 # Plot 'em and take a look for which is consistently the best
 bf.dn.none.plt <- ggplot(bf.dn, aes(x = None)) +
@@ -301,9 +273,9 @@ bf.dn.pwr.plt <- ggplot(bf.dn, aes(x = Power)) +
         legend.position = "none", legend.title = element_blank())
 
 plot_grid(bf.dn.none.plt, bf.dn.log.plt, bf.dn.sq.plt, labels = trns1.labs, ncol = 1, nrow = 3)
-ggplot2::ggsave("./Graphs/Transformations/bf.dn.trnsfrm1.pdf", plot = last_plot())
+ggplot2::ggsave("./Graphs/Model Checks/bf.dn.trnsfrm1.pdf", plot = last_plot())
 plot_grid(bf.dn.inv.plt, bf.dn.pwr.plt, labels = trns2.labs, ncol = 1, nrow = 2)
-ggplot2::ggsave("./Graphs/Transformations/bf.dn.trnsfrm2.pdf", plot = last_plot())
+ggplot2::ggsave("./Graphs/Model Checks/bf.dn.trnsfrm2.pdf", plot = last_plot())
 
 # And for Shannon diversity (H')
 bf.dv <- ddply(bf, c("Year"), summarise,
@@ -355,84 +327,66 @@ bf.dv.pwr.plt <- ggplot(bf.dv, aes(x = Power)) +
         legend.position = "none", legend.title = element_blank())
 
 plot_grid(bf.dv.none.plt, bf.dv.log.plt, bf.dv.sq.plt, labels = trns1.labs, ncol = 1, nrow = 3)
-ggplot2::ggsave("./Graphs/Transformations/bf.dv.trnsfrm1.pdf", plot = last_plot())
+ggplot2::ggsave("./Graphs/Model Checks/bf.dv.trnsfrm1.pdf", plot = last_plot())
 plot_grid(bf.dv.inv.plt, bf.dv.pwr.plt, labels = trns2.labs, ncol = 1, nrow = 2)
-ggplot2::ggsave("./Graphs/Transformations/bf.dv.trnsfrm2.pdf", plot = last_plot())
+ggplot2::ggsave("./Graphs/Model Checks/bf.dv.trnsfrm2.pdf", plot = last_plot())
 
-##  ----------------------------------------------------------  ##
-                # Model Fit Checks
-##  ----------------------------------------------------------  ##
+##  ----------------------------------------------------------------------------------------------------------  ##
+                          # Butterfly Model Fit Checks ####
+##  ----------------------------------------------------------------------------------------------------------  ##
 # Because I am doing perANCOVA, I don't think I can actually check the residuals of that test
   ## HOWEVER, I believe I can fit an ANCOVA and check variance/normality assumptions
-  ## This (if I am correct) will approximate the state of the data immediately prior to the permutation step
+  ## This (if I am correct) will approximate what is actually permuted
 
-# 2014 bfly check (for CGRs)
-bf14.abmod <- lm((Abundance^.2) ~ Fescue.Treatment, data = bf14)
-bf14.abmodplt <- resid_panel(bf14.abmod$residuals, predict(bf14.abmod), bins = 20)
-ggplot2::ggsave("./Graphs/Residuals/bf14.abmod.pdf", plot = bf14.abmodplt)
+# Fit the model, call the resid_panel function, save it
+bf.abmod <- lm(log(Abundance) ~ Herb.Trt * Year, data = bf)
+bf.abmodplt <- resid_panel(bf.abmod$residuals, predict(bf.abmod), bins = 20)
+ggplot2::ggsave("./Graphs/Model Checks/resid.bf.ab.pdf", plot = bf.abmodplt)
 
-bf14.dnmod <- lm(SpeciesDensity ~ Fescue.Treatment, data = bf14)
-bf14.dnmodplt <- resid_panel(bf14.dnmod$residuals, predict(bf14.dnmod), bins = 20)
-ggplot2::ggsave("./Graphs/Residuals/bf14.dnmod.pdf", plot = bf14.dnmodplt)
+bf.dnmod <- lm(Species.Density ~ Herb.Trt * Year, data = bf)
+bf.dnmodplt <- resid_panel(bf.dnmod$residuals, predict(bf.dnmod), bins = 20)
+ggplot2::ggsave("./Graphs/Model Checks/resid.bf.dn.pdf", plot = bf.dnmodplt)
 
-bf14.dvmod <- lm(sqrt(Diversity) ~ Fescue.Treatment, data = bf14)
-bf14.dvmodplt <- resid_panel(bf14.dvmod$residuals, predict(bf14.dvmod), bins = 20)
-ggplot2::ggsave("./Graphs/Residuals/bf14.dvmod.pdf", plot = bf14.dvmodplt)
-
-# bfly CGR test
-bfhyp.abmod <- lm((Abundance^.2) ~ Fescue.Treatment * Year, data = bfhyp)
-bfhyp.abmodplt <- resid_panel(bfhyp.abmod$residuals, predict(bfhyp.abmod), bins = 20)
-ggplot2::ggsave("./Graphs/Residuals/bfhyp.abmod.pdf", plot = bfhyp.abmodplt)
-
-bfhyp.dnmod <- lm(SpeciesDensity ~ Fescue.Treatment * Year, data = bfhyp)
-bfhyp.dnmodplt <- resid_panel(bfhyp.dnmod$residuals, predict(bfhyp.dnmod), bins = 20)
-ggplot2::ggsave("./Graphs/Residuals/bfhyp.dnmod.pdf", plot = bfhyp.dnmodplt)
-
-bfhyp.dvmod <- lm(sqrt(Diversity) ~ Fescue.Treatment * Year, data = bfhyp)
-bfhyp.dvmodplt <- resid_panel(bfhyp.dvmod$residuals, predict(bfhyp.dvmod), bins = 20)
-ggplot2::ggsave("./Graphs/Residuals/bfhyp.dvmod.pdf", plot = bfhyp.dvmodplt)
+bf.dvmod <- lm(log(Diversity) ~ Herb.Trt * Year, data = bf)
+bf.dvmodplt <- resid_panel(bf.dvmod$residuals, predict(bf.dvmod), bins = 20)
+ggplot2::ggsave("./Graphs/Model Checks/resid.bf.dv.pdf", plot = bf.dvmodplt)
 
 ##  ----------------------------------------------------------------------------------------------------------  ##
-                                  # Floral Resources
+                        # Floral Normality and Variance Checks ####
 ##  ----------------------------------------------------------------------------------------------------------  ##
-# START OF Floral
-##  ----------------------------------------------------------  ##
-          # Normality & Variance Checks
-##  ----------------------------------------------------------  ##
-# Get raw data
-flr <- read.csv("./Data/Ready/flr_ready.csv")
-
-# Subset out year '0'
-flr14 <- subset(flr, flr$Year == 2014)
-flrhyp <- subset(flr, flr$Year != 2014)
+# Get data and make necessary formatting changes
+flr <- read.csv("./Data/flr-wide.csv")
+flr$Year <- as.factor(flr$Year)
+flr$Herb.Trt <- factor(as.character(flr$Herb.Trt), levels = c("Con", "Spr", "SnS"))
+str(flr); str(flr$Year); unique(flr$Herb.Trt)
 
 ##  -----------------------------  ##
           # Variance
 ##  -----------------------------  ##
 # Check within year and within treatment variances to ensure they're approximately equal
-ggplot(flr, aes(Fescue.Treatment, Abundance, color = Fescue.Treatment)) +
+ggplot(flr, aes(Herb.Trt, Abundance, fill = Herb.Trt)) +
   geom_boxplot() +
   facet_grid(. ~ Year) +
-  scale_x_discrete(limits = cgr.labs) +
-  scale_colour_manual(labels = cgr.labs, values = cgr.colors) +
+  scale_x_discrete(limits = trt.labs) +
+  scale_fill_manual(labels = trt.labs, values = flr.colors) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black"),
         legend.position = "none", legend.title = element_blank())
 
-ggplot(flr, aes(Fescue.Treatment, SpeciesDensity, color = Fescue.Treatment)) +
+ggplot(flr, aes(Herb.Trt, Species.Density, fill = Herb.Trt)) +
   geom_boxplot() +
   facet_grid(. ~ Year) +
-  scale_x_discrete(limits = cgr.labs) +
-  scale_colour_manual(labels = cgr.labs, values = cgr.colors) +
+  scale_x_discrete(limits = trt.labs) +
+  scale_fill_manual(labels = trt.labs, values = flr.colors) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black"),
         legend.position = "none", legend.title = element_blank())
 
-ggplot(flr, aes(Fescue.Treatment, Diversity, color = Fescue.Treatment)) +
+ggplot(flr, aes(Herb.Trt, Diversity, fill = Herb.Trt)) +
   geom_boxplot() +
   facet_grid(. ~ Year) +
-  scale_x_discrete(limits = cgr.labs) +
-  scale_colour_manual(labels = cgr.labs, values = cgr.colors) +
+  scale_x_discrete(limits = trt.labs) +
+  scale_fill_manual(labels = trt.labs, values = flr.colors) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black"),
         legend.position = "none", legend.title = element_blank())
@@ -490,17 +444,17 @@ flr.ab.pwr.plt <- ggplot(flr.ab, aes(x = Power)) +
         legend.position = "none", legend.title = element_blank())
 
 plot_grid(flr.ab.none.plt, flr.ab.log.plt, flr.ab.sq.plt, labels = trns1.labs, ncol = 1, nrow = 3)
-ggplot2::ggsave("./Graphs/Transformations/flr.ab.trnsfrm1.pdf", plot = last_plot())
+ggplot2::ggsave("./Graphs/Model Checks/flr.ab.trnsfrm1.pdf", plot = last_plot())
 plot_grid(flr.ab.inv.plt, flr.ab.pwr.plt, labels = trns2.labs, ncol = 1, nrow = 2)
-ggplot2::ggsave("./Graphs/Transformations/flr.ab.trnsfrm2.pdf", plot = last_plot())
+ggplot2::ggsave("./Graphs/Model Checks/flr.ab.trnsfrm2.pdf", plot = last_plot())
 
 # Do likewise for species density (S / 10 min)
 flr.dn <- ddply(flr, c("Year"), summarise,
-               None = SpeciesDensity,
-               Log = log(SpeciesDensity),
-               Inverse = 1/(SpeciesDensity),
-               Power = (SpeciesDensity)^0.2,
-               Square.Root = sqrt(SpeciesDensity))
+               None = Species.Density,
+               Log = log(Species.Density),
+               Inverse = 1/(Species.Density),
+               Power = (Species.Density)^0.2,
+               Square.Root = sqrt(Species.Density))
 
 # Plot 'em and take a look for which is consistently the best
 flr.dn.none.plt <- ggplot(flr.dn, aes(x = None)) +
@@ -544,9 +498,9 @@ flr.dn.pwr.plt <- ggplot(flr.dn, aes(x = Power)) +
         legend.position = "none", legend.title = element_blank())
 
 plot_grid(flr.dn.none.plt, flr.dn.log.plt, flr.dn.sq.plt, labels = trns1.labs, ncol = 1, nrow = 3)
-ggplot2::ggsave("./Graphs/Transformations/flr.dn.trnsfrm1.pdf", plot = last_plot())
+ggplot2::ggsave("./Graphs/Model Checks/flr.dn.trnsfrm1.pdf", plot = last_plot())
 plot_grid(flr.dn.inv.plt, flr.dn.pwr.plt, labels = trns2.labs, ncol = 1, nrow = 2)
-ggplot2::ggsave("./Graphs/Transformations/flr.dn.trnsfrm2.pdf", plot = last_plot())
+ggplot2::ggsave("./Graphs/Model Checks/flr.dn.trnsfrm2.pdf", plot = last_plot())
 
 # And for Shannon diversity (H')
 flr.dv <- ddply(flr, c("Year"), summarise,
@@ -598,39 +552,22 @@ flr.dv.pwr.plt <- ggplot(flr.dv, aes(x = Power)) +
         legend.position = "none", legend.title = element_blank())
 
 plot_grid(flr.dv.none.plt, flr.dv.log.plt, flr.dv.sq.plt, labels = trns1.labs, ncol = 1, nrow = 3)
-ggplot2::ggsave("./Graphs/Transformations/flr.dv.trnsfrm1.pdf", plot = last_plot())
+ggplot2::ggsave("./Graphs/Model Checks/flr.dv.trnsfrm1.pdf", plot = last_plot())
 plot_grid(flr.dv.inv.plt, flr.dv.pwr.plt, labels = trns2.labs, ncol = 1, nrow = 2)
-ggplot2::ggsave("./Graphs/Transformations/flr.dv.trnsfrm2.pdf", plot = last_plot())
+ggplot2::ggsave("./Graphs/Model Checks/flr.dv.trnsfrm2.pdf", plot = last_plot())
 
-##  ----------------------------------------------------------  ##
-                # Model Fit Checks
-##  ----------------------------------------------------------  ##
-# Because I am doing perANCOVA,
-# I believe I can fit an ANCOVA and check variance/normality assumptions
-## This (if I am correct) will approximate the state of the data immediately prior to the permutation step
+##  ----------------------------------------------------------------------------------------------------------  ##
+                            # Floral Model Fit Checks ####
+##  ----------------------------------------------------------------------------------------------------------  ##
+# Fit the model, call the resid_panel function, save it
+flr.abmod <- lm(log(Abundance) ~ Herb.Trt * Year, data = flr)
+flr.abmodplt <- resid_panel(flr.abmod$residuals, predict(flr.abmod), bins = 20)
+ggplot2::ggsave("./Graphs/Model Checks/resid.flr.ab.pdf", plot = flr.abmodplt)
 
-# 2014 flrly check (for CGRs)
-flr14.abmod <- lm((Abundance^.2) ~ Fescue.Treatment, data = flr14)
-flr14.abmodplt <- resid_panel(flr14.abmod$residuals, predict(flr14.abmod), bins = 20)
-ggplot2::ggsave("./Graphs/Residuals/flr14.abmod.pdf", plot = flr14.abmodplt)
+flr.dnmod <- lm(Species.Density ~ Herb.Trt * Year, data = flr)
+flr.dnmodplt <- resid_panel(flr.dnmod$residuals, predict(flr.dnmod), bins = 20)
+ggplot2::ggsave("./Graphs/Model Checks/resid.flr.dn.pdf", plot = flr.dnmodplt)
 
-flr14.dnmod <- lm(SpeciesDensity ~ Fescue.Treatment, data = flr14)
-flr14.dnmodplt <- resid_panel(flr14.dnmod$residuals, predict(flr14.dnmod), bins = 20)
-ggplot2::ggsave("./Graphs/Residuals/flr14.dnmod.pdf", plot = flr14.dnmodplt)
-
-flr14.dvmod <- lm((Diversity^.2) ~ Fescue.Treatment, data = flr14)
-flr14.dvmodplt <- resid_panel(flr14.dvmod$residuals, predict(flr14.dvmod), bins = 20)
-ggplot2::ggsave("./Graphs/Residuals/flr14.dvmod.pdf", plot = flr14.dvmodplt)
-
-# flrly CGR test
-flrhyp.abmod <- lm((Abundance^.2) ~ Fescue.Treatment * Year, data = flrhyp)
-flrhyp.abmodplt <- resid_panel(flrhyp.abmod$residuals, predict(flrhyp.abmod), bins = 20)
-ggplot2::ggsave("./Graphs/Residuals/flrhyp.abmod.pdf", plot = flrhyp.abmodplt)
-
-flrhyp.dnmod <- lm(SpeciesDensity ~ Fescue.Treatment * Year, data = flrhyp)
-flrhyp.dnmodplt <- resid_panel(flrhyp.dnmod$residuals, predict(flrhyp.dnmod), bins = 20)
-ggplot2::ggsave("./Graphs/Residuals/flrhyp.dnmod.pdf", plot = flrhyp.dnmodplt)
-
-flrhyp.dvmod <- lm((Diversity^.2) ~ Fescue.Treatment * Year, data = flrhyp)
-flrhyp.dvmodplt <- resid_panel(flrhyp.dvmod$residuals, predict(flrhyp.dvmod), bins = 20)
-ggplot2::ggsave("./Graphs/Residuals/flrhyp.dvmod.pdf", plot = flrhyp.dvmodplt)
+flr.dvmod <- lm(sqrt(Diversity) ~ Herb.Trt * Year, data = flr)
+flr.dvmodplt <- resid_panel(flr.dvmod$residuals, predict(flr.dvmod), bins = 20)
+ggplot2::ggsave("./Graphs/Model Checks/resid.flr.dv.pdf", plot = flr.dvmodplt)
