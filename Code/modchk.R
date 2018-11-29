@@ -99,17 +99,14 @@ resid_panel <- function(resid, pred, bins = NA){
   grid.arrange(resid.plot, resid.hist, resid.qq, resid.boxplot, ncol = 2, nrow = 2)
 }
 
-# Graphing shortcuts
+# Label shortcuts
 trt.labs <- c("Con", "Spr", "SnS")
+trns.labs <- c("y", "log(y)", "sqrt(y)")
+
+# Color shortcuts
 bf.colors <- c("Con" = "#003c30", "Spr" = "#35978f", "SnS" = "#80cdc1") # teals
 flr.colors <- c("Con" = "#8c510a", "Spr" = "#bf812d", "SnS" = "#dfc27d") # browns
-
-  ## Colors to apply to each of the ways of transforming data (makes looking across years more intuitive)
-trnsfrm.colors <- c("#fef0d9", "#fdcc8a", "#fc8d59", "#e34a33", "#b30000")
-
-# plot_grid shortcuts
-trns1.labs <- c("y", "log(y)", "sqrt(y)")
-trns2.labs <- c("1/y", "y^.2")
+trnsfrm.colors <- c("#fef0d9", "#fdcc8a", "#fc8d59", "#e34a33", "#b30000") # oranges
 
 ##  ----------------------------------------------------------------------------------------------------------  ##
                          # Transformation Recommendations ####
@@ -148,6 +145,8 @@ ggplot(bf, aes(Herb.Trt, Abundance, fill = Herb.Trt)) +
         panel.background = element_blank(), axis.line = element_line(colour = "black"),
         legend.position = "none", legend.title = element_blank())
 
+ggplot2::ggsave("./Graphs/Model Checks/var.bf.ab.pdf", plot = last_plot())
+
 ggplot(bf, aes(Herb.Trt, Species.Density, fill = Herb.Trt)) +
   geom_boxplot() +
   facet_grid(. ~ Year) +
@@ -156,6 +155,8 @@ ggplot(bf, aes(Herb.Trt, Species.Density, fill = Herb.Trt)) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black"),
         legend.position = "none", legend.title = element_blank())
+
+ggplot2::ggsave("./Graphs/Model Checks/var.bf.dn.pdf", plot = last_plot())
 
 ggplot(bf, aes(Herb.Trt, Diversity, fill = Herb.Trt)) +
   geom_boxplot() +
@@ -166,6 +167,8 @@ ggplot(bf, aes(Herb.Trt, Diversity, fill = Herb.Trt)) +
         panel.background = element_blank(), axis.line = element_line(colour = "black"),
         legend.position = "none", legend.title = element_blank())
 
+ggplot2::ggsave("./Graphs/Model Checks/var.bf.dv.pdf", plot = last_plot())
+
 ##  ----------------------------------------------------------  ##
                  # Transformations
 ##  ----------------------------------------------------------  ##
@@ -173,8 +176,6 @@ ggplot(bf, aes(Herb.Trt, Diversity, fill = Herb.Trt)) +
 bf.ab <- ddply(bf, c("Year"), summarise,
                None = Abundance,
                Log = log(Abundance),
-               Inverse = 1/(Abundance),
-               Power = (Abundance)^0.2,
                Square.Root = sqrt(Abundance))
 
 # Plot 'em and take a look for which is consistently the best
@@ -202,33 +203,13 @@ bf.ab.sq.plt <- ggplot(bf.ab, aes(x = Square.Root)) +
         panel.background = element_blank(), axis.line = element_line(colour = "black"),
         legend.position = "none", legend.title = element_blank())
 
-bf.ab.inv.plt <- ggplot(bf.ab, aes(x = Inverse)) +
-  geom_density(aes(fill = rep.int("Z", nrow(bf.ab)))) +
-  facet_grid( ~ Year) +
-  scale_fill_manual(values = "#e34a33") +
-  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
-        panel.background = element_blank(), axis.line = element_line(colour = "black"),
-        legend.position = "none", legend.title = element_blank())
-
-bf.ab.pwr.plt <- ggplot(bf.ab, aes(x = Power)) +
-  geom_density(aes(fill = rep.int("Z", nrow(bf.ab)))) +
-  facet_grid( ~ Year) +
-  scale_fill_manual(values = "#b30000") +
-  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
-        panel.background = element_blank(), axis.line = element_line(colour = "black"),
-        legend.position = "none", legend.title = element_blank())
-
-plot_grid(bf.ab.none.plt, bf.ab.log.plt, bf.ab.sq.plt, labels = trns1.labs, ncol = 1, nrow = 3)
+plot_grid(bf.ab.none.plt, bf.ab.log.plt, bf.ab.sq.plt, labels = trns.labs, ncol = 1, nrow = 3)
 ggplot2::ggsave("./Graphs/Model Checks/trnsfrm.bf.ab.pdf", plot = last_plot())
-plot_grid(bf.ab.inv.plt, bf.ab.pwr.plt, labels = trns2.labs, ncol = 1, nrow = 2)
-ggplot2::ggsave("./Graphs/Model Checks/bf.ab.trnsfrm2.pdf", plot = last_plot())
 
 # Do likewise for species density (S / 10 min)
 bf.dn <- ddply(bf, c("Year"), summarise,
                None = Species.Density,
                Log = log(Species.Density),
-               Inverse = 1/(Species.Density),
-               Power = (Species.Density)^0.2,
                Square.Root = sqrt(Species.Density))
 
 # Plot 'em and take a look for which is consistently the best
@@ -256,33 +237,13 @@ bf.dn.sq.plt <- ggplot(bf.dn, aes(x = Square.Root)) +
         panel.background = element_blank(), axis.line = element_line(colour = "black"),
         legend.position = "none", legend.title = element_blank())
 
-bf.dn.inv.plt <- ggplot(bf.dn, aes(x = Inverse)) +
-  geom_density(aes(fill = rep.int("Z", nrow(bf.dn)))) +
-  facet_grid( ~ Year) +
-  scale_fill_manual(values = "#e34a33") +
-  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
-        panel.background = element_blank(), axis.line = element_line(colour = "black"),
-        legend.position = "none", legend.title = element_blank())
-
-bf.dn.pwr.plt <- ggplot(bf.dn, aes(x = Power)) +
-  geom_density(aes(fill = rep.int("Z", nrow(bf.dn)))) +
-  facet_grid( ~ Year) +
-  scale_fill_manual(values = "#b30000") +
-  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
-        panel.background = element_blank(), axis.line = element_line(colour = "black"),
-        legend.position = "none", legend.title = element_blank())
-
-plot_grid(bf.dn.none.plt, bf.dn.log.plt, bf.dn.sq.plt, labels = trns1.labs, ncol = 1, nrow = 3)
-ggplot2::ggsave("./Graphs/Model Checks/bf.dn.trnsfrm1.pdf", plot = last_plot())
-plot_grid(bf.dn.inv.plt, bf.dn.pwr.plt, labels = trns2.labs, ncol = 1, nrow = 2)
-ggplot2::ggsave("./Graphs/Model Checks/bf.dn.trnsfrm2.pdf", plot = last_plot())
+plot_grid(bf.dn.none.plt, bf.dn.log.plt, bf.dn.sq.plt, labels = trns.labs, ncol = 1, nrow = 3)
+ggplot2::ggsave("./Graphs/Model Checks/trnsfrm.bf.dn.pdf", plot = last_plot())
 
 # And for Shannon diversity (H')
 bf.dv <- ddply(bf, c("Year"), summarise,
                None = Abundance,
                Log = log(Abundance),
-               Inverse = 1/(Abundance),
-               Power = (Abundance)^0.2,
                Square.Root = sqrt(Abundance))
 
 # Plot 'em and take a look for which is consistently the best
@@ -310,26 +271,8 @@ bf.dv.sq.plt <- ggplot(bf.dv, aes(x = Square.Root)) +
         panel.background = element_blank(), axis.line = element_line(colour = "black"),
         legend.position = "none", legend.title = element_blank())
 
-bf.dv.inv.plt <- ggplot(bf.dv, aes(x = Inverse)) +
-  geom_density(aes(fill = rep.int("Z", nrow(bf.dv)))) +
-  facet_grid( ~ Year) +
-  scale_fill_manual(values = "#e34a33") +
-  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
-        panel.background = element_blank(), axis.line = element_line(colour = "black"),
-        legend.position = "none", legend.title = element_blank())
-
-bf.dv.pwr.plt <- ggplot(bf.dv, aes(x = Power)) +
-  geom_density(aes(fill = rep.int("Z", nrow(bf.dv)))) +
-  facet_grid( ~ Year) +
-  scale_fill_manual(values = "#b30000") +
-  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
-        panel.background = element_blank(), axis.line = element_line(colour = "black"),
-        legend.position = "none", legend.title = element_blank())
-
-plot_grid(bf.dv.none.plt, bf.dv.log.plt, bf.dv.sq.plt, labels = trns1.labs, ncol = 1, nrow = 3)
-ggplot2::ggsave("./Graphs/Model Checks/bf.dv.trnsfrm1.pdf", plot = last_plot())
-plot_grid(bf.dv.inv.plt, bf.dv.pwr.plt, labels = trns2.labs, ncol = 1, nrow = 2)
-ggplot2::ggsave("./Graphs/Model Checks/bf.dv.trnsfrm2.pdf", plot = last_plot())
+plot_grid(bf.dv.none.plt, bf.dv.log.plt, bf.dv.sq.plt, labels = trns.labs, ncol = 1, nrow = 3)
+ggplot2::ggsave("./Graphs/Model Checks/trnsfrm.bf.dv.pdf", plot = last_plot())
 
 ##  ----------------------------------------------------------------------------------------------------------  ##
                           # Butterfly Model Fit Checks ####
@@ -360,9 +303,9 @@ flr$Year <- as.factor(flr$Year)
 flr$Herb.Trt <- factor(as.character(flr$Herb.Trt), levels = c("Con", "Spr", "SnS"))
 str(flr); str(flr$Year); unique(flr$Herb.Trt)
 
-##  -----------------------------  ##
-          # Variance
-##  -----------------------------  ##
+##  ----------------------------------------------------------  ##
+                    # Variance
+##  ----------------------------------------------------------  ##
 # Check within year and within treatment variances to ensure they're approximately equal
 ggplot(flr, aes(Herb.Trt, Abundance, fill = Herb.Trt)) +
   geom_boxplot() +
@@ -373,6 +316,8 @@ ggplot(flr, aes(Herb.Trt, Abundance, fill = Herb.Trt)) +
         panel.background = element_blank(), axis.line = element_line(colour = "black"),
         legend.position = "none", legend.title = element_blank())
 
+ggplot2::ggsave("./Graphs/Model Checks/var.flr.ab.pdf", plot = last_plot())
+
 ggplot(flr, aes(Herb.Trt, Species.Density, fill = Herb.Trt)) +
   geom_boxplot() +
   facet_grid(. ~ Year) +
@@ -381,6 +326,8 @@ ggplot(flr, aes(Herb.Trt, Species.Density, fill = Herb.Trt)) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black"),
         legend.position = "none", legend.title = element_blank())
+
+ggplot2::ggsave("./Graphs/Model Checks/var.flr.dn.pdf", plot = last_plot())
 
 ggplot(flr, aes(Herb.Trt, Diversity, fill = Herb.Trt)) +
   geom_boxplot() +
@@ -391,15 +338,15 @@ ggplot(flr, aes(Herb.Trt, Diversity, fill = Herb.Trt)) +
         panel.background = element_blank(), axis.line = element_line(colour = "black"),
         legend.position = "none", legend.title = element_blank())
 
-##  -----------------------------  ##
-     # Transformations
-##  -----------------------------  ##
+ggplot2::ggsave("./Graphs/Model Checks/var.flr.dv.pdf", plot = last_plot())
+
+##  ----------------------------------------------------------  ##
+                # Transformations
+##  ----------------------------------------------------------  ##
 # Check distribution of data with no, log, sqrt, inverse, and power transformations within each year
 flr.ab <- ddply(flr, c("Year"), summarise,
                None = Abundance,
                Log = log(Abundance),
-               Inverse = 1/(Abundance),
-               Power = (Abundance)^0.2,
                Square.Root = sqrt(Abundance))
 
 # Plot 'em and take a look for which is consistently the best
@@ -427,33 +374,13 @@ flr.ab.sq.plt <- ggplot(flr.ab, aes(x = Square.Root)) +
         panel.background = element_blank(), axis.line = element_line(colour = "black"),
         legend.position = "none", legend.title = element_blank())
 
-flr.ab.inv.plt <- ggplot(flr.ab, aes(x = Inverse)) +
-  geom_density(aes(fill = rep.int("Z", nrow(flr.ab)))) +
-  facet_grid( ~ Year) +
-  scale_fill_manual(values = "#e34a33") +
-  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
-        panel.background = element_blank(), axis.line = element_line(colour = "black"),
-        legend.position = "none", legend.title = element_blank())
-
-flr.ab.pwr.plt <- ggplot(flr.ab, aes(x = Power)) +
-  geom_density(aes(fill = rep.int("Z", nrow(flr.ab)))) +
-  facet_grid( ~ Year) +
-  scale_fill_manual(values = "#b30000") +
-  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
-        panel.background = element_blank(), axis.line = element_line(colour = "black"),
-        legend.position = "none", legend.title = element_blank())
-
-plot_grid(flr.ab.none.plt, flr.ab.log.plt, flr.ab.sq.plt, labels = trns1.labs, ncol = 1, nrow = 3)
-ggplot2::ggsave("./Graphs/Model Checks/flr.ab.trnsfrm1.pdf", plot = last_plot())
-plot_grid(flr.ab.inv.plt, flr.ab.pwr.plt, labels = trns2.labs, ncol = 1, nrow = 2)
-ggplot2::ggsave("./Graphs/Model Checks/flr.ab.trnsfrm2.pdf", plot = last_plot())
+plot_grid(flr.ab.none.plt, flr.ab.log.plt, flr.ab.sq.plt, labels = trns.labs, ncol = 1, nrow = 3)
+ggplot2::ggsave("./Graphs/Model Checks/trnsfrm.flr.ab.pdf", plot = last_plot())
 
 # Do likewise for species density (S / 10 min)
 flr.dn <- ddply(flr, c("Year"), summarise,
                None = Species.Density,
                Log = log(Species.Density),
-               Inverse = 1/(Species.Density),
-               Power = (Species.Density)^0.2,
                Square.Root = sqrt(Species.Density))
 
 # Plot 'em and take a look for which is consistently the best
@@ -481,33 +408,13 @@ flr.dn.sq.plt <- ggplot(flr.dn, aes(x = Square.Root)) +
         panel.background = element_blank(), axis.line = element_line(colour = "black"),
         legend.position = "none", legend.title = element_blank())
 
-flr.dn.inv.plt <- ggplot(flr.dn, aes(x = Inverse)) +
-  geom_density(aes(fill = rep.int("Z", nrow(flr.dn)))) +
-  facet_grid( ~ Year) +
-  scale_fill_manual(values = "#e34a33") +
-  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
-        panel.background = element_blank(), axis.line = element_line(colour = "black"),
-        legend.position = "none", legend.title = element_blank())
-
-flr.dn.pwr.plt <- ggplot(flr.dn, aes(x = Power)) +
-  geom_density(aes(fill = rep.int("Z", nrow(flr.dn)))) +
-  facet_grid( ~ Year) +
-  scale_fill_manual(values = "#b30000") +
-  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
-        panel.background = element_blank(), axis.line = element_line(colour = "black"),
-        legend.position = "none", legend.title = element_blank())
-
-plot_grid(flr.dn.none.plt, flr.dn.log.plt, flr.dn.sq.plt, labels = trns1.labs, ncol = 1, nrow = 3)
-ggplot2::ggsave("./Graphs/Model Checks/flr.dn.trnsfrm1.pdf", plot = last_plot())
-plot_grid(flr.dn.inv.plt, flr.dn.pwr.plt, labels = trns2.labs, ncol = 1, nrow = 2)
-ggplot2::ggsave("./Graphs/Model Checks/flr.dn.trnsfrm2.pdf", plot = last_plot())
+plot_grid(flr.dn.none.plt, flr.dn.log.plt, flr.dn.sq.plt, labels = trns.labs, ncol = 1, nrow = 3)
+ggplot2::ggsave("./Graphs/Model Checks/trnsfrm.flr.dn.pdf", plot = last_plot())
 
 # And for Shannon diversity (H')
 flr.dv <- ddply(flr, c("Year"), summarise,
                None = Abundance,
                Log = log(Abundance),
-               Inverse = 1/(Abundance),
-               Power = (Abundance)^0.2,
                Square.Root = sqrt(Abundance))
 
 # Plot 'em and take a look for which is consistently the best
@@ -535,26 +442,8 @@ flr.dv.sq.plt <- ggplot(flr.dv, aes(x = Square.Root)) +
         panel.background = element_blank(), axis.line = element_line(colour = "black"),
         legend.position = "none", legend.title = element_blank())
 
-flr.dv.inv.plt <- ggplot(flr.dv, aes(x = Inverse)) +
-  geom_density(aes(fill = rep.int("Z", nrow(flr.dv)))) +
-  facet_grid( ~ Year) +
-  scale_fill_manual(values = "#e34a33") +
-  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
-        panel.background = element_blank(), axis.line = element_line(colour = "black"),
-        legend.position = "none", legend.title = element_blank())
-
-flr.dv.pwr.plt <- ggplot(flr.dv, aes(x = Power)) +
-  geom_density(aes(fill = rep.int("Z", nrow(flr.dv)))) +
-  facet_grid( ~ Year) +
-  scale_fill_manual(values = "#b30000") +
-  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
-        panel.background = element_blank(), axis.line = element_line(colour = "black"),
-        legend.position = "none", legend.title = element_blank())
-
-plot_grid(flr.dv.none.plt, flr.dv.log.plt, flr.dv.sq.plt, labels = trns1.labs, ncol = 1, nrow = 3)
-ggplot2::ggsave("./Graphs/Model Checks/flr.dv.trnsfrm1.pdf", plot = last_plot())
-plot_grid(flr.dv.inv.plt, flr.dv.pwr.plt, labels = trns2.labs, ncol = 1, nrow = 2)
-ggplot2::ggsave("./Graphs/Model Checks/flr.dv.trnsfrm2.pdf", plot = last_plot())
+plot_grid(flr.dv.none.plt, flr.dv.log.plt, flr.dv.sq.plt, labels = trns.labs, ncol = 1, nrow = 3)
+ggplot2::ggsave("./Graphs/Model Checks/trnsfrm.flr.dv.pdf", plot = last_plot())
 
 ##  ----------------------------------------------------------------------------------------------------------  ##
                             # Floral Model Fit Checks ####
@@ -571,3 +460,9 @@ ggplot2::ggsave("./Graphs/Model Checks/resid.flr.dn.pdf", plot = flr.dnmodplt)
 flr.dvmod <- lm(sqrt(Diversity) ~ Herb.Trt * Year, data = flr)
 flr.dvmodplt <- resid_panel(flr.dvmod$residuals, predict(flr.dvmod), bins = 20)
 ggplot2::ggsave("./Graphs/Model Checks/resid.flr.dv.pdf", plot = flr.dvmodplt)
+
+
+# END ####
+
+
+
