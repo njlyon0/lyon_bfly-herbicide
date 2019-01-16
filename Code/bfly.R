@@ -38,6 +38,11 @@ dodge <- position_dodge(width = 0.5)
 colors <- c("Con" = "#003c30", #  darkish teal
             "Spr" = "#35978f", # med. teal
             "SnS" = "#80cdc1") # lite teal
+yr.colors <- c("14" = "#ffeda0",
+               "15" = "#feb24c",
+               "16" = "#fc4e2a",
+               "17" = "#bd0026",
+               "18" = "#800026")
 ns.color <- "#003c30" # dark teal
 box.theme <- theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
                    panel.background = element_blank(), axis.line = element_line(colour = "black"),
@@ -245,20 +250,20 @@ simp.rrpp <- function (object, test.type = c("dist", "VC", "var"), angle.type = 
                  # Abundance ####
 ##  ----------------------------------------------------------  ##
 # How does the abundance of butterflies vary among herbicide treatment patches and over time?
-anova(lm.rrpp(Abundance ~ Herb.Trt * Year, data = bf, iter = 9999), effect.type = "F")
+anova(lm.rrpp(log(Abundance) ~ Herb.Trt * Year, data = bf, iter = 9999), effect.type = "F")
   ## interaction = NS
 
 # Drop the interaction (because NS) and re-run
-anova(lm.rrpp(Abundance ~ Herb.Trt + Year, data = bf, iter = 9999), effect.type = "F")
+anova(lm.rrpp(log(Abundance) ~ Herb.Trt + Year, data = bf, iter = 9999), effect.type = "F")
   ## yr = sig, trt = NS
 
 # Fit two models, one for each of the two categorical variables
-abun.trt.fit <- lm.rrpp(Abundance ~ Herb.Trt, data = bf, iter = 9999)
-abun.year.fit <- lm.rrpp(Abundance ~ Year, data = bf, iter = 9999)
+abun.trt.fit <- lm.rrpp(log(Abundance) ~ Herb.Trt, data = bf, iter = 9999)
+abun.year.fit <- lm.rrpp(log(Abundance) ~ Year, data = bf, iter = 9999)
 
 # And fit the pairwise comparison assessments
-abun.trt.pairs <- summary.pairwise(pairwise(abun.trt.fit, fit.null = NULL, groups = bf$Herb.Trt))
-abun.year.pairs <- summary.pairwise(pairwise(abun.year.fit, fit.null = NULL, groups = bf$Year))
+abun.trt.pairs <- simp.rrpp(pairwise(abun.trt.fit, fit.null = NULL, groups = bf$Herb.Trt))
+abun.year.pairs <- simp.rrpp(pairwise(abun.year.fit, fit.null = NULL, groups = bf$Year))
 
 # Get the pairwise results from those!
 abun.trt.pairs
@@ -268,31 +273,16 @@ abun.year.pairs
   ## 16 v 18 = sig
 
 # Plot the 'by treatment' results
-abun.plt <- ggplot(bf, aes(x = Herb.Trt, y = Abundance, fill = Herb.Trt)) +
+abun.plt <- ggplot(bf, aes(x = Year, y = Abundance, fill = Year)) +
   geom_boxplot(outlier.shape = 21) +
-  labs(x = "Herbicide Treatment", y = "Butterfly Abundance") + 
-  scale_fill_manual(values = colors) +
-  box.theme; abun.plt
-
-# Save it
-#ggplot2::ggsave("./Graphs/bf_abun.pdf", plot = abun.plt)
-
-# Get plotting dataframe
-abun.pltdf <- summarySE(data = bf, measurevar = "Abundance",
-                        groupvars = c("Composite.Variable", "Herb.Trt", "Year"))
-abun.pltdf$Year <- as.numeric(as.character(abun.pltdf$Year))
-
-# Plot
-ggplot(abun.pltdf, aes(x = Year, y = Abundance, color = Herb.Trt)) +
-  geom_path(aes(group = Herb.Trt), position = dodge, lwd = .7) +
-  geom_errorbar(aes(ymax = Abundance + se, ymin = Abundance - se), position = dodge, width = .4, lwd = .8) +
-  geom_point(position = dodge, size = 2) +
-  geom_vline(xintercept = c(14.35, 14.5, 14.65, 17.35), lty = c(1, 2, 3, 1)) +
   labs(x = "Year", y = "Butterfly Abundance") +
-  scale_color_manual(values = colors) +
-  sct.theme + theme(legend.position = c(0.4, 0.8))
-
-# ggplot2::ggsave("./Graphs/bf_abun.pdf", plot = abun.plt)
+  scale_fill_manual(values = yr.colors) +
+  geom_text(label = "AB", x = 0.7, y = 85) +
+  geom_text(label = "AB", x = 1.7, y = 80) +
+  geom_text(label = "A", x = 2.8, y = 120) +
+  geom_text(label = "AB", x = 3.7, y = 87) +
+  geom_text(label = "B", x = 4.8, y = 52) +
+  box.theme; abun.plt
 
 ##  ----------------------------------------------------------  ##
               # Species Density ####
