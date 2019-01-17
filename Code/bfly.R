@@ -284,6 +284,9 @@ abun.plt <- ggplot(bf, aes(x = Year, y = Abundance, fill = Year)) +
   geom_text(label = "B", x = 4.8, y = 52) +
   box.theme; abun.plt
 
+# Save it
+ggplot2::ggsave("./Graphs/bf_abun.pdf", plot = abun.plt)
+
 ##  ----------------------------------------------------------  ##
               # Species Density ####
 ##  ----------------------------------------------------------  ##
@@ -303,77 +306,44 @@ dens.plt <- ggplot(bf, aes(x = Herb.Trt, y = Species.Density, fill = Herb.Trt)) 
   box.theme; dens.plt
 
 # Save it
-#ggplot2::ggsave("./Graphs/bf_dens.pdf", plot = dens.plt)
-
-# Get plotting dataframe
-dens.pltdf <- summarySE(data = bf, measurevar = "Species.Density",
-                        groupvars = c("Composite.Variable", "Herb.Trt", "Year"))
-dens.pltdf$Year <- as.numeric(as.character(dens.pltdf$Year))
-
-# Plot
-ggplot(dens.pltdf, aes(x = Year, y = Species.Density, color = Herb.Trt)) +
-  geom_path(aes(group = Herb.Trt), position = dodge, lwd = .7) +
-  geom_errorbar(aes(ymax = Species.Density + se, ymin = Species.Density - se), position = dodge, width = .4, lwd = .8) +
-  geom_point(position = dodge, size = 2) +
-  geom_vline(xintercept = c(14.35, 14.5, 14.65, 17.35), lty = c(1, 2, 3, 1)) +
-  labs(x = "Year", y = "Butterfly Richness") +
-  scale_color_manual(values = colors) +
-  sct.theme + theme(legend.position = c(0.4, 0.8))
-
-# ggplot2::ggsave("./Graphs/bf_dens.pdf", plot = dens.plt)
+ggplot2::ggsave("./Graphs/bf_dens.pdf", plot = dens.plt)
 
 ##  ----------------------------------------------------------  ##
                  # Diversity ####
 ##  ----------------------------------------------------------  ##
 # How does the diversity of butterflies vary among herbicide treatment patches and over time?
-anova(lm.rrpp(Diversity ~ Herb.Trt * Year, data = bf, iter = 9999), effect.type = "F")
+anova(lm.rrpp(log(Diversity) ~ Herb.Trt * Year, data = bf, iter = 9999), effect.type = "F")
 ## interaction = NS
 
 # Drop the interaction (because NS) and re-run
-anova(lm.rrpp(Diversity ~ Herb.Trt + Year, data = bf, iter = 9999), effect.type = "F")
+anova(lm.rrpp(log(Diversity) ~ Herb.Trt + Year, data = bf, iter = 9999), effect.type = "F")
 ## yr = sig, trt = NS
 
-# Fit two models, one for each of the two categorical variables
-dive.trt.fit <- lm.rrpp(Diversity ~ Herb.Trt, data = bf, iter = 9999)
-dive.year.fit <- lm.rrpp(Diversity ~ Year, data = bf, iter = 9999)
+# Fit the year model
+dive.year.fit <- lm.rrpp(log(Diversity) ~ Year, data = bf, iter = 9999)
 
 # And fit the pairwise comparison assessments
-dive.trt.pairs <- summary.pairwise(pairwise(dive.trt.fit, fit.null = NULL, groups = bf$Herb.Trt))
-dive.year.pairs <- summary.pairwise(pairwise(dive.year.fit, fit.null = NULL, groups = bf$Year))
+dive.year.pairs <- simp.rrpp(pairwise(dive.year.fit, fit.null = NULL, groups = bf$Year))
 
 # Get the pairwise results from those!
-dive.trt.pairs
-## NS
-
 dive.year.pairs
-## 16 v 18 = sig
+## 14 v 18 = sig
+## 15 v 18 = sig
 
 # Plot the 'by treatment' results
-dive.plt <- ggplot(bf, aes(x = Herb.Trt, y = Diversity, fill = Herb.Trt)) +
+dive.plt <- ggplot(bf, aes(x = Year, y = Diversity, fill = Year)) +
   geom_boxplot(outlier.shape = 21) +
-  labs(x = "Herbicide Treatment", y = "Butterfly Diversity") + 
-  scale_fill_manual(values = colors) +
+  labs(x = "Year", y = "Butterfly Diversity") +
+  scale_fill_manual(values = yr.colors) +
+  geom_text(label = "A", x = 0.8, y = 1.87) +
+  geom_text(label = "A", x = 1.8, y = 1.83) +
+  geom_text(label = "AB", x = 2.7, y = 1.89) +
+  geom_text(label = "AB", x = 3.7, y = 1.9) +
+  geom_text(label = "B", x = 4.8, y = 2.04) +
   box.theme; dive.plt
 
 # Save it
-#ggplot2::ggsave("./Graphs/bf_dive.pdf", plot = dive.plt)
-
-# Get plotting dataframe
-dive.pltdf <- summarySE(data = bf, measurevar = "Diversity",
-                        groupvars = c("Composite.Variable", "Herb.Trt", "Year"))
-dive.pltdf$Year <- as.numeric(as.character(dive.pltdf$Year))
-
-# Plot
-ggplot(dive.pltdf, aes(x = Year, y = Diversity, color = Herb.Trt)) +
-  geom_path(aes(group = Herb.Trt), position = dodge, lwd = .7) +
-  geom_errorbar(aes(ymax = Diversity + se, ymin = Diversity - se), position = dodge, width = .4, lwd = .8) +
-  geom_point(position = dodge, size = 2) +
-  geom_vline(xintercept = c(14.35, 14.5, 14.65, 17.35), lty = c(1, 2, 3, 1)) +
-  labs(x = "Year", y = "Butterfly Diversity") +
-  scale_color_manual(values = colors) +
-  sct.theme + theme(legend.position = c(0.4, 0.8))
-
-# ggplot2::ggsave("./Graphs/bf_dive.pdf", plot = dive.plt)
+ggplot2::ggsave("./Graphs/bf_dive.pdf", plot = dive.plt)
 
 ##  ----------------------------------------------------------------------------------------------------------  ##
                        # Species of Greatest Conservation Need ###
@@ -389,6 +359,13 @@ sgcn <- aggregate(Number ~ Year + Site + Patch + Herb.Trt, data = bf.lng.sgcn, F
 
 # How many total SGCNs were observed?
 sum(sgcn$Number)
+
+# Exploratory plot
+sgcn.plt <- ggplot(sgcn, aes(x = Herb.Trt, y = Number, fill = Herb.Trt)) +
+  geom_boxplot(outlier.shape = 21) +
+  labs(x = "Herbicide Treatment", y = "Bfly SGCN Abundance") + 
+  scale_fill_manual(values = colors) +
+  box.theme; sgcn.plt
 
 ##  ----------------------------------------------------------------------------------------------------------  ##
                        # Multivariate Analysis and Plotting ####
@@ -445,7 +422,7 @@ bf$Herb.Trt <- factor(as.character(bf$Herb.Trt), levels = c("Con", "Spr", "SnS")
 unique(bf$Herb.Trt)
 
 # Select your community similarity/distance index (use the style of vegan::vegdist)
-comm.dist <- "kulczynski"
+comm.dist <- "jaccard"
 
 #   Subset by year
 bf14 <- subset(bf, bf$Year == 14)
@@ -513,27 +490,6 @@ nms.3.ord(bf15.mds, bf15$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS", legcont =
 nms.3.ord(bf16.mds, bf16$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS", legcont = trt)
 nms.3.ord(bf17.mds, bf17$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS", legcont = trt)
 nms.3.ord(bf18.mds, bf18$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS", legcont = trt)
-
-# Save out the significant ones
-jpeg(file = "./Graphs/bf_nms14.jpg")
-
-dev.off()
-
-jpeg(file = "./Graphs/bf_nms15.jpg")
-
-dev.off()
-
-jpeg(file = "./Graphs/bf_nms16.jpg")
-
-dev.off()
-
-jpeg(file = "./Graphs/bf_nms17.jpg")
-
-dev.off()
-
-jpeg(file = "./Graphs/bf_nms18.jpg")
-
-dev.off()
 
 ##  ----------------------------------------------------------------------------------------------------------  ##
                                     # Misc Notes ####
