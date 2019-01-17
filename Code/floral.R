@@ -39,6 +39,11 @@ dodge <- position_dodge(width = 0.5)
 colors <- c("Con" = "#8c510a", # dark brown
             "Spr" = "#bf812d", # med. brown
             "SnS" = "#dfc27d") # light brown
+yr.colors <- c("14" = "#ffeda0",
+               "15" = "#feb24c",
+               "16" = "#fc4e2a",
+               "17" = "#bd0026",
+               "18" = "#800026")
 ns.color <- "#8c510a" # dark brown
 box.theme <- theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
                    panel.background = element_blank(), axis.line = element_line(colour = "black"),
@@ -246,90 +251,45 @@ simp.rrpp <- function (object, test.type = c("dist", "VC", "var"), angle.type = 
                  # Abundance ####
 ##  ----------------------------------------------------------  ##
 # How does the abundance of flowers vary among herbicide treatment patches and over time?
-anova(lm.rrpp(Abundance ~ Herb.Trt * Year, data = flr, iter = 9999), effect.type = "F")
-## interaction = NS
+anova(lm.rrpp(log(Abundance) ~ Herb.Trt * Year, data = flr, iter = 9999), effect.type = "F")
+  ## interaction = NS
 
 # Drop the interaction (because NS) and re-run
-anova(lm.rrpp(Abundance ~ Herb.Trt + Year, data = flr, iter = 9999), effect.type = "F")
-## yr = sig, trt = NS
+anova(lm.rrpp(log(Abundance) ~ Herb.Trt + Year, data = flr, iter = 9999), effect.type = "F")
+  ## yr = sig, trt = NS
 
-# Fit two models, one for each of the two categorical variables
-abun.trt.fit <- lm.rrpp(Abundance ~ Herb.Trt, data = flr, iter = 9999)
+# Fit the model with the significant term
 abun.year.fit <- lm.rrpp(Abundance ~ Year, data = flr, iter = 9999)
 
 # And fit the pairwise comparison assessments
-abun.trt.pairs <- simp.rrpp(pairwise(abun.trt.fit, fit.null = NULL, groups = flr$Herb.Trt))
 abun.year.pairs <- simp.rrpp(pairwise(abun.year.fit, fit.null = NULL, groups = flr$Year))
 
 # Get the pairwise results from those!
-abun.trt.pairs
-## NS
-
 abun.year.pairs
-## 16 v 18 = sig
+## 14 v 17 = sig
+## 15 v 17 = sig
 
-# Plot the 'by treatment' results
-abun.plt <- ggplot(flr, aes(x = Herb.Trt, y = Abundance, fill = Herb.Trt)) +
+# Plot the significant results
+abun.plt <- ggplot(flr, aes(x = Year, y = Abundance, fill = Year)) +
   geom_boxplot(outlier.shape = 21) +
-  labs(x = "Herbicide Treatment", y = "Floral Abundance") + 
-  scale_fill_manual(values = colors) +
+  labs(x = "Year", y = "Floral Abundance") +
+  scale_fill_manual(values = yr.colors) +
+  geom_text(label = "A", x = 0.8, y = 2250) +
+  geom_text(label = "A", x = 1.8, y = 2750) +
+  geom_text(label = "AB", x = 2.7, y = 6300) +
+  geom_text(label = "B", x = 3.8, y = 8500) +
+  geom_text(label = "AB", x = 4.7, y = 4900) +
   box.theme; abun.plt
 
 # Save it
-#ggplot2::ggsave("./Graphs/flr_abun.pdf", plot = abun.plt)
-
-# Get plotting dataframe
-abun.pltdf <- summarySE(data = flr, measurevar = "Abundance",
-                        groupvars = c("Composite.Variable", "Herb.Trt", "Year"))
-abun.pltdf$Year <- as.numeric(as.character(abun.pltdf$Year))
-
-# Plot
-ggplot(abun.pltdf, aes(x = Year, y = Abundance, color = Herb.Trt)) +
-  geom_path(aes(group = Herb.Trt), position = dodge, lwd = .7) +
-  geom_errorbar(aes(ymax = Abundance + se, ymin = Abundance - se), position = dodge, width = .4, lwd = .8) +
-  geom_point(position = dodge, size = 2) +
-  geom_vline(xintercept = c(14.35, 14.5, 14.65, 17.35), lty = c(1, 2, 3, 1)) +
-  labs(x = "Year", y = "Flower Abundance") +
-  scale_color_manual(values = colors) +
-  sct.theme + theme(legend.position = c(0.4, 0.8))
-
-# ggplot2::ggsave("./Graphs/flr_abun.pdf", plot = abun.plt)
+ggplot2::ggsave("./Graphs/flr_abun.pdf", plot = abun.plt)
 
 ##  ----------------------------------------------------------  ##
               # Species Density ####
 ##  ----------------------------------------------------------  ##
 # How does the species density of flowers vary among herbicide treatment patches and over time?
 anova(lm.rrpp(Species.Density ~ Herb.Trt * Year, data = flr, iter = 9999), effect.type = "F")
-## interaction = NS
-
-# Drop the interaction (because NS) and re-run
-anova(lm.rrpp(Species.Density ~ Herb.Trt + Year, data = flr, iter = 9999), effect.type = "F")
-## yr = sig, trt = NS
-
-# Fit two models, one for each of the two categorical variables
-dens.trt.fit <- lm.rrpp(Species.Density ~ Herb.Trt, data = flr, iter = 9999)
-dens.year.fit <- lm.rrpp(Species.Density ~ Year, data = flr, iter = 9999)
-
-# And fit the pairwise comparison assessments
-dens.trt.pairs <- simp.rrpp(pairwise(dens.trt.fit, fit.null = NULL, groups = flr$Herb.Trt))
-dens.year.pairs <- simp.rrpp(pairwise(dens.year.fit, fit.null = NULL, groups = flr$Year))
-
-# Get the pairwise results from those!
-dens.trt.pairs
-## NS
-
-dens.year.pairs
-## 16 v 18 = sig
-
-# Plot the 'by treatment' results
-dens.plt <- ggplot(flr, aes(x = Herb.Trt, y = Species.Density, fill = Herb.Trt)) +
-  geom_boxplot(outlier.shape = 21) +
-  labs(x = "Herbicide Treatment", y = "Flower Richness") + 
-  scale_fill_manual(values = colors) +
-  box.theme; dens.plt
-
-# Save it
-#ggplot2::ggsave("./Graphs/flr_dens.pdf", plot = dens.plt)
+  ## interaction = sig
 
 # Get plotting dataframe
 dens.pltdf <- summarySE(data = flr, measurevar = "Species.Density",
@@ -337,42 +297,26 @@ dens.pltdf <- summarySE(data = flr, measurevar = "Species.Density",
 dens.pltdf$Year <- as.numeric(as.character(dens.pltdf$Year))
 
 # Plot
-ggplot(dens.pltdf, aes(x = Year, y = Species.Density, color = Herb.Trt)) +
+dens.plt <- ggplot(dens.pltdf, aes(x = Year, y = Species.Density, color = Herb.Trt, shape = Herb.Trt)) +
   geom_path(aes(group = Herb.Trt), position = dodge, lwd = .7) +
   geom_errorbar(aes(ymax = Species.Density + se, ymin = Species.Density - se), position = dodge, width = .4, lwd = .8) +
   geom_point(position = dodge, size = 2) +
-  geom_vline(xintercept = c(14.35, 14.5, 14.65, 17.35), lty = c(1, 2, 3, 1)) +
   labs(x = "Year", y = "Flower Richness") +
   scale_color_manual(values = colors) +
-  sct.theme + theme(legend.position = c(0.4, 0.8))
+  sct.theme + theme(legend.position = c(0.0, 0.8)); dens.plt
 
-# ggplot2::ggsave("./Graphs/flr_dens.pdf", plot = dens.plt)
+ggplot2::ggsave("./Graphs/flr_dens.pdf", plot = dens.plt)
 
 ##  ----------------------------------------------------------  ##
                   # Diversity ####
 ##  ----------------------------------------------------------  ##
 # How does the diversity of flowers vary among herbicide treatment patches and over time?
-anova(lm.rrpp(Diversity ~ Herb.Trt * Year, data = flr, iter = 9999), effect.type = "F")
-## interaction = NS
+anova(lm.rrpp(sqrt(Diversity) ~ Herb.Trt * Year, data = flr, iter = 9999), effect.type = "F")
+  ## interaction = NS
 
 # Drop the interaction (because NS) and re-run
-anova(lm.rrpp(Diversity ~ Herb.Trt + Year, data = flr, iter = 9999), effect.type = "F")
-## yr = sig, trt = NS
-
-# Fit two models, one for each of the two categorical variables
-dive.trt.fit <- lm.rrpp(Diversity ~ Herb.Trt, data = flr, iter = 9999)
-dive.year.fit <- lm.rrpp(Diversity ~ Year, data = flr, iter = 9999)
-
-# And fit the pairwise comparison assessments
-dive.trt.pairs <- simp.rrpp(pairwise(dive.trt.fit, fit.null = NULL, groups = flr$Herb.Trt))
-dive.year.pairs <- simp.rrpp(pairwise(dive.year.fit, fit.null = NULL, groups = flr$Year))
-
-# Get the pairwise results from those!
-dive.trt.pairs
-## NS
-
-dive.year.pairs
-## 16 v 18 = sig
+anova(lm.rrpp(sqrt(Diversity) ~ Herb.Trt + Year, data = flr, iter = 9999), effect.type = "F")
+  ## yr = sig, trt = NS
 
 # Plot the 'by treatment' results
 dive.plt <- ggplot(flr, aes(x = Herb.Trt, y = Diversity, fill = Herb.Trt)) +
@@ -382,24 +326,7 @@ dive.plt <- ggplot(flr, aes(x = Herb.Trt, y = Diversity, fill = Herb.Trt)) +
   box.theme; dive.plt
 
 # Save it
-#ggplot2::ggsave("./Graphs/flr_dive.pdf", plot = dive.plt)
-
-# Get plotting dataframe
-dive.pltdf <- summarySE(data = flr, measurevar = "Diversity",
-                        groupvars = c("Composite.Variable", "Herb.Trt", "Year"))
-dive.pltdf$Year <- as.numeric(as.character(dive.pltdf$Year))
-
-# Plot
-ggplot(dive.pltdf, aes(x = Year, y = Diversity, color = Herb.Trt)) +
-  geom_path(aes(group = Herb.Trt), position = dodge, lwd = .7) +
-  geom_errorbar(aes(ymax = Diversity + se, ymin = Diversity - se), position = dodge, width = .4, lwd = .8) +
-  geom_point(position = dodge, size = 2) +
-  geom_vline(xintercept = c(14.35, 14.5, 14.65, 17.35), lty = c(1, 2, 3, 1)) +
-  labs(x = "Year", y = "Flower Diversity") +
-  scale_color_manual(values = colors) +
-  sct.theme + theme(legend.position = c(0.4, 0.8))
-
-# ggplot2::ggsave("./Graphs/flr_dive.pdf", plot = dive.plt)
+ggplot2::ggsave("./Graphs/flr_dive.pdf", plot = dive.plt)
 
 ##  ----------------------------------------------------------------------------------------------------------  ##
                   # Native/Exotic/Seed-mix Analysis and Plotting ####
@@ -445,19 +372,36 @@ sdmx <- sdmx.v2
          # Seed-mix Analysis Plotting ####
 ##  ----------------------------------------------------------  ##
 # Abundance first
-anova(lm.rrpp(Abundance ~ Herb.Trt * Year, data = sdmx, iter = 9999), effect.type = "F")
-anova(lm.rrpp(Abundance ~ Herb.Trt + Year, data = sdmx, iter = 9999), effect.type = "F")
+anova(lm.rrpp(log(Abundance) ~ Herb.Trt * Year, data = sdmx, iter = 9999), effect.type = "F")
+anova(lm.rrpp(log(Abundance) ~ Herb.Trt + Year, data = sdmx, iter = 9999), effect.type = "F")
   ## Year was significant!
 
 # Fit the model and ask for pairwise comparisons
-sdmx.abun.year.fit <- lm.rrpp(Abundance ~ Herb.Trt + Year, data = sdmx, iter = 9999)
+sdmx.abun.year.fit <- lm.rrpp(log(Abundance) ~ Herb.Trt + Year, data = sdmx, iter = 9999)
 sdmx.abun.year.pairs <- simp.rrpp(pairwise(sdmx.abun.year.fit, fit.null = NULL, groups = sdmx$Year))
 sdmx.abun.year.pairs
-  ## 14 v 16 = sig!
+  ## 14 v 16 = sig
+  ## 14 v 17 = sig
+  ## 14 v 18 = sig
+
+# Plot abundance
+sdmx.abun.plt <- ggplot(sdmx, aes(x = Year, y = Abundance, fill = Year)) +
+  geom_boxplot(outlier.shape = 21) +
+  labs(x = "Year", y = "Seedmix Flower Abundance") +
+  scale_fill_manual(values = yr.colors) +
+  geom_text(label = "A", x = 0.8, y = 125) +
+  geom_text(label = "AB", x = 1.7, y = 325) +
+  geom_text(label = "B", x = 2.8, y = 950) +
+  geom_text(label = "B", x = 3.8, y = 550) +
+  geom_text(label = "B", x = 4.8, y = 450) +
+  box.theme; sdmx.abun.plt
+
+# Save it
+ggplot2::ggsave("./Graphs/flr_sdmx_abun.pdf", plot = sdmx.abun.plt)
 
 # Now species density
 anova(lm.rrpp(Species.Density ~ Herb.Trt * Year, data = sdmx, iter = 9999), effect.type = "F")
-  ## interaction was significant!
+  ## interaction was significant
 
 # Plot the species density information
   ## Get plotting dataframe
@@ -466,15 +410,16 @@ sdmx.dens.pltdf <- summarySE(data = sdmx, measurevar = "Species.Density",
 sdmx.dens.pltdf$Year <- as.numeric(as.character(sdmx.dens.pltdf$Year))
 
 # Plot
-ggplot(sdmx.dens.pltdf, aes(x = Year, y = Species.Density, color = Herb.Trt)) +
+sdmx.dens.plt <- ggplot(sdmx.dens.pltdf, aes(x = Year, y = Species.Density, color = Herb.Trt, shape = Herb.Trt)) +
   geom_path(aes(group = Herb.Trt), position = dodge, lwd = .7) +
   geom_errorbar(aes(ymax = Species.Density + se, ymin = Species.Density - se),
                 position = dodge, width = .4, lwd = .8) +
   geom_point(position = dodge, size = 2) +
-  geom_vline(xintercept = c(14.35, 14.5, 14.65, 17.35), lty = c(1, 2, 3, 1)) +
   labs(x = "Year", y = "Seedmix Plant Richness") +
-  #scale_color_manual(values = colors) +
-  sct.theme + theme(legend.position = c(0.4, 0.8))
+  scale_color_manual(values = colors) +
+  sct.theme + theme(legend.position = c(0, 0.8)); sdmx.dens.plt
+
+ggplot2::ggsave("./Graphs/flr_sdmx_dens.pdf", plot = sdmx.dens.plt)
 
 ##  ----------------------------------------------------------  ##
       # Native/Exotic Analysis & Plotting ####
@@ -485,6 +430,7 @@ anova(lm.rrpp(Percent.Native ~ Herb.Trt + Year, data = native.exotic, iter = 999
   ## NS
 
 # This means that the pattern of natives and exotics is not significantly different from the overall pattern
+  ## Because the proportions are conserved
 
 ##  ----------------------------------------------------------------------------------------------------------  ##
                         # Multivariate Analysis and Plotting ####
@@ -541,7 +487,7 @@ flr$Herb.Trt <- factor(as.character(flr$Herb.Trt), levels = c("Con", "Spr", "SnS
 unique(flr$Herb.Trt)
 
 # Select your community similarity/distance index (use the style of vegan::vegdist)
-comm.dist <- "kulczynski"
+comm.dist <- "jaccard"
 
 #   Subset by year
 flr14 <- subset(flr, flr$Year == 14)
@@ -609,27 +555,6 @@ nms.3.ord(flr15.mds, flr15$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS", legcont
 nms.3.ord(flr16.mds, flr16$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS", legcont = trt)
 nms.3.ord(flr17.mds, flr17$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS", legcont = trt)
 nms.3.ord(flr18.mds, flr18$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS", legcont = trt)
-
-# Save out the significant ones
-jpeg(file = "./Graphs/flr_nms14.jpg")
-
-dev.off()
-
-jpeg(file = "./Graphs/flr_nms15.jpg")
-
-dev.off()
-
-jpeg(file = "./Graphs/flr_nms16.jpg")
-
-dev.off()
-
-jpeg(file = "./Graphs/flr_nms17.jpg")
-
-dev.off()
-
-jpeg(file = "./Graphs/flr_nms18.jpg")
-
-dev.off()
 
 ##  ----------------------------------------------------------------------------------------------------------  ##
                                   # Misc Notes ####
