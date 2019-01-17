@@ -258,17 +258,12 @@ anova(lm.rrpp(log(Abundance) ~ Herb.Trt + Year, data = bf, iter = 9999), effect.
   ## yr = sig, trt = NS
 
 # Fit two models, one for each of the two categorical variables
-abun.trt.fit <- lm.rrpp(log(Abundance) ~ Herb.Trt, data = bf, iter = 9999)
 abun.year.fit <- lm.rrpp(log(Abundance) ~ Year, data = bf, iter = 9999)
 
 # And fit the pairwise comparison assessments
-abun.trt.pairs <- simp.rrpp(pairwise(abun.trt.fit, fit.null = NULL, groups = bf$Herb.Trt))
 abun.year.pairs <- simp.rrpp(pairwise(abun.year.fit, fit.null = NULL, groups = bf$Year))
 
-# Get the pairwise results from those!
-abun.trt.pairs
-  ## NS
-
+# Get the pairwise results from the sig results!
 abun.year.pairs
   ## 16 v 18 = sig
 

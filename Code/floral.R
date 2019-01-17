@@ -316,7 +316,7 @@ anova(lm.rrpp(sqrt(Diversity) ~ Herb.Trt * Year, data = flr, iter = 9999), effec
 
 # Drop the interaction (because NS) and re-run
 anova(lm.rrpp(sqrt(Diversity) ~ Herb.Trt + Year, data = flr, iter = 9999), effect.type = "F")
-  ## yr = sig, trt = NS
+  ## yr = NS, trt = NS
 
 # Plot the 'by treatment' results
 dive.plt <- ggplot(flr, aes(x = Herb.Trt, y = Diversity, fill = Herb.Trt)) +
