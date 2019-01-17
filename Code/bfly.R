@@ -484,7 +484,7 @@ anova(lm.rrpp(bf18.dst ~ Herb.Trt, data = bf18, iter = 9999), effect.type = "F")
 # Set a quick shortcut for the legend contents of each (it'll be the same for all of 'em)
 trt <- c("Con", "Spr", "SnS")
 
-# Make ordinations!
+# Make ordinations (for exploration purposes only)
 nms.3.ord(bf14.mds, bf14$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS", legcont = trt)
 nms.3.ord(bf15.mds, bf15$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS", legcont = trt)
 nms.3.ord(bf16.mds, bf16$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS", legcont = trt)
