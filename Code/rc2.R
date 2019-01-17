@@ -94,7 +94,7 @@ flr.rc2.dive <- ggplot(flr.rc2, aes(x = Year, y = Diversity, color = Herb.Trt, s
                                 # Figure Creation ####
 ##  ----------------------------------------------------------------------------------------------------------  ##
 plot_grid(bf.rc2.abun, bf.rc2.dens, bf.rc2.dive, flr.rc2.abun, flr.rc2.dens, flr.rc2.dive, 
-          labels = c("A", "B", "C", "D", "E", "F"), ncol = 3, nrow = 2)
+          labels = c("i", "ii", "iii", "iv", "v", "vi"), ncol = 3, nrow = 2)
 
 cowplot::ggsave(plot = last_plot(), filename = "./Figures/Richardson2.pdf",
                 width = 8, height = 7, units = "in")
