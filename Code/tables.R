@@ -68,9 +68,9 @@ sort(unique(bf.v4$BFLY.Common.Name[is.na(bf.v4$Scientific)]))
 sort(unique(flr.v4$Nectar.Plant.Name[is.na(flr.v4$Scientific)]))
   ## "factor(0)" means that everything transferred as desired
 
-# Re-order columns
+# Re-order columns,
 bf.v5 <- bf.v4[, c(2, 1, 6, 3:5)]
-flr.v5 <- flr.v4[, c(3, 1, 7, 2, 3:5)]
+flr.v5 <- flr.v4[, c(3, 1, 7, 2, 4:6)]
 
 # Standardize column names for the butterfly table
 colnames(bf.v5)
