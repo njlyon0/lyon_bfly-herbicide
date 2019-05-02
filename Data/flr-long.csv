@@ -1,730 +1,730 @@
-"Year","Site","Patch","Adaptive.Mgmt","Herb.Trt","Nectar.Common.Name","Number"
-14,"GIL","GIL-C","GB","SnS","birdsfoot trefoil",209
-14,"GIL","GIL-C","GB","SnS","black medick",19
-14,"GIL","GIL-C","GB","SnS","daisy fleabane",3
-14,"GIL","GIL-C","GB","SnS","deptford pink",14
-14,"GIL","GIL-C","GB","SnS","hoary vervain",8
-14,"GIL","GIL-C","GB","SnS","horsenettle",5
-14,"GIL","GIL-C","GB","SnS","prairie petunia",1
-14,"GIL","GIL-C","GB","SnS","queen anne's lace",2
-14,"GIL","GIL-C","GB","SnS","red clover",17
-14,"GIL","GIL-C","GB","SnS","white clover",52
-14,"GIL","GIL-C","GB","SnS","yellow oxalis",9
-14,"GIL","GIL-C","GB","SnS","yellow sweet clover",5
-14,"GIL","GIL-N","GB","Spr","alsike clover",1
-14,"GIL","GIL-N","GB","Spr","birdsfoot trefoil",881
-14,"GIL","GIL-N","GB","Spr","black medick",243
-14,"GIL","GIL-N","GB","Spr","chickweed",1
-14,"GIL","GIL-N","GB","Spr","chicory",1
-14,"GIL","GIL-N","GB","Spr","common cinquefoil",3
-14,"GIL","GIL-N","GB","Spr","daisy fleabane",1
-14,"GIL","GIL-N","GB","Spr","deptford pink",28
-14,"GIL","GIL-N","GB","Spr","fieldcress",2
-14,"GIL","GIL-N","GB","Spr","horsenettle",4
-14,"GIL","GIL-N","GB","Spr","ironweed",1
-14,"GIL","GIL-N","GB","Spr","queen anne's lace",8
-14,"GIL","GIL-N","GB","Spr","red clover",32
-14,"GIL","GIL-N","GB","Spr","white clover",492
-14,"GIL","GIL-N","GB","Spr","white sweet clover",1
-14,"GIL","GIL-N","GB","Spr","yellow oxalis",1
-14,"GIL","GIL-N","GB","Spr","yellow sweet clover",12
-14,"GIL","GIL-S","GB","Con","birdsfoot trefoil",360
-14,"GIL","GIL-S","GB","Con","daisy fleabane",6
-14,"GIL","GIL-S","GB","Con","deptford pink",18
-14,"GIL","GIL-S","GB","Con","fieldcress",1
-14,"GIL","GIL-S","GB","Con","germander",14
-14,"GIL","GIL-S","GB","Con","hoary vervain",2
-14,"GIL","GIL-S","GB","Con","horsenettle",2
-14,"GIL","GIL-S","GB","Con","queen anne's lace",77
-14,"GIL","GIL-S","GB","Con","red clover",49
-14,"GIL","GIL-S","GB","Con","white clover",332
-14,"GIL","GIL-S","GB","Con","wild bergamot",61
-14,"GIL","GIL-S","GB","Con","wild parsnip",2
-14,"GIL","GIL-S","GB","Con","yellow sweet clover",5
-14,"LTR","LTR-C","GB","Spr","birdsfoot trefoil",28
-14,"LTR","LTR-C","GB","Spr","daisy fleabane",15
-14,"LTR","LTR-C","GB","Spr","deptford pink",25
-14,"LTR","LTR-C","GB","Spr","hoary vervain",2
-14,"LTR","LTR-C","GB","Spr","pale spike lobelia",1
-14,"LTR","LTR-C","GB","Spr","prairie petunia",32
-14,"LTR","LTR-C","GB","Spr","red clover",2
-14,"LTR","LTR-C","GB","Spr","white clover",83
-14,"LTR","LTR-C","GB","Spr","yarrow",1
-14,"LTR","LTR-E","GB","SnS","birdsfoot trefoil",32
-14,"LTR","LTR-E","GB","SnS","black medick",25
-14,"LTR","LTR-E","GB","SnS","daisy fleabane",8
-14,"LTR","LTR-E","GB","SnS","dandelion",1
-14,"LTR","LTR-E","GB","SnS","deptford pink",2
-14,"LTR","LTR-E","GB","SnS","hoary vervain",7
-14,"LTR","LTR-E","GB","SnS","horsenettle",4
-14,"LTR","LTR-E","GB","SnS","moth mullein",1
-14,"LTR","LTR-E","GB","SnS","prairie petunia",14
-14,"LTR","LTR-E","GB","SnS","queen anne's lace",2
-14,"LTR","LTR-E","GB","SnS","red clover",41
-14,"LTR","LTR-E","GB","SnS","white clover",257
-14,"LTR","LTR-E","GB","SnS","white wild indigo",3
-14,"LTR","LTR-W","GB","Con","alsike clover",647
-14,"LTR","LTR-W","GB","Con","birdsfoot trefoil",39
-14,"LTR","LTR-W","GB","Con","black medick",14
-14,"LTR","LTR-W","GB","Con","daisy fleabane",13
-14,"LTR","LTR-W","GB","Con","deptford pink",11
-14,"LTR","LTR-W","GB","Con","field milkwort",1
-14,"LTR","LTR-W","GB","Con","germander",1
-14,"LTR","LTR-W","GB","Con","hoary vervain",2
-14,"LTR","LTR-W","GB","Con","horsenettle",1
-14,"LTR","LTR-W","GB","Con","prairie petunia",14
-14,"LTR","LTR-W","GB","Con","red clover",1
-14,"LTR","LTR-W","GB","Con","white clover",677
-14,"LTR","LTR-W","GB","Con","white wild indigo",5
-14,"PYW","PYW-C","GB","Spr","birdsfoot trefoil",1408
-14,"PYW","PYW-C","GB","Spr","black medick",133
-14,"PYW","PYW-C","GB","Spr","butterfly milkweed",17
-14,"PYW","PYW-C","GB","Spr","deptford pink",43
-14,"PYW","PYW-C","GB","Spr","field milkwort",3
-14,"PYW","PYW-C","GB","Spr","flowering spurge",1
-14,"PYW","PYW-C","GB","Spr","oxeye daisy",13
-14,"PYW","PYW-C","GB","Spr","prairie petunia",26
-14,"PYW","PYW-C","GB","Spr","red clover",90
-14,"PYW","PYW-C","GB","Spr","slender mountain mint",38
-14,"PYW","PYW-C","GB","Spr","white clover",19
-14,"PYW","PYW-C","GB","Spr","yellow sweet clover",16
-14,"PYW","PYW-N","GB","SnS","alsike clover",3
-14,"PYW","PYW-N","GB","SnS","birdsfoot trefoil",2923
-14,"PYW","PYW-N","GB","SnS","black medick",8
-14,"PYW","PYW-N","GB","SnS","blue-eyed grass",1
-14,"PYW","PYW-N","GB","SnS","common cinquefoil",1
-14,"PYW","PYW-N","GB","SnS","deptford pink",33
-14,"PYW","PYW-N","GB","SnS","hoary vervain",1
-14,"PYW","PYW-N","GB","SnS","oxeye daisy",23
-14,"PYW","PYW-N","GB","SnS","pale spike lobelia",2
-14,"PYW","PYW-N","GB","SnS","prairie petunia",8
-14,"PYW","PYW-N","GB","SnS","red clover",56
-14,"PYW","PYW-N","GB","SnS","slender mountain mint",43
-14,"PYW","PYW-N","GB","SnS","white clover",17
-14,"PYW","PYW-N","GB","SnS","white sweet clover",6
-14,"PYW","PYW-N","GB","SnS","white wild indigo",1
-14,"PYW","PYW-N","GB","SnS","yellow sweet clover",5
-14,"PYW","PYW-S","GB","Con","birdsfoot trefoil",1282
-14,"PYW","PYW-S","GB","Con","black medick",2
-14,"PYW","PYW-S","GB","Con","common cinquefoil",1
-14,"PYW","PYW-S","GB","Con","deptford pink",34
-14,"PYW","PYW-S","GB","Con","field milkwort",12
-14,"PYW","PYW-S","GB","Con","morning glory",1
-14,"PYW","PYW-S","GB","Con","pale spike lobelia",2
-14,"PYW","PYW-S","GB","Con","partridge pea",1
-14,"PYW","PYW-S","GB","Con","prairie petunia",11
-14,"PYW","PYW-S","GB","Con","red clover",420
-14,"PYW","PYW-S","GB","Con","self-heal",2
-14,"PYW","PYW-S","GB","Con","slender mountain mint",4
-14,"PYW","PYW-S","GB","Con","white clover",66
-14,"PYW","PYW-S","GB","Con","yarrow",2
-15,"GIL","GIL-C","GB-IC","SnS","birdsfoot trefoil",30
-15,"GIL","GIL-C","GB-IC","SnS","chickweed",3
-15,"GIL","GIL-C","GB-IC","SnS","chicory",9
-15,"GIL","GIL-C","GB-IC","SnS","daisy fleabane",66
-15,"GIL","GIL-C","GB-IC","SnS","ground cherry",1
-15,"GIL","GIL-C","GB-IC","SnS","hoary vervain",22
-15,"GIL","GIL-C","GB-IC","SnS","horsenettle",17
-15,"GIL","GIL-C","GB-IC","SnS","queen anne's lace",6
-15,"GIL","GIL-C","GB-IC","SnS","white clover",240
-15,"GIL","GIL-C","GB-IC","SnS","white vervain",1
-15,"GIL","GIL-C","GB-IC","SnS","yellow oxalis",22
-15,"GIL","GIL-N","GB-IC","Spr","birdsfoot trefoil",143
-15,"GIL","GIL-N","GB-IC","Spr","chickweed",1
-15,"GIL","GIL-N","GB-IC","Spr","daisy fleabane",1
-15,"GIL","GIL-N","GB-IC","Spr","dandelion",1
-15,"GIL","GIL-N","GB-IC","Spr","hoary vervain",1
-15,"GIL","GIL-N","GB-IC","Spr","horsenettle",3
-15,"GIL","GIL-N","GB-IC","Spr","red clover",2
-15,"GIL","GIL-N","GB-IC","Spr","white clover",29
-15,"GIL","GIL-N","GB-IC","Spr","yellow oxalis",65
-15,"GIL","GIL-S","GB-IC","Con","birdsfoot trefoil",664
-15,"GIL","GIL-S","GB-IC","Con","chickweed",7
-15,"GIL","GIL-S","GB-IC","Con","germander",33
-15,"GIL","GIL-S","GB-IC","Con","hoary vervain",6
-15,"GIL","GIL-S","GB-IC","Con","horsenettle",3
-15,"GIL","GIL-S","GB-IC","Con","ironweed",6
-15,"GIL","GIL-S","GB-IC","Con","prairie petunia",2
-15,"GIL","GIL-S","GB-IC","Con","queen anne's lace",12
-15,"GIL","GIL-S","GB-IC","Con","red clover",24
-15,"GIL","GIL-S","GB-IC","Con","self-heal",5
-15,"GIL","GIL-S","GB-IC","Con","white clover",614
-15,"GIL","GIL-S","GB-IC","Con","wild bergamot",169
-15,"GIL","GIL-S","GB-IC","Con","yellow oxalis",3
-15,"LTR","LTR-C","GB-IC","Spr","birdsfoot trefoil",24
-15,"LTR","LTR-C","GB-IC","Spr","daisy fleabane",68
-15,"LTR","LTR-C","GB-IC","Spr","germander",6
-15,"LTR","LTR-C","GB-IC","Spr","hoary vervain",116
-15,"LTR","LTR-C","GB-IC","Spr","horsenettle",5
-15,"LTR","LTR-C","GB-IC","Spr","ironweed",14
-15,"LTR","LTR-C","GB-IC","Spr","partridge pea",5
-15,"LTR","LTR-C","GB-IC","Spr","prairie petunia",23
-15,"LTR","LTR-C","GB-IC","Spr","queen anne's lace",2
-15,"LTR","LTR-C","GB-IC","Spr","red clover",3
-15,"LTR","LTR-C","GB-IC","Spr","slender mountain mint",31
-15,"LTR","LTR-C","GB-IC","Spr","white clover",111
-15,"LTR","LTR-C","GB-IC","Spr","white wild indigo",3
-15,"LTR","LTR-C","GB-IC","Spr","whorled milkweed",3
-15,"LTR","LTR-C","GB-IC","Spr","yarrow",25
-15,"LTR","LTR-C","GB-IC","Spr","yellow oxalis",82
-15,"LTR","LTR-E","GB-IC","SnS","birdsfoot trefoil",4
-15,"LTR","LTR-E","GB-IC","SnS","corn speedwell",1
-15,"LTR","LTR-E","GB-IC","SnS","daisy fleabane",25
-15,"LTR","LTR-E","GB-IC","SnS","germander",1
-15,"LTR","LTR-E","GB-IC","SnS","hoary vervain",80
-15,"LTR","LTR-E","GB-IC","SnS","horsenettle",17
-15,"LTR","LTR-E","GB-IC","SnS","ironweed",37
-15,"LTR","LTR-E","GB-IC","SnS","prairie petunia",8
-15,"LTR","LTR-E","GB-IC","SnS","queen anne's lace",137
-15,"LTR","LTR-E","GB-IC","SnS","red clover",47
-15,"LTR","LTR-E","GB-IC","SnS","swamp vervain",1
-15,"LTR","LTR-E","GB-IC","SnS","white clover",1426
-15,"LTR","LTR-E","GB-IC","SnS","white vervain",12
-15,"LTR","LTR-E","GB-IC","SnS","white wild indigo",4
-15,"LTR","LTR-E","GB-IC","SnS","yarrow",28
-15,"LTR","LTR-E","GB-IC","SnS","yellow oxalis",34
-15,"LTR","LTR-W","GB-IC","Con","alsike clover",11
-15,"LTR","LTR-W","GB-IC","Con","daisy fleabane",282
-15,"LTR","LTR-W","GB-IC","Con","hoary vervain",9
-15,"LTR","LTR-W","GB-IC","Con","horsenettle",1
-15,"LTR","LTR-W","GB-IC","Con","ironweed",8
-15,"LTR","LTR-W","GB-IC","Con","prairie petunia",11
-15,"LTR","LTR-W","GB-IC","Con","prairie rose",1
-15,"LTR","LTR-W","GB-IC","Con","queen anne's lace",41
-15,"LTR","LTR-W","GB-IC","Con","red clover",26
-15,"LTR","LTR-W","GB-IC","Con","self-heal",7
-15,"LTR","LTR-W","GB-IC","Con","slender mountain mint",9
-15,"LTR","LTR-W","GB-IC","Con","st. john's wort",2
-15,"LTR","LTR-W","GB-IC","Con","swamp vervain",3
-15,"LTR","LTR-W","GB-IC","Con","white clover",279
-15,"LTR","LTR-W","GB-IC","Con","white wild indigo",3
-15,"LTR","LTR-W","GB-IC","Con","whorled milkweed",1
-15,"LTR","LTR-W","GB-IC","Con","wild bergamot",5
-15,"LTR","LTR-W","GB-IC","Con","yarrow",7
-15,"LTR","LTR-W","GB-IC","Con","yellow sweet clover",1
-15,"PYW","PYW-C","GB-IC","Spr","birdsfoot trefoil",88
-15,"PYW","PYW-C","GB-IC","Spr","black-eyed susan",2
-15,"PYW","PYW-C","GB-IC","Spr","deptford pink",4
-15,"PYW","PYW-C","GB-IC","Spr","grey-headed coneflower",3
-15,"PYW","PYW-C","GB-IC","Spr","ironweed",5
-15,"PYW","PYW-C","GB-IC","Spr","pale spike lobelia",5
-15,"PYW","PYW-C","GB-IC","Spr","partridge pea",20
-15,"PYW","PYW-C","GB-IC","Spr","prairie petunia",1
-15,"PYW","PYW-C","GB-IC","Spr","queen anne's lace",84
-15,"PYW","PYW-C","GB-IC","Spr","red clover",153
-15,"PYW","PYW-C","GB-IC","Spr","slender mountain mint",316
-15,"PYW","PYW-C","GB-IC","Spr","white clover",20
-15,"PYW","PYW-C","GB-IC","Spr","yellow oxalis",2
-15,"PYW","PYW-N","GB-IC","SnS","birdsfoot trefoil",2558
-15,"PYW","PYW-N","GB-IC","SnS","black-eyed susan",7
-15,"PYW","PYW-N","GB-IC","SnS","daisy fleabane",1
-15,"PYW","PYW-N","GB-IC","SnS","horsenettle",1
-15,"PYW","PYW-N","GB-IC","SnS","ironweed",2
-15,"PYW","PYW-N","GB-IC","SnS","oxeye daisy",1
-15,"PYW","PYW-N","GB-IC","SnS","prairie petunia",19
-15,"PYW","PYW-N","GB-IC","SnS","queen anne's lace",59
-15,"PYW","PYW-N","GB-IC","SnS","red clover",4
-15,"PYW","PYW-N","GB-IC","SnS","slender mountain mint",237
-15,"PYW","PYW-N","GB-IC","SnS","white clover",4
-15,"PYW","PYW-S","GB-IC","Con","black-eyed susan",7
-15,"PYW","PYW-S","GB-IC","Con","daisy fleabane",3
-15,"PYW","PYW-S","GB-IC","Con","oxeye daisy",2
-15,"PYW","PYW-S","GB-IC","Con","pale spike lobelia",12
-15,"PYW","PYW-S","GB-IC","Con","prairie cinquefoil",1
-15,"PYW","PYW-S","GB-IC","Con","prairie petunia",16
-15,"PYW","PYW-S","GB-IC","Con","queen anne's lace",26
-15,"PYW","PYW-S","GB-IC","Con","self-heal",5
-15,"PYW","PYW-S","GB-IC","Con","slender mountain mint",57
-16,"GIL","GIL-C","GB-IC","SnS","birdsfoot trefoil",161
-16,"GIL","GIL-C","GB-IC","SnS","black medick",77
-16,"GIL","GIL-C","GB-IC","SnS","daisy fleabane",759
-16,"GIL","GIL-C","GB-IC","SnS","deptford pink",96
-16,"GIL","GIL-C","GB-IC","SnS","germander",3
-16,"GIL","GIL-C","GB-IC","SnS","hoary vervain",63
-16,"GIL","GIL-C","GB-IC","SnS","horsenettle",2
-16,"GIL","GIL-C","GB-IC","SnS","ironweed",9
-16,"GIL","GIL-C","GB-IC","SnS","prairie cinquefoil",1
-16,"GIL","GIL-C","GB-IC","SnS","prairie petunia",1
-16,"GIL","GIL-C","GB-IC","SnS","queen anne's lace",228
-16,"GIL","GIL-C","GB-IC","SnS","red clover",15
-16,"GIL","GIL-C","GB-IC","SnS","ribwort plantain",152
-16,"GIL","GIL-C","GB-IC","SnS","self-heal",17
-16,"GIL","GIL-C","GB-IC","SnS","swamp vervain",58
-16,"GIL","GIL-C","GB-IC","SnS","wild bergamot",13
-16,"GIL","GIL-C","GB-IC","SnS","yellow oxalis",10
-16,"GIL","GIL-C","GB-IC","SnS","yellow sweet clover",5
-16,"GIL","GIL-N","GB-IC","Spr","alsike clover",25
-16,"GIL","GIL-N","GB-IC","Spr","birdsfoot trefoil",419
-16,"GIL","GIL-N","GB-IC","Spr","black medick",17
-16,"GIL","GIL-N","GB-IC","Spr","black-eyed susan",3
-16,"GIL","GIL-N","GB-IC","Spr","chicory",1
-16,"GIL","GIL-N","GB-IC","Spr","common cinquefoil",3
-16,"GIL","GIL-N","GB-IC","Spr","daisy fleabane",317
-16,"GIL","GIL-N","GB-IC","Spr","deptford pink",158
-16,"GIL","GIL-N","GB-IC","Spr","hoary vervain",32
-16,"GIL","GIL-N","GB-IC","Spr","ironweed",3
-16,"GIL","GIL-N","GB-IC","Spr","queen anne's lace",216
-16,"GIL","GIL-N","GB-IC","Spr","red clover",40
-16,"GIL","GIL-N","GB-IC","Spr","ribwort plantain",730
-16,"GIL","GIL-N","GB-IC","Spr","self-heal",65
-16,"GIL","GIL-N","GB-IC","Spr","swamp vervain",5
-16,"GIL","GIL-N","GB-IC","Spr","white clover",2445
-16,"GIL","GIL-N","GB-IC","Spr","white sweet clover",6
-16,"GIL","GIL-N","GB-IC","Spr","yellow sweet clover",16
-16,"GIL","GIL-S","GB-IC","Con","birdsfoot trefoil",303
-16,"GIL","GIL-S","GB-IC","Con","black medick",35
-16,"GIL","GIL-S","GB-IC","Con","black-eyed susan",4
-16,"GIL","GIL-S","GB-IC","Con","daisy fleabane",1
-16,"GIL","GIL-S","GB-IC","Con","grey-headed coneflower",3
-16,"GIL","GIL-S","GB-IC","Con","horsenettle",39
-16,"GIL","GIL-S","GB-IC","Con","ironweed",235
-16,"GIL","GIL-S","GB-IC","Con","red clover",60
-16,"GIL","GIL-S","GB-IC","Con","ribwort plantain",1
-16,"GIL","GIL-S","GB-IC","Con","self-heal",6
-16,"GIL","GIL-S","GB-IC","Con","swamp vervain",57
-16,"GIL","GIL-S","GB-IC","Con","white clover",718
-16,"GIL","GIL-S","GB-IC","Con","wild parsnip",5
-16,"LTR","LTR-C","GB-IC","Spr","birdsfoot trefoil",7
-16,"LTR","LTR-C","GB-IC","Spr","black medick",15
-16,"LTR","LTR-C","GB-IC","Spr","black-eyed susan",4
-16,"LTR","LTR-C","GB-IC","Spr","deptford pink",13
-16,"LTR","LTR-C","GB-IC","Spr","hoary vervain",5
-16,"LTR","LTR-C","GB-IC","Spr","horsenettle",8
-16,"LTR","LTR-C","GB-IC","Spr","ironweed",5
-16,"LTR","LTR-C","GB-IC","Spr","partridge pea",11
-16,"LTR","LTR-C","GB-IC","Spr","rapeseed",1
-16,"LTR","LTR-C","GB-IC","Spr","red clover",5
-16,"LTR","LTR-C","GB-IC","Spr","ribwort plantain",5
-16,"LTR","LTR-C","GB-IC","Spr","self-heal",5
-16,"LTR","LTR-C","GB-IC","Spr","slender mountain mint",3
-16,"LTR","LTR-C","GB-IC","Spr","swamp vervain",2
-16,"LTR","LTR-C","GB-IC","Spr","white clover",1
-16,"LTR","LTR-C","GB-IC","Spr","white wild indigo",6
-16,"LTR","LTR-C","GB-IC","Spr","wild bergamot",7
-16,"LTR","LTR-C","GB-IC","Spr","yarrow",15
-16,"LTR","LTR-E","GB-IC","SnS","birdsfoot trefoil",33
-16,"LTR","LTR-E","GB-IC","SnS","black medick",11
-16,"LTR","LTR-E","GB-IC","SnS","black-eyed susan",9
-16,"LTR","LTR-E","GB-IC","SnS","daisy fleabane",529
-16,"LTR","LTR-E","GB-IC","SnS","deptford pink",90
-16,"LTR","LTR-E","GB-IC","SnS","germander",1
-16,"LTR","LTR-E","GB-IC","SnS","hoary vervain",47
-16,"LTR","LTR-E","GB-IC","SnS","horsenettle",18
-16,"LTR","LTR-E","GB-IC","SnS","ironweed",199
-16,"LTR","LTR-E","GB-IC","SnS","musk thistle",1
-16,"LTR","LTR-E","GB-IC","SnS","partridge pea",9
-16,"LTR","LTR-E","GB-IC","SnS","prairie petunia",9
-16,"LTR","LTR-E","GB-IC","SnS","queen anne's lace",332
-16,"LTR","LTR-E","GB-IC","SnS","red clover",49
-16,"LTR","LTR-E","GB-IC","SnS","ribwort plantain",153
-16,"LTR","LTR-E","GB-IC","SnS","self-heal",9
-16,"LTR","LTR-E","GB-IC","SnS","slender mountain mint",180
-16,"LTR","LTR-E","GB-IC","SnS","white clover",3644
-16,"LTR","LTR-E","GB-IC","SnS","white vervain",15
-16,"LTR","LTR-E","GB-IC","SnS","white wild indigo",2
-16,"LTR","LTR-E","GB-IC","SnS","wild bergamot",1
-16,"LTR","LTR-E","GB-IC","SnS","yarrow",40
-16,"LTR","LTR-E","GB-IC","SnS","yellow sweet clover",5
-16,"LTR","LTR-W","GB-IC","Con","black medick",2
-16,"LTR","LTR-W","GB-IC","Con","daisy fleabane",33
-16,"LTR","LTR-W","GB-IC","Con","deptford pink",3
-16,"LTR","LTR-W","GB-IC","Con","hoary vervain",23
-16,"LTR","LTR-W","GB-IC","Con","horsenettle",1
-16,"LTR","LTR-W","GB-IC","Con","ironweed",6
-16,"LTR","LTR-W","GB-IC","Con","prairie petunia",5
-16,"LTR","LTR-W","GB-IC","Con","queen anne's lace",85
-16,"LTR","LTR-W","GB-IC","Con","ribwort plantain",2
-16,"LTR","LTR-W","GB-IC","Con","white clover",1057
-16,"LTR","LTR-W","GB-IC","Con","wild bergamot",4
-16,"LTR","LTR-W","GB-IC","Con","yellow sweet clover",1
-16,"PYW","PYW-C","GB-IC","Spr","birdsfoot trefoil",2194
-16,"PYW","PYW-C","GB-IC","Spr","black medick",90
-16,"PYW","PYW-C","GB-IC","Spr","black-eyed susan",146
-16,"PYW","PYW-C","GB-IC","Spr","butterfly milkweed",5
-16,"PYW","PYW-C","GB-IC","Spr","daisy fleabane",260
-16,"PYW","PYW-C","GB-IC","Spr","deptford pink",200
-16,"PYW","PYW-C","GB-IC","Spr","grey-headed coneflower",11
-16,"PYW","PYW-C","GB-IC","Spr","hoary vervain",3
-16,"PYW","PYW-C","GB-IC","Spr","horsenettle",1
-16,"PYW","PYW-C","GB-IC","Spr","oxeye daisy",663
-16,"PYW","PYW-C","GB-IC","Spr","pale spike lobelia",3
-16,"PYW","PYW-C","GB-IC","Spr","prairie petunia",11
-16,"PYW","PYW-C","GB-IC","Spr","red clover",933
-16,"PYW","PYW-C","GB-IC","Spr","self-heal",13
-16,"PYW","PYW-C","GB-IC","Spr","slender mountain mint",696
-16,"PYW","PYW-C","GB-IC","Spr","st. john's wort",18
-16,"PYW","PYW-C","GB-IC","Spr","tall green milkweed",3
-16,"PYW","PYW-C","GB-IC","Spr","white clover",169
-16,"PYW","PYW-C","GB-IC","Spr","yarrow",7
-16,"PYW","PYW-C","GB-IC","Spr","yellow sweet clover",13
-16,"PYW","PYW-N","GB-IC","SnS","birdsfoot trefoil",3073
-16,"PYW","PYW-N","GB-IC","SnS","black medick",110
-16,"PYW","PYW-N","GB-IC","SnS","black-eyed susan",171
-16,"PYW","PYW-N","GB-IC","SnS","butterfly milkweed",1
-16,"PYW","PYW-N","GB-IC","SnS","daisy fleabane",570
-16,"PYW","PYW-N","GB-IC","SnS","deptford pink",98
-16,"PYW","PYW-N","GB-IC","SnS","grey-headed coneflower",4
-16,"PYW","PYW-N","GB-IC","SnS","hoary vervain",2
-16,"PYW","PYW-N","GB-IC","SnS","ironweed",1
-16,"PYW","PYW-N","GB-IC","SnS","oxeye daisy",1429
-16,"PYW","PYW-N","GB-IC","SnS","pale spike lobelia",36
-16,"PYW","PYW-N","GB-IC","SnS","prairie petunia",16
-16,"PYW","PYW-N","GB-IC","SnS","queen anne's lace",164
-16,"PYW","PYW-N","GB-IC","SnS","red clover",351
-16,"PYW","PYW-N","GB-IC","SnS","self-heal",14
-16,"PYW","PYW-N","GB-IC","SnS","slender mountain mint",1668
-16,"PYW","PYW-N","GB-IC","SnS","st. john's wort",3
-16,"PYW","PYW-N","GB-IC","SnS","white clover",29
-16,"PYW","PYW-N","GB-IC","SnS","yarrow",2
-16,"PYW","PYW-N","GB-IC","SnS","yellow sweet clover",27
-16,"PYW","PYW-S","GB-IC","Con","birdsfoot trefoil",937
-16,"PYW","PYW-S","GB-IC","Con","black-eyed susan",21
-16,"PYW","PYW-S","GB-IC","Con","daisy fleabane",6
-16,"PYW","PYW-S","GB-IC","Con","germander",4
-16,"PYW","PYW-S","GB-IC","Con","horsenettle",1
-16,"PYW","PYW-S","GB-IC","Con","ironweed",4
-16,"PYW","PYW-S","GB-IC","Con","multiflora rose",1
-16,"PYW","PYW-S","GB-IC","Con","oxeye daisy",14
-16,"PYW","PYW-S","GB-IC","Con","pale spike lobelia",43
-16,"PYW","PYW-S","GB-IC","Con","prairie cinquefoil",2
-16,"PYW","PYW-S","GB-IC","Con","queen anne's lace",46
-16,"PYW","PYW-S","GB-IC","Con","red clover",248
-16,"PYW","PYW-S","GB-IC","Con","ribwort plantain",5
-16,"PYW","PYW-S","GB-IC","Con","self-heal",25
-16,"PYW","PYW-S","GB-IC","Con","white clover",12
-16,"PYW","PYW-S","GB-IC","Con","yarrow",8
-17,"GIL","GIL-C","GB-IC","SnS","alsike clover",537
-17,"GIL","GIL-C","GB-IC","SnS","birdsfoot trefoil",287
-17,"GIL","GIL-C","GB-IC","SnS","black medick",35
-17,"GIL","GIL-C","GB-IC","SnS","black-eyed susan",7
-17,"GIL","GIL-C","GB-IC","SnS","broadleaf plantain",7
-17,"GIL","GIL-C","GB-IC","SnS","common cinquefoil",3
-17,"GIL","GIL-C","GB-IC","SnS","daisy fleabane",369
-17,"GIL","GIL-C","GB-IC","SnS","dandelion",1
-17,"GIL","GIL-C","GB-IC","SnS","deptford pink",74
-17,"GIL","GIL-C","GB-IC","SnS","germander",48
-17,"GIL","GIL-C","GB-IC","SnS","grey-headed coneflower",4
-17,"GIL","GIL-C","GB-IC","SnS","hoary vervain",132
-17,"GIL","GIL-C","GB-IC","SnS","horsenettle",2
-17,"GIL","GIL-C","GB-IC","SnS","ironweed",46
-17,"GIL","GIL-C","GB-IC","SnS","prairie cinquefoil",1
-17,"GIL","GIL-C","GB-IC","SnS","queen anne's lace",46
-17,"GIL","GIL-C","GB-IC","SnS","red clover",34
-17,"GIL","GIL-C","GB-IC","SnS","ribwort plantain",422
-17,"GIL","GIL-C","GB-IC","SnS","self-heal",8
-17,"GIL","GIL-C","GB-IC","SnS","white clover",985
-17,"GIL","GIL-C","GB-IC","SnS","wild bergamot",29
-17,"GIL","GIL-C","GB-IC","SnS","yellow oxalis",11
-17,"GIL","GIL-C","GB-IC","SnS","yellow sweet clover",14
-17,"GIL","GIL-N","GB-IC","Spr","alsike clover",334
-17,"GIL","GIL-N","GB-IC","Spr","birdsfoot trefoil",831
-17,"GIL","GIL-N","GB-IC","Spr","black medick",1
-17,"GIL","GIL-N","GB-IC","Spr","chickweed",9
-17,"GIL","GIL-N","GB-IC","Spr","chicory",15
-17,"GIL","GIL-N","GB-IC","Spr","daisy fleabane",681
-17,"GIL","GIL-N","GB-IC","Spr","deptford pink",137
-17,"GIL","GIL-N","GB-IC","Spr","germander",6
-17,"GIL","GIL-N","GB-IC","Spr","grey-headed coneflower",3
-17,"GIL","GIL-N","GB-IC","Spr","hoary vervain",5
-17,"GIL","GIL-N","GB-IC","Spr","horsenettle",4
-17,"GIL","GIL-N","GB-IC","Spr","prairie cinquefoil",5
-17,"GIL","GIL-N","GB-IC","Spr","prairie petunia",4
-17,"GIL","GIL-N","GB-IC","Spr","queen anne's lace",116
-17,"GIL","GIL-N","GB-IC","Spr","red clover",41
-17,"GIL","GIL-N","GB-IC","Spr","ribwort plantain",222
-17,"GIL","GIL-N","GB-IC","Spr","self-heal",12
-17,"GIL","GIL-N","GB-IC","Spr","slender mountain mint",3
-17,"GIL","GIL-N","GB-IC","Spr","swamp vervain",2
-17,"GIL","GIL-N","GB-IC","Spr","white clover",1598
-17,"GIL","GIL-N","GB-IC","Spr","wild bergamot",54
-17,"GIL","GIL-N","GB-IC","Spr","yellow oxalis",1
-17,"GIL","GIL-S","GB-IC","Con","birdsfoot trefoil",630
-17,"GIL","GIL-S","GB-IC","Con","black medick",27
-17,"GIL","GIL-S","GB-IC","Con","broadleaf plantain",1
-17,"GIL","GIL-S","GB-IC","Con","chicory",11
-17,"GIL","GIL-S","GB-IC","Con","daisy fleabane",116
-17,"GIL","GIL-S","GB-IC","Con","deptford pink",35
-17,"GIL","GIL-S","GB-IC","Con","germander",66
-17,"GIL","GIL-S","GB-IC","Con","hoary vervain",8
-17,"GIL","GIL-S","GB-IC","Con","horsenettle",3
-17,"GIL","GIL-S","GB-IC","Con","ironweed",49
-17,"GIL","GIL-S","GB-IC","Con","prairie petunia",3
-17,"GIL","GIL-S","GB-IC","Con","queen anne's lace",118
-17,"GIL","GIL-S","GB-IC","Con","ribwort plantain",45
-17,"GIL","GIL-S","GB-IC","Con","self-heal",33
-17,"GIL","GIL-S","GB-IC","Con","white clover",599
-17,"GIL","GIL-S","GB-IC","Con","wild bergamot",921
-17,"LTR","LTR-C","GB-IC","Spr","alsike clover",182
-17,"LTR","LTR-C","GB-IC","Spr","birdsfoot trefoil",167
-17,"LTR","LTR-C","GB-IC","Spr","black medick",193
-17,"LTR","LTR-C","GB-IC","Spr","blue-eyed grass",1
-17,"LTR","LTR-C","GB-IC","Spr","daisy fleabane",142
-17,"LTR","LTR-C","GB-IC","Spr","deptford pink",124
-17,"LTR","LTR-C","GB-IC","Spr","germander",19
-17,"LTR","LTR-C","GB-IC","Spr","grooved yellow flax",7
-17,"LTR","LTR-C","GB-IC","Spr","hairy mountain mint",34
-17,"LTR","LTR-C","GB-IC","Spr","horsenettle",4
-17,"LTR","LTR-C","GB-IC","Spr","ironweed",54
-17,"LTR","LTR-C","GB-IC","Spr","partridge pea",7
-17,"LTR","LTR-C","GB-IC","Spr","prairie petunia",22
-17,"LTR","LTR-C","GB-IC","Spr","queen anne's lace",49
-17,"LTR","LTR-C","GB-IC","Spr","red clover",8
-17,"LTR","LTR-C","GB-IC","Spr","ribwort plantain",53
-17,"LTR","LTR-C","GB-IC","Spr","self-heal",2
-17,"LTR","LTR-C","GB-IC","Spr","showy tick trefoil",15
-17,"LTR","LTR-C","GB-IC","Spr","swamp agrimony",1
-17,"LTR","LTR-C","GB-IC","Spr","white clover",141
-17,"LTR","LTR-C","GB-IC","Spr","white wild indigo",11
-17,"LTR","LTR-C","GB-IC","Spr","wild bergamot",11
-17,"LTR","LTR-C","GB-IC","Spr","yarrow",34
-17,"LTR","LTR-E","GB-IC","SnS","alsike clover",6
-17,"LTR","LTR-E","GB-IC","SnS","birdsfoot trefoil",73
-17,"LTR","LTR-E","GB-IC","SnS","black medick",78
-17,"LTR","LTR-E","GB-IC","SnS","black-eyed susan",9
-17,"LTR","LTR-E","GB-IC","SnS","broadleaf plantain",405
-17,"LTR","LTR-E","GB-IC","SnS","catnip",3
-17,"LTR","LTR-E","GB-IC","SnS","corn speedwell",1
-17,"LTR","LTR-E","GB-IC","SnS","daisy fleabane",42
-17,"LTR","LTR-E","GB-IC","SnS","deptford pink",200
-17,"LTR","LTR-E","GB-IC","SnS","germander",22
-17,"LTR","LTR-E","GB-IC","SnS","grey-headed coneflower",5
-17,"LTR","LTR-E","GB-IC","SnS","hoary vervain",57
-17,"LTR","LTR-E","GB-IC","SnS","horsenettle",6
-17,"LTR","LTR-E","GB-IC","SnS","ironweed",319
-17,"LTR","LTR-E","GB-IC","SnS","moth mullein",5
-17,"LTR","LTR-E","GB-IC","SnS","prairie petunia",17
-17,"LTR","LTR-E","GB-IC","SnS","queen anne's lace",1178
-17,"LTR","LTR-E","GB-IC","SnS","ribwort plantain",1200
-17,"LTR","LTR-E","GB-IC","SnS","self-heal",2
-17,"LTR","LTR-E","GB-IC","SnS","slender mountain mint",5
-17,"LTR","LTR-E","GB-IC","SnS","swamp vervain",14
-17,"LTR","LTR-E","GB-IC","SnS","white wild indigo",1
-17,"LTR","LTR-E","GB-IC","SnS","wild bergamot",8
-17,"LTR","LTR-E","GB-IC","SnS","yarrow",59
-17,"LTR","LTR-W","GB-IC","Con","daisy fleabane",76
-17,"LTR","LTR-W","GB-IC","Con","deptford pink",7
-17,"LTR","LTR-W","GB-IC","Con","hoary vervain",7
-17,"LTR","LTR-W","GB-IC","Con","horsenettle",8
-17,"LTR","LTR-W","GB-IC","Con","pale spike lobelia",1
-17,"LTR","LTR-W","GB-IC","Con","prairie petunia",8
-17,"LTR","LTR-W","GB-IC","Con","queen anne's lace",129
-17,"LTR","LTR-W","GB-IC","Con","red clover",25
-17,"LTR","LTR-W","GB-IC","Con","ribwort plantain",4
-17,"LTR","LTR-W","GB-IC","Con","slender mountain mint",119
-17,"LTR","LTR-W","GB-IC","Con","st. john's wort",1
-17,"LTR","LTR-W","GB-IC","Con","white wild indigo",4
-17,"LTR","LTR-W","GB-IC","Con","yarrow",1
-17,"LTR","LTR-W","GB-IC","Con","yellow sweet clover",8
-17,"PYW","PYW-C","GB-IC","Spr","alsike clover",7
-17,"PYW","PYW-C","GB-IC","Spr","birdsfoot trefoil",1435
-17,"PYW","PYW-C","GB-IC","Spr","black-eyed susan",31
-17,"PYW","PYW-C","GB-IC","Spr","blue-eyed grass",3
-17,"PYW","PYW-C","GB-IC","Spr","daisy fleabane",202
-17,"PYW","PYW-C","GB-IC","Spr","deptford pink",38
-17,"PYW","PYW-C","GB-IC","Spr","fieldcress",6
-17,"PYW","PYW-C","GB-IC","Spr","horsenettle",2
-17,"PYW","PYW-C","GB-IC","Spr","multiflora rose",12
-17,"PYW","PYW-C","GB-IC","Spr","prairie petunia",24
-17,"PYW","PYW-C","GB-IC","Spr","queen anne's lace",24
-17,"PYW","PYW-C","GB-IC","Spr","red clover",557
-17,"PYW","PYW-C","GB-IC","Spr","self-heal",89
-17,"PYW","PYW-C","GB-IC","Spr","slender mountain mint",352
-17,"PYW","PYW-C","GB-IC","Spr","spotted st. john's wort",22
-17,"PYW","PYW-C","GB-IC","Spr","white clover",175
-17,"PYW","PYW-C","GB-IC","Spr","yarrow",21
-17,"PYW","PYW-N","GB-IC","SnS","alsike clover",7
-17,"PYW","PYW-N","GB-IC","SnS","black medick",23
-17,"PYW","PYW-N","GB-IC","SnS","black-eyed susan",1
-17,"PYW","PYW-N","GB-IC","SnS","blue-eyed grass",4
-17,"PYW","PYW-N","GB-IC","SnS","canada anemone",9
-17,"PYW","PYW-N","GB-IC","SnS","common cinquefoil",8
-17,"PYW","PYW-N","GB-IC","SnS","daisy fleabane",230
-17,"PYW","PYW-N","GB-IC","SnS","deptford pink",15
-17,"PYW","PYW-N","GB-IC","SnS","germander",7
-17,"PYW","PYW-N","GB-IC","SnS","grey-headed coneflower",13
-17,"PYW","PYW-N","GB-IC","SnS","horsenettle",1
-17,"PYW","PYW-N","GB-IC","SnS","oxeye daisy",201
-17,"PYW","PYW-N","GB-IC","SnS","prairie petunia",15
-17,"PYW","PYW-N","GB-IC","SnS","queen anne's lace",31
-17,"PYW","PYW-N","GB-IC","SnS","red clover",311
-17,"PYW","PYW-N","GB-IC","SnS","ribwort plantain",25
-17,"PYW","PYW-N","GB-IC","SnS","slender mountain mint",1133
-17,"PYW","PYW-N","GB-IC","SnS","white clover",59
-17,"PYW","PYW-N","GB-IC","SnS","white sweet clover",3
-17,"PYW","PYW-N","GB-IC","SnS","white wild indigo",3
-17,"PYW","PYW-N","GB-IC","SnS","wild bergamot",1
-17,"PYW","PYW-S","GB-IC","Con","black-eyed susan",15
-17,"PYW","PYW-S","GB-IC","Con","blue-eyed grass",3
-17,"PYW","PYW-S","GB-IC","Con","common cinquefoil",29
-17,"PYW","PYW-S","GB-IC","Con","horsenettle",4
-17,"PYW","PYW-S","GB-IC","Con","oxeye daisy",47
-17,"PYW","PYW-S","GB-IC","Con","pale spike lobelia",2
-17,"PYW","PYW-S","GB-IC","Con","prairie petunia",3
-17,"PYW","PYW-S","GB-IC","Con","red clover",381
-17,"PYW","PYW-S","GB-IC","Con","white clover",26
-17,"PYW","PYW-S","GB-IC","Con","yarrow",1
-18,"GIL","GIL-C","GB-IC","SnS","birdsfoot trefoil",156
-18,"GIL","GIL-C","GB-IC","SnS","black medick",21
-18,"GIL","GIL-C","GB-IC","SnS","catnip",1
-18,"GIL","GIL-C","GB-IC","SnS","chicory",63
-18,"GIL","GIL-C","GB-IC","SnS","common cinquefoil",1
-18,"GIL","GIL-C","GB-IC","SnS","daisy fleabane",34
-18,"GIL","GIL-C","GB-IC","SnS","dandelion",1
-18,"GIL","GIL-C","GB-IC","SnS","deptford pink",32
-18,"GIL","GIL-C","GB-IC","SnS","fieldcress",3
-18,"GIL","GIL-C","GB-IC","SnS","grey-headed coneflower",6
-18,"GIL","GIL-C","GB-IC","SnS","hoary vervain",6
-18,"GIL","GIL-C","GB-IC","SnS","horsenettle",3
-18,"GIL","GIL-C","GB-IC","SnS","ironweed",4
-18,"GIL","GIL-C","GB-IC","SnS","queen anne's lace",52
-18,"GIL","GIL-C","GB-IC","SnS","red clover",7
-18,"GIL","GIL-C","GB-IC","SnS","ribwort plantain",64
-18,"GIL","GIL-C","GB-IC","SnS","self-heal",6
-18,"GIL","GIL-C","GB-IC","SnS","slender mountain mint",45
-18,"GIL","GIL-C","GB-IC","SnS","white clover",52
-18,"GIL","GIL-C","GB-IC","SnS","wild bergamot",18
-18,"GIL","GIL-C","GB-IC","SnS","yarrow",2
-18,"GIL","GIL-N","GB-IC","Spr","birdsfoot trefoil",1061
-18,"GIL","GIL-N","GB-IC","Spr","black medick",6
-18,"GIL","GIL-N","GB-IC","Spr","chicory",19
-18,"GIL","GIL-N","GB-IC","Spr","common mullein",1
-18,"GIL","GIL-N","GB-IC","Spr","dandelion",1
-18,"GIL","GIL-N","GB-IC","Spr","deptford pink",37
-18,"GIL","GIL-N","GB-IC","Spr","hoary vervain",4
-18,"GIL","GIL-N","GB-IC","Spr","horsenettle",15
-18,"GIL","GIL-N","GB-IC","Spr","ironweed",33
-18,"GIL","GIL-N","GB-IC","Spr","multiflora rose",68
-18,"GIL","GIL-N","GB-IC","Spr","queen anne's lace",168
-18,"GIL","GIL-N","GB-IC","Spr","red clover",12
-18,"GIL","GIL-N","GB-IC","Spr","ribwort plantain",284
-18,"GIL","GIL-N","GB-IC","Spr","self-heal",6
-18,"GIL","GIL-N","GB-IC","Spr","white clover",444
-18,"GIL","GIL-N","GB-IC","Spr","wild bergamot",1
-18,"GIL","GIL-N","GB-IC","Spr","yarrow",14
-18,"GIL","GIL-S","GB-IC","Con","alsike clover",9
-18,"GIL","GIL-S","GB-IC","Con","birdsfoot trefoil",521
-18,"GIL","GIL-S","GB-IC","Con","black medick",27
-18,"GIL","GIL-S","GB-IC","Con","canada anemone",2
-18,"GIL","GIL-S","GB-IC","Con","chicory",215
-18,"GIL","GIL-S","GB-IC","Con","common milkweed",4
-18,"GIL","GIL-S","GB-IC","Con","daisy fleabane",11
-18,"GIL","GIL-S","GB-IC","Con","deptford pink",43
-18,"GIL","GIL-S","GB-IC","Con","grey-headed coneflower",5
-18,"GIL","GIL-S","GB-IC","Con","hoary vervain",6
-18,"GIL","GIL-S","GB-IC","Con","horsenettle",12
-18,"GIL","GIL-S","GB-IC","Con","ironweed",24
-18,"GIL","GIL-S","GB-IC","Con","prairie petunia",4
-18,"GIL","GIL-S","GB-IC","Con","red clover",179
-18,"GIL","GIL-S","GB-IC","Con","ribwort plantain",48
-18,"GIL","GIL-S","GB-IC","Con","white clover",82
-18,"GIL","GIL-S","GB-IC","Con","wild bergamot",37
-18,"GIL","GIL-S","GB-IC","Con","yellow sweet clover",3
-18,"LTR","LTR-C","GB-IC","Spr","alsike clover",8
-18,"LTR","LTR-C","GB-IC","Spr","birdsfoot trefoil",4
-18,"LTR","LTR-C","GB-IC","Spr","black medick",15
-18,"LTR","LTR-C","GB-IC","Spr","black-eyed susan",13
-18,"LTR","LTR-C","GB-IC","Spr","butterfly milkweed",7
-18,"LTR","LTR-C","GB-IC","Spr","daisy fleabane",163
-18,"LTR","LTR-C","GB-IC","Spr","deptford pink",28
-18,"LTR","LTR-C","GB-IC","Spr","germander",4
-18,"LTR","LTR-C","GB-IC","Spr","grey-headed coneflower",6
-18,"LTR","LTR-C","GB-IC","Spr","ironweed",66
-18,"LTR","LTR-C","GB-IC","Spr","pale spike lobelia",12
-18,"LTR","LTR-C","GB-IC","Spr","prairie petunia",7
-18,"LTR","LTR-C","GB-IC","Spr","queen anne's lace",46
-18,"LTR","LTR-C","GB-IC","Spr","red clover",7
-18,"LTR","LTR-C","GB-IC","Spr","slender mountain mint",99
-18,"LTR","LTR-C","GB-IC","Spr","st. john's wort",8
-18,"LTR","LTR-C","GB-IC","Spr","wild bergamot",1
-18,"LTR","LTR-C","GB-IC","Spr","yarrow",8
-18,"LTR","LTR-E","GB-IC","SnS","birdsfoot trefoil",77
-18,"LTR","LTR-E","GB-IC","SnS","daisy fleabane",196
-18,"LTR","LTR-E","GB-IC","SnS","deptford pink",49
-18,"LTR","LTR-E","GB-IC","SnS","germander",19
-18,"LTR","LTR-E","GB-IC","SnS","hoary vervain",14
-18,"LTR","LTR-E","GB-IC","SnS","horsenettle",6
-18,"LTR","LTR-E","GB-IC","SnS","ironweed",85
-18,"LTR","LTR-E","GB-IC","SnS","prairie petunia",11
-18,"LTR","LTR-E","GB-IC","SnS","queen anne's lace",435
-18,"LTR","LTR-E","GB-IC","SnS","red clover",277
-18,"LTR","LTR-E","GB-IC","SnS","ribwort plantain",47
-18,"LTR","LTR-E","GB-IC","SnS","white clover",15
-18,"LTR","LTR-E","GB-IC","SnS","white sweet clover",1
-18,"LTR","LTR-E","GB-IC","SnS","white wild indigo",20
-18,"LTR","LTR-E","GB-IC","SnS","wild bergamot",13
-18,"LTR","LTR-E","GB-IC","SnS","yarrow",139
-18,"LTR","LTR-W","GB-IC","Con","alsike clover",3
-18,"LTR","LTR-W","GB-IC","Con","black-eyed susan",19
-18,"LTR","LTR-W","GB-IC","Con","common cinquefoil",1
-18,"LTR","LTR-W","GB-IC","Con","daisy fleabane",321
-18,"LTR","LTR-W","GB-IC","Con","deptford pink",35
-18,"LTR","LTR-W","GB-IC","Con","grey-headed coneflower",3
-18,"LTR","LTR-W","GB-IC","Con","hoary vervain",1
-18,"LTR","LTR-W","GB-IC","Con","horsenettle",5
-18,"LTR","LTR-W","GB-IC","Con","ironweed",23
-18,"LTR","LTR-W","GB-IC","Con","prairie petunia",8
-18,"LTR","LTR-W","GB-IC","Con","red clover",1
-18,"LTR","LTR-W","GB-IC","Con","ribwort plantain",23
-18,"LTR","LTR-W","GB-IC","Con","spotted st. john's wort",1
-18,"LTR","LTR-W","GB-IC","Con","white clover",5
-18,"LTR","LTR-W","GB-IC","Con","whorled milkweed",3
-18,"LTR","LTR-W","GB-IC","Con","wild bergamot",7
-18,"LTR","LTR-W","GB-IC","Con","yarrow",4
-18,"LTR","LTR-W","GB-IC","Con","yellow sweet clover",26
-18,"PYW","PYW-C","GB-IC","Spr","black-eyed susan",18
-18,"PYW","PYW-C","GB-IC","Spr","daisy fleabane",46
-18,"PYW","PYW-C","GB-IC","Spr","deptford pink",1
-18,"PYW","PYW-C","GB-IC","Spr","germander",5
-18,"PYW","PYW-C","GB-IC","Spr","grey-headed coneflower",64
-18,"PYW","PYW-C","GB-IC","Spr","hawkweed",1
-18,"PYW","PYW-C","GB-IC","Spr","hoary vervain",1
-18,"PYW","PYW-C","GB-IC","Spr","horsenettle",9
-18,"PYW","PYW-C","GB-IC","Spr","ironweed",24
-18,"PYW","PYW-C","GB-IC","Spr","oxeye daisy",12
-18,"PYW","PYW-C","GB-IC","Spr","pale spike lobelia",16
-18,"PYW","PYW-C","GB-IC","Spr","prairie petunia",98
-18,"PYW","PYW-C","GB-IC","Spr","queen anne's lace",66
-18,"PYW","PYW-C","GB-IC","Spr","red clover",435
-18,"PYW","PYW-C","GB-IC","Spr","self-heal",1
-18,"PYW","PYW-C","GB-IC","Spr","sulfur cinquefoil",51
-18,"PYW","PYW-C","GB-IC","Spr","white clover",106
-18,"PYW","PYW-C","GB-IC","Spr","wild bergamot",53
-18,"PYW","PYW-C","GB-IC","Spr","yarrow",8
-18,"PYW","PYW-N","GB-IC","SnS","antelope horns",1
-18,"PYW","PYW-N","GB-IC","SnS","birdsfoot trefoil",708
-18,"PYW","PYW-N","GB-IC","SnS","black-eyed susan",6
-18,"PYW","PYW-N","GB-IC","SnS","daisy fleabane",53
-18,"PYW","PYW-N","GB-IC","SnS","grey-headed coneflower",55
-18,"PYW","PYW-N","GB-IC","SnS","horsenettle",2
-18,"PYW","PYW-N","GB-IC","SnS","ironweed",5
-18,"PYW","PYW-N","GB-IC","SnS","oxeye daisy",11
-18,"PYW","PYW-N","GB-IC","SnS","pale spike lobelia",28
-18,"PYW","PYW-N","GB-IC","SnS","prairie petunia",69
-18,"PYW","PYW-N","GB-IC","SnS","queen anne's lace",53
-18,"PYW","PYW-N","GB-IC","SnS","red clover",38
-18,"PYW","PYW-N","GB-IC","SnS","sawtooth sunflower",1
-18,"PYW","PYW-N","GB-IC","SnS","self-heal",1
-18,"PYW","PYW-N","GB-IC","SnS","slender mountain mint",213
-18,"PYW","PYW-N","GB-IC","SnS","white clover",3
-18,"PYW","PYW-N","GB-IC","SnS","white sweet clover",48
-18,"PYW","PYW-N","GB-IC","SnS","wild bergamot",8
-18,"PYW","PYW-N","GB-IC","SnS","yellow sweet clover",2
-18,"PYW","PYW-S","GB-IC","Con","antelope horns",1
-18,"PYW","PYW-S","GB-IC","Con","birdsfoot trefoil",1045
-18,"PYW","PYW-S","GB-IC","Con","black-eyed susan",1
-18,"PYW","PYW-S","GB-IC","Con","daisy fleabane",4
-18,"PYW","PYW-S","GB-IC","Con","germander",3
-18,"PYW","PYW-S","GB-IC","Con","ground cherry",1
-18,"PYW","PYW-S","GB-IC","Con","horsenettle",31
-18,"PYW","PYW-S","GB-IC","Con","ironweed",8
-18,"PYW","PYW-S","GB-IC","Con","morning glory",1
-18,"PYW","PYW-S","GB-IC","Con","oxeye daisy",16
-18,"PYW","PYW-S","GB-IC","Con","pale spike lobelia",8
-18,"PYW","PYW-S","GB-IC","Con","prairie petunia",138
-18,"PYW","PYW-S","GB-IC","Con","queen anne's lace",17
-18,"PYW","PYW-S","GB-IC","Con","red clover",159
-18,"PYW","PYW-S","GB-IC","Con","ribwort plantain",32
-18,"PYW","PYW-S","GB-IC","Con","self-heal",1
-18,"PYW","PYW-S","GB-IC","Con","slender mountain mint",377
-18,"PYW","PYW-S","GB-IC","Con","sulfur cinquefoil",7
-18,"PYW","PYW-S","GB-IC","Con","white clover",12
+"Year","Site","Patch","Adaptive.Mgmt","Herb.Trt","Nectar.Common.Name","Number","L48.Status","Seedmix"
+14,"GIL","GIL-C","GB","SnS","birdsfoot trefoil",209,"E","O"
+14,"GIL","GIL-C","GB","SnS","black medick",19,"E","O"
+14,"GIL","GIL-C","GB","SnS","daisy fleabane",3,"N","O"
+14,"GIL","GIL-C","GB","SnS","deptford pink",14,"E","O"
+14,"GIL","GIL-C","GB","SnS","hoary vervain",8,"N","O"
+14,"GIL","GIL-C","GB","SnS","horsenettle",5,"N","O"
+14,"GIL","GIL-C","GB","SnS","prairie petunia",1,"N","X"
+14,"GIL","GIL-C","GB","SnS","queen anne's lace",2,"E","O"
+14,"GIL","GIL-C","GB","SnS","red clover",17,"E","O"
+14,"GIL","GIL-C","GB","SnS","white clover",52,"E","O"
+14,"GIL","GIL-C","GB","SnS","yellow oxalis",9,"N","O"
+14,"GIL","GIL-C","GB","SnS","yellow sweet clover",5,"E","O"
+14,"GIL","GIL-N","GB","Spr","alsike clover",1,"E","O"
+14,"GIL","GIL-N","GB","Spr","birdsfoot trefoil",881,"E","O"
+14,"GIL","GIL-N","GB","Spr","black medick",243,"E","O"
+14,"GIL","GIL-N","GB","Spr","chickweed",1,"E","O"
+14,"GIL","GIL-N","GB","Spr","chicory",1,"E","O"
+14,"GIL","GIL-N","GB","Spr","common cinquefoil",3,"N","O"
+14,"GIL","GIL-N","GB","Spr","daisy fleabane",1,"N","O"
+14,"GIL","GIL-N","GB","Spr","deptford pink",28,"E","O"
+14,"GIL","GIL-N","GB","Spr","fieldcress",2,"E","O"
+14,"GIL","GIL-N","GB","Spr","horsenettle",4,"N","O"
+14,"GIL","GIL-N","GB","Spr","ironweed",1,"N","X"
+14,"GIL","GIL-N","GB","Spr","queen anne's lace",8,"E","O"
+14,"GIL","GIL-N","GB","Spr","red clover",32,"E","O"
+14,"GIL","GIL-N","GB","Spr","white clover",492,"E","O"
+14,"GIL","GIL-N","GB","Spr","white sweet clover",1,"E","O"
+14,"GIL","GIL-N","GB","Spr","yellow oxalis",1,"N","O"
+14,"GIL","GIL-N","GB","Spr","yellow sweet clover",12,"E","O"
+14,"GIL","GIL-S","GB","Con","birdsfoot trefoil",360,"E","O"
+14,"GIL","GIL-S","GB","Con","daisy fleabane",6,"N","O"
+14,"GIL","GIL-S","GB","Con","deptford pink",18,"E","O"
+14,"GIL","GIL-S","GB","Con","fieldcress",1,"E","O"
+14,"GIL","GIL-S","GB","Con","germander",14,"N","X"
+14,"GIL","GIL-S","GB","Con","hoary vervain",2,"N","O"
+14,"GIL","GIL-S","GB","Con","horsenettle",2,"N","O"
+14,"GIL","GIL-S","GB","Con","queen anne's lace",77,"E","O"
+14,"GIL","GIL-S","GB","Con","red clover",49,"E","O"
+14,"GIL","GIL-S","GB","Con","white clover",332,"E","O"
+14,"GIL","GIL-S","GB","Con","wild bergamot",61,"N","X"
+14,"GIL","GIL-S","GB","Con","wild parsnip",2,"E","O"
+14,"GIL","GIL-S","GB","Con","yellow sweet clover",5,"E","O"
+14,"LTR","LTR-C","GB","Spr","birdsfoot trefoil",28,"E","O"
+14,"LTR","LTR-C","GB","Spr","daisy fleabane",15,"N","O"
+14,"LTR","LTR-C","GB","Spr","deptford pink",25,"E","O"
+14,"LTR","LTR-C","GB","Spr","hoary vervain",2,"N","O"
+14,"LTR","LTR-C","GB","Spr","pale spike lobelia",1,"N","X"
+14,"LTR","LTR-C","GB","Spr","prairie petunia",32,"N","X"
+14,"LTR","LTR-C","GB","Spr","red clover",2,"E","O"
+14,"LTR","LTR-C","GB","Spr","white clover",83,"E","O"
+14,"LTR","LTR-C","GB","Spr","yarrow",1,"N","O"
+14,"LTR","LTR-E","GB","SnS","birdsfoot trefoil",32,"E","O"
+14,"LTR","LTR-E","GB","SnS","black medick",25,"E","O"
+14,"LTR","LTR-E","GB","SnS","daisy fleabane",8,"N","O"
+14,"LTR","LTR-E","GB","SnS","dandelion",1,"N","O"
+14,"LTR","LTR-E","GB","SnS","deptford pink",2,"E","O"
+14,"LTR","LTR-E","GB","SnS","hoary vervain",7,"N","O"
+14,"LTR","LTR-E","GB","SnS","horsenettle",4,"N","O"
+14,"LTR","LTR-E","GB","SnS","moth mullein",1,"N","O"
+14,"LTR","LTR-E","GB","SnS","prairie petunia",14,"N","X"
+14,"LTR","LTR-E","GB","SnS","queen anne's lace",2,"E","O"
+14,"LTR","LTR-E","GB","SnS","red clover",41,"E","O"
+14,"LTR","LTR-E","GB","SnS","white clover",257,"E","O"
+14,"LTR","LTR-E","GB","SnS","white wild indigo",3,"N","X"
+14,"LTR","LTR-W","GB","Con","alsike clover",647,"E","O"
+14,"LTR","LTR-W","GB","Con","birdsfoot trefoil",39,"E","O"
+14,"LTR","LTR-W","GB","Con","black medick",14,"E","O"
+14,"LTR","LTR-W","GB","Con","daisy fleabane",13,"N","O"
+14,"LTR","LTR-W","GB","Con","deptford pink",11,"E","O"
+14,"LTR","LTR-W","GB","Con","field milkwort",1,"N","O"
+14,"LTR","LTR-W","GB","Con","germander",1,"N","X"
+14,"LTR","LTR-W","GB","Con","hoary vervain",2,"N","O"
+14,"LTR","LTR-W","GB","Con","horsenettle",1,"N","O"
+14,"LTR","LTR-W","GB","Con","prairie petunia",14,"N","X"
+14,"LTR","LTR-W","GB","Con","red clover",1,"E","O"
+14,"LTR","LTR-W","GB","Con","white clover",677,"E","O"
+14,"LTR","LTR-W","GB","Con","white wild indigo",5,"N","X"
+14,"PYW","PYW-C","GB","Spr","birdsfoot trefoil",1408,"E","O"
+14,"PYW","PYW-C","GB","Spr","black medick",133,"E","O"
+14,"PYW","PYW-C","GB","Spr","butterfly milkweed",17,"N","X"
+14,"PYW","PYW-C","GB","Spr","deptford pink",43,"E","O"
+14,"PYW","PYW-C","GB","Spr","field milkwort",3,"N","O"
+14,"PYW","PYW-C","GB","Spr","flowering spurge",1,"N","O"
+14,"PYW","PYW-C","GB","Spr","oxeye daisy",13,"E","O"
+14,"PYW","PYW-C","GB","Spr","prairie petunia",26,"N","X"
+14,"PYW","PYW-C","GB","Spr","red clover",90,"E","O"
+14,"PYW","PYW-C","GB","Spr","slender mountain mint",38,"N","X"
+14,"PYW","PYW-C","GB","Spr","white clover",19,"E","O"
+14,"PYW","PYW-C","GB","Spr","yellow sweet clover",16,"E","O"
+14,"PYW","PYW-N","GB","SnS","alsike clover",3,"E","O"
+14,"PYW","PYW-N","GB","SnS","birdsfoot trefoil",2923,"E","O"
+14,"PYW","PYW-N","GB","SnS","black medick",8,"E","O"
+14,"PYW","PYW-N","GB","SnS","blue-eyed grass",1,"N","X"
+14,"PYW","PYW-N","GB","SnS","common cinquefoil",1,"N","O"
+14,"PYW","PYW-N","GB","SnS","deptford pink",33,"E","O"
+14,"PYW","PYW-N","GB","SnS","hoary vervain",1,"N","O"
+14,"PYW","PYW-N","GB","SnS","oxeye daisy",23,"E","O"
+14,"PYW","PYW-N","GB","SnS","pale spike lobelia",2,"N","X"
+14,"PYW","PYW-N","GB","SnS","prairie petunia",8,"N","X"
+14,"PYW","PYW-N","GB","SnS","red clover",56,"E","O"
+14,"PYW","PYW-N","GB","SnS","slender mountain mint",43,"N","X"
+14,"PYW","PYW-N","GB","SnS","white clover",17,"E","O"
+14,"PYW","PYW-N","GB","SnS","white sweet clover",6,"E","O"
+14,"PYW","PYW-N","GB","SnS","white wild indigo",1,"N","X"
+14,"PYW","PYW-N","GB","SnS","yellow sweet clover",5,"E","O"
+14,"PYW","PYW-S","GB","Con","birdsfoot trefoil",1282,"E","O"
+14,"PYW","PYW-S","GB","Con","black medick",2,"E","O"
+14,"PYW","PYW-S","GB","Con","common cinquefoil",1,"N","O"
+14,"PYW","PYW-S","GB","Con","deptford pink",34,"E","O"
+14,"PYW","PYW-S","GB","Con","field milkwort",12,"N","O"
+14,"PYW","PYW-S","GB","Con","morning glory",1,"E","O"
+14,"PYW","PYW-S","GB","Con","pale spike lobelia",2,"N","X"
+14,"PYW","PYW-S","GB","Con","partridge pea",1,"N","O"
+14,"PYW","PYW-S","GB","Con","prairie petunia",11,"N","X"
+14,"PYW","PYW-S","GB","Con","red clover",420,"E","O"
+14,"PYW","PYW-S","GB","Con","self-heal",2,"N","O"
+14,"PYW","PYW-S","GB","Con","slender mountain mint",4,"N","X"
+14,"PYW","PYW-S","GB","Con","white clover",66,"E","O"
+14,"PYW","PYW-S","GB","Con","yarrow",2,"N","O"
+15,"GIL","GIL-C","GB-IC","SnS","birdsfoot trefoil",30,"E","O"
+15,"GIL","GIL-C","GB-IC","SnS","chickweed",3,"E","O"
+15,"GIL","GIL-C","GB-IC","SnS","chicory",9,"E","O"
+15,"GIL","GIL-C","GB-IC","SnS","daisy fleabane",66,"N","O"
+15,"GIL","GIL-C","GB-IC","SnS","ground cherry",1,"N","O"
+15,"GIL","GIL-C","GB-IC","SnS","hoary vervain",22,"N","O"
+15,"GIL","GIL-C","GB-IC","SnS","horsenettle",17,"N","O"
+15,"GIL","GIL-C","GB-IC","SnS","queen anne's lace",6,"E","O"
+15,"GIL","GIL-C","GB-IC","SnS","white clover",240,"E","O"
+15,"GIL","GIL-C","GB-IC","SnS","white vervain",1,"N","O"
+15,"GIL","GIL-C","GB-IC","SnS","yellow oxalis",22,"N","O"
+15,"GIL","GIL-N","GB-IC","Spr","birdsfoot trefoil",143,"E","O"
+15,"GIL","GIL-N","GB-IC","Spr","chickweed",1,"E","O"
+15,"GIL","GIL-N","GB-IC","Spr","daisy fleabane",1,"N","O"
+15,"GIL","GIL-N","GB-IC","Spr","dandelion",1,"N","O"
+15,"GIL","GIL-N","GB-IC","Spr","hoary vervain",1,"N","O"
+15,"GIL","GIL-N","GB-IC","Spr","horsenettle",3,"N","O"
+15,"GIL","GIL-N","GB-IC","Spr","red clover",2,"E","O"
+15,"GIL","GIL-N","GB-IC","Spr","white clover",29,"E","O"
+15,"GIL","GIL-N","GB-IC","Spr","yellow oxalis",65,"N","O"
+15,"GIL","GIL-S","GB-IC","Con","birdsfoot trefoil",664,"E","O"
+15,"GIL","GIL-S","GB-IC","Con","chickweed",7,"E","O"
+15,"GIL","GIL-S","GB-IC","Con","germander",33,"N","X"
+15,"GIL","GIL-S","GB-IC","Con","hoary vervain",6,"N","O"
+15,"GIL","GIL-S","GB-IC","Con","horsenettle",3,"N","O"
+15,"GIL","GIL-S","GB-IC","Con","ironweed",6,"N","X"
+15,"GIL","GIL-S","GB-IC","Con","prairie petunia",2,"N","X"
+15,"GIL","GIL-S","GB-IC","Con","queen anne's lace",12,"E","O"
+15,"GIL","GIL-S","GB-IC","Con","red clover",24,"E","O"
+15,"GIL","GIL-S","GB-IC","Con","self-heal",5,"N","O"
+15,"GIL","GIL-S","GB-IC","Con","white clover",614,"E","O"
+15,"GIL","GIL-S","GB-IC","Con","wild bergamot",169,"N","X"
+15,"GIL","GIL-S","GB-IC","Con","yellow oxalis",3,"N","O"
+15,"LTR","LTR-C","GB-IC","Spr","birdsfoot trefoil",24,"E","O"
+15,"LTR","LTR-C","GB-IC","Spr","daisy fleabane",68,"N","O"
+15,"LTR","LTR-C","GB-IC","Spr","germander",6,"N","X"
+15,"LTR","LTR-C","GB-IC","Spr","hoary vervain",116,"N","O"
+15,"LTR","LTR-C","GB-IC","Spr","horsenettle",5,"N","O"
+15,"LTR","LTR-C","GB-IC","Spr","ironweed",14,"N","X"
+15,"LTR","LTR-C","GB-IC","Spr","partridge pea",5,"N","O"
+15,"LTR","LTR-C","GB-IC","Spr","prairie petunia",23,"N","X"
+15,"LTR","LTR-C","GB-IC","Spr","queen anne's lace",2,"E","O"
+15,"LTR","LTR-C","GB-IC","Spr","red clover",3,"E","O"
+15,"LTR","LTR-C","GB-IC","Spr","slender mountain mint",31,"N","X"
+15,"LTR","LTR-C","GB-IC","Spr","white clover",111,"E","O"
+15,"LTR","LTR-C","GB-IC","Spr","white wild indigo",3,"N","X"
+15,"LTR","LTR-C","GB-IC","Spr","whorled milkweed",3,"N","O"
+15,"LTR","LTR-C","GB-IC","Spr","yarrow",25,"N","O"
+15,"LTR","LTR-C","GB-IC","Spr","yellow oxalis",82,"N","O"
+15,"LTR","LTR-E","GB-IC","SnS","birdsfoot trefoil",4,"E","O"
+15,"LTR","LTR-E","GB-IC","SnS","corn speedwell",1,"E","O"
+15,"LTR","LTR-E","GB-IC","SnS","daisy fleabane",25,"N","O"
+15,"LTR","LTR-E","GB-IC","SnS","germander",1,"N","X"
+15,"LTR","LTR-E","GB-IC","SnS","hoary vervain",80,"N","O"
+15,"LTR","LTR-E","GB-IC","SnS","horsenettle",17,"N","O"
+15,"LTR","LTR-E","GB-IC","SnS","ironweed",37,"N","X"
+15,"LTR","LTR-E","GB-IC","SnS","prairie petunia",8,"N","X"
+15,"LTR","LTR-E","GB-IC","SnS","queen anne's lace",137,"E","O"
+15,"LTR","LTR-E","GB-IC","SnS","red clover",47,"E","O"
+15,"LTR","LTR-E","GB-IC","SnS","swamp vervain",1,"N","O"
+15,"LTR","LTR-E","GB-IC","SnS","white clover",1426,"E","O"
+15,"LTR","LTR-E","GB-IC","SnS","white vervain",12,"N","O"
+15,"LTR","LTR-E","GB-IC","SnS","white wild indigo",4,"N","X"
+15,"LTR","LTR-E","GB-IC","SnS","yarrow",28,"N","O"
+15,"LTR","LTR-E","GB-IC","SnS","yellow oxalis",34,"N","O"
+15,"LTR","LTR-W","GB-IC","Con","alsike clover",11,"E","O"
+15,"LTR","LTR-W","GB-IC","Con","daisy fleabane",282,"N","O"
+15,"LTR","LTR-W","GB-IC","Con","hoary vervain",9,"N","O"
+15,"LTR","LTR-W","GB-IC","Con","horsenettle",1,"N","O"
+15,"LTR","LTR-W","GB-IC","Con","ironweed",8,"N","X"
+15,"LTR","LTR-W","GB-IC","Con","prairie petunia",11,"N","X"
+15,"LTR","LTR-W","GB-IC","Con","prairie rose",1,"N","O"
+15,"LTR","LTR-W","GB-IC","Con","queen anne's lace",41,"E","O"
+15,"LTR","LTR-W","GB-IC","Con","red clover",26,"E","O"
+15,"LTR","LTR-W","GB-IC","Con","self-heal",7,"N","O"
+15,"LTR","LTR-W","GB-IC","Con","slender mountain mint",9,"N","X"
+15,"LTR","LTR-W","GB-IC","Con","st. john's wort",2,"E","O"
+15,"LTR","LTR-W","GB-IC","Con","swamp vervain",3,"N","O"
+15,"LTR","LTR-W","GB-IC","Con","white clover",279,"E","O"
+15,"LTR","LTR-W","GB-IC","Con","white wild indigo",3,"N","X"
+15,"LTR","LTR-W","GB-IC","Con","whorled milkweed",1,"N","O"
+15,"LTR","LTR-W","GB-IC","Con","wild bergamot",5,"N","X"
+15,"LTR","LTR-W","GB-IC","Con","yarrow",7,"N","O"
+15,"LTR","LTR-W","GB-IC","Con","yellow sweet clover",1,"E","O"
+15,"PYW","PYW-C","GB-IC","Spr","birdsfoot trefoil",88,"E","O"
+15,"PYW","PYW-C","GB-IC","Spr","black-eyed susan",2,"N","X"
+15,"PYW","PYW-C","GB-IC","Spr","deptford pink",4,"E","O"
+15,"PYW","PYW-C","GB-IC","Spr","grey-headed coneflower",3,"N","X"
+15,"PYW","PYW-C","GB-IC","Spr","ironweed",5,"N","X"
+15,"PYW","PYW-C","GB-IC","Spr","pale spike lobelia",5,"N","X"
+15,"PYW","PYW-C","GB-IC","Spr","partridge pea",20,"N","O"
+15,"PYW","PYW-C","GB-IC","Spr","prairie petunia",1,"N","X"
+15,"PYW","PYW-C","GB-IC","Spr","queen anne's lace",84,"E","O"
+15,"PYW","PYW-C","GB-IC","Spr","red clover",153,"E","O"
+15,"PYW","PYW-C","GB-IC","Spr","slender mountain mint",316,"N","X"
+15,"PYW","PYW-C","GB-IC","Spr","white clover",20,"E","O"
+15,"PYW","PYW-C","GB-IC","Spr","yellow oxalis",2,"N","O"
+15,"PYW","PYW-N","GB-IC","SnS","birdsfoot trefoil",2558,"E","O"
+15,"PYW","PYW-N","GB-IC","SnS","black-eyed susan",7,"N","X"
+15,"PYW","PYW-N","GB-IC","SnS","daisy fleabane",1,"N","O"
+15,"PYW","PYW-N","GB-IC","SnS","horsenettle",1,"N","O"
+15,"PYW","PYW-N","GB-IC","SnS","ironweed",2,"N","X"
+15,"PYW","PYW-N","GB-IC","SnS","oxeye daisy",1,"E","O"
+15,"PYW","PYW-N","GB-IC","SnS","prairie petunia",19,"N","X"
+15,"PYW","PYW-N","GB-IC","SnS","queen anne's lace",59,"E","O"
+15,"PYW","PYW-N","GB-IC","SnS","red clover",4,"E","O"
+15,"PYW","PYW-N","GB-IC","SnS","slender mountain mint",237,"N","X"
+15,"PYW","PYW-N","GB-IC","SnS","white clover",4,"E","O"
+15,"PYW","PYW-S","GB-IC","Con","black-eyed susan",7,"N","X"
+15,"PYW","PYW-S","GB-IC","Con","daisy fleabane",3,"N","O"
+15,"PYW","PYW-S","GB-IC","Con","oxeye daisy",2,"E","O"
+15,"PYW","PYW-S","GB-IC","Con","pale spike lobelia",12,"N","X"
+15,"PYW","PYW-S","GB-IC","Con","prairie cinquefoil",1,"N","X"
+15,"PYW","PYW-S","GB-IC","Con","prairie petunia",16,"N","X"
+15,"PYW","PYW-S","GB-IC","Con","queen anne's lace",26,"E","O"
+15,"PYW","PYW-S","GB-IC","Con","self-heal",5,"N","O"
+15,"PYW","PYW-S","GB-IC","Con","slender mountain mint",57,"N","X"
+16,"GIL","GIL-C","GB-IC","SnS","birdsfoot trefoil",161,"E","O"
+16,"GIL","GIL-C","GB-IC","SnS","black medick",77,"E","O"
+16,"GIL","GIL-C","GB-IC","SnS","daisy fleabane",759,"N","O"
+16,"GIL","GIL-C","GB-IC","SnS","deptford pink",96,"E","O"
+16,"GIL","GIL-C","GB-IC","SnS","germander",3,"N","X"
+16,"GIL","GIL-C","GB-IC","SnS","hoary vervain",63,"N","O"
+16,"GIL","GIL-C","GB-IC","SnS","horsenettle",2,"N","O"
+16,"GIL","GIL-C","GB-IC","SnS","ironweed",9,"N","X"
+16,"GIL","GIL-C","GB-IC","SnS","prairie cinquefoil",1,"N","X"
+16,"GIL","GIL-C","GB-IC","SnS","prairie petunia",1,"N","X"
+16,"GIL","GIL-C","GB-IC","SnS","queen anne's lace",228,"E","O"
+16,"GIL","GIL-C","GB-IC","SnS","red clover",15,"E","O"
+16,"GIL","GIL-C","GB-IC","SnS","ribwort plantain",152,"E","O"
+16,"GIL","GIL-C","GB-IC","SnS","self-heal",17,"N","O"
+16,"GIL","GIL-C","GB-IC","SnS","swamp vervain",58,"N","O"
+16,"GIL","GIL-C","GB-IC","SnS","wild bergamot",13,"N","X"
+16,"GIL","GIL-C","GB-IC","SnS","yellow oxalis",10,"N","O"
+16,"GIL","GIL-C","GB-IC","SnS","yellow sweet clover",5,"E","O"
+16,"GIL","GIL-N","GB-IC","Spr","alsike clover",25,"E","O"
+16,"GIL","GIL-N","GB-IC","Spr","birdsfoot trefoil",419,"E","O"
+16,"GIL","GIL-N","GB-IC","Spr","black medick",17,"E","O"
+16,"GIL","GIL-N","GB-IC","Spr","black-eyed susan",3,"N","X"
+16,"GIL","GIL-N","GB-IC","Spr","chicory",1,"E","O"
+16,"GIL","GIL-N","GB-IC","Spr","common cinquefoil",3,"N","O"
+16,"GIL","GIL-N","GB-IC","Spr","daisy fleabane",317,"N","O"
+16,"GIL","GIL-N","GB-IC","Spr","deptford pink",158,"E","O"
+16,"GIL","GIL-N","GB-IC","Spr","hoary vervain",32,"N","O"
+16,"GIL","GIL-N","GB-IC","Spr","ironweed",3,"N","X"
+16,"GIL","GIL-N","GB-IC","Spr","queen anne's lace",216,"E","O"
+16,"GIL","GIL-N","GB-IC","Spr","red clover",40,"E","O"
+16,"GIL","GIL-N","GB-IC","Spr","ribwort plantain",730,"E","O"
+16,"GIL","GIL-N","GB-IC","Spr","self-heal",65,"N","O"
+16,"GIL","GIL-N","GB-IC","Spr","swamp vervain",5,"N","O"
+16,"GIL","GIL-N","GB-IC","Spr","white clover",2445,"E","O"
+16,"GIL","GIL-N","GB-IC","Spr","white sweet clover",6,"E","O"
+16,"GIL","GIL-N","GB-IC","Spr","yellow sweet clover",16,"E","O"
+16,"GIL","GIL-S","GB-IC","Con","birdsfoot trefoil",303,"E","O"
+16,"GIL","GIL-S","GB-IC","Con","black medick",35,"E","O"
+16,"GIL","GIL-S","GB-IC","Con","black-eyed susan",4,"N","X"
+16,"GIL","GIL-S","GB-IC","Con","daisy fleabane",1,"N","O"
+16,"GIL","GIL-S","GB-IC","Con","grey-headed coneflower",3,"N","X"
+16,"GIL","GIL-S","GB-IC","Con","horsenettle",39,"N","O"
+16,"GIL","GIL-S","GB-IC","Con","ironweed",235,"N","X"
+16,"GIL","GIL-S","GB-IC","Con","red clover",60,"E","O"
+16,"GIL","GIL-S","GB-IC","Con","ribwort plantain",1,"E","O"
+16,"GIL","GIL-S","GB-IC","Con","self-heal",6,"N","O"
+16,"GIL","GIL-S","GB-IC","Con","swamp vervain",57,"N","O"
+16,"GIL","GIL-S","GB-IC","Con","white clover",718,"E","O"
+16,"GIL","GIL-S","GB-IC","Con","wild parsnip",5,"E","O"
+16,"LTR","LTR-C","GB-IC","Spr","birdsfoot trefoil",7,"E","O"
+16,"LTR","LTR-C","GB-IC","Spr","black medick",15,"E","O"
+16,"LTR","LTR-C","GB-IC","Spr","black-eyed susan",4,"N","X"
+16,"LTR","LTR-C","GB-IC","Spr","deptford pink",13,"E","O"
+16,"LTR","LTR-C","GB-IC","Spr","hoary vervain",5,"N","O"
+16,"LTR","LTR-C","GB-IC","Spr","horsenettle",8,"N","O"
+16,"LTR","LTR-C","GB-IC","Spr","ironweed",5,"N","X"
+16,"LTR","LTR-C","GB-IC","Spr","partridge pea",11,"N","O"
+16,"LTR","LTR-C","GB-IC","Spr","rapeseed",1,"E","O"
+16,"LTR","LTR-C","GB-IC","Spr","red clover",5,"E","O"
+16,"LTR","LTR-C","GB-IC","Spr","ribwort plantain",5,"E","O"
+16,"LTR","LTR-C","GB-IC","Spr","self-heal",5,"N","O"
+16,"LTR","LTR-C","GB-IC","Spr","slender mountain mint",3,"N","X"
+16,"LTR","LTR-C","GB-IC","Spr","swamp vervain",2,"N","O"
+16,"LTR","LTR-C","GB-IC","Spr","white clover",1,"E","O"
+16,"LTR","LTR-C","GB-IC","Spr","white wild indigo",6,"N","X"
+16,"LTR","LTR-C","GB-IC","Spr","wild bergamot",7,"N","X"
+16,"LTR","LTR-C","GB-IC","Spr","yarrow",15,"N","O"
+16,"LTR","LTR-E","GB-IC","SnS","birdsfoot trefoil",33,"E","O"
+16,"LTR","LTR-E","GB-IC","SnS","black medick",11,"E","O"
+16,"LTR","LTR-E","GB-IC","SnS","black-eyed susan",9,"N","X"
+16,"LTR","LTR-E","GB-IC","SnS","daisy fleabane",529,"N","O"
+16,"LTR","LTR-E","GB-IC","SnS","deptford pink",90,"E","O"
+16,"LTR","LTR-E","GB-IC","SnS","germander",1,"N","X"
+16,"LTR","LTR-E","GB-IC","SnS","hoary vervain",47,"N","O"
+16,"LTR","LTR-E","GB-IC","SnS","horsenettle",18,"N","O"
+16,"LTR","LTR-E","GB-IC","SnS","ironweed",199,"N","X"
+16,"LTR","LTR-E","GB-IC","SnS","musk thistle",1,"E","O"
+16,"LTR","LTR-E","GB-IC","SnS","partridge pea",9,"N","O"
+16,"LTR","LTR-E","GB-IC","SnS","prairie petunia",9,"N","X"
+16,"LTR","LTR-E","GB-IC","SnS","queen anne's lace",332,"E","O"
+16,"LTR","LTR-E","GB-IC","SnS","red clover",49,"E","O"
+16,"LTR","LTR-E","GB-IC","SnS","ribwort plantain",153,"E","O"
+16,"LTR","LTR-E","GB-IC","SnS","self-heal",9,"N","O"
+16,"LTR","LTR-E","GB-IC","SnS","slender mountain mint",180,"N","X"
+16,"LTR","LTR-E","GB-IC","SnS","white clover",3644,"E","O"
+16,"LTR","LTR-E","GB-IC","SnS","white vervain",15,"N","O"
+16,"LTR","LTR-E","GB-IC","SnS","white wild indigo",2,"N","X"
+16,"LTR","LTR-E","GB-IC","SnS","wild bergamot",1,"N","X"
+16,"LTR","LTR-E","GB-IC","SnS","yarrow",40,"N","O"
+16,"LTR","LTR-E","GB-IC","SnS","yellow sweet clover",5,"E","O"
+16,"LTR","LTR-W","GB-IC","Con","black medick",2,"E","O"
+16,"LTR","LTR-W","GB-IC","Con","daisy fleabane",33,"N","O"
+16,"LTR","LTR-W","GB-IC","Con","deptford pink",3,"E","O"
+16,"LTR","LTR-W","GB-IC","Con","hoary vervain",23,"N","O"
+16,"LTR","LTR-W","GB-IC","Con","horsenettle",1,"N","O"
+16,"LTR","LTR-W","GB-IC","Con","ironweed",6,"N","X"
+16,"LTR","LTR-W","GB-IC","Con","prairie petunia",5,"N","X"
+16,"LTR","LTR-W","GB-IC","Con","queen anne's lace",85,"E","O"
+16,"LTR","LTR-W","GB-IC","Con","ribwort plantain",2,"E","O"
+16,"LTR","LTR-W","GB-IC","Con","white clover",1057,"E","O"
+16,"LTR","LTR-W","GB-IC","Con","wild bergamot",4,"N","X"
+16,"LTR","LTR-W","GB-IC","Con","yellow sweet clover",1,"E","O"
+16,"PYW","PYW-C","GB-IC","Spr","birdsfoot trefoil",2194,"E","O"
+16,"PYW","PYW-C","GB-IC","Spr","black medick",90,"E","O"
+16,"PYW","PYW-C","GB-IC","Spr","black-eyed susan",146,"N","X"
+16,"PYW","PYW-C","GB-IC","Spr","butterfly milkweed",5,"N","X"
+16,"PYW","PYW-C","GB-IC","Spr","daisy fleabane",260,"N","O"
+16,"PYW","PYW-C","GB-IC","Spr","deptford pink",200,"E","O"
+16,"PYW","PYW-C","GB-IC","Spr","grey-headed coneflower",11,"N","X"
+16,"PYW","PYW-C","GB-IC","Spr","hoary vervain",3,"N","O"
+16,"PYW","PYW-C","GB-IC","Spr","horsenettle",1,"N","O"
+16,"PYW","PYW-C","GB-IC","Spr","oxeye daisy",663,"E","O"
+16,"PYW","PYW-C","GB-IC","Spr","pale spike lobelia",3,"N","X"
+16,"PYW","PYW-C","GB-IC","Spr","prairie petunia",11,"N","X"
+16,"PYW","PYW-C","GB-IC","Spr","red clover",933,"E","O"
+16,"PYW","PYW-C","GB-IC","Spr","self-heal",13,"N","O"
+16,"PYW","PYW-C","GB-IC","Spr","slender mountain mint",696,"N","X"
+16,"PYW","PYW-C","GB-IC","Spr","st. john's wort",18,"E","O"
+16,"PYW","PYW-C","GB-IC","Spr","tall green milkweed",3,"N","O"
+16,"PYW","PYW-C","GB-IC","Spr","white clover",169,"E","O"
+16,"PYW","PYW-C","GB-IC","Spr","yarrow",7,"N","O"
+16,"PYW","PYW-C","GB-IC","Spr","yellow sweet clover",13,"E","O"
+16,"PYW","PYW-N","GB-IC","SnS","birdsfoot trefoil",3073,"E","O"
+16,"PYW","PYW-N","GB-IC","SnS","black medick",110,"E","O"
+16,"PYW","PYW-N","GB-IC","SnS","black-eyed susan",171,"N","X"
+16,"PYW","PYW-N","GB-IC","SnS","butterfly milkweed",1,"N","X"
+16,"PYW","PYW-N","GB-IC","SnS","daisy fleabane",570,"N","O"
+16,"PYW","PYW-N","GB-IC","SnS","deptford pink",98,"E","O"
+16,"PYW","PYW-N","GB-IC","SnS","grey-headed coneflower",4,"N","X"
+16,"PYW","PYW-N","GB-IC","SnS","hoary vervain",2,"N","O"
+16,"PYW","PYW-N","GB-IC","SnS","ironweed",1,"N","X"
+16,"PYW","PYW-N","GB-IC","SnS","oxeye daisy",1429,"E","O"
+16,"PYW","PYW-N","GB-IC","SnS","pale spike lobelia",36,"N","X"
+16,"PYW","PYW-N","GB-IC","SnS","prairie petunia",16,"N","X"
+16,"PYW","PYW-N","GB-IC","SnS","queen anne's lace",164,"E","O"
+16,"PYW","PYW-N","GB-IC","SnS","red clover",351,"E","O"
+16,"PYW","PYW-N","GB-IC","SnS","self-heal",14,"N","O"
+16,"PYW","PYW-N","GB-IC","SnS","slender mountain mint",1668,"N","X"
+16,"PYW","PYW-N","GB-IC","SnS","st. john's wort",3,"E","O"
+16,"PYW","PYW-N","GB-IC","SnS","white clover",29,"E","O"
+16,"PYW","PYW-N","GB-IC","SnS","yarrow",2,"N","O"
+16,"PYW","PYW-N","GB-IC","SnS","yellow sweet clover",27,"E","O"
+16,"PYW","PYW-S","GB-IC","Con","birdsfoot trefoil",937,"E","O"
+16,"PYW","PYW-S","GB-IC","Con","black-eyed susan",21,"N","X"
+16,"PYW","PYW-S","GB-IC","Con","daisy fleabane",6,"N","O"
+16,"PYW","PYW-S","GB-IC","Con","germander",4,"N","X"
+16,"PYW","PYW-S","GB-IC","Con","horsenettle",1,"N","O"
+16,"PYW","PYW-S","GB-IC","Con","ironweed",4,"N","X"
+16,"PYW","PYW-S","GB-IC","Con","multiflora rose",1,"E","O"
+16,"PYW","PYW-S","GB-IC","Con","oxeye daisy",14,"E","O"
+16,"PYW","PYW-S","GB-IC","Con","pale spike lobelia",43,"N","X"
+16,"PYW","PYW-S","GB-IC","Con","prairie cinquefoil",2,"N","X"
+16,"PYW","PYW-S","GB-IC","Con","queen anne's lace",46,"E","O"
+16,"PYW","PYW-S","GB-IC","Con","red clover",248,"E","O"
+16,"PYW","PYW-S","GB-IC","Con","ribwort plantain",5,"E","O"
+16,"PYW","PYW-S","GB-IC","Con","self-heal",25,"N","O"
+16,"PYW","PYW-S","GB-IC","Con","white clover",12,"E","O"
+16,"PYW","PYW-S","GB-IC","Con","yarrow",8,"N","O"
+17,"GIL","GIL-C","GB-IC","SnS","alsike clover",537,"E","O"
+17,"GIL","GIL-C","GB-IC","SnS","birdsfoot trefoil",287,"E","O"
+17,"GIL","GIL-C","GB-IC","SnS","black medick",35,"E","O"
+17,"GIL","GIL-C","GB-IC","SnS","black-eyed susan",7,"N","X"
+17,"GIL","GIL-C","GB-IC","SnS","broadleaf plantain",7,"E","O"
+17,"GIL","GIL-C","GB-IC","SnS","common cinquefoil",3,"N","O"
+17,"GIL","GIL-C","GB-IC","SnS","daisy fleabane",369,"N","O"
+17,"GIL","GIL-C","GB-IC","SnS","dandelion",1,"N","O"
+17,"GIL","GIL-C","GB-IC","SnS","deptford pink",74,"E","O"
+17,"GIL","GIL-C","GB-IC","SnS","germander",48,"N","X"
+17,"GIL","GIL-C","GB-IC","SnS","grey-headed coneflower",4,"N","X"
+17,"GIL","GIL-C","GB-IC","SnS","hoary vervain",132,"N","O"
+17,"GIL","GIL-C","GB-IC","SnS","horsenettle",2,"N","O"
+17,"GIL","GIL-C","GB-IC","SnS","ironweed",46,"N","X"
+17,"GIL","GIL-C","GB-IC","SnS","prairie cinquefoil",1,"N","X"
+17,"GIL","GIL-C","GB-IC","SnS","queen anne's lace",46,"E","O"
+17,"GIL","GIL-C","GB-IC","SnS","red clover",34,"E","O"
+17,"GIL","GIL-C","GB-IC","SnS","ribwort plantain",422,"E","O"
+17,"GIL","GIL-C","GB-IC","SnS","self-heal",8,"N","O"
+17,"GIL","GIL-C","GB-IC","SnS","white clover",985,"E","O"
+17,"GIL","GIL-C","GB-IC","SnS","wild bergamot",29,"N","X"
+17,"GIL","GIL-C","GB-IC","SnS","yellow oxalis",11,"N","O"
+17,"GIL","GIL-C","GB-IC","SnS","yellow sweet clover",14,"E","O"
+17,"GIL","GIL-N","GB-IC","Spr","alsike clover",334,"E","O"
+17,"GIL","GIL-N","GB-IC","Spr","birdsfoot trefoil",831,"E","O"
+17,"GIL","GIL-N","GB-IC","Spr","black medick",1,"E","O"
+17,"GIL","GIL-N","GB-IC","Spr","chickweed",9,"E","O"
+17,"GIL","GIL-N","GB-IC","Spr","chicory",15,"E","O"
+17,"GIL","GIL-N","GB-IC","Spr","daisy fleabane",681,"N","O"
+17,"GIL","GIL-N","GB-IC","Spr","deptford pink",137,"E","O"
+17,"GIL","GIL-N","GB-IC","Spr","germander",6,"N","X"
+17,"GIL","GIL-N","GB-IC","Spr","grey-headed coneflower",3,"N","X"
+17,"GIL","GIL-N","GB-IC","Spr","hoary vervain",5,"N","O"
+17,"GIL","GIL-N","GB-IC","Spr","horsenettle",4,"N","O"
+17,"GIL","GIL-N","GB-IC","Spr","prairie cinquefoil",5,"N","X"
+17,"GIL","GIL-N","GB-IC","Spr","prairie petunia",4,"N","X"
+17,"GIL","GIL-N","GB-IC","Spr","queen anne's lace",116,"E","O"
+17,"GIL","GIL-N","GB-IC","Spr","red clover",41,"E","O"
+17,"GIL","GIL-N","GB-IC","Spr","ribwort plantain",222,"E","O"
+17,"GIL","GIL-N","GB-IC","Spr","self-heal",12,"N","O"
+17,"GIL","GIL-N","GB-IC","Spr","slender mountain mint",3,"N","X"
+17,"GIL","GIL-N","GB-IC","Spr","swamp vervain",2,"N","O"
+17,"GIL","GIL-N","GB-IC","Spr","white clover",1598,"E","O"
+17,"GIL","GIL-N","GB-IC","Spr","wild bergamot",54,"N","X"
+17,"GIL","GIL-N","GB-IC","Spr","yellow oxalis",1,"N","O"
+17,"GIL","GIL-S","GB-IC","Con","birdsfoot trefoil",630,"E","O"
+17,"GIL","GIL-S","GB-IC","Con","black medick",27,"E","O"
+17,"GIL","GIL-S","GB-IC","Con","broadleaf plantain",1,"E","O"
+17,"GIL","GIL-S","GB-IC","Con","chicory",11,"E","O"
+17,"GIL","GIL-S","GB-IC","Con","daisy fleabane",116,"N","O"
+17,"GIL","GIL-S","GB-IC","Con","deptford pink",35,"E","O"
+17,"GIL","GIL-S","GB-IC","Con","germander",66,"N","X"
+17,"GIL","GIL-S","GB-IC","Con","hoary vervain",8,"N","O"
+17,"GIL","GIL-S","GB-IC","Con","horsenettle",3,"N","O"
+17,"GIL","GIL-S","GB-IC","Con","ironweed",49,"N","X"
+17,"GIL","GIL-S","GB-IC","Con","prairie petunia",3,"N","X"
+17,"GIL","GIL-S","GB-IC","Con","queen anne's lace",118,"E","O"
+17,"GIL","GIL-S","GB-IC","Con","ribwort plantain",45,"E","O"
+17,"GIL","GIL-S","GB-IC","Con","self-heal",33,"N","O"
+17,"GIL","GIL-S","GB-IC","Con","white clover",599,"E","O"
+17,"GIL","GIL-S","GB-IC","Con","wild bergamot",921,"N","X"
+17,"LTR","LTR-C","GB-IC","Spr","alsike clover",182,"E","O"
+17,"LTR","LTR-C","GB-IC","Spr","birdsfoot trefoil",167,"E","O"
+17,"LTR","LTR-C","GB-IC","Spr","black medick",193,"E","O"
+17,"LTR","LTR-C","GB-IC","Spr","blue-eyed grass",1,"N","X"
+17,"LTR","LTR-C","GB-IC","Spr","daisy fleabane",142,"N","O"
+17,"LTR","LTR-C","GB-IC","Spr","deptford pink",124,"E","O"
+17,"LTR","LTR-C","GB-IC","Spr","germander",19,"N","X"
+17,"LTR","LTR-C","GB-IC","Spr","grooved yellow flax",7,"N","O"
+17,"LTR","LTR-C","GB-IC","Spr","hairy mountain mint",34,"N","O"
+17,"LTR","LTR-C","GB-IC","Spr","horsenettle",4,"N","O"
+17,"LTR","LTR-C","GB-IC","Spr","ironweed",54,"N","X"
+17,"LTR","LTR-C","GB-IC","Spr","partridge pea",7,"N","O"
+17,"LTR","LTR-C","GB-IC","Spr","prairie petunia",22,"N","X"
+17,"LTR","LTR-C","GB-IC","Spr","queen anne's lace",49,"E","O"
+17,"LTR","LTR-C","GB-IC","Spr","red clover",8,"E","O"
+17,"LTR","LTR-C","GB-IC","Spr","ribwort plantain",53,"E","O"
+17,"LTR","LTR-C","GB-IC","Spr","self-heal",2,"N","O"
+17,"LTR","LTR-C","GB-IC","Spr","showy tick trefoil",15,"N","X"
+17,"LTR","LTR-C","GB-IC","Spr","swamp agrimony",1,"N","O"
+17,"LTR","LTR-C","GB-IC","Spr","white clover",141,"E","O"
+17,"LTR","LTR-C","GB-IC","Spr","white wild indigo",11,"N","X"
+17,"LTR","LTR-C","GB-IC","Spr","wild bergamot",11,"N","X"
+17,"LTR","LTR-C","GB-IC","Spr","yarrow",34,"N","O"
+17,"LTR","LTR-E","GB-IC","SnS","alsike clover",6,"E","O"
+17,"LTR","LTR-E","GB-IC","SnS","birdsfoot trefoil",73,"E","O"
+17,"LTR","LTR-E","GB-IC","SnS","black medick",78,"E","O"
+17,"LTR","LTR-E","GB-IC","SnS","black-eyed susan",9,"N","X"
+17,"LTR","LTR-E","GB-IC","SnS","broadleaf plantain",405,"E","O"
+17,"LTR","LTR-E","GB-IC","SnS","catnip",3,"E","O"
+17,"LTR","LTR-E","GB-IC","SnS","corn speedwell",1,"E","O"
+17,"LTR","LTR-E","GB-IC","SnS","daisy fleabane",42,"N","O"
+17,"LTR","LTR-E","GB-IC","SnS","deptford pink",200,"E","O"
+17,"LTR","LTR-E","GB-IC","SnS","germander",22,"N","X"
+17,"LTR","LTR-E","GB-IC","SnS","grey-headed coneflower",5,"N","X"
+17,"LTR","LTR-E","GB-IC","SnS","hoary vervain",57,"N","O"
+17,"LTR","LTR-E","GB-IC","SnS","horsenettle",6,"N","O"
+17,"LTR","LTR-E","GB-IC","SnS","ironweed",319,"N","X"
+17,"LTR","LTR-E","GB-IC","SnS","moth mullein",5,"N","O"
+17,"LTR","LTR-E","GB-IC","SnS","prairie petunia",17,"N","X"
+17,"LTR","LTR-E","GB-IC","SnS","queen anne's lace",1178,"E","O"
+17,"LTR","LTR-E","GB-IC","SnS","ribwort plantain",1200,"E","O"
+17,"LTR","LTR-E","GB-IC","SnS","self-heal",2,"N","O"
+17,"LTR","LTR-E","GB-IC","SnS","slender mountain mint",5,"N","X"
+17,"LTR","LTR-E","GB-IC","SnS","swamp vervain",14,"N","O"
+17,"LTR","LTR-E","GB-IC","SnS","white wild indigo",1,"N","X"
+17,"LTR","LTR-E","GB-IC","SnS","wild bergamot",8,"N","X"
+17,"LTR","LTR-E","GB-IC","SnS","yarrow",59,"N","O"
+17,"LTR","LTR-W","GB-IC","Con","daisy fleabane",76,"N","O"
+17,"LTR","LTR-W","GB-IC","Con","deptford pink",7,"E","O"
+17,"LTR","LTR-W","GB-IC","Con","hoary vervain",7,"N","O"
+17,"LTR","LTR-W","GB-IC","Con","horsenettle",8,"N","O"
+17,"LTR","LTR-W","GB-IC","Con","pale spike lobelia",1,"N","X"
+17,"LTR","LTR-W","GB-IC","Con","prairie petunia",8,"N","X"
+17,"LTR","LTR-W","GB-IC","Con","queen anne's lace",129,"E","O"
+17,"LTR","LTR-W","GB-IC","Con","red clover",25,"E","O"
+17,"LTR","LTR-W","GB-IC","Con","ribwort plantain",4,"E","O"
+17,"LTR","LTR-W","GB-IC","Con","slender mountain mint",119,"N","X"
+17,"LTR","LTR-W","GB-IC","Con","st. john's wort",1,"E","O"
+17,"LTR","LTR-W","GB-IC","Con","white wild indigo",4,"N","X"
+17,"LTR","LTR-W","GB-IC","Con","yarrow",1,"N","O"
+17,"LTR","LTR-W","GB-IC","Con","yellow sweet clover",8,"E","O"
+17,"PYW","PYW-C","GB-IC","Spr","alsike clover",7,"E","O"
+17,"PYW","PYW-C","GB-IC","Spr","birdsfoot trefoil",1435,"E","O"
+17,"PYW","PYW-C","GB-IC","Spr","black-eyed susan",31,"N","X"
+17,"PYW","PYW-C","GB-IC","Spr","blue-eyed grass",3,"N","X"
+17,"PYW","PYW-C","GB-IC","Spr","daisy fleabane",202,"N","O"
+17,"PYW","PYW-C","GB-IC","Spr","deptford pink",38,"E","O"
+17,"PYW","PYW-C","GB-IC","Spr","fieldcress",6,"E","O"
+17,"PYW","PYW-C","GB-IC","Spr","horsenettle",2,"N","O"
+17,"PYW","PYW-C","GB-IC","Spr","multiflora rose",12,"E","O"
+17,"PYW","PYW-C","GB-IC","Spr","prairie petunia",24,"N","X"
+17,"PYW","PYW-C","GB-IC","Spr","queen anne's lace",24,"E","O"
+17,"PYW","PYW-C","GB-IC","Spr","red clover",557,"E","O"
+17,"PYW","PYW-C","GB-IC","Spr","self-heal",89,"N","O"
+17,"PYW","PYW-C","GB-IC","Spr","slender mountain mint",352,"N","X"
+17,"PYW","PYW-C","GB-IC","Spr","spotted st. john's wort",22,"N","X"
+17,"PYW","PYW-C","GB-IC","Spr","white clover",175,"E","O"
+17,"PYW","PYW-C","GB-IC","Spr","yarrow",21,"N","O"
+17,"PYW","PYW-N","GB-IC","SnS","alsike clover",7,"E","O"
+17,"PYW","PYW-N","GB-IC","SnS","black medick",23,"E","O"
+17,"PYW","PYW-N","GB-IC","SnS","black-eyed susan",1,"N","X"
+17,"PYW","PYW-N","GB-IC","SnS","blue-eyed grass",4,"N","X"
+17,"PYW","PYW-N","GB-IC","SnS","canada anemone",9,"N","O"
+17,"PYW","PYW-N","GB-IC","SnS","common cinquefoil",8,"N","O"
+17,"PYW","PYW-N","GB-IC","SnS","daisy fleabane",230,"N","O"
+17,"PYW","PYW-N","GB-IC","SnS","deptford pink",15,"E","O"
+17,"PYW","PYW-N","GB-IC","SnS","germander",7,"N","X"
+17,"PYW","PYW-N","GB-IC","SnS","grey-headed coneflower",13,"N","X"
+17,"PYW","PYW-N","GB-IC","SnS","horsenettle",1,"N","O"
+17,"PYW","PYW-N","GB-IC","SnS","oxeye daisy",201,"E","O"
+17,"PYW","PYW-N","GB-IC","SnS","prairie petunia",15,"N","X"
+17,"PYW","PYW-N","GB-IC","SnS","queen anne's lace",31,"E","O"
+17,"PYW","PYW-N","GB-IC","SnS","red clover",311,"E","O"
+17,"PYW","PYW-N","GB-IC","SnS","ribwort plantain",25,"E","O"
+17,"PYW","PYW-N","GB-IC","SnS","slender mountain mint",1133,"N","X"
+17,"PYW","PYW-N","GB-IC","SnS","white clover",59,"E","O"
+17,"PYW","PYW-N","GB-IC","SnS","white sweet clover",3,"E","O"
+17,"PYW","PYW-N","GB-IC","SnS","white wild indigo",3,"N","X"
+17,"PYW","PYW-N","GB-IC","SnS","wild bergamot",1,"N","X"
+17,"PYW","PYW-S","GB-IC","Con","black-eyed susan",15,"N","X"
+17,"PYW","PYW-S","GB-IC","Con","blue-eyed grass",3,"N","X"
+17,"PYW","PYW-S","GB-IC","Con","common cinquefoil",29,"N","O"
+17,"PYW","PYW-S","GB-IC","Con","horsenettle",4,"N","O"
+17,"PYW","PYW-S","GB-IC","Con","oxeye daisy",47,"E","O"
+17,"PYW","PYW-S","GB-IC","Con","pale spike lobelia",2,"N","X"
+17,"PYW","PYW-S","GB-IC","Con","prairie petunia",3,"N","X"
+17,"PYW","PYW-S","GB-IC","Con","red clover",381,"E","O"
+17,"PYW","PYW-S","GB-IC","Con","white clover",26,"E","O"
+17,"PYW","PYW-S","GB-IC","Con","yarrow",1,"N","O"
+18,"GIL","GIL-C","GB-IC","SnS","birdsfoot trefoil",156,"E","O"
+18,"GIL","GIL-C","GB-IC","SnS","black medick",21,"E","O"
+18,"GIL","GIL-C","GB-IC","SnS","catnip",1,"E","O"
+18,"GIL","GIL-C","GB-IC","SnS","chicory",63,"E","O"
+18,"GIL","GIL-C","GB-IC","SnS","common cinquefoil",1,"N","O"
+18,"GIL","GIL-C","GB-IC","SnS","daisy fleabane",34,"N","O"
+18,"GIL","GIL-C","GB-IC","SnS","dandelion",1,"N","O"
+18,"GIL","GIL-C","GB-IC","SnS","deptford pink",32,"E","O"
+18,"GIL","GIL-C","GB-IC","SnS","fieldcress",3,"E","O"
+18,"GIL","GIL-C","GB-IC","SnS","grey-headed coneflower",6,"N","X"
+18,"GIL","GIL-C","GB-IC","SnS","hoary vervain",6,"N","O"
+18,"GIL","GIL-C","GB-IC","SnS","horsenettle",3,"N","O"
+18,"GIL","GIL-C","GB-IC","SnS","ironweed",4,"N","X"
+18,"GIL","GIL-C","GB-IC","SnS","queen anne's lace",52,"E","O"
+18,"GIL","GIL-C","GB-IC","SnS","red clover",7,"E","O"
+18,"GIL","GIL-C","GB-IC","SnS","ribwort plantain",64,"E","O"
+18,"GIL","GIL-C","GB-IC","SnS","self-heal",6,"N","O"
+18,"GIL","GIL-C","GB-IC","SnS","slender mountain mint",45,"N","X"
+18,"GIL","GIL-C","GB-IC","SnS","white clover",52,"E","O"
+18,"GIL","GIL-C","GB-IC","SnS","wild bergamot",18,"N","X"
+18,"GIL","GIL-C","GB-IC","SnS","yarrow",2,"N","O"
+18,"GIL","GIL-N","GB-IC","Spr","birdsfoot trefoil",1061,"E","O"
+18,"GIL","GIL-N","GB-IC","Spr","black medick",6,"E","O"
+18,"GIL","GIL-N","GB-IC","Spr","chicory",19,"E","O"
+18,"GIL","GIL-N","GB-IC","Spr","common mullein",1,"E","O"
+18,"GIL","GIL-N","GB-IC","Spr","dandelion",1,"N","O"
+18,"GIL","GIL-N","GB-IC","Spr","deptford pink",37,"E","O"
+18,"GIL","GIL-N","GB-IC","Spr","hoary vervain",4,"N","O"
+18,"GIL","GIL-N","GB-IC","Spr","horsenettle",15,"N","O"
+18,"GIL","GIL-N","GB-IC","Spr","ironweed",33,"N","X"
+18,"GIL","GIL-N","GB-IC","Spr","multiflora rose",68,"E","O"
+18,"GIL","GIL-N","GB-IC","Spr","queen anne's lace",168,"E","O"
+18,"GIL","GIL-N","GB-IC","Spr","red clover",12,"E","O"
+18,"GIL","GIL-N","GB-IC","Spr","ribwort plantain",284,"E","O"
+18,"GIL","GIL-N","GB-IC","Spr","self-heal",6,"N","O"
+18,"GIL","GIL-N","GB-IC","Spr","white clover",444,"E","O"
+18,"GIL","GIL-N","GB-IC","Spr","wild bergamot",1,"N","X"
+18,"GIL","GIL-N","GB-IC","Spr","yarrow",14,"N","O"
+18,"GIL","GIL-S","GB-IC","Con","alsike clover",9,"E","O"
+18,"GIL","GIL-S","GB-IC","Con","birdsfoot trefoil",521,"E","O"
+18,"GIL","GIL-S","GB-IC","Con","black medick",27,"E","O"
+18,"GIL","GIL-S","GB-IC","Con","canada anemone",2,"N","O"
+18,"GIL","GIL-S","GB-IC","Con","chicory",215,"E","O"
+18,"GIL","GIL-S","GB-IC","Con","common milkweed",4,"N","X"
+18,"GIL","GIL-S","GB-IC","Con","daisy fleabane",11,"N","O"
+18,"GIL","GIL-S","GB-IC","Con","deptford pink",43,"E","O"
+18,"GIL","GIL-S","GB-IC","Con","grey-headed coneflower",5,"N","X"
+18,"GIL","GIL-S","GB-IC","Con","hoary vervain",6,"N","O"
+18,"GIL","GIL-S","GB-IC","Con","horsenettle",12,"N","O"
+18,"GIL","GIL-S","GB-IC","Con","ironweed",24,"N","X"
+18,"GIL","GIL-S","GB-IC","Con","prairie petunia",4,"N","X"
+18,"GIL","GIL-S","GB-IC","Con","red clover",179,"E","O"
+18,"GIL","GIL-S","GB-IC","Con","ribwort plantain",48,"E","O"
+18,"GIL","GIL-S","GB-IC","Con","white clover",82,"E","O"
+18,"GIL","GIL-S","GB-IC","Con","wild bergamot",37,"N","X"
+18,"GIL","GIL-S","GB-IC","Con","yellow sweet clover",3,"E","O"
+18,"LTR","LTR-C","GB-IC","Spr","alsike clover",8,"E","O"
+18,"LTR","LTR-C","GB-IC","Spr","birdsfoot trefoil",4,"E","O"
+18,"LTR","LTR-C","GB-IC","Spr","black medick",15,"E","O"
+18,"LTR","LTR-C","GB-IC","Spr","black-eyed susan",13,"N","X"
+18,"LTR","LTR-C","GB-IC","Spr","butterfly milkweed",7,"N","X"
+18,"LTR","LTR-C","GB-IC","Spr","daisy fleabane",163,"N","O"
+18,"LTR","LTR-C","GB-IC","Spr","deptford pink",28,"E","O"
+18,"LTR","LTR-C","GB-IC","Spr","germander",4,"N","X"
+18,"LTR","LTR-C","GB-IC","Spr","grey-headed coneflower",6,"N","X"
+18,"LTR","LTR-C","GB-IC","Spr","ironweed",66,"N","X"
+18,"LTR","LTR-C","GB-IC","Spr","pale spike lobelia",12,"N","X"
+18,"LTR","LTR-C","GB-IC","Spr","prairie petunia",7,"N","X"
+18,"LTR","LTR-C","GB-IC","Spr","queen anne's lace",46,"E","O"
+18,"LTR","LTR-C","GB-IC","Spr","red clover",7,"E","O"
+18,"LTR","LTR-C","GB-IC","Spr","slender mountain mint",99,"N","X"
+18,"LTR","LTR-C","GB-IC","Spr","st. john's wort",8,"E","O"
+18,"LTR","LTR-C","GB-IC","Spr","wild bergamot",1,"N","X"
+18,"LTR","LTR-C","GB-IC","Spr","yarrow",8,"N","O"
+18,"LTR","LTR-E","GB-IC","SnS","birdsfoot trefoil",77,"E","O"
+18,"LTR","LTR-E","GB-IC","SnS","daisy fleabane",196,"N","O"
+18,"LTR","LTR-E","GB-IC","SnS","deptford pink",49,"E","O"
+18,"LTR","LTR-E","GB-IC","SnS","germander",19,"N","X"
+18,"LTR","LTR-E","GB-IC","SnS","hoary vervain",14,"N","O"
+18,"LTR","LTR-E","GB-IC","SnS","horsenettle",6,"N","O"
+18,"LTR","LTR-E","GB-IC","SnS","ironweed",85,"N","X"
+18,"LTR","LTR-E","GB-IC","SnS","prairie petunia",11,"N","X"
+18,"LTR","LTR-E","GB-IC","SnS","queen anne's lace",435,"E","O"
+18,"LTR","LTR-E","GB-IC","SnS","red clover",277,"E","O"
+18,"LTR","LTR-E","GB-IC","SnS","ribwort plantain",47,"E","O"
+18,"LTR","LTR-E","GB-IC","SnS","white clover",15,"E","O"
+18,"LTR","LTR-E","GB-IC","SnS","white sweet clover",1,"E","O"
+18,"LTR","LTR-E","GB-IC","SnS","white wild indigo",20,"N","X"
+18,"LTR","LTR-E","GB-IC","SnS","wild bergamot",13,"N","X"
+18,"LTR","LTR-E","GB-IC","SnS","yarrow",139,"N","O"
+18,"LTR","LTR-W","GB-IC","Con","alsike clover",3,"E","O"
+18,"LTR","LTR-W","GB-IC","Con","black-eyed susan",19,"N","X"
+18,"LTR","LTR-W","GB-IC","Con","common cinquefoil",1,"N","O"
+18,"LTR","LTR-W","GB-IC","Con","daisy fleabane",321,"N","O"
+18,"LTR","LTR-W","GB-IC","Con","deptford pink",35,"E","O"
+18,"LTR","LTR-W","GB-IC","Con","grey-headed coneflower",3,"N","X"
+18,"LTR","LTR-W","GB-IC","Con","hoary vervain",1,"N","O"
+18,"LTR","LTR-W","GB-IC","Con","horsenettle",5,"N","O"
+18,"LTR","LTR-W","GB-IC","Con","ironweed",23,"N","X"
+18,"LTR","LTR-W","GB-IC","Con","prairie petunia",8,"N","X"
+18,"LTR","LTR-W","GB-IC","Con","red clover",1,"E","O"
+18,"LTR","LTR-W","GB-IC","Con","ribwort plantain",23,"E","O"
+18,"LTR","LTR-W","GB-IC","Con","spotted st. john's wort",1,"N","X"
+18,"LTR","LTR-W","GB-IC","Con","white clover",5,"E","O"
+18,"LTR","LTR-W","GB-IC","Con","whorled milkweed",3,"N","O"
+18,"LTR","LTR-W","GB-IC","Con","wild bergamot",7,"N","X"
+18,"LTR","LTR-W","GB-IC","Con","yarrow",4,"N","O"
+18,"LTR","LTR-W","GB-IC","Con","yellow sweet clover",26,"E","O"
+18,"PYW","PYW-C","GB-IC","Spr","black-eyed susan",18,"N","X"
+18,"PYW","PYW-C","GB-IC","Spr","daisy fleabane",46,"N","O"
+18,"PYW","PYW-C","GB-IC","Spr","deptford pink",1,"E","O"
+18,"PYW","PYW-C","GB-IC","Spr","germander",5,"N","X"
+18,"PYW","PYW-C","GB-IC","Spr","grey-headed coneflower",64,"N","X"
+18,"PYW","PYW-C","GB-IC","Spr","hawkweed",1,"E","O"
+18,"PYW","PYW-C","GB-IC","Spr","hoary vervain",1,"N","O"
+18,"PYW","PYW-C","GB-IC","Spr","horsenettle",9,"N","O"
+18,"PYW","PYW-C","GB-IC","Spr","ironweed",24,"N","X"
+18,"PYW","PYW-C","GB-IC","Spr","oxeye daisy",12,"E","O"
+18,"PYW","PYW-C","GB-IC","Spr","pale spike lobelia",16,"N","X"
+18,"PYW","PYW-C","GB-IC","Spr","prairie petunia",98,"N","X"
+18,"PYW","PYW-C","GB-IC","Spr","queen anne's lace",66,"E","O"
+18,"PYW","PYW-C","GB-IC","Spr","red clover",435,"E","O"
+18,"PYW","PYW-C","GB-IC","Spr","self-heal",1,"N","O"
+18,"PYW","PYW-C","GB-IC","Spr","sulfur cinquefoil",51,"E","O"
+18,"PYW","PYW-C","GB-IC","Spr","white clover",106,"E","O"
+18,"PYW","PYW-C","GB-IC","Spr","wild bergamot",53,"N","X"
+18,"PYW","PYW-C","GB-IC","Spr","yarrow",8,"N","O"
+18,"PYW","PYW-N","GB-IC","SnS","antelope horns",1,"N","O"
+18,"PYW","PYW-N","GB-IC","SnS","birdsfoot trefoil",708,"E","O"
+18,"PYW","PYW-N","GB-IC","SnS","black-eyed susan",6,"N","X"
+18,"PYW","PYW-N","GB-IC","SnS","daisy fleabane",53,"N","O"
+18,"PYW","PYW-N","GB-IC","SnS","grey-headed coneflower",55,"N","X"
+18,"PYW","PYW-N","GB-IC","SnS","horsenettle",2,"N","O"
+18,"PYW","PYW-N","GB-IC","SnS","ironweed",5,"N","X"
+18,"PYW","PYW-N","GB-IC","SnS","oxeye daisy",11,"E","O"
+18,"PYW","PYW-N","GB-IC","SnS","pale spike lobelia",28,"N","X"
+18,"PYW","PYW-N","GB-IC","SnS","prairie petunia",69,"N","X"
+18,"PYW","PYW-N","GB-IC","SnS","queen anne's lace",53,"E","O"
+18,"PYW","PYW-N","GB-IC","SnS","red clover",38,"E","O"
+18,"PYW","PYW-N","GB-IC","SnS","sawtooth sunflower",1,"N","O"
+18,"PYW","PYW-N","GB-IC","SnS","self-heal",1,"N","O"
+18,"PYW","PYW-N","GB-IC","SnS","slender mountain mint",213,"N","X"
+18,"PYW","PYW-N","GB-IC","SnS","white clover",3,"E","O"
+18,"PYW","PYW-N","GB-IC","SnS","white sweet clover",48,"E","O"
+18,"PYW","PYW-N","GB-IC","SnS","wild bergamot",8,"N","X"
+18,"PYW","PYW-N","GB-IC","SnS","yellow sweet clover",2,"E","O"
+18,"PYW","PYW-S","GB-IC","Con","antelope horns",1,"N","O"
+18,"PYW","PYW-S","GB-IC","Con","birdsfoot trefoil",1045,"E","O"
+18,"PYW","PYW-S","GB-IC","Con","black-eyed susan",1,"N","X"
+18,"PYW","PYW-S","GB-IC","Con","daisy fleabane",4,"N","O"
+18,"PYW","PYW-S","GB-IC","Con","germander",3,"N","X"
+18,"PYW","PYW-S","GB-IC","Con","ground cherry",1,"N","O"
+18,"PYW","PYW-S","GB-IC","Con","horsenettle",31,"N","O"
+18,"PYW","PYW-S","GB-IC","Con","ironweed",8,"N","X"
+18,"PYW","PYW-S","GB-IC","Con","morning glory",1,"E","O"
+18,"PYW","PYW-S","GB-IC","Con","oxeye daisy",16,"E","O"
+18,"PYW","PYW-S","GB-IC","Con","pale spike lobelia",8,"N","X"
+18,"PYW","PYW-S","GB-IC","Con","prairie petunia",138,"N","X"
+18,"PYW","PYW-S","GB-IC","Con","queen anne's lace",17,"E","O"
+18,"PYW","PYW-S","GB-IC","Con","red clover",159,"E","O"
+18,"PYW","PYW-S","GB-IC","Con","ribwort plantain",32,"E","O"
+18,"PYW","PYW-S","GB-IC","Con","self-heal",1,"N","O"
+18,"PYW","PYW-S","GB-IC","Con","slender mountain mint",377,"N","X"
+18,"PYW","PYW-S","GB-IC","Con","sulfur cinquefoil",7,"E","O"
+18,"PYW","PYW-S","GB-IC","Con","white clover",12,"E","O"
