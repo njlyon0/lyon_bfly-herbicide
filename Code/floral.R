@@ -8,7 +8,7 @@
   ## Script Taxon: **Nectar Resource Plants**
 
 # Required libraries
-library(vegan); library(RRPP) # Calculate & Analyze
+library(vegan); library(RRPP); library(geomorph) # Calculate & Analyze
 library(dplyr); library(ggplot2); library(Rmisc) # Plot
 
 # Set working directory
@@ -428,8 +428,77 @@ ggplot2::ggsave("./Graphs/flr_native.pdf", plot = last_plot())
 ##  ----------------------------------------------------------------------------------------------------------  ##
                         # Multivariate Analysis and Plotting ####
 ##  ----------------------------------------------------------------------------------------------------------  ##
+##  ----------------------------------------------------------  ##
+            # Trajectory Analysis ####
+##  ----------------------------------------------------------  ##
 # Clear environment to reduce error chances
 rm(list = ls())
+
+# Pull in nice clean dataset
+flr <- read.csv("./Data/flr-wide.csv")
+
+# Fix the levels of the adaptive management column
+unique(flr$Herb.Trt)
+flr$Herb.Trt <- factor(as.character(flr$Herb.Trt), levels = c("Con", "Spr", "SnS"))
+unique(flr$Herb.Trt)
+
+# Make community matrix with no non-species columns
+flr.rsp <- as.matrix(flr[,-c(1:5, (ncol(flr)-2):ncol(flr))])
+
+# Make a geomorph dataframe to use the trajectory analysis function from geomorph
+flr.gdf <- geomorph.data.frame(flr.com = flr.rsp,
+                              year = as.factor(flr$Year),
+                              treat = as.factor(flr$Herb.Trt))
+
+#PROBLEMS WITH THIS BIT NOW ####
+# Fit the trajectory analysis
+flr.ta <- trajectory.analysis(f1 = flr.com ~ treat * year, traj.pts = 5, data = flr.gdf, iter = 999)
+
+# Get summary and check distance, angle, and shape of the change through time
+summary(flr.ta, angle.type = "deg")
+
+# Get the custom function to strip out the PC coordinates in the trajectory analysis object
+ta.extract <- function(ta.obj){
+  ## ta.obj = object returned by "trajectory.analysis" argument in library(geomorph)
+  ## nm1 - 2 = what you want your two grouping variables named (be sure they are in quotes)
+  
+  # Make the PC coords into a dataframe
+  ta.df <- as.data.frame(ta.obj$pc.means)[,1:2]
+  
+  # Get the rownames into its own column
+  ta.df$Levels <- rownames(ta.df)
+  
+  # Separate based on the colon
+  ta.done <- tidyr::separate(data = ta.df, col = Levels,
+                             into = c("Groups", "Traj.Points"), sep = ":")
+  
+  # Spit it back out!
+  return(ta.done)
+}
+
+# Use the functio to get the coordinates (for plotting)
+flr.ta.rdy <- ta.extract(flr.ta)
+
+# Plotting shortcuts
+colors <- c("BO" = "#a50026", # red
+            "GB" = "#313695", # light blue
+            "PBG" = "#fdae61") # yellow
+
+# Make the plot
+ggplot(flr.ta.rdy, aes(x = PC1, y = PC2, color = Groups, shape = Traj.Points)) +
+  geom_point(size = 2) +
+  geom_path(aes(group = Groups)) +
+  scale_color_manual(values = colors) +
+  scale_shape_manual(values = c(15:19, 15:19, 15)) +
+  theme(legend.box = "horizontal", legend.position = c(0.4, 0.8), legend.title = element_blank())
+
+
+
+##  ----------------------------------------------------------  ##
+            # perMANOVA + NMS ####
+##  ----------------------------------------------------------  ##
+
+
 
 # You'll want the pairwise comparison functions & my NMS function
 nms.3.ord <- function(mod, groupcol, g1, g2, g3, lntp1 = 1, lntp2 = 1, lntp3 = 1,
@@ -470,14 +539,6 @@ nms.3.ord <- function(mod, groupcol, g1, g2, g3, lntp1 = 1, lntp2 = 1, lntp3 = 1
          pt.bg = c(col1, col2, col3))
   
 }
-
-# Pull in nice clean dataset you just created
-flr <- read.csv("./Data/flr-wide.csv")
-
-# Fix the levels of the adaptive management column
-unique(flr$Herb.Trt)
-flr$Herb.Trt <- factor(as.character(flr$Herb.Trt), levels = c("Con", "Spr", "SnS"))
-unique(flr$Herb.Trt)
 
 # Select your community similarity/distance index (use the style of vegan::vegdist)
 comm.dist <- "jaccard"
