@@ -12,7 +12,7 @@
 library(ggplot2); library(cowplot)
 
 # Set working directory
-setwd("~/Documents/School/1. Iowa State/Collaborations/'Herbicide Project/Herbicide.WD")
+setwd("~/Documents/School/Iowa State/Collaborations/'Herbicide Project/Herbicide.WD")
 
 ##  ----------------------------------------------------------------------------------------------------------  ##
                                     # Housekeeping ####
@@ -40,55 +40,147 @@ dodge <- position_dodge(width = 0.1)
                                 # Butterfly Graphs ####
 ##  ----------------------------------------------------------------------------------------------------------  ##
 # Abundance
-bf.rc2.abun <- ggplot(bf.rc2, aes(x = Year, y = Abundance, color = Herb.Trt, shape = Herb.Trt)) +
-  geom_point(position = dodge) +
-  geom_path(position = dodge) +
+bf.rc2.abun <- ggplot(bf.rc2, aes(x = Year, y = Abundance)) +
+  geom_smooth(aes(color = Herb.Trt), method = "lm", se = F) +
+  geom_jitter(aes(fill = Herb.Trt, shape = Herb.Trt), width = 0.15, size = 2) +
   labs(x = "Year", y = "Butterfly Abundance") +
+  scale_fill_manual(values = bf.cols) +
   scale_color_manual(values = bf.cols) +
+  scale_shape_manual(values = 21:23) +
   theme(legend.position = c(0.7, 0.8), legend.title = element_blank()); bf.rc2.abun
 
 # Species density/richness
-bf.rc2.dens <- ggplot(bf.rc2, aes(x = Year, y = Species.Density, color = Herb.Trt, shape = Herb.Trt)) +
-  geom_point(position = dodge) +
-  geom_path(position = dodge) +
+bf.rc2.dens <- ggplot(bf.rc2, aes(x = Year, y = Richness)) +
+  geom_smooth(aes(color = Herb.Trt), method = "lm", se = F) +
+  geom_jitter(aes(fill = Herb.Trt, shape = Herb.Trt), width = 0.15, size = 2) +
   labs(x = "Year", y = "Butterfly Richness") +
+  scale_fill_manual(values = bf.cols) +
   scale_color_manual(values = bf.cols) +
-  theme(legend.position = "none"); bf.rc2.dens
+  scale_shape_manual(values = 21:23) +
+  theme(legend.position = c(0, 0.8), legend.title = element_blank()); bf.rc2.dens
 
 # Diversity
-bf.rc2.dive <- ggplot(bf.rc2, aes(x = Year, y = Diversity, color = Herb.Trt, shape = Herb.Trt)) +
-  geom_point(position = dodge) +
-  geom_path(position = dodge) +
+bf.rc2.dive <- ggplot(bf.rc2, aes(x = Year, y = Diversity)) +
+  geom_smooth(aes(color = Herb.Trt), method = "lm", se = F) +
+  geom_jitter(aes(fill = Herb.Trt, shape = Herb.Trt), width = 0.15, size = 2) +
   labs(x = "Year", y = "Butterfly Diversity") +
+  scale_fill_manual(values = bf.cols) +
   scale_color_manual(values = bf.cols) +
-  theme(legend.position = "none"); bf.rc2.dive
+  scale_shape_manual(values = 21:23) +
+  theme(legend.position = c(0.7, 0.2), legend.title = element_blank()); bf.rc2.dive
 
 ##  ----------------------------------------------------------------------------------------------------------  ##
                                   # Floral Graphs ####
 ##  ----------------------------------------------------------------------------------------------------------  ##
 # Abundance
-flr.rc2.abun <- ggplot(flr.rc2, aes(x = Year, y = Abundance, color = Herb.Trt, shape = Herb.Trt)) +
-  geom_point(position = dodge) +
-  geom_path(position = dodge) +
+flr.rc2.abun <- ggplot(flr.rc2, aes(x = Year, y = Abundance)) +
+  geom_smooth(aes(color = Herb.Trt), method = "lm", se = F) +
+  geom_jitter(aes(fill = Herb.Trt, shape = Herb.Trt), width = 0.15, size = 2) +
   labs(x = "Year", y = "Floral Abundance") +
+  scale_fill_manual(values = flr.cols) +
   scale_color_manual(values = flr.cols) +
+  scale_shape_manual(values = 21:23) +
   theme(legend.position = c(0, 0.8), legend.title = element_blank()); flr.rc2.abun
 
 # Species density/richness
-flr.rc2.dens <- ggplot(flr.rc2, aes(x = Year, y = Species.Density, color = Herb.Trt, shape = Herb.Trt)) +
-  geom_point(position = dodge) +
-  geom_path(position = dodge) +
+flr.rc2.dens <- ggplot(flr.rc2, aes(x = Year, y = Richness)) +
+  geom_smooth(aes(color = Herb.Trt), method = "lm", se = F) +
+  geom_jitter(aes(fill = Herb.Trt, shape = Herb.Trt), width = 0.15, size = 2) +
   labs(x = "Year", y = "Floral Richness") +
+  scale_fill_manual(values = flr.cols) +
   scale_color_manual(values = flr.cols) +
-  theme(legend.position = "none"); flr.rc2.dens
+  scale_shape_manual(values = 21:23) +
+  theme(legend.position = c(0, 0.8), legend.title = element_blank()); flr.rc2.dens
 
 # Diversity
-flr.rc2.dive <- ggplot(flr.rc2, aes(x = Year, y = Diversity, color = Herb.Trt, shape = Herb.Trt)) +
-  geom_point(position = dodge) +
-  geom_path(position = dodge) +
+flr.rc2.dive <- ggplot(flr.rc2, aes(x = Year, y = Diversity)) +
+  geom_smooth(aes(color = Herb.Trt), method = "lm", se = F) +
+  geom_jitter(aes(fill = Herb.Trt, shape = Herb.Trt), width = 0.15, size = 2) +
   labs(x = "Year", y = "Floral Diversity") +
+  scale_fill_manual(values = flr.cols) +
   scale_color_manual(values = flr.cols) +
-  theme(legend.position = "none"); flr.rc2.dive
+  scale_shape_manual(values = 21:23) +
+  theme(legend.position = c(0.7, 0.8), legend.title = element_blank()); flr.rc2.dive
+
+##  ----------------------------------------------------------------------------------------------------------  ##
+# Seedmix Figure ####
+##  ----------------------------------------------------------------------------------------------------------  ##
+# Get the long format flower data
+flr.lng <- read.csv("./Data/flr-long.csv")
+
+# And get the treatment levels in the right order (alpha order doesn't really make sense here)
+unique(flr.lng$Herb.Trt)
+flr.lng$Herb.Trt <- factor(as.character(flr.lng$Herb.Trt), levels = c("Con", "Spr", "SnS"))
+unique(flr.lng$Herb.Trt)
+
+# Make a seedmix dataframe too
+sdmx <- flr.lng %>%
+  filter(Seedmix == "X") %>%
+  select(Year:Patch, Herb.Trt, Seedmix, Number) %>%
+  group_by(Year, Site, Patch, Herb.Trt) %>%
+  summarise(Abundance = sum(Number),
+            Richness = vegan::specnumber(Number))
+str(sdmx)
+
+# Plot seedmix abundance
+sdmx.abun.plt <- ggplot(sdmx, aes(x = Year, y = Abundance)) +
+  geom_smooth(method = "lm", se = F, color = "black") +
+  geom_smooth(aes(color = Herb.Trt), method = "lm", se = F, linetype = 4) +
+  geom_jitter(aes(fill = Herb.Trt, shape = Herb.Trt), width = 0.15, size = 2) +
+  labs(x = "Year", y = "Seedmix Abundance") +
+  geom_text(label = "NS", x = 14, y = 7900) +
+  scale_fill_manual(values = flr.colors) +
+  scale_color_manual(values = flr.colors) +
+  scale_shape_manual(values = 21:23) +
+  sct.theme + theme(legend.position = c(0.15, 0.85)); sdmx.abun.plt
+
+# Seedmix Richness Plot
+sdmx.rich.plt <- ggplot(sdmx, aes(x = Year, y = Richness)) +
+  geom_smooth(method = "lm", se = F, color = "black") +
+  geom_smooth(aes(color = Herb.Trt), method = "lm", se = F, linetype = 4) +
+  geom_jitter(aes(fill = Herb.Trt, shape = Herb.Trt), width = 0.15, size = 2) +
+  labs(x = "Year", y = "Seedmix Richness") +
+  geom_text(label = "NS", x = 14, y = 7900) +
+  scale_fill_manual(values = flr.colors) +
+  scale_color_manual(values = flr.colors) +
+  scale_shape_manual(values = 21:23) +
+  sct.theme + theme(legend.position = c(0, 0.85)); sdmx.rich.plt
+
+# Make two-panel seedmix figure
+plot_grid(sdmx.abun.plt, sdmx.rich.plt, labels = c("i", "ii"), ncol = 2, nrow = 1)
+
+cowplot::ggsave(plot = last_plot(), filename = "./Figures/Figure_3.pdf", 
+                width = 8, height = 7, units = "in")
+
+##  ----------------------------------------------------------  ##
+# Native/Exotic Analysis & Plotting ####
+##  ----------------------------------------------------------  ##
+# Make a native/exotic dataframe
+nv.ex <- flr.lng %>%
+  select(Year:Patch, Herb.Trt, L48.Status, Number) %>%
+  group_by(Year, Site, Patch, Herb.Trt, L48.Status) %>%
+  summarise(Number = sum(Number)) %>%
+  tidyr::spread(key = "L48.Status", value = "Number", fill = 0)
+str(nv.ex)
+
+# Get a Percent Native column
+nv.ex$Percent.Native <- with(nv.ex, (N / (N + E)) * 100)
+
+# Plot
+nv.ex.plt <- ggplot(nv.ex, aes(x = Year, y = Percent.Native)) +
+  geom_smooth(method = "lm", se = F, color = "black") +
+  geom_smooth(aes(color = Herb.Trt), method = "lm", se = F, linetype = 4) +
+  geom_jitter(aes(fill = Herb.Trt, shape = Herb.Trt), width = 0.15, size = 2) +
+  labs(x = "Year", y = "Percent Native Flowers") +
+  geom_text(label = "NS", x = 14, y = 7900) +
+  scale_fill_manual(values = flr.colors) +
+  scale_color_manual(values = flr.colors) +
+  scale_shape_manual(values = 21:23) +
+  sct.theme + theme(legend.position = c(0, 0.85)); nv.ex.plt
+
+# Save it
+cowplot::ggsave(plot = last_plot(), filename = "./Figures/Figure_4.pdf", 
+                width = 8, height = 7, units = "in")
 
 ##  ----------------------------------------------------------------------------------------------------------  ##
                                 # Figure Creation ####
