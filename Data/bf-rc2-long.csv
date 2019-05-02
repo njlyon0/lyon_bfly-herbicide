@@ -1,141 +1,141 @@
-"Composite.Variable","Year","Site","Patch","Adaptive.Mgmt","Herb.Trt","BFLY.Common.Name","Number","L48.Status","Family","SGCN"
-"17-H+","17","RC2","RC2-S","H+","Con","american lady",1,"N","Nymphalidae","O"
-"14-H+","14","RC2","RC2-N","H+","SnS","american lady",1,"N","Nymphalidae","O"
-"16-H+","16","RC2","RC2-S","H+","Con","black swallowtail",2,"N","Papilionidae","O"
-"14-H+","14","RC2","RC2-N","H+","SnS","black swallowtail",1,"N","Papilionidae","O"
-"15-H+","15","RC2","RC2-N","H+","SnS","black swallowtail",1,"N","Papilionidae","O"
-"16-H+","16","RC2","RC2-N","H+","SnS","black swallowtail",7,"N","Papilionidae","O"
-"18-H+","18","RC2","RC2-N","H+","SnS","black swallowtail",2,"N","Papilionidae","O"
-"16-H+","16","RC2","RC2-C","H+","Spr","black swallowtail",3,"N","Papilionidae","O"
-"16-H+","16","RC2","RC2-C","H+","Spr","bronze copper",2,"N","Lycaenidae","O"
-"17-H+","17","RC2","RC2-C","H+","Spr","bronze copper",2,"N","Lycaenidae","O"
-"15-H+","15","RC2","RC2-S","H+","Con","cabbage white",6,"E","Pieridae","O"
-"16-H+","16","RC2","RC2-S","H+","Con","cabbage white",8,"E","Pieridae","O"
-"17-H+","17","RC2","RC2-S","H+","Con","cabbage white",13,"E","Pieridae","O"
-"18-H+","18","RC2","RC2-S","H+","Con","cabbage white",1,"E","Pieridae","O"
-"14-H+","14","RC2","RC2-N","H+","SnS","cabbage white",1,"E","Pieridae","O"
-"15-H+","15","RC2","RC2-N","H+","SnS","cabbage white",59,"E","Pieridae","O"
-"16-H+","16","RC2","RC2-N","H+","SnS","cabbage white",7,"E","Pieridae","O"
-"17-H+","17","RC2","RC2-N","H+","SnS","cabbage white",9,"E","Pieridae","O"
-"18-H+","18","RC2","RC2-N","H+","SnS","cabbage white",2,"E","Pieridae","O"
-"14-H+","14","RC2","RC2-C","H+","Spr","cabbage white",1,"E","Pieridae","O"
-"15-H+","15","RC2","RC2-C","H+","Spr","cabbage white",60,"E","Pieridae","O"
-"16-H+","16","RC2","RC2-C","H+","Spr","cabbage white",13,"E","Pieridae","O"
-"17-H+","17","RC2","RC2-C","H+","Spr","cabbage white",4,"E","Pieridae","O"
-"18-H+","18","RC2","RC2-C","H+","Spr","cabbage white",1,"E","Pieridae","O"
-"14-H+","14","RC2","RC2-S","H+","Con","clouded sulphur",5,"N","Pieridae","O"
-"15-H+","15","RC2","RC2-S","H+","Con","clouded sulphur",3,"N","Pieridae","O"
-"16-H+","16","RC2","RC2-S","H+","Con","clouded sulphur",2,"N","Pieridae","O"
-"17-H+","17","RC2","RC2-S","H+","Con","clouded sulphur",3,"N","Pieridae","O"
-"18-H+","18","RC2","RC2-S","H+","Con","clouded sulphur",1,"N","Pieridae","O"
-"14-H+","14","RC2","RC2-N","H+","SnS","clouded sulphur",3,"N","Pieridae","O"
-"15-H+","15","RC2","RC2-N","H+","SnS","clouded sulphur",11,"N","Pieridae","O"
-"16-H+","16","RC2","RC2-N","H+","SnS","clouded sulphur",6,"N","Pieridae","O"
-"17-H+","17","RC2","RC2-N","H+","SnS","clouded sulphur",2,"N","Pieridae","O"
-"18-H+","18","RC2","RC2-N","H+","SnS","clouded sulphur",2,"N","Pieridae","O"
-"14-H+","14","RC2","RC2-C","H+","Spr","clouded sulphur",4,"N","Pieridae","O"
-"15-H+","15","RC2","RC2-C","H+","Spr","clouded sulphur",10,"N","Pieridae","O"
-"16-H+","16","RC2","RC2-C","H+","Spr","clouded sulphur",7,"N","Pieridae","O"
-"17-H+","17","RC2","RC2-C","H+","Spr","clouded sulphur",4,"N","Pieridae","O"
-"18-H+","18","RC2","RC2-C","H+","Spr","clouded sulphur",3,"N","Pieridae","O"
-"16-H+","16","RC2","RC2-N","H+","SnS","common buckeye",1,"N","Nymphalidae","O"
-"17-H+","17","RC2","RC2-N","H+","SnS","common buckeye",2,"N","Nymphalidae","O"
-"16-H+","16","RC2","RC2-C","H+","Spr","common buckeye",3,"N","Nymphalidae","O"
-"16-H+","16","RC2","RC2-S","H+","Con","common wood nymph",4,"N","Nymphalidae","O"
-"18-H+","18","RC2","RC2-S","H+","Con","common wood nymph",2,"N","Nymphalidae","O"
-"14-H+","14","RC2","RC2-N","H+","SnS","common wood nymph",1,"N","Nymphalidae","O"
-"15-H+","15","RC2","RC2-N","H+","SnS","common wood nymph",1,"N","Nymphalidae","O"
-"17-H+","17","RC2","RC2-N","H+","SnS","common wood nymph",1,"N","Nymphalidae","O"
-"15-H+","15","RC2","RC2-C","H+","Spr","common wood nymph",1,"N","Nymphalidae","O"
-"18-H+","18","RC2","RC2-C","H+","Spr","common wood nymph",1,"N","Nymphalidae","O"
-"18-H+","18","RC2","RC2-C","H+","Spr","delaware skipper",1,"N","Hesperiidae","O"
-"16-H+","16","RC2","RC2-S","H+","Con","dun skipper",1,"N","Hesperiidae","O"
-"15-H+","15","RC2","RC2-N","H+","SnS","eastern comma",1,"N","Nymphalidae","O"
-"14-H+","14","RC2","RC2-S","H+","Con","eastern tailed blue",7,"N","Lycaenidae","O"
-"16-H+","16","RC2","RC2-S","H+","Con","eastern tailed blue",1,"N","Lycaenidae","O"
-"17-H+","17","RC2","RC2-S","H+","Con","eastern tailed blue",4,"N","Lycaenidae","O"
-"18-H+","18","RC2","RC2-S","H+","Con","eastern tailed blue",1,"N","Lycaenidae","O"
-"15-H+","15","RC2","RC2-N","H+","SnS","eastern tailed blue",1,"N","Lycaenidae","O"
-"16-H+","16","RC2","RC2-N","H+","SnS","eastern tailed blue",11,"N","Lycaenidae","O"
-"17-H+","17","RC2","RC2-N","H+","SnS","eastern tailed blue",13,"N","Lycaenidae","O"
-"18-H+","18","RC2","RC2-N","H+","SnS","eastern tailed blue",2,"N","Lycaenidae","O"
-"14-H+","14","RC2","RC2-C","H+","Spr","eastern tailed blue",2,"N","Lycaenidae","O"
-"15-H+","15","RC2","RC2-C","H+","Spr","eastern tailed blue",4,"N","Lycaenidae","O"
-"16-H+","16","RC2","RC2-C","H+","Spr","eastern tailed blue",7,"N","Lycaenidae","O"
-"17-H+","17","RC2","RC2-C","H+","Spr","eastern tailed blue",12,"N","Lycaenidae","O"
-"18-H+","18","RC2","RC2-C","H+","Spr","eastern tailed blue",2,"N","Lycaenidae","O"
-"18-H+","18","RC2","RC2-N","H+","SnS","eastern tiger swallowtail",4,"N","Papilionidae","O"
-"16-H+","16","RC2","RC2-C","H+","Spr","giant swallowtail",1,"N","Papilionidae","O"
-"14-H+","14","RC2","RC2-N","H+","SnS","gray copper",1,"N","Lycaenidae","O"
-"14-H+","14","RC2","RC2-S","H+","Con","great spangled fritillary",2,"N","Nymphalidae","O"
-"15-H+","15","RC2","RC2-S","H+","Con","great spangled fritillary",2,"N","Nymphalidae","O"
-"16-H+","16","RC2","RC2-S","H+","Con","great spangled fritillary",1,"N","Nymphalidae","O"
-"18-H+","18","RC2","RC2-S","H+","Con","great spangled fritillary",4,"N","Nymphalidae","O"
-"14-H+","14","RC2","RC2-N","H+","SnS","great spangled fritillary",2,"N","Nymphalidae","O"
-"15-H+","15","RC2","RC2-N","H+","SnS","great spangled fritillary",1,"N","Nymphalidae","O"
-"17-H+","17","RC2","RC2-N","H+","SnS","great spangled fritillary",1,"N","Nymphalidae","O"
-"14-H+","14","RC2","RC2-C","H+","Spr","great spangled fritillary",1,"N","Nymphalidae","O"
-"15-H+","15","RC2","RC2-C","H+","Spr","great spangled fritillary",1,"N","Nymphalidae","O"
-"16-H+","16","RC2","RC2-C","H+","Spr","great spangled fritillary",1,"N","Nymphalidae","O"
-"16-H+","16","RC2","RC2-S","H+","Con","little wood satyr",1,"N","Nymphalidae","O"
-"18-H+","18","RC2","RC2-N","H+","SnS","little yellow",1,"N","Pieridae","O"
-"15-H+","15","RC2","RC2-S","H+","Con","meadow fritillary",2,"N","Nymphalidae","O"
-"16-H+","16","RC2","RC2-S","H+","Con","meadow fritillary",2,"N","Nymphalidae","O"
-"18-H+","18","RC2","RC2-S","H+","Con","meadow fritillary",2,"N","Nymphalidae","O"
-"16-H+","16","RC2","RC2-N","H+","SnS","meadow fritillary",5,"N","Nymphalidae","O"
-"17-H+","17","RC2","RC2-N","H+","SnS","meadow fritillary",3,"N","Nymphalidae","O"
-"18-H+","18","RC2","RC2-N","H+","SnS","meadow fritillary",1,"N","Nymphalidae","O"
-"16-H+","16","RC2","RC2-C","H+","Spr","meadow fritillary",4,"N","Nymphalidae","O"
-"18-H+","18","RC2","RC2-C","H+","Spr","meadow fritillary",3,"N","Nymphalidae","O"
-"16-H+","16","RC2","RC2-S","H+","Con","monarch",1,"N","Nymphalidae","X"
-"18-H+","18","RC2","RC2-S","H+","Con","monarch",1,"N","Nymphalidae","X"
-"16-H+","16","RC2","RC2-C","H+","Spr","monarch",1,"N","Nymphalidae","X"
-"17-H+","17","RC2","RC2-C","H+","Spr","monarch",1,"N","Nymphalidae","X"
-"18-H+","18","RC2","RC2-C","H+","Spr","monarch",1,"N","Nymphalidae","X"
-"14-H+","14","RC2","RC2-S","H+","Con","orange sulphur",1,"N","Pieridae","O"
-"15-H+","15","RC2","RC2-S","H+","Con","orange sulphur",2,"N","Pieridae","O"
-"16-H+","16","RC2","RC2-S","H+","Con","orange sulphur",5,"N","Pieridae","O"
-"17-H+","17","RC2","RC2-S","H+","Con","orange sulphur",4,"N","Pieridae","O"
-"18-H+","18","RC2","RC2-S","H+","Con","orange sulphur",2,"N","Pieridae","O"
-"15-H+","15","RC2","RC2-N","H+","SnS","orange sulphur",2,"N","Pieridae","O"
-"16-H+","16","RC2","RC2-N","H+","SnS","orange sulphur",7,"N","Pieridae","O"
-"17-H+","17","RC2","RC2-N","H+","SnS","orange sulphur",4,"N","Pieridae","O"
-"18-H+","18","RC2","RC2-N","H+","SnS","orange sulphur",1,"N","Pieridae","O"
-"14-H+","14","RC2","RC2-C","H+","Spr","orange sulphur",3,"N","Pieridae","O"
-"16-H+","16","RC2","RC2-C","H+","Spr","orange sulphur",9,"N","Pieridae","O"
-"17-H+","17","RC2","RC2-C","H+","Spr","orange sulphur",4,"N","Pieridae","O"
-"18-H+","18","RC2","RC2-C","H+","Spr","orange sulphur",4,"N","Pieridae","O"
-"16-H+","16","RC2","RC2-S","H+","Con","pearl crescent",3,"N","Nymphalidae","O"
-"17-H+","17","RC2","RC2-S","H+","Con","pearl crescent",6,"N","Nymphalidae","O"
-"18-H+","18","RC2","RC2-S","H+","Con","pearl crescent",4,"N","Nymphalidae","O"
-"15-H+","15","RC2","RC2-N","H+","SnS","pearl crescent",2,"N","Nymphalidae","O"
-"16-H+","16","RC2","RC2-N","H+","SnS","pearl crescent",5,"N","Nymphalidae","O"
-"17-H+","17","RC2","RC2-N","H+","SnS","pearl crescent",14,"N","Nymphalidae","O"
-"18-H+","18","RC2","RC2-N","H+","SnS","pearl crescent",11,"N","Nymphalidae","O"
-"15-H+","15","RC2","RC2-C","H+","Spr","pearl crescent",9,"N","Nymphalidae","O"
-"16-H+","16","RC2","RC2-C","H+","Spr","pearl crescent",4,"N","Nymphalidae","O"
-"17-H+","17","RC2","RC2-C","H+","Spr","pearl crescent",10,"N","Nymphalidae","O"
-"18-H+","18","RC2","RC2-C","H+","Spr","pearl crescent",5,"N","Nymphalidae","O"
-"16-H+","16","RC2","RC2-N","H+","SnS","peck's skipper",1,"N","Hesperiidae","O"
-"17-H+","17","RC2","RC2-N","H+","SnS","peck's skipper",1,"N","Hesperiidae","O"
-"16-H+","16","RC2","RC2-S","H+","Con","red admiral",1,"N","Nymphalidae","O"
-"17-H+","17","RC2","RC2-S","H+","Con","red admiral",1,"N","Nymphalidae","O"
-"16-H+","16","RC2","RC2-N","H+","SnS","red admiral",1,"N","Nymphalidae","O"
-"17-H+","17","RC2","RC2-N","H+","SnS","red admiral",1,"N","Nymphalidae","O"
-"15-H+","15","RC2","RC2-C","H+","Spr","red admiral",1,"N","Nymphalidae","O"
-"16-H+","16","RC2","RC2-C","H+","Spr","red admiral",1,"N","Nymphalidae","O"
-"14-H+","14","RC2","RC2-S","H+","Con","regal fritillary",1,"N","Nymphalidae","X"
-"16-H+","16","RC2","RC2-S","H+","Con","regal fritillary",1,"N","Nymphalidae","X"
-"17-H+","17","RC2","RC2-S","H+","Con","regal fritillary",1,"N","Nymphalidae","X"
-"18-H+","18","RC2","RC2-S","H+","Con","regal fritillary",3,"N","Nymphalidae","X"
-"16-H+","16","RC2","RC2-N","H+","SnS","regal fritillary",1,"N","Nymphalidae","X"
-"17-H+","17","RC2","RC2-N","H+","SnS","regal fritillary",2,"N","Nymphalidae","X"
-"16-H+","16","RC2","RC2-N","H+","SnS","silver-spotted skipper",1,"N","Hesperiidae","O"
-"18-H+","18","RC2","RC2-N","H+","SnS","silver-spotted skipper",1,"N","Hesperiidae","O"
-"16-H+","16","RC2","RC2-N","H+","SnS","silvery checkerspot",1,"N","Nymphalidae","O"
-"18-H+","18","RC2","RC2-C","H+","Spr","silvery checkerspot",2,"N","Nymphalidae","O"
-"17-H+","17","RC2","RC2-N","H+","SnS","spring azure",1,"N","Lycaenidae","O"
-"18-H+","18","RC2","RC2-S","H+","Con","summer azure",1,"N","Lycaenidae","O"
-"18-H+","18","RC2","RC2-S","H+","Con","tawny-edged skipper",2,"N","Hesperiidae","O"
-"14-H+","14","RC2","RC2-C","H+","Spr","tawny-edged skipper",1,"N","Hesperiidae","O"
-"16-H+","16","RC2","RC2-C","H+","Spr","tawny-edged skipper",1,"N","Hesperiidae","O"
+"Year","Site","Patch","Adaptive.Mgmt","Herb.Trt","Butterfly.Common.Name","Number"
+14,"RC2","RC2-C","IC","Spr","cabbage white",1
+14,"RC2","RC2-C","IC","Spr","clouded sulphur",4
+14,"RC2","RC2-C","IC","Spr","eastern tailed blue",2
+14,"RC2","RC2-C","IC","Spr","great spangled fritillary",1
+14,"RC2","RC2-C","IC","Spr","orange sulphur",3
+14,"RC2","RC2-C","IC","Spr","tawny-edged skipper",1
+14,"RC2","RC2-N","IC","SnS","american lady",1
+14,"RC2","RC2-N","IC","SnS","black swallowtail",1
+14,"RC2","RC2-N","IC","SnS","cabbage white",1
+14,"RC2","RC2-N","IC","SnS","clouded sulphur",3
+14,"RC2","RC2-N","IC","SnS","common wood nymph",1
+14,"RC2","RC2-N","IC","SnS","gray copper",1
+14,"RC2","RC2-N","IC","SnS","great spangled fritillary",2
+14,"RC2","RC2-S","IC","Con","clouded sulphur",5
+14,"RC2","RC2-S","IC","Con","eastern tailed blue",7
+14,"RC2","RC2-S","IC","Con","great spangled fritillary",2
+14,"RC2","RC2-S","IC","Con","orange sulphur",1
+14,"RC2","RC2-S","IC","Con","regal fritillary",1
+15,"RC2","RC2-C","IC","Spr","cabbage white",60
+15,"RC2","RC2-C","IC","Spr","clouded sulphur",10
+15,"RC2","RC2-C","IC","Spr","common wood nymph",1
+15,"RC2","RC2-C","IC","Spr","eastern tailed blue",4
+15,"RC2","RC2-C","IC","Spr","great spangled fritillary",1
+15,"RC2","RC2-C","IC","Spr","pearl crescent",9
+15,"RC2","RC2-C","IC","Spr","red admiral",1
+15,"RC2","RC2-N","IC","SnS","black swallowtail",1
+15,"RC2","RC2-N","IC","SnS","cabbage white",59
+15,"RC2","RC2-N","IC","SnS","clouded sulphur",11
+15,"RC2","RC2-N","IC","SnS","common wood nymph",1
+15,"RC2","RC2-N","IC","SnS","eastern comma",1
+15,"RC2","RC2-N","IC","SnS","eastern tailed blue",1
+15,"RC2","RC2-N","IC","SnS","great spangled fritillary",1
+15,"RC2","RC2-N","IC","SnS","orange sulphur",2
+15,"RC2","RC2-N","IC","SnS","pearl crescent",2
+15,"RC2","RC2-S","IC","Con","cabbage white",6
+15,"RC2","RC2-S","IC","Con","clouded sulphur",3
+15,"RC2","RC2-S","IC","Con","great spangled fritillary",2
+15,"RC2","RC2-S","IC","Con","meadow fritillary",2
+15,"RC2","RC2-S","IC","Con","orange sulphur",2
+16,"RC2","RC2-C","IC","Spr","black swallowtail",3
+16,"RC2","RC2-C","IC","Spr","bronze copper",2
+16,"RC2","RC2-C","IC","Spr","cabbage white",13
+16,"RC2","RC2-C","IC","Spr","clouded sulphur",7
+16,"RC2","RC2-C","IC","Spr","common buckeye",3
+16,"RC2","RC2-C","IC","Spr","eastern tailed blue",7
+16,"RC2","RC2-C","IC","Spr","giant swallowtail",1
+16,"RC2","RC2-C","IC","Spr","great spangled fritillary",1
+16,"RC2","RC2-C","IC","Spr","meadow fritillary",4
+16,"RC2","RC2-C","IC","Spr","monarch",1
+16,"RC2","RC2-C","IC","Spr","orange sulphur",9
+16,"RC2","RC2-C","IC","Spr","pearl crescent",4
+16,"RC2","RC2-C","IC","Spr","red admiral",1
+16,"RC2","RC2-C","IC","Spr","tawny-edged skipper",1
+16,"RC2","RC2-N","IC","SnS","black swallowtail",7
+16,"RC2","RC2-N","IC","SnS","cabbage white",7
+16,"RC2","RC2-N","IC","SnS","clouded sulphur",6
+16,"RC2","RC2-N","IC","SnS","common buckeye",1
+16,"RC2","RC2-N","IC","SnS","eastern tailed blue",11
+16,"RC2","RC2-N","IC","SnS","meadow fritillary",5
+16,"RC2","RC2-N","IC","SnS","orange sulphur",7
+16,"RC2","RC2-N","IC","SnS","pearl crescent",5
+16,"RC2","RC2-N","IC","SnS","peck's skipper",1
+16,"RC2","RC2-N","IC","SnS","red admiral",1
+16,"RC2","RC2-N","IC","SnS","regal fritillary",1
+16,"RC2","RC2-N","IC","SnS","silver-spotted skipper",1
+16,"RC2","RC2-N","IC","SnS","silvery checkerspot",1
+16,"RC2","RC2-S","IC","Con","black swallowtail",2
+16,"RC2","RC2-S","IC","Con","cabbage white",8
+16,"RC2","RC2-S","IC","Con","clouded sulphur",2
+16,"RC2","RC2-S","IC","Con","common wood nymph",4
+16,"RC2","RC2-S","IC","Con","dun skipper",1
+16,"RC2","RC2-S","IC","Con","eastern tailed blue",1
+16,"RC2","RC2-S","IC","Con","great spangled fritillary",1
+16,"RC2","RC2-S","IC","Con","little wood satyr",1
+16,"RC2","RC2-S","IC","Con","meadow fritillary",2
+16,"RC2","RC2-S","IC","Con","monarch",1
+16,"RC2","RC2-S","IC","Con","orange sulphur",5
+16,"RC2","RC2-S","IC","Con","pearl crescent",3
+16,"RC2","RC2-S","IC","Con","red admiral",1
+16,"RC2","RC2-S","IC","Con","regal fritillary",1
+17,"RC2","RC2-C","IC","Spr","bronze copper",2
+17,"RC2","RC2-C","IC","Spr","cabbage white",4
+17,"RC2","RC2-C","IC","Spr","clouded sulphur",4
+17,"RC2","RC2-C","IC","Spr","eastern tailed blue",12
+17,"RC2","RC2-C","IC","Spr","monarch",1
+17,"RC2","RC2-C","IC","Spr","orange sulphur",4
+17,"RC2","RC2-C","IC","Spr","pearl crescent",10
+17,"RC2","RC2-N","IC","SnS","cabbage white",9
+17,"RC2","RC2-N","IC","SnS","clouded sulphur",2
+17,"RC2","RC2-N","IC","SnS","common buckeye",2
+17,"RC2","RC2-N","IC","SnS","common wood nymph",1
+17,"RC2","RC2-N","IC","SnS","eastern tailed blue",13
+17,"RC2","RC2-N","IC","SnS","great spangled fritillary",1
+17,"RC2","RC2-N","IC","SnS","meadow fritillary",3
+17,"RC2","RC2-N","IC","SnS","orange sulphur",4
+17,"RC2","RC2-N","IC","SnS","pearl crescent",14
+17,"RC2","RC2-N","IC","SnS","peck's skipper",1
+17,"RC2","RC2-N","IC","SnS","red admiral",1
+17,"RC2","RC2-N","IC","SnS","regal fritillary",2
+17,"RC2","RC2-N","IC","SnS","spring azure",1
+17,"RC2","RC2-S","IC","Con","american lady",1
+17,"RC2","RC2-S","IC","Con","cabbage white",13
+17,"RC2","RC2-S","IC","Con","clouded sulphur",3
+17,"RC2","RC2-S","IC","Con","eastern tailed blue",4
+17,"RC2","RC2-S","IC","Con","orange sulphur",4
+17,"RC2","RC2-S","IC","Con","pearl crescent",6
+17,"RC2","RC2-S","IC","Con","red admiral",1
+17,"RC2","RC2-S","IC","Con","regal fritillary",1
+18,"RC2","RC2-C","IC","Spr","cabbage white",1
+18,"RC2","RC2-C","IC","Spr","clouded sulphur",3
+18,"RC2","RC2-C","IC","Spr","common wood nymph",1
+18,"RC2","RC2-C","IC","Spr","delaware skipper",1
+18,"RC2","RC2-C","IC","Spr","eastern tailed blue",2
+18,"RC2","RC2-C","IC","Spr","meadow fritillary",3
+18,"RC2","RC2-C","IC","Spr","monarch",1
+18,"RC2","RC2-C","IC","Spr","orange sulphur",4
+18,"RC2","RC2-C","IC","Spr","pearl crescent",5
+18,"RC2","RC2-C","IC","Spr","silvery checkerspot",2
+18,"RC2","RC2-N","IC","SnS","black swallowtail",2
+18,"RC2","RC2-N","IC","SnS","cabbage white",2
+18,"RC2","RC2-N","IC","SnS","clouded sulphur",2
+18,"RC2","RC2-N","IC","SnS","eastern tailed blue",2
+18,"RC2","RC2-N","IC","SnS","eastern tiger swallowtail",4
+18,"RC2","RC2-N","IC","SnS","little yellow",1
+18,"RC2","RC2-N","IC","SnS","meadow fritillary",1
+18,"RC2","RC2-N","IC","SnS","orange sulphur",1
+18,"RC2","RC2-N","IC","SnS","pearl crescent",11
+18,"RC2","RC2-N","IC","SnS","silver-spotted skipper",1
+18,"RC2","RC2-S","IC","Con","cabbage white",1
+18,"RC2","RC2-S","IC","Con","clouded sulphur",1
+18,"RC2","RC2-S","IC","Con","common wood nymph",2
+18,"RC2","RC2-S","IC","Con","eastern tailed blue",1
+18,"RC2","RC2-S","IC","Con","great spangled fritillary",4
+18,"RC2","RC2-S","IC","Con","meadow fritillary",2
+18,"RC2","RC2-S","IC","Con","monarch",1
+18,"RC2","RC2-S","IC","Con","orange sulphur",2
+18,"RC2","RC2-S","IC","Con","pearl crescent",4
+18,"RC2","RC2-S","IC","Con","regal fritillary",3
+18,"RC2","RC2-S","IC","Con","summer azure",1
+18,"RC2","RC2-S","IC","Con","tawny-edged skipper",2
