@@ -8,12 +8,11 @@
   ## Script Taxon: **Nectar Resource Plants**
 
 # Required libraries
-library(tidyr) # data manipulation
 library(vegan); library(RRPP) # Calculate & Analyze
-library(ggplot2); library(Rmisc) # Plot
+library(dplyr); library(ggplot2); library(Rmisc) # Plot
 
 # Set working directory
-setwd("~/Documents/School/1. Iowa State/Collaborations/'Herbicide Project/Herbicide.WD")
+setwd("~/Documents/School/Iowa State/Collaborations/'Herbicide Project/Herbicide.WD")
 
 # Clear environment to reduce error chances
 rm(list = ls())
@@ -25,10 +24,6 @@ rm(list = ls())
 flr <- read.csv("./Data/flr-wide.csv")
 str(flr)
 
-# Make year a factor!
-flr$Year <- as.factor(flr$Year)
-str(flr$Year)
-
 # And get the treatment levels in the right order (alpha order doesn't really make sense here)
 unique(flr$Herb.Trt)
 flr$Herb.Trt <- factor(as.character(flr$Herb.Trt), levels = c("Con", "Spr", "SnS"))
@@ -39,15 +34,6 @@ dodge <- position_dodge(width = 0.5)
 colors <- c("Con" = "#8c510a", # dark brown
             "Spr" = "#bf812d", # med. brown
             "SnS" = "#dfc27d") # light brown
-yr.colors <- c("14" = "#ffeda0",
-               "15" = "#feb24c",
-               "16" = "#fc4e2a",
-               "17" = "#bd0026",
-               "18" = "#800026")
-ns.color <- "#8c510a" # dark brown
-box.theme <- theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
-                   panel.background = element_blank(), axis.line = element_line(colour = "black"),
-                   legend.position = 'none')
 sct.theme <- theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
                    panel.background = element_blank(), axis.line = element_line(colour = "black"),
                    legend.background = element_blank(), legend.title = element_blank())
@@ -256,77 +242,88 @@ anova(lm.rrpp(log(Abundance) ~ Herb.Trt * Year, data = flr, iter = 9999), effect
 
 # Drop the interaction (because NS) and re-run
 anova(lm.rrpp(log(Abundance) ~ Herb.Trt + Year, data = flr, iter = 9999), effect.type = "F")
-  ## yr = sig, trt = NS
-
-# Fit the model with the significant term
-abun.year.fit <- lm.rrpp(Abundance ~ Year, data = flr, iter = 9999)
-
-# And fit the pairwise comparison assessments
-abun.year.pairs <- simp.rrpp(pairwise(abun.year.fit, fit.null = NULL, groups = flr$Year))
-
-# Get the pairwise results from those!
-abun.year.pairs
-## 14 v 17 = sig
-## 15 v 17 = sig
-
-# Plot the significant results
-abun.plt <- ggplot(flr, aes(x = Year, y = Abundance, fill = Year)) +
-  geom_boxplot(outlier.shape = 21) +
-  labs(x = "Year", y = "Floral Abundance") +
-  scale_fill_manual(values = yr.colors) +
-  geom_text(label = "A", x = 0.8, y = 2250) +
-  geom_text(label = "A", x = 1.8, y = 2750) +
-  geom_text(label = "AB", x = 2.7, y = 6300) +
-  geom_text(label = "B", x = 3.8, y = 8500) +
-  geom_text(label = "AB", x = 4.7, y = 4900) +
-  box.theme; abun.plt
-
-# Save it
-ggplot2::ggsave("./Graphs/flr_abun.pdf", plot = abun.plt)
-
-##  ----------------------------------------------------------  ##
-              # Species Density ####
-##  ----------------------------------------------------------  ##
-# How does the species density of flowers vary among herbicide treatment patches and over time?
-anova(lm.rrpp(Species.Density ~ Herb.Trt * Year, data = flr, iter = 9999), effect.type = "F")
-  ## interaction = sig
-
-# Get plotting dataframe
-dens.pltdf <- summarySE(data = flr, measurevar = "Species.Density",
-                        groupvars = c("Composite.Variable", "Herb.Trt", "Year"))
-dens.pltdf$Year <- as.numeric(as.character(dens.pltdf$Year))
+  ## Both NS
 
 # Plot
-dens.plt <- ggplot(dens.pltdf, aes(x = Year, y = Species.Density, color = Herb.Trt, shape = Herb.Trt)) +
-  geom_path(aes(group = Herb.Trt), position = dodge, lwd = .7) +
-  geom_errorbar(aes(ymax = Species.Density + se, ymin = Species.Density - se), position = dodge, width = .4, lwd = .8) +
-  geom_point(position = dodge, size = 2) +
-  labs(x = "Year", y = "Flower Richness") +
+ggplot(flr, aes(x = Year, y = Abundance)) +
+  geom_jitter(aes(fill = Herb.Trt, shape = Herb.Trt), width = 0.15) +
+  geom_smooth(method = "lm", se = F, color = "black", linetype = 2) +
+  geom_smooth(aes(color = Herb.Trt), method = "lm", se = F, linetype = 4) +
+  labs(x = "Year", y = "Floral Abundance") +
+  geom_text(label = "NS", x = 14, y = 7900) +
+  scale_fill_manual(values = colors) +
   scale_color_manual(values = colors) +
-  sct.theme + theme(legend.position = c(0.0, 0.8)); dens.plt
+  scale_shape_manual(values = 21:23) +
+  sct.theme + theme(legend.position = c(0.9, 0.9))
 
-ggplot2::ggsave("./Graphs/flr_dens.pdf", plot = dens.plt)
+# Save it
+ggplot2::ggsave("./Graphs/flr_abun.pdf", plot = last_plot())
+
+##  ----------------------------------------------------------  ##
+              # Species Richness ####
+##  ----------------------------------------------------------  ##
+# How does the species density of flowers vary among herbicide treatment patches and over time?
+anova(lm.rrpp(Richness ~ Herb.Trt * Year, data = flr, iter = 9999), effect.type = "F")
+  ## interaction = NS
+
+# Run w/o interaction
+anova(lm.rrpp(Richness ~ Herb.Trt + Year, data = flr, iter = 9999), effect.type = "F")
+  ## Both sig
+
+# Fit a management only model and do pairwise comparisons
+flr.rich.fit <- lm.rrpp(Richness ~ Herb.Trt, data = flr, iter = 9999)
+flr.rich.pairs <- simp.rrpp(pairwise(flr.rich.fit, fit.null = NULL, groups = flr$Herb.Trt))
+flr.rich.pairs
+  ## Con = A | Spr = AB | SnS = B
+
+# Plot
+ggplot(flr, aes(x = Year, y = Richness)) +
+  geom_jitter(aes(fill = Herb.Trt, shape = Herb.Trt), width = 0.15) +
+  geom_smooth(method = "lm", se = F, color = "black") +
+  geom_smooth(aes(color = Herb.Trt), method = "lm", se = F, linetype = 4) +
+  labs(x = "Year", y = "Floral Richness") +
+  geom_text(label = "NS", x = 14, y = 7900) +
+  scale_fill_manual(values = colors) +
+  scale_color_manual(values = colors) +
+  scale_shape_manual(values = 21:23) +
+  sct.theme + theme(legend.position = c(0.9, 0.15))
+
+# Save it
+ggplot2::ggsave("./Graphs/flr_rich_1.pdf", plot = last_plot())
+
+# Treatment plot
+ggplot(flr, aes(x = Herb.Trt, y = Richness, fill = Herb.Trt)) +
+  geom_boxplot(outlier.shape = 21) +
+  labs(x = "Herbicide Treatment", y = "Floral Richness") +
+  scale_fill_manual(values = colors) +
+  geom_text(label = "A", x = 0.9, y = 17.5) +
+  geom_text(label = "AB", x = 1.8, y = 19) +
+  geom_text(label = "B", x = 2.9, y = 21.5) +
+  sct.theme + theme(legend.position = "none")
+
+# Save it
+ggplot2::ggsave("./Graphs/flr_rich_2.pdf", plot = last_plot())
 
 ##  ----------------------------------------------------------  ##
                   # Diversity ####
 ##  ----------------------------------------------------------  ##
 # How does the diversity of flowers vary among herbicide treatment patches and over time?
 anova(lm.rrpp(sqrt(Diversity) ~ Herb.Trt * Year, data = flr, iter = 9999), effect.type = "F")
-  ## interaction = NS
+  ## interaction = sig!
 
-# Drop the interaction (because NS) and re-run
-anova(lm.rrpp(sqrt(Diversity) ~ Herb.Trt + Year, data = flr, iter = 9999), effect.type = "F")
-  ## yr = NS, trt = NS
-
-# Plot the 'by treatment' results
-dive.plt <- ggplot(flr, aes(x = Herb.Trt, y = Diversity, fill = Herb.Trt)) +
-  geom_boxplot(outlier.shape = 21) +
-  labs(x = "Herbicide Treatment", y = "Flower Diversity") + 
+# Get the plot!
+ggplot(flr, aes(x = Year, y = Diversity)) +
+  geom_jitter(aes(fill = Herb.Trt, shape = Herb.Trt), width = 0.15) +
+  geom_smooth(aes(color = Herb.Trt), method = "lm", se = F) +
+  labs(x = "Year", y = "Floral Diversity") +
+  geom_text(label = "NS", x = 14, y = 7900) +
   scale_fill_manual(values = colors) +
-  box.theme; dive.plt
+  scale_color_manual(values = colors) +
+  scale_shape_manual(values = 21:23) +
+  sct.theme + theme(legend.position = c(0.9, 0.15))
 
 # Save it
-ggplot2::ggsave("./Graphs/flr_dive.pdf", plot = dive.plt)
+ggplot2::ggsave("./Graphs/flr_dive.pdf", plot = last_plot())
 
 ##  ----------------------------------------------------------------------------------------------------------  ##
                   # Native/Exotic/Seed-mix Analysis and Plotting ####
@@ -337,100 +334,96 @@ ggplot2::ggsave("./Graphs/flr_dive.pdf", plot = dive.plt)
 # Get the long format flower data
 flr.lng <- read.csv("./Data/flr-long.csv")
 
-# Make year a factor!
-flr.lng$Year <- as.factor(flr.lng$Year)
-str(flr.lng$Year)
-
 # And get the treatment levels in the right order (alpha order doesn't really make sense here)
 unique(flr.lng$Herb.Trt)
 flr.lng$Herb.Trt <- factor(as.character(flr.lng$Herb.Trt), levels = c("Con", "Spr", "SnS"))
 unique(flr.lng$Herb.Trt)
 
-# Get a subset for seed-mix species
-sdmx.v0 <- subset(flr.lng, flr.lng$Seedmix == "X")
+# Make a native/exotic dataframe
+nv.ex <- flr.lng %>%
+  select(Year:Patch, Herb.Trt, L48.Status, Number) %>%
+  group_by(Year, Site, Patch, Herb.Trt, L48.Status) %>%
+  summarise(Number = sum(Number)) %>%
+  tidyr::spread(key = "L48.Status", value = "Number", fill = 0)
+str(nv.ex)
 
-# Get aggregated values for each
-native.exotic.v0 <- aggregate(TransectTotals ~ Composite.Variable + Year + Site + Patch +
-                                Herb.Trt + L48.Status, FUN = sum, data = flr.lng)
-sdmx.v1 <- aggregate(TransectTotals ~ Composite.Variable + Year + Site + Patch +
-                       Herb.Trt + Nectar.Plant.Name, FUN = sum, data = sdmx.v0)
+# Make a seedmix dataframe too
+sdmx <- flr.lng %>%
+  filter(Seedmix == "X") %>%
+  select(Year:Patch, Herb.Trt, Seedmix, Number) %>%
+  group_by(Year, Site, Patch, Herb.Trt) %>%
+  summarise(Abundance = sum(Number),
+            Richness = vegan::specnumber(Number))
+str(sdmx)
 
-# Spread both to wide format
-native.exotic.v1 <- spread(native.exotic.v0, key = "L48.Status", value = "TransectTotals", fill = 0)
-sdmx.v2 <- spread(sdmx.v1, key = "Nectar.Plant.Name", value = "TransectTotals", fill = 0)
-
-# Calculate abundance and species density for seed-mix species and percent native for native/exotics
-sdmx.v2$Abundance <- rowSums(sdmx.v2[,-c(1:5)])
-sdmx.v2$Species.Density <- vegan::specnumber(sdmx.v2[,-c(1:5)])
-native.exotic.v1$Percent.Native <- ( (native.exotic.v1$N / (native.exotic.v1$N + native.exotic.v1$E)) * 100 )
-
-# Save both as more easily called dataframes
-native.exotic <- native.exotic.v1
-sdmx <- sdmx.v2
+# Get a Percent Native column
+nv.ex$Percent.Native <- with(nv.ex, (N / (N + E)) * 100)
 
 ##  ----------------------------------------------------------  ##
          # Seed-mix Analysis Plotting ####
 ##  ----------------------------------------------------------  ##
 # Abundance first
-anova(lm.rrpp(log(Abundance) ~ Herb.Trt * Year, data = sdmx, iter = 9999), effect.type = "F")
+anova(lm.rrpp(log(Abundance) ~ Herb.Trt * Year, data = sdmx, iter = 9999), effect.type = "F") ## NS
 anova(lm.rrpp(log(Abundance) ~ Herb.Trt + Year, data = sdmx, iter = 9999), effect.type = "F")
   ## Year was significant!
 
-# Fit the model and ask for pairwise comparisons
-sdmx.abun.year.fit <- lm.rrpp(log(Abundance) ~ Herb.Trt + Year, data = sdmx, iter = 9999)
-sdmx.abun.year.pairs <- simp.rrpp(pairwise(sdmx.abun.year.fit, fit.null = NULL, groups = sdmx$Year))
-sdmx.abun.year.pairs
-  ## 14 v 16 = sig
-  ## 14 v 17 = sig
-  ## 14 v 18 = sig
-
 # Plot abundance
-sdmx.abun.plt <- ggplot(sdmx, aes(x = Year, y = Abundance, fill = Year)) +
-  geom_boxplot(outlier.shape = 21) +
-  labs(x = "Year", y = "Seedmix Flower Abundance") +
-  scale_fill_manual(values = yr.colors) +
-  geom_text(label = "A", x = 0.8, y = 125) +
-  geom_text(label = "AB", x = 1.7, y = 325) +
-  geom_text(label = "B", x = 2.8, y = 950) +
-  geom_text(label = "B", x = 3.8, y = 550) +
-  geom_text(label = "B", x = 4.8, y = 450) +
-  box.theme; sdmx.abun.plt
+ggplot(sdmx, aes(x = Year, y = Abundance)) +
+  geom_jitter(aes(fill = Herb.Trt, shape = Herb.Trt), width = 0.15) +
+  geom_smooth(method = "lm", se = F, color = "black") +
+  geom_smooth(aes(color = Herb.Trt), method = "lm", se = F, linetype = 4) +
+  labs(x = "Year", y = "Seedmix Abundance") +
+  geom_text(label = "NS", x = 14, y = 7900) +
+  scale_fill_manual(values = colors) +
+  scale_color_manual(values = colors) +
+  scale_shape_manual(values = 21:23) +
+  sct.theme + theme(legend.position = c(0.15, 0.85))
 
 # Save it
-ggplot2::ggsave("./Graphs/flr_sdmx_abun.pdf", plot = sdmx.abun.plt)
+ggplot2::ggsave("./Graphs/flr_sdmx_abun.pdf", plot = last_plot())
 
 # Now species density
-anova(lm.rrpp(Species.Density ~ Herb.Trt * Year, data = sdmx, iter = 9999), effect.type = "F")
-  ## interaction was significant
-
-# Plot the species density information
-  ## Get plotting dataframe
-sdmx.dens.pltdf <- summarySE(data = sdmx, measurevar = "Species.Density",
-                        groupvars = c("Composite.Variable", "Herb.Trt", "Year"))
-sdmx.dens.pltdf$Year <- as.numeric(as.character(sdmx.dens.pltdf$Year))
+anova(lm.rrpp(Richness ~ Herb.Trt * Year, data = sdmx, iter = 9999), effect.type = "F") ## int = NS
+anova(lm.rrpp(Richness ~ Herb.Trt + Year, data = sdmx, iter = 9999), effect.type = "F")
+  ## year was significant
 
 # Plot
-sdmx.dens.plt <- ggplot(sdmx.dens.pltdf, aes(x = Year, y = Species.Density, color = Herb.Trt, shape = Herb.Trt)) +
-  geom_path(aes(group = Herb.Trt), position = dodge, lwd = .7) +
-  geom_errorbar(aes(ymax = Species.Density + se, ymin = Species.Density - se),
-                position = dodge, width = .4, lwd = .8) +
-  geom_point(position = dodge, size = 2) +
-  labs(x = "Year", y = "Seedmix Plant Richness") +
+ggplot(sdmx, aes(x = Year, y = Richness)) +
+  geom_jitter(aes(fill = Herb.Trt, shape = Herb.Trt), width = 0.15) +
+  geom_smooth(method = "lm", se = F, color = "black") +
+  geom_smooth(aes(color = Herb.Trt), method = "lm", se = F, linetype = 4) +
+  labs(x = "Year", y = "Seedmix Richness") +
+  geom_text(label = "NS", x = 14, y = 7900) +
+  scale_fill_manual(values = colors) +
   scale_color_manual(values = colors) +
-  sct.theme + theme(legend.position = c(0, 0.8)); sdmx.dens.plt
+  scale_shape_manual(values = 21:23) +
+  sct.theme + theme(legend.position = c(0.15, 0.85))
 
-ggplot2::ggsave("./Graphs/flr_sdmx_dens.pdf", plot = sdmx.dens.plt)
+ggplot2::ggsave("./Graphs/flr_sdmx_dens.pdf", plot = last_plot())
 
 ##  ----------------------------------------------------------  ##
       # Native/Exotic Analysis & Plotting ####
 ##  ----------------------------------------------------------  ##
 # Does the percent native flowers change with treatment and/or time?
-anova(lm.rrpp(Percent.Native ~ Herb.Trt * Year, data = native.exotic, iter = 9999), effect.type = "F")
-anova(lm.rrpp(Percent.Native ~ Herb.Trt + Year, data = native.exotic, iter = 9999), effect.type = "F")
-  ## NS
+anova(lm.rrpp(Percent.Native ~ Herb.Trt * Year, data = nv.ex, iter = 9999), effect.type = "F")
+anova(lm.rrpp(Percent.Native ~ Herb.Trt + Year, data = nv.ex, iter = 9999), effect.type = "F")
+  ## year = sig
 
-# This means that the pattern of natives and exotics is not significantly different from the overall pattern
-  ## Because the proportions are conserved
+# Plot
+ggplot(nv.ex, aes(x = Year, y = Percent.Native)) +
+  geom_jitter(aes(fill = Herb.Trt, shape = Herb.Trt), width = 0.15) +
+  geom_smooth(method = "lm", se = F, color = "black") +
+  geom_smooth(aes(color = Herb.Trt), method = "lm", se = F, linetype = 4) +
+  labs(x = "Year", y = "Percent Native Flowers") +
+  geom_text(label = "NS", x = 14, y = 7900) +
+  scale_fill_manual(values = colors) +
+  scale_color_manual(values = colors) +
+  scale_shape_manual(values = 21:23) +
+  sct.theme + theme(legend.position = c(0.15, 0.85))
+
+ggplot2::ggsave("./Graphs/flr_native.pdf", plot = last_plot())
+
+# This means that over time the percent native flowers increased, but it wasn't treatment dependent
 
 ##  ----------------------------------------------------------------------------------------------------------  ##
                         # Multivariate Analysis and Plotting ####
@@ -497,11 +490,11 @@ flr17 <- subset(flr, flr$Year == 17)
 flr18 <- subset(flr, flr$Year == 18)
 
 # Make community matrices with no non-species columns
-flr14.rsp <- as.matrix(flr14[,-c(1:6, (ncol(flr14)-2):ncol(flr14))])
-flr15.rsp <- as.matrix(flr15[,-c(1:6, (ncol(flr15)-2):ncol(flr15))])
-flr16.rsp <- as.matrix(flr16[,-c(1:6, (ncol(flr16)-2):ncol(flr16))])
-flr17.rsp <- as.matrix(flr17[,-c(1:6, (ncol(flr17)-2):ncol(flr17))])
-flr18.rsp <- as.matrix(flr18[,-c(1:6, (ncol(flr18)-2):ncol(flr18))])
+flr14.rsp <- as.matrix(flr14[,-c(1:5, (ncol(flr14)-2):ncol(flr14))])
+flr15.rsp <- as.matrix(flr15[,-c(1:5, (ncol(flr15)-2):ncol(flr15))])
+flr16.rsp <- as.matrix(flr16[,-c(1:5, (ncol(flr16)-2):ncol(flr16))])
+flr17.rsp <- as.matrix(flr17[,-c(1:5, (ncol(flr17)-2):ncol(flr17))])
+flr18.rsp <- as.matrix(flr18[,-c(1:5, (ncol(flr18)-2):ncol(flr18))])
 
 # Get the chosen dissimilarity/distance metric for those communities 
 flr14.dst <- vegdist(flr14.rsp, method = comm.dist)
