@@ -21,13 +21,17 @@ rm(list = ls())
                  # Housekeeping
 ##  ----------------------------------------------------------  ##
 # Pull in data
-bf <- read.csv("./Data/bf-wide.csv")
-str(bf)
+bf.v0 <- read.csv("./Data/bf-wide.csv")
+str(bf.v0)
 
 # And get the treatment levels in the right order (alpha order doesn't really make sense here)
-unique(bf$Herb.Trt)
-bf$Herb.Trt <- factor(as.character(bf$Herb.Trt), levels = c("Con", "Spr", "SnS"))
-unique(bf$Herb.Trt)
+unique(bf.v0$Herb.Trt)
+bf.v0$Herb.Trt <- factor(as.character(bf.v0$Herb.Trt), levels = c("Con", "Spr", "SnS"))
+unique(bf.v0$Herb.Trt)
+
+# Split off 2014
+bf.14 <- subset(bf.v0, Year == 14)
+bf <- subset(bf.v0, Year != 14)
 
 # Graphing shortcuts
 dodge <- position_dodge(width = 0.5)
@@ -38,6 +42,22 @@ ns.color <- "#003c30" # dark teal
 sct.theme <- theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
                    panel.background = element_blank(), axis.line = element_line(colour = "black"),
                    legend.background = element_blank(), legend.title = element_blank())
+##  ----------------------------------------------------------------------------------------------------------  ##
+                          # Pre-Treatment Analysis ####
+##  ----------------------------------------------------------------------------------------------------------  ##
+# Cover your bases; any differences among patches pre-treatment?
+
+# ABUNDANCE #
+anova(lm.rrpp(log(Abundance) ~ Herb.Trt, data = bf.14, iter = 9999), effect.type = "F")
+  ## NS
+
+# RICHNESS #
+anova(lm.rrpp(Richness ~ Herb.Trt, data = bf.14, iter = 9999), effect.type = "F")
+  ## NS
+
+# DIVERSITY #
+anova(lm.rrpp(log(Diversity) ~ Herb.Trt, data = bf.14, iter = 9999), effect.type = "F")
+  ## NS
 
 ##  ----------------------------------------------------------------------------------------------------------  ##
                            # Univariate Analysis and Plotting ####
@@ -68,7 +88,7 @@ ggplot(bf, aes(x = Year, y = Abundance)) +
 ggplot2::ggsave("./Graphs/bf_abun.pdf", plot = last_plot())
 
 ##  ----------------------------------------------------------  ##
-              # Species Density ####
+                # Richness ####
 ##  ----------------------------------------------------------  ##
 # How does the species richness of butterflies vary among herbicide treatment patches and over time?
 anova(lm.rrpp(Richness ~ Herb.Trt * Year, data = bf, iter = 9999), effect.type = "F")
@@ -76,7 +96,7 @@ anova(lm.rrpp(Richness ~ Herb.Trt * Year, data = bf, iter = 9999), effect.type =
 
 # Drop the interaction (because NS) and re-run
 anova(lm.rrpp(Richness ~ Herb.Trt + Year, data = bf, iter = 9999), effect.type = "F")
-  ## Both NS
+  ## year = marginal
 
 # Plot the 'by treatment' results
 ggplot(bf, aes(x = Year, y = Richness)) +
