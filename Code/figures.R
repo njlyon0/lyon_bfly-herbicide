@@ -161,7 +161,7 @@ bf.dive.fig <- egg::ggarrange(bf.14.dive.plt, bf.dive.plt, nrow = 1, widths = c(
 plot_grid(bf.abun.fig, bf.rich.fig, bf.dive.fig, labels = c("i", "ii", "iii"), ncol = 1, nrow = 3)
 
 # Save it
-ggsave(plot = last_plot(), filename = "./Figures/Figure_1.pdf", width = 7, height = 9, units = "in")
+ggsave(plot = last_plot(), filename = "./Figures/Figure_2.pdf", width = 7, height = 9, units = "in")
 
 ##  ----------------------------------------------------------  ##
                         # Flower Figure ####
@@ -274,7 +274,7 @@ flr.dive.fig <- egg::ggarrange(flr.14.dive.plt, flr.dive.plt, nrow = 1, widths =
 plot_grid(flr.abun.fig, flr.rich.fig, flr.dive.fig, labels = c("i", "ii", "iii"), ncol = 1, nrow = 3)
 
 # Save it
-ggsave(plot = last_plot(), filename = "./Figures/Figure_2.pdf", width = 7, height = 9, units = "in")
+ggsave(plot = last_plot(), filename = "./Figures/Figure_1.pdf", width = 7, height = 9, units = "in")
 
 ##  ----------------------------------------------------------  ##
                       # Seedmix Figure ####
@@ -318,7 +318,7 @@ sdmx.14.abun.plt <- ggplot(sdmx.14.abun.pltdf, aes(x = Herb.Trt, y = Abundance))
   scale_color_manual(values = sdmx.colors) +
   scale_fill_manual(values = sdmx.colors) +
   ylim(0, 1500) +
-  labs(x = "Pre-Treatment", y = "Seedmix Abundance") +
+  labs(x = "Pre-Treatment", y = "Seeded Species Abundance") +
   pref.theme; sdmx.14.abun.plt
 
   ## Post-Treatment (2015-18)
@@ -350,7 +350,7 @@ sdmx.14.rich.plt <- ggplot(sdmx.14.rich.pltdf, aes(x = Herb.Trt, y = Richness)) 
   scale_color_manual(values = sdmx.colors) +
   scale_fill_manual(values = sdmx.colors) +
   ylim(0, 8.5) +
-  labs(x = "Pre-Treatment", y = "Seedmix Richness") +
+  labs(x = "Pre-Treatment", y = "Seeded Species Richness") +
   pref.theme; sdmx.14.rich.plt
 
 ## Post-Treatment (2015-18)
