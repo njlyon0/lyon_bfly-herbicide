@@ -1,6 +1,6 @@
-##  --------------------------------------------------------------------------------------------------------------------------------------  ##
-                                    # Herbicide Side Project - Figures
-##  --------------------------------------------------------------------------------------------------------------------------------------  ##
+##  ----------------------------------------------------------------------------------  ##
+                            # Herbicide Side Project - Figures
+##  ----------------------------------------------------------------------------------  ##
 # Written by Nicholas Lyon
 
 # Required libraries
@@ -12,9 +12,9 @@ setwd("~/Documents/School/Iowa State/Collaborations/'Herbicide Project/Herbicide
 # Clear environment to reduce error chances
 rm(list = ls())
 
-##  ----------------------------------------------------------------------------------------------------------  ##
-                                 # Housekeeping ####
-##  ----------------------------------------------------------------------------------------------------------  ##
+##  ----------------------------------------------------------  ##
+                        # Housekeeping ####
+##  ----------------------------------------------------------  ##
 # Read in data
 bf.v0 <- read.csv("./Data/bf-wide.csv")
 flr.v0 <- read.csv("./Data/flr-wide.csv")
@@ -25,11 +25,17 @@ bf.v0$Herb.Trt <- factor(as.character(bf.v0$Herb.Trt), levels = c("Con", "Spr", 
 flr.v0$Herb.Trt <- factor(as.character(flr.v0$Herb.Trt), levels = c("Con", "Spr", "SnS"))
 unique(bf.v0$Herb.Trt); unique(flr.v0$Herb.Trt)
 
+# Make the years be full year numbers
+unique(bf.v0$Year); unique(flr.v0$Year)
+bf.v0$Year <- as.numeric(paste0("20", bf.v0$Year))
+flr.v0$Year <- as.numeric(paste0("20", flr.v0$Year))
+unique(bf.v0$Year); unique(flr.v0$Year)
+
 # Get separated 2014 and 15-18 datasets
-bf.14 <- subset(bf.v0, Year == 14)
-bf <- subset(bf.v0, Year != 14)
-flr.14 <- subset(flr.v0, Year == 14)
-flr <- subset(flr.v0, Year != 14)
+bf.14 <- subset(bf.v0, Year == 2014)
+bf <- subset(bf.v0, Year != 2014)
+flr.14 <- subset(flr.v0, Year == 2014)
+flr <- subset(flr.v0, Year != 2014)
 
 # Graphing shortcuts
 dodge <- position_dodge(width = 0.5)
@@ -49,9 +55,9 @@ pref.theme <- theme(panel.grid.major = element_blank(), panel.grid.minor = eleme
 no.y.axis <- theme(axis.title.y = element_blank(), axis.text.y = element_blank(),
                    axis.ticks.y = element_blank(), axis.line.y = element_blank())
 
-##  ----------------------------------------------------------------------------------------------------------  ##
-                                # Butterfly Figure ####
-##  ----------------------------------------------------------------------------------------------------------  ##
+##  ----------------------------------------------------------  ##
+                     # Butterfly Figure ####
+##  ----------------------------------------------------------  ##
 # Abundance plots
   ## Pre-Treatment (2014)
 bf.14.abun.pltdf <- summarySE(bf.14, measurevar = "Abundance", groupvars = "Herb.Trt")
@@ -157,9 +163,9 @@ plot_grid(bf.abun.fig, bf.rich.fig, bf.dive.fig, labels = c("i", "ii", "iii"), n
 # Save it
 ggsave(plot = last_plot(), filename = "./Figures/Figure_1.pdf", width = 7, height = 9, units = "in")
 
-##  ----------------------------------------------------------------------------------------------------------  ##
-                                  # Flower Figure ####
-##  ----------------------------------------------------------------------------------------------------------  ##
+##  ----------------------------------------------------------  ##
+                        # Flower Figure ####
+##  ----------------------------------------------------------  ##
 # Abundance plots
   ## Pre-Treatment (2014)
 flr.14.abun.pltdf <- summarySE(flr.14, measurevar = "Abundance", groupvars = "Herb.Trt")
@@ -270,9 +276,9 @@ plot_grid(flr.abun.fig, flr.rich.fig, flr.dive.fig, labels = c("i", "ii", "iii")
 # Save it
 ggsave(plot = last_plot(), filename = "./Figures/Figure_2.pdf", width = 7, height = 9, units = "in")
 
-##  ----------------------------------------------------------------------------------------------------------  ##
-                                  # Seedmix Figure ####
-##  ----------------------------------------------------------------------------------------------------------  ##
+##  ----------------------------------------------------------  ##
+                      # Seedmix Figure ####
+##  ----------------------------------------------------------  ##
 # Get the long format flower data
 flr.lng <- read.csv("./Data/flr-long.csv")
 
@@ -286,13 +292,18 @@ sdmx.ver0 <- flr.lng %>%
   filter(Seedmix == "X") %>%
   select(Year:Patch, Herb.Trt, Seedmix, Number) %>%
   group_by(Year, Site, Patch, Herb.Trt) %>%
-  summarise(Abundance = sum(Number),
+  dplyr::summarise(Abundance = sum(Number),
             Richness = vegan::specnumber(Number))
 str(sdmx.ver0)
 
+# Fix the year column as above
+unique(sdmx.ver0$Year)
+sdmx.ver0$Year <- as.numeric(paste0("20", sdmx.ver0$Year))
+unique(sdmx.ver0$Year)
+
 # Split 2014 from the rest
-sdmx.14 <- subset(sdmx.ver0, Year == 14)
-sdmx <- subset(sdmx.ver0, Year != 14)
+sdmx.14 <- subset(sdmx.ver0, Year == 2014)
+sdmx <- subset(sdmx.ver0, Year != 2014)
 
 # Seedmix abundance stuff
   ## Pre-Treatment (2014)
@@ -368,22 +379,27 @@ plot_grid(sdmx.abun.fig, sdmx.rich.fig, labels = c("i", "ii"), ncol = 1, nrow = 
 ggsave(plot = last_plot(), filename = "./Figures/Figure_3.pdf", width = 7, height = 9, units = "in")
 
 ##  ----------------------------------------------------------  ##
-    # Native/Exotic Analysis & Plotting ####
+            # Native/Exotic Analysis & Plotting ####
 ##  ----------------------------------------------------------  ##
 # Make a native/exotic dataframe
 nv.ex.ver0 <- flr.lng %>%
   select(Year:Patch, Herb.Trt, L48.Status, Number) %>%
   group_by(Year, Site, Patch, Herb.Trt, L48.Status) %>%
-  summarise(Number = sum(Number)) %>%
+  dplyr::summarise(Number = sum(Number)) %>%
   tidyr::spread(key = "L48.Status", value = "Number", fill = 0)
 str(nv.ex.ver0)
 
 # Get a Percent Native column
 nv.ex.ver0$Percent.Native <- with(nv.ex.ver0, (N / (N + E)) * 100)
 
+# Fix the year column
+unique(nv.ex.ver0$Year)
+nv.ex.ver0$Year <- as.numeric(paste0("20", nv.ex.ver0$Year))
+unique(nv.ex.ver0$Year)
+
 # Split 2014 off
-nv.ex.14 <- subset(nv.ex.ver0, Year == 14)
-nv.ex <- subset(nv.ex.ver0, Year != 14)
+nv.ex.14 <- subset(nv.ex.ver0, Year == 2014)
+nv.ex <- subset(nv.ex.ver0, Year != 2014)
 
 ## Pre-Treatment (2014)
 nv.ex.14.pltdf <- summarySE(nv.ex.14, measurevar = "Percent.Native", groupvars = "Herb.Trt")
@@ -396,7 +412,7 @@ nv.ex.14.plt <- ggplot(nv.ex.14.pltdf, aes(x = Herb.Trt, y = Percent.Native)) +
   #geom_text(label = "NS", x = 0.7, y = 120) + 
   scale_color_manual(values = sdmx.colors) +
   scale_fill_manual(values = sdmx.colors) +
-  ylim(0, 85) +
+  ylim(0, 70) +
   labs(x = "Pre-Treatment", y = "Percent Native Flowers") +
   pref.theme; nv.ex.14.plt
 
@@ -407,7 +423,7 @@ nv.ex.plt <- ggplot(nv.ex.pltdf, aes(x = Year, y = Percent.Native)) +
                     color = Herb.Trt), width = 0.5, position = dodge) +
   geom_point(aes(fill = Herb.Trt, shape = Herb.Trt), size = 2, position = dodge) +
   labs(x = "Post-Treatment") +
-  ylim(0, 85) +
+  ylim(0, 70) +
   scale_fill_manual(values = sdmx.colors) +
   scale_color_manual(values = sdmx.colors) +
   scale_shape_manual(values = 21:23) +
