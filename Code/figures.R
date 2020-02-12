@@ -66,7 +66,7 @@ bf.abun.pltdf <- summarySE(bf, measurevar = "Abundance", groupvars = c("Herb.Trt
 bf.14.abun.plt <- ggplot(bf.14.abun.pltdf, aes(x = Herb.Trt, y = Abundance)) +
   geom_errorbar(aes(ymax = Abundance + se, ymin = Abundance - se,
                     color = Herb.Trt), width = 0.5, position = dodge) +
-  geom_point(aes(fill = Herb.Trt), position = dodge, size = 2.5, shape = 21:23) +
+  geom_point(aes(fill = Herb.Trt), position = dodge, size = 2.5, shape = 22:24) +
   #geom_text(label = "NS", x = 0.7, y = 120) + 
   scale_color_manual(values = bf.colors) +
   scale_fill_manual(values = bf.colors) +
@@ -85,7 +85,7 @@ bf.abun.plt <- ggplot(bf.abun.pltdf, aes(x = Year, y = Abundance)) +
   ylim(0, 135) +
   scale_fill_manual(values = bf.colors) +
   scale_color_manual(values = bf.colors) +
-  scale_shape_manual(values = 21:23) +
+  scale_shape_manual(values = 22:24) +
   pref.theme + theme(legend.position = c(0.8, 0.9)) + no.y.axis; bf.abun.plt
 
   ## Make a two-panel figure
@@ -99,7 +99,7 @@ bf.rich.pltdf <- summarySE(bf, measurevar = "Richness", groupvars = c("Herb.Trt"
 bf.14.rich.plt <- ggplot(bf.14.rich.pltdf, aes(x = Herb.Trt, y = Richness)) +
   geom_errorbar(aes(ymax = Richness + se, ymin = Richness - se,
                     color = Herb.Trt), width = 0.5, position = dodge) +
-  geom_point(aes(fill = Herb.Trt), position = dodge, size = 2.5, shape = 21:23) +
+  geom_point(aes(fill = Herb.Trt), position = dodge, size = 2.5, shape = 22:24) +
   #geom_text(label = "NS", x = 0.7, y = 120) + 
   scale_color_manual(values = bf.colors) +
   scale_fill_manual(values = bf.colors) +
@@ -118,7 +118,7 @@ bf.rich.plt <- ggplot(bf.rich.pltdf, aes(x = Year, y = Richness)) +
   ylim(0, 16) +
   scale_fill_manual(values = bf.colors) +
   scale_color_manual(values = bf.colors) +
-  scale_shape_manual(values = 21:23) +
+  scale_shape_manual(values = 22:24) +
   pref.theme + no.y.axis; bf.rich.plt
 
   ## Make a two-panel figure
@@ -132,7 +132,7 @@ bf.dive.pltdf <- summarySE(bf, measurevar = "Diversity", groupvars = c("Herb.Trt
 bf.14.dive.plt <- ggplot(bf.14.dive.pltdf, aes(x = Herb.Trt, y = Diversity)) +
   geom_errorbar(aes(ymax = Diversity + se, ymin = Diversity - se,
                     color = Herb.Trt), width = 0.5, position = dodge) +
-  geom_point(aes(fill = Herb.Trt), position = dodge, size = 2.5, shape = 21:23) +
+  geom_point(aes(fill = Herb.Trt), position = dodge, size = 2.5, shape = 22:24) +
   #geom_text(label = "NS", x = 0.7, y = 120) + 
   scale_color_manual(values = bf.colors) +
   scale_fill_manual(values = bf.colors) +
@@ -151,7 +151,7 @@ bf.dive.plt <- ggplot(bf.dive.pltdf, aes(x = Year, y = Diversity)) +
   ylim(0, 2.75) +
   scale_fill_manual(values = bf.colors) +
   scale_color_manual(values = bf.colors) +
-  scale_shape_manual(values = 21:23) +
+  scale_shape_manual(values = 22:24) +
   pref.theme + no.y.axis; bf.dive.plt
 
   ## Make a two-panel figure
@@ -174,7 +174,7 @@ flr.abun.pltdf <- summarySE(flr, measurevar = "Abundance", groupvars = c("Herb.T
 flr.14.abun.plt <- ggplot(flr.14.abun.pltdf, aes(x = Herb.Trt, y = Abundance)) +
   geom_errorbar(aes(ymax = Abundance + se, ymin = Abundance - se,
                     color = Herb.Trt), width = 0.5, position = dodge) +
-  geom_point(aes(fill = Herb.Trt), position = dodge, size = 2.5, shape = 21:23) +
+  geom_point(aes(fill = Herb.Trt), position = dodge, size = 2.5, shape = 22:24) +
   #geom_text(label = "NS", x = 0.7, y = 120) + 
   scale_color_manual(values = flr.colors) +
   scale_fill_manual(values = flr.colors) +
@@ -192,7 +192,7 @@ flr.abun.plt <- ggplot(flr.abun.pltdf, aes(x = Year, y = Abundance)) +
   ylim(0, 7000) +
   scale_fill_manual(values = flr.colors) +
   scale_color_manual(values = flr.colors) +
-  scale_shape_manual(values = 21:23) +
+  scale_shape_manual(values = 22:24) +
   pref.theme + theme(legend.position = c(0.8, 0.9)) + no.y.axis; flr.abun.plt
 
   ## Make a two-panel figure
@@ -206,7 +206,7 @@ flr.rich.pltdf <- summarySE(flr, measurevar = "Richness", groupvars = c("Herb.Tr
 flr.14.rich.plt <- ggplot(flr.14.rich.pltdf, aes(x = Herb.Trt, y = Richness)) +
   geom_errorbar(aes(ymax = Richness + se, ymin = Richness - se,
                     color = Herb.Trt), width = 0.5, position = dodge) +
-  geom_point(aes(fill = Herb.Trt), position = dodge, size = 2.5, shape = 21:23) +
+  geom_point(aes(fill = Herb.Trt), position = dodge, size = 2.5, shape = 22:24) +
   #geom_text(label = "NS", x = 0.7, y = 120) + 
   scale_color_manual(values = flr.colors) +
   scale_fill_manual(values = flr.colors) +
@@ -228,7 +228,7 @@ flr.rich.plt <- ggplot(flr.rich.pltdf, aes(x = Year, y = Richness)) +
   geom_text(label = "B", x = 15.3, y = 18) +
   scale_fill_manual(values = flr.colors) +
   scale_color_manual(values = flr.colors) +
-  scale_shape_manual(values = 21:23) +
+  scale_shape_manual(values = 22:24) +
   pref.theme + no.y.axis; flr.rich.plt
 
   ## Make a two-panel figure
@@ -242,7 +242,7 @@ flr.dive.pltdf <- summarySE(flr, measurevar = "Diversity", groupvars = c("Herb.T
 flr.14.dive.plt <- ggplot(flr.14.dive.pltdf, aes(x = Herb.Trt, y = Diversity)) +
   geom_errorbar(aes(ymax = Diversity + se, ymin = Diversity - se,
                     color = Herb.Trt), width = 0.5, position = dodge) +
-  geom_point(aes(fill = Herb.Trt), position = dodge, size = 2.5, shape = 21:23) +
+  geom_point(aes(fill = Herb.Trt), position = dodge, size = 2.5, shape = 22:24) +
   #geom_text(label = "NS", x = 0.7, y = 120) + 
   scale_color_manual(values = flr.colors) +
   scale_fill_manual(values = flr.colors) +
@@ -264,7 +264,7 @@ flr.dive.plt <- ggplot(flr.dive.pltdf, aes(x = Year, y = Diversity)) +
   geom_text(label = "B", x = 15.3, y = 2) + # SnS
   scale_fill_manual(values = flr.colors) +
   scale_color_manual(values = flr.colors) +
-  scale_shape_manual(values = 21:23) +
+  scale_shape_manual(values = 22:24) +
   pref.theme + no.y.axis; flr.dive.plt
 
   ## Make a two-panel figure
@@ -313,7 +313,7 @@ sdmx.abun.pltdf <- summarySE(sdmx, measurevar = "Abundance", groupvars = c("Herb
 sdmx.14.abun.plt <- ggplot(sdmx.14.abun.pltdf, aes(x = Herb.Trt, y = Abundance)) +
   geom_errorbar(aes(ymax = Abundance + se, ymin = Abundance - se,
                     color = Herb.Trt), width = 0.5, position = dodge) +
-  geom_point(aes(fill = Herb.Trt), position = dodge, size = 2.5, shape = 21:23) +
+  geom_point(aes(fill = Herb.Trt), position = dodge, size = 2.5, shape = 22:24) +
   #geom_text(label = "NS", x = 0.7, y = 120) + 
   scale_color_manual(values = sdmx.colors) +
   scale_fill_manual(values = sdmx.colors) +
@@ -331,7 +331,7 @@ sdmx.abun.plt <- ggplot(sdmx.abun.pltdf, aes(x = Year, y = Abundance)) +
   ylim(0, 1500) +
   scale_fill_manual(values = sdmx.colors) +
   scale_color_manual(values = sdmx.colors) +
-  scale_shape_manual(values = 21:23) +
+  scale_shape_manual(values = 22:24) +
   pref.theme + theme(legend.position = c(0.85, 0.95))+ no.y.axis; sdmx.abun.plt
 
   ## Make a two-panel figure
@@ -345,7 +345,7 @@ sdmx.rich.pltdf <- summarySE(sdmx, measurevar = "Richness", groupvars = c("Herb.
 sdmx.14.rich.plt <- ggplot(sdmx.14.rich.pltdf, aes(x = Herb.Trt, y = Richness)) +
   geom_errorbar(aes(ymax = Richness + se, ymin = Richness - se,
                     color = Herb.Trt), width = 0.5, position = dodge) +
-  geom_point(aes(fill = Herb.Trt), position = dodge, size = 2.5, shape = 21:23) +
+  geom_point(aes(fill = Herb.Trt), position = dodge, size = 2.5, shape = 22:24) +
   #geom_text(label = "NS", x = 0.7, y = 120) + 
   scale_color_manual(values = sdmx.colors) +
   scale_fill_manual(values = sdmx.colors) +
@@ -366,7 +366,7 @@ sdmx.rich.plt <- ggplot(sdmx.rich.pltdf, aes(x = Year, y = Richness)) +
   geom_text(label = "B", x = 15.3, y = 18) +
   scale_fill_manual(values = sdmx.colors) +
   scale_color_manual(values = sdmx.colors) +
-  scale_shape_manual(values = 21:23) +
+  scale_shape_manual(values = 22:24) +
   pref.theme + no.y.axis; sdmx.rich.plt
 
   ## Make a two-panel figure
@@ -408,7 +408,7 @@ nv.ex.pltdf <- summarySE(nv.ex, measurevar = "Percent.Native", groupvars = c("He
 nv.ex.14.plt <- ggplot(nv.ex.14.pltdf, aes(x = Herb.Trt, y = Percent.Native)) +
   geom_errorbar(aes(ymax = Percent.Native + se, ymin = Percent.Native - se,
                     color = Herb.Trt), width = 0.5, position = dodge) +
-  geom_point(aes(fill = Herb.Trt), position = dodge, size = 2.5, shape = 21:23) +
+  geom_point(aes(fill = Herb.Trt), position = dodge, size = 2.5, shape = 22:24) +
   #geom_text(label = "NS", x = 0.7, y = 120) + 
   scale_color_manual(values = sdmx.colors) +
   scale_fill_manual(values = sdmx.colors) +
@@ -426,7 +426,7 @@ nv.ex.plt <- ggplot(nv.ex.pltdf, aes(x = Year, y = Percent.Native)) +
   ylim(0, 70) +
   scale_fill_manual(values = sdmx.colors) +
   scale_color_manual(values = sdmx.colors) +
-  scale_shape_manual(values = 21:23) +
+  scale_shape_manual(values = 22:24) +
   pref.theme + theme(legend.position = c(0.85, 0.95)) + no.y.axis; nv.ex.plt
 
 ## Make a two-panel figure
