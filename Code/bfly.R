@@ -8,7 +8,7 @@
   ## Script Taxon: **Butterflies**
 
 # Required libraries
-library(vegan); library(RRPP) # Calculate & Analyze
+library(vegan); library(ape); library(RRPP) # Calculate & Analyze
 library(ggplot2); library(Rmisc) # Plot
 
 # Set working directory
@@ -143,46 +143,6 @@ ggplot2::ggsave("./Graphs/bf_dive.pdf", plot = last_plot())
 # Clear environment to reduce error chances
 rm(list = ls())
 
-# You'll want the pairwise comparison functions & my NMS function
-nms.3.ord <- function(mod, groupcol, g1, g2, g3, lntp1 = 1, lntp2 = 1, lntp3 = 1, title = NA,
-                      legcont, legpos = "topright") {
-  ## mod = object returned by metaMDS
-  ## groupcol = group column in the dataframe that contains those (not the community matrix)
-  ## g1 - g3 = how each group appears in your dataframe (in quotes)
-  ## lntp1 - 3 = what sort of line each ellipse will be made of (accepts integers between 1 and 6 for diff lines)
-  ## legcont = single object for what you want the content of the legend to be
-  ## legpos = legend position, either numeric vector of x/y coords or shorthand accepted by "legend" function
-  
-  # Create plot
-  plot(mod, display = 'sites', choice = c(1, 2), type = 'none', xlab = "", ylab = "", main = title)
-  
-  # Set colors (easier for you to modify if we set this now and call these objects later)
-  col1 <- "#003c30" #  darkish teal
-  col2 <- "#35978f" # med. teal
-  col3 <- "#80cdc1" # lite teal
-  
-  # Add points for each group with a different color per group
-  points(mod$points[groupcol == g1, 1], mod$points[groupcol == g1, 2], pch = 21, bg = col1)
-  points(mod$points[groupcol == g2, 1], mod$points[groupcol == g2, 2], pch = 22, bg = col2)
-  points(mod$points[groupcol == g3, 1], mod$points[groupcol == g3, 2], pch = 23, bg = col3)
-  ## As of right now the colors are colorblind safe and each group is also given its own shape
-  
-  # Get a single vector of your manually set line types for the ellipses
-  lntps <- c(lntp1, lntp2, lntp3)
-  
-  # Ordinate SD ellipses around the centroid
-  library(vegan) # need this package for the following function
-  ordiellipse(mod, groupcol, 
-              col = c(g1 = col1, g2 = col2, g3 = col3),
-              display = "sites", kind = "sd", lwd = 2, lty = lntps, label = F)
-  
-  # Add legend
-  legend(legpos, legend = legcont, bty = "n", 
-         pch = c(21, 22, 23), cex = 1.15, 
-         pt.bg = c(col1, col2, col3))
-  
-}
-
 # Pull in nice clean dataset you just created
 bf <- read.csv("./Data/bf-wide.csv")
 
@@ -191,10 +151,54 @@ unique(bf$Herb.Trt)
 bf$Herb.Trt <- factor(as.character(bf$Herb.Trt), levels = c("Con", "Spr", "SnS"))
 unique(bf$Herb.Trt)
 
+# You'll want my PCoA function to make pretty ordinations
+pcoa.3.ord <- function(mod, groupcol, g1, g2, g3, lntp1 = 1, lntp2 = 1, lntp3 = 1,
+                       legcont, legpos = "topleft", plot.title = NULL) {
+  ## mod = object returned by ape::pcoa
+  ## groupcol = group column in the dataframe that contains those (not the matrix used in vegdist)
+  ## g1 - g3 = how each group appears in your dataframe (in quotes)
+  ## lntp1 - 3 = what sort of line each ellipse will be made of (accepts integers between 1 and 6 for diff lines)
+  ## legcont = single object for what you want the content of the legend to be
+  ## legpos = legend position, either numeric vector of x/y coords or shorthand accepted by "legend" function
+  ## plot.title = if you want a title above the plot
+  
+  # Create plot
+  plot(mod$vectors, display = 'sites', choice = c(1, 2), type = 'none', main = plot.title,
+       xlab = paste0("PC1 (", round(mod$values$Relative_eig[1] * 100, digits = 2), "%)"),
+       ylab = paste0("PC2 (", round(mod$values$Relative_eig[2] * 100, digits = 2), "%)"))
+  ## Probably want the relative eigenvalues (% variation explained per axis) on the plot in an obvious way
+  
+  # Set colors (easier for you to modify if we set this now and call these objects later)
+  col1 <- "#003c30" #  darkish teal
+  col2 <- "#35978f" # med. teal
+  col3 <- "#80cdc1" # light teal
+              
+  # Add points for each group with a different color per group
+  points(mod$vectors[groupcol == g1, 1], mod$vectors[groupcol == g1, 2], pch = 21, bg = col1)
+  points(mod$vectors[groupcol == g2, 1], mod$vectors[groupcol == g2, 2], pch = 22, bg = col2)
+  points(mod$vectors[groupcol == g3, 1], mod$vectors[groupcol == g3, 2], pch = 23, bg = col3)
+  ## As of right now the colors are colorblind safe and each group is also given its own shape
+  
+  # Get a single vector of your manually set line types for the ellipses
+  lntps <- c(lntp1, lntp2, lntp3)
+  
+  # Ordinate SD ellipses around the centroid
+  vegan::ordiellipse(mod$vectors, groupcol, 
+                     col = c(g1 = col1, g2 = col2, g3 = col3),
+                     display = "sites", kind = "sd", lwd = 2, lty = lntps, label = F)
+  
+  # Add legend
+  legend(legpos, legend = legcont, bty = "n", 
+         title = NULL,  cex = 1.15, 
+         pch = c(21, 22, 23),
+         pt.bg = c(col1, col2, col3))
+  
+}
+
 # Select your community similarity/distance index (use the style of vegan::vegdist)
 comm.dist <- "jaccard"
 
-#   Subset by year
+# Subset by year
 bf14 <- subset(bf, bf$Year == 14)
 bf15 <- subset(bf, bf$Year == 15)
 bf16 <- subset(bf, bf$Year == 16)
@@ -216,51 +220,63 @@ bf17.dst <- vegdist(bf17.rsp, method = comm.dist)
 bf18.dst <- vegdist(bf18.rsp, method = comm.dist)
 
 # Get non-metric multidimensional scaling objects for each of 'em
-bf14.mds <- metaMDS(bf14.dst, distance = comm.dist, engine = "monoMDS",
-                    autotransform = F, expand = F, k = 2, try = 100)
-bf15.mds <- metaMDS(bf15.dst, distance = comm.dist, engine = "monoMDS",
-                    autotransform = F, expand = F, k = 2, try = 100)
-bf16.mds <- metaMDS(bf16.dst, distance = comm.dist, engine = "monoMDS",
-                    autotransform = F, expand = F, k = 2, try = 100)
-bf17.mds <- metaMDS(bf17.dst, distance = comm.dist, engine = "monoMDS",
-                    autotransform = F, expand = F, k = 2, try = 100)
-bf18.mds <- metaMDS(bf18.dst, distance = comm.dist, engine = "monoMDS",
-                    autotransform = F, expand = F, k = 2, try = 100)
-
-# Get the stress values in their own dataframe in case it becomes useful later
-stress <- data.frame(Year = c("2014", "2015", "2016", "2017", "2018"),
-                     stress.unadj = c(bf14.mds$stress, bf15.mds$stress, bf16.mds$stress, 
-                                      bf17.mds$stress, bf18.mds$stress))
-stress$stress.rounded <- round(stress$stress.unadj, digits = 3)
-write.csv(stress, "./Summary Info/stress_bf.csv", row.names = F)
-  ## ranges from 0 to 1 when engine = "monoMDS" (is a % with engine = "isoMDS")
+bf14.pcoa <- pcoa(bf14.dst)
+bf15.pcoa <- pcoa(bf15.dst)
+bf16.pcoa <- pcoa(bf16.dst)
+bf17.pcoa <- pcoa(bf17.dst)
+bf18.pcoa <- pcoa(bf18.dst)
 
 # Analyze!
 anova(lm.rrpp(bf14.dst ~ Herb.Trt, data = bf14, iter = 9999), effect.type = "F")
-  ## NS
+## NS
 
 anova(lm.rrpp(bf15.dst ~ Herb.Trt, data = bf15, iter = 9999), effect.type = "F")
-  ## NS
+## NS
 
 anova(lm.rrpp(bf16.dst ~ Herb.Trt, data = bf16, iter = 9999), effect.type = "F")
-  ## NS
+## NS
 
 anova(lm.rrpp(bf17.dst ~ Herb.Trt, data = bf17, iter = 9999), effect.type = "F")
-  ## NS
+## NS
 
 anova(lm.rrpp(bf18.dst ~ Herb.Trt, data = bf18, iter = 9999), effect.type = "F")
-  ## NS
+## NS
 
 # Set a quick shortcut for the legend contents of each (it'll be the same for all of 'em)
 trt <- c("Con", "Spr", "SnS")
 
-# Make ordinations (for exploration purposes only)
-nms.3.ord(bf14.mds, bf14$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS", legcont = trt, title = "2014")
-nms.3.ord(bf15.mds, bf15$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS", legcont = trt, title = "2015")
-nms.3.ord(bf16.mds, bf16$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS", legcont = trt, title = "2016")
-nms.3.ord(bf17.mds, bf17$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS", legcont = trt, title = "2017")
-nms.3.ord(bf18.mds, bf18$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS", legcont = trt, title = "2018")
+# Make ordinations!
+pcoa.3.ord(bf14.pcoa, bf14$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS",
+           legcont = trt, plot.title = "2014")
+pcoa.3.ord(bf15.pcoa, bf15$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS",
+           legpos = NA, legcont = trt, plot.title = "2015")
+pcoa.3.ord(bf16.pcoa, bf16$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS",
+           legpos = NA, legcont = trt, plot.title = "2016")
+pcoa.3.ord(bf17.pcoa, bf17$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS",
+           legpos = NA, legcont = trt, plot.title = "2017")
+pcoa.3.ord(bf18.pcoa, bf18$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS",
+           legpos = NA, legcont = trt, plot.title = "2018")
 
+# Now make all of them in a single row and save it out
+jpeg(file = 'Figures/Butterfly_PCoAs.jpg', width = 7, height = 5, units = "in", res = 720)
+
+par(mfrow = c(2, 3))
+
+pcoa.3.ord(bf14.pcoa, bf14$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS",
+           legcont = trt, plot.title = "2014", legpos = 'bottomright')
+pcoa.3.ord(bf15.pcoa, bf15$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS",
+           legpos = NA, legcont = trt, plot.title = "2015")
+pcoa.3.ord(bf16.pcoa, bf16$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS",
+           legpos = NA, legcont = trt, plot.title = "2016")
+pcoa.3.ord(bf17.pcoa, bf17$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS",
+           legpos = NA, legcont = trt, plot.title = "2017")
+pcoa.3.ord(bf18.pcoa, bf18$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS",
+           legpos = NA, legcont = trt, plot.title = "2018")
+
+dev.off()
+
+# Set this back to the default so it doesn't mess up later graphs
+par(mfrow = c(1 , 1))
 
 ##  ----------------------------------------------------------------------------------------------------------  ##
                                     # Misc Notes ####

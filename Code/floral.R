@@ -8,7 +8,7 @@
   ## Script Taxon: **Nectar Resource Plants**
 
 # Required libraries
-library(vegan); library(RRPP) # Calculate & Analyze
+library(vegan); library(ape); library(RRPP) # Calculate & Analyze
 library(dplyr); library(ggplot2); library(Rmisc) # Plot
 
 # Set working directory
@@ -497,18 +497,22 @@ unique(flr$Herb.Trt)
 # Make community matrix with no non-species columns
 flr.rsp <- as.matrix(flr[,-c(1:5, (ncol(flr)-2):ncol(flr))])
 
-# You'll want the pairwise comparison functions & my NMS function
-nms.3.ord <- function(mod, groupcol, g1, g2, g3, lntp1 = 1, lntp2 = 1, lntp3 = 1,
-                      legcont, legpos = "topright") {
-  ## mod = object returned by metaMDS
-  ## groupcol = group column in the dataframe that contains those (not the community matrix)
+# You'll want my PCoA function to make pretty ordinations
+pcoa.3.ord <- function(mod, groupcol, g1, g2, g3, lntp1 = 1, lntp2 = 1, lntp3 = 1,
+                       legcont, legpos = "topleft", plot.title = NULL) {
+  ## mod = object returned by ape::pcoa
+  ## groupcol = group column in the dataframe that contains those (not the matrix used in vegdist)
   ## g1 - g3 = how each group appears in your dataframe (in quotes)
   ## lntp1 - 3 = what sort of line each ellipse will be made of (accepts integers between 1 and 6 for diff lines)
   ## legcont = single object for what you want the content of the legend to be
   ## legpos = legend position, either numeric vector of x/y coords or shorthand accepted by "legend" function
+  ## plot.title = if you want a title above the plot
   
   # Create plot
-  plot(mod, display = 'sites', choice = c(1, 2), type = 'none', xlab = "", ylab = "")
+  plot(mod$vectors, display = 'sites', choice = c(1, 2), type = 'none', main = plot.title,
+       xlab = paste0("PC1 (", round(mod$values$Relative_eig[1] * 100, digits = 2), "%)"),
+       ylab = paste0("PC2 (", round(mod$values$Relative_eig[2] * 100, digits = 2), "%)"))
+  ## Probably want the relative eigenvalues (% variation explained per axis) on the plot in an obvious way
   
   # Set colors (easier for you to modify if we set this now and call these objects later)
   col1 <- "#8c510a" # dark brown
@@ -516,23 +520,23 @@ nms.3.ord <- function(mod, groupcol, g1, g2, g3, lntp1 = 1, lntp2 = 1, lntp3 = 1
   col3 <- "#dfc27d" # light brown
   
   # Add points for each group with a different color per group
-  points(mod$points[groupcol == g1, 1], mod$points[groupcol == g1, 2], pch = 21, bg = col1)
-  points(mod$points[groupcol == g2, 1], mod$points[groupcol == g2, 2], pch = 22, bg = col2)
-  points(mod$points[groupcol == g3, 1], mod$points[groupcol == g3, 2], pch = 23, bg = col3)
+  points(mod$vectors[groupcol == g1, 1], mod$vectors[groupcol == g1, 2], pch = 21, bg = col1)
+  points(mod$vectors[groupcol == g2, 1], mod$vectors[groupcol == g2, 2], pch = 22, bg = col2)
+  points(mod$vectors[groupcol == g3, 1], mod$vectors[groupcol == g3, 2], pch = 23, bg = col3)
   ## As of right now the colors are colorblind safe and each group is also given its own shape
   
   # Get a single vector of your manually set line types for the ellipses
   lntps <- c(lntp1, lntp2, lntp3)
   
   # Ordinate SD ellipses around the centroid
-  library(vegan) # need this package for the following function
-  ordiellipse(mod, groupcol, 
-              col = c(g1 = col1, g2 = col2, g3 = col3),
-              display = "sites", kind = "sd", lwd = 2, lty = lntps, label = F)
+  vegan::ordiellipse(mod$vectors, groupcol, 
+                     col = c(g1 = col1, g2 = col2, g3 = col3),
+                     display = "sites", kind = "sd", lwd = 2, lty = lntps, label = F)
   
   # Add legend
   legend(legpos, legend = legcont, bty = "n", 
-         pch = c(21, 22, 23), cex = 1.15, 
+         title = NULL,  cex = 1.15, 
+         pch = c(21, 22, 23),
          pt.bg = c(col1, col2, col3))
   
 }
@@ -562,24 +566,11 @@ flr17.dst <- vegdist(flr17.rsp, method = comm.dist)
 flr18.dst <- vegdist(flr18.rsp, method = comm.dist)
 
 # Get non-metric multidimensional scaling objects for each of 'em
-flr14.mds <- metaMDS(flr14.dst, distance = comm.dist, engine = "monoMDS",
-                    autotransform = F, expand = F, k = 2, try = 100)
-flr15.mds <- metaMDS(flr15.dst, distance = comm.dist, engine = "monoMDS",
-                    autotransform = F, expand = F, k = 2, try = 100)
-flr16.mds <- metaMDS(flr16.dst, distance = comm.dist, engine = "monoMDS",
-                    autotransform = F, expand = F, k = 2, try = 100)
-flr17.mds <- metaMDS(flr17.dst, distance = comm.dist, engine = "monoMDS",
-                    autotransform = F, expand = F, k = 2, try = 100)
-flr18.mds <- metaMDS(flr18.dst, distance = comm.dist, engine = "monoMDS",
-                    autotransform = F, expand = F, k = 2, try = 100)
-
-# Get the stress values in their own dataframe in case it becomes useful later
-stress <- data.frame(Year = c("2014", "2015", "2016", "2017", "2018"),
-                     stress.unadj = c(flr14.mds$stress, flr15.mds$stress, flr16.mds$stress, 
-                                      flr17.mds$stress, flr18.mds$stress))
-stress$stress.rounded <- round(stress$stress.unadj, digits = 3)
-write.csv(stress, "./Summary Info/stress_flr.csv", row.names = F)
-  ## ranges from 0 to 1 when engine = "monoMDS" (is a % with engine = "isoMDS")
+flr14.pcoa <- pcoa(flr14.dst)
+flr15.pcoa <- pcoa(flr15.dst)
+flr16.pcoa <- pcoa(flr16.dst)
+flr17.pcoa <- pcoa(flr17.dst)
+flr18.pcoa <- pcoa(flr18.dst)
 
 # Analyze!
 anova(lm.rrpp(flr14.dst ~ Herb.Trt, data = flr14, iter = 9999), effect.type = "F")
@@ -601,11 +592,37 @@ anova(lm.rrpp(flr18.dst ~ Herb.Trt, data = flr18, iter = 9999), effect.type = "F
 trt <- c("Con", "Spr", "SnS")
 
 # Make ordinations!
-nms.3.ord(flr14.mds, flr14$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS", legcont = trt)
-nms.3.ord(flr15.mds, flr15$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS", legcont = trt)
-nms.3.ord(flr16.mds, flr16$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS", legcont = trt)
-nms.3.ord(flr17.mds, flr17$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS", legcont = trt)
-nms.3.ord(flr18.mds, flr18$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS", legcont = trt)
+pcoa.3.ord(flr14.pcoa, flr14$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS",
+           legcont = trt, plot.title = "2014")
+pcoa.3.ord(flr15.pcoa, flr15$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS",
+           legpos = NA, legcont = trt, plot.title = "2015")
+pcoa.3.ord(flr16.pcoa, flr16$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS",
+           legpos = NA, legcont = trt, plot.title = "2016")
+pcoa.3.ord(flr17.pcoa, flr17$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS",
+           legpos = NA, legcont = trt, plot.title = "2017")
+pcoa.3.ord(flr18.pcoa, flr18$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS",
+           legpos = NA, legcont = trt, plot.title = "2018")
+
+# Now make all of them in a single row and save it out
+jpeg(file = 'Figures/Floral_PCoAs.jpg', width = 7, height = 5, units = "in", res = 720)
+
+par(mfrow = c(2, 3))
+
+pcoa.3.ord(flr14.pcoa, flr14$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS",
+           legcont = trt, plot.title = "2014", legpos = 'topright')
+pcoa.3.ord(flr15.pcoa, flr15$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS",
+           legpos = NA, legcont = trt, plot.title = "2015")
+pcoa.3.ord(flr16.pcoa, flr16$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS",
+           legpos = NA, legcont = trt, plot.title = "2016")
+pcoa.3.ord(flr17.pcoa, flr17$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS",
+           legpos = NA, legcont = trt, plot.title = "2017")
+pcoa.3.ord(flr18.pcoa, flr18$Herb.Trt, g1 = "Con", g2 = "Spr", g3 = "SnS",
+           legpos = NA, legcont = trt, plot.title = "2018")
+
+dev.off()
+
+# Set this back to the default so it doesn't mess up later graphs
+par(mfrow = c(1 , 1))
 
 ##  ----------------------------------------------------------------------------------------------------------  ##
                                   # Misc Notes ####
