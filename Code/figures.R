@@ -7,7 +7,7 @@
 library(dplyr); library(Rmisc); library(ggplot2); library(cowplot); library(gridExtra); library(egg)
 
 # Set working directory
-setwd("~/Documents/School/Iowa State/Collaborations/'Herbicide Project/Herbicide.WD")
+setwd("~/Documents/_Publications/2020_Lyon_Butterfly SnS/Herbicide.WD")
 
 # Clear environment to reduce error chances
 rm(list = ls())
@@ -65,7 +65,7 @@ bf.abun.pltdf <- summarySE(bf, measurevar = "Abundance", groupvars = c("Herb.Trt
 
 bf.14.abun.plt <- ggplot(bf.14.abun.pltdf, aes(x = Herb.Trt, y = Abundance)) +
   geom_errorbar(aes(ymax = Abundance + se, ymin = Abundance - se,
-                    color = Herb.Trt), width = 0.5, position = dodge) +
+                    color = Herb.Trt), width = 0.45, position = dodge) +
   geom_point(aes(fill = Herb.Trt), position = dodge, size = 2.5, shape = 22:24) +
   #geom_text(label = "NS", x = 0.7, y = 120) + 
   scale_color_manual(values = bf.colors) +
@@ -77,9 +77,9 @@ bf.14.abun.plt <- ggplot(bf.14.abun.pltdf, aes(x = Herb.Trt, y = Abundance)) +
   ## Post-Treatment (2015-18)
 bf.abun.plt <- ggplot(bf.abun.pltdf, aes(x = Year, y = Abundance)) +
   geom_smooth(method = "lm", se = F, color = "black") +
-  geom_smooth(aes(color = Herb.Trt), method = "lm", se = F, linetype = 4) +
+  #geom_smooth(aes(color = Herb.Trt), method = "lm", se = F, linetype = 4) +
   geom_errorbar(aes(ymax = Abundance + se, ymin = Abundance - se,
-                    color = Herb.Trt), width = 0.5, position = dodge) +
+                    color = Herb.Trt), width = 0.45, position = dodge) +
   geom_point(aes(fill = Herb.Trt, shape = Herb.Trt), size = 2, position = dodge) +
   labs(x = "Post-Treatment") +
   ylim(0, 135) +
@@ -98,7 +98,7 @@ bf.rich.pltdf <- summarySE(bf, measurevar = "Richness", groupvars = c("Herb.Trt"
 
 bf.14.rich.plt <- ggplot(bf.14.rich.pltdf, aes(x = Herb.Trt, y = Richness)) +
   geom_errorbar(aes(ymax = Richness + se, ymin = Richness - se,
-                    color = Herb.Trt), width = 0.5, position = dodge) +
+                    color = Herb.Trt), width = 0.45, position = dodge) +
   geom_point(aes(fill = Herb.Trt), position = dodge, size = 2.5, shape = 22:24) +
   #geom_text(label = "NS", x = 0.7, y = 120) + 
   scale_color_manual(values = bf.colors) +
@@ -110,9 +110,9 @@ bf.14.rich.plt <- ggplot(bf.14.rich.pltdf, aes(x = Herb.Trt, y = Richness)) +
   ## Post-Treatment (2015-18)
 bf.rich.plt <- ggplot(bf.rich.pltdf, aes(x = Year, y = Richness)) +
   geom_smooth(method = "lm", se = F, color = "black") +
-  geom_smooth(aes(color = Herb.Trt), method = "lm", se = F, linetype = 4) +
+  #geom_smooth(aes(color = Herb.Trt), method = "lm", se = F, linetype = 4) +
   geom_errorbar(aes(ymax = Richness + se, ymin = Richness - se,
-                    color = Herb.Trt), width = 0.5, position = dodge) +
+                    color = Herb.Trt), width = 0.45, position = dodge) +
   geom_point(aes(fill = Herb.Trt, shape = Herb.Trt), size = 2, position = dodge) +
   labs(x = "Post-Treatment") +
   ylim(0, 16) +
@@ -131,7 +131,7 @@ bf.dive.pltdf <- summarySE(bf, measurevar = "Diversity", groupvars = c("Herb.Trt
 
 bf.14.dive.plt <- ggplot(bf.14.dive.pltdf, aes(x = Herb.Trt, y = Diversity)) +
   geom_errorbar(aes(ymax = Diversity + se, ymin = Diversity - se,
-                    color = Herb.Trt), width = 0.5, position = dodge) +
+                    color = Herb.Trt), width = 0.45, position = dodge) +
   geom_point(aes(fill = Herb.Trt), position = dodge, size = 2.5, shape = 22:24) +
   #geom_text(label = "NS", x = 0.7, y = 120) + 
   scale_color_manual(values = bf.colors) +
@@ -143,9 +143,9 @@ bf.14.dive.plt <- ggplot(bf.14.dive.pltdf, aes(x = Herb.Trt, y = Diversity)) +
   ## Post-Treatment (2015-18)
 bf.dive.plt <- ggplot(bf.dive.pltdf, aes(x = Year, y = Diversity)) +
   geom_smooth(method = "lm", se = F, color = "black") +
-  geom_smooth(aes(color = Herb.Trt), method = "lm", se = F, linetype = 4) +
+  #geom_smooth(aes(color = Herb.Trt), method = "lm", se = F, linetype = 4) +
   geom_errorbar(aes(ymax = Diversity + se, ymin = Diversity - se,
-                    color = Herb.Trt), width = 0.5, position = dodge) +
+                    color = Herb.Trt), width = 0.45, position = dodge) +
   geom_point(aes(fill = Herb.Trt, shape = Herb.Trt), size = 2, position = dodge) +
   labs(x = "Post-Treatment") +
   ylim(0, 2.75) +
@@ -173,7 +173,7 @@ flr.abun.pltdf <- summarySE(flr, measurevar = "Abundance", groupvars = c("Herb.T
 
 flr.14.abun.plt <- ggplot(flr.14.abun.pltdf, aes(x = Herb.Trt, y = Abundance)) +
   geom_errorbar(aes(ymax = Abundance + se, ymin = Abundance - se,
-                    color = Herb.Trt), width = 0.5, position = dodge) +
+                    color = Herb.Trt), width = 0.45, position = dodge) +
   geom_point(aes(fill = Herb.Trt), position = dodge, size = 2.5, shape = 22:24) +
   #geom_text(label = "NS", x = 0.7, y = 120) + 
   scale_color_manual(values = flr.colors) +
@@ -184,9 +184,9 @@ flr.14.abun.plt <- ggplot(flr.14.abun.pltdf, aes(x = Herb.Trt, y = Abundance)) +
 
   ## Post-Treatment (2015-18)
 flr.abun.plt <- ggplot(flr.abun.pltdf, aes(x = Year, y = Abundance)) +
-  geom_smooth(aes(color = Herb.Trt), method = "lm", se = F, linetype = 4) +
+  #geom_smooth(aes(color = Herb.Trt), method = "lm", se = F, linetype = 4) +
   geom_errorbar(aes(ymax = Abundance + se, ymin = Abundance - se,
-                    color = Herb.Trt), width = 0.5, position = dodge) +
+                    color = Herb.Trt), width = 0.45, position = dodge) +
   geom_point(aes(fill = Herb.Trt, shape = Herb.Trt), size = 2, position = dodge) +
   labs(x = "Post-Treatment") +
   ylim(0, 7000) +
@@ -205,7 +205,7 @@ flr.rich.pltdf <- summarySE(flr, measurevar = "Richness", groupvars = c("Herb.Tr
 
 flr.14.rich.plt <- ggplot(flr.14.rich.pltdf, aes(x = Herb.Trt, y = Richness)) +
   geom_errorbar(aes(ymax = Richness + se, ymin = Richness - se,
-                    color = Herb.Trt), width = 0.5, position = dodge) +
+                    color = Herb.Trt), width = 0.45, position = dodge) +
   geom_point(aes(fill = Herb.Trt), position = dodge, size = 2.5, shape = 22:24) +
   #geom_text(label = "NS", x = 0.7, y = 120) + 
   scale_color_manual(values = flr.colors) +
@@ -217,9 +217,9 @@ flr.14.rich.plt <- ggplot(flr.14.rich.pltdf, aes(x = Herb.Trt, y = Richness)) +
   ## Post-Treatment (2015-18)
 flr.rich.plt <- ggplot(flr.rich.pltdf, aes(x = Year, y = Richness)) +
   geom_smooth(method = "lm", se = F, color = "black") +
-  geom_smooth(aes(color = Herb.Trt), method = "lm", se = F, linetype = 4) +
+  #geom_smooth(aes(color = Herb.Trt), method = "lm", se = F, linetype = 4) +
   geom_errorbar(aes(ymax = Richness + se, ymin = Richness - se,
-                    color = Herb.Trt), width = 0.5, position = dodge) +
+                    color = Herb.Trt), width = 0.45, position = dodge) +
   geom_point(aes(fill = Herb.Trt, shape = Herb.Trt), size = 2, position = dodge) +
   labs(x = "Post-Treatment") +
   ylim(0, 25) +
@@ -241,7 +241,7 @@ flr.dive.pltdf <- summarySE(flr, measurevar = "Diversity", groupvars = c("Herb.T
 
 flr.14.dive.plt <- ggplot(flr.14.dive.pltdf, aes(x = Herb.Trt, y = Diversity)) +
   geom_errorbar(aes(ymax = Diversity + se, ymin = Diversity - se,
-                    color = Herb.Trt), width = 0.5, position = dodge) +
+                    color = Herb.Trt), width = 0.45, position = dodge) +
   geom_point(aes(fill = Herb.Trt), position = dodge, size = 2.5, shape = 22:24) +
   #geom_text(label = "NS", x = 0.7, y = 120) + 
   scale_color_manual(values = flr.colors) +
@@ -253,9 +253,9 @@ flr.14.dive.plt <- ggplot(flr.14.dive.pltdf, aes(x = Herb.Trt, y = Diversity)) +
 ## Post-Treatment (2015-18)
 flr.dive.plt <- ggplot(flr.dive.pltdf, aes(x = Year, y = Diversity)) +
   geom_errorbar(aes(ymax = Diversity + se, ymin = Diversity - se,
-                    color = Herb.Trt), width = 0.5, position = dodge) +
+                    color = Herb.Trt), width = 0.45, position = dodge) +
   geom_smooth(method = "lm", se = F, color = "black") +
-  geom_smooth(aes(color = Herb.Trt), method = "lm", se = F, linetype = 4) +
+  #geom_smooth(aes(color = Herb.Trt), method = "lm", se = F, linetype = 4) +
   geom_point(aes(fill = Herb.Trt, shape = Herb.Trt), size = 2, position = dodge) +
   labs(x = "Post-Treatment") +
   ylim(0, 2.75) +
@@ -312,7 +312,7 @@ sdmx.abun.pltdf <- summarySE(sdmx, measurevar = "Abundance", groupvars = c("Herb
 
 sdmx.14.abun.plt <- ggplot(sdmx.14.abun.pltdf, aes(x = Herb.Trt, y = Abundance)) +
   geom_errorbar(aes(ymax = Abundance + se, ymin = Abundance - se,
-                    color = Herb.Trt), width = 0.5, position = dodge) +
+                    color = Herb.Trt), width = 0.45, position = dodge) +
   geom_point(aes(fill = Herb.Trt), position = dodge, size = 2.5, shape = 22:24) +
   #geom_text(label = "NS", x = 0.7, y = 120) + 
   scale_color_manual(values = sdmx.colors) +
@@ -323,9 +323,9 @@ sdmx.14.abun.plt <- ggplot(sdmx.14.abun.pltdf, aes(x = Herb.Trt, y = Abundance))
 
   ## Post-Treatment (2015-18)
 sdmx.abun.plt <- ggplot(sdmx.abun.pltdf, aes(x = Year, y = Abundance)) +
-  geom_smooth(aes(color = Herb.Trt), method = "lm", se = F, linetype = 4) +
+  #geom_smooth(aes(color = Herb.Trt), method = "lm", se = F, linetype = 4) +
   geom_errorbar(aes(ymax = Abundance + se, ymin = Abundance - se,
-                    color = Herb.Trt), width = 0.5, position = dodge) +
+                    color = Herb.Trt), width = 0.45, position = dodge) +
   geom_point(aes(fill = Herb.Trt, shape = Herb.Trt), size = 2, position = dodge) +
   labs(x = "Post-Treatment") +
   ylim(0, 1500) +
@@ -344,7 +344,7 @@ sdmx.rich.pltdf <- summarySE(sdmx, measurevar = "Richness", groupvars = c("Herb.
 
 sdmx.14.rich.plt <- ggplot(sdmx.14.rich.pltdf, aes(x = Herb.Trt, y = Richness)) +
   geom_errorbar(aes(ymax = Richness + se, ymin = Richness - se,
-                    color = Herb.Trt), width = 0.5, position = dodge) +
+                    color = Herb.Trt), width = 0.45, position = dodge) +
   geom_point(aes(fill = Herb.Trt), position = dodge, size = 2.5, shape = 22:24) +
   #geom_text(label = "NS", x = 0.7, y = 120) + 
   scale_color_manual(values = sdmx.colors) +
@@ -355,9 +355,9 @@ sdmx.14.rich.plt <- ggplot(sdmx.14.rich.pltdf, aes(x = Herb.Trt, y = Richness)) 
 
 ## Post-Treatment (2015-18)
 sdmx.rich.plt <- ggplot(sdmx.rich.pltdf, aes(x = Year, y = Richness)) +
-  geom_smooth(aes(color = Herb.Trt), method = "lm", se = F, linetype = 4) +
+  #geom_smooth(aes(color = Herb.Trt), method = "lm", se = F, linetype = 4) +
   geom_errorbar(aes(ymax = Richness + se, ymin = Richness - se,
-                    color = Herb.Trt), width = 0.5, position = dodge) +
+                    color = Herb.Trt), width = 0.45, position = dodge) +
   geom_point(aes(fill = Herb.Trt, shape = Herb.Trt), size = 2, position = dodge) +
   labs(x = "Post-Treatment") +
   ylim(0, 8.5) +
@@ -407,7 +407,7 @@ nv.ex.pltdf <- summarySE(nv.ex, measurevar = "Percent.Native", groupvars = c("He
 
 nv.ex.14.plt <- ggplot(nv.ex.14.pltdf, aes(x = Herb.Trt, y = Percent.Native)) +
   geom_errorbar(aes(ymax = Percent.Native + se, ymin = Percent.Native - se,
-                    color = Herb.Trt), width = 0.5, position = dodge) +
+                    color = Herb.Trt), width = 0.45, position = dodge) +
   geom_point(aes(fill = Herb.Trt), position = dodge, size = 2.5, shape = 22:24) +
   #geom_text(label = "NS", x = 0.7, y = 120) + 
   scale_color_manual(values = sdmx.colors) +
@@ -418,9 +418,9 @@ nv.ex.14.plt <- ggplot(nv.ex.14.pltdf, aes(x = Herb.Trt, y = Percent.Native)) +
 
 ## Post-Treatment (2015-18)
 nv.ex.plt <- ggplot(nv.ex.pltdf, aes(x = Year, y = Percent.Native)) +
-  geom_smooth(aes(color = Herb.Trt), method = "lm", se = F, linetype = 4) +
+  #geom_smooth(aes(color = Herb.Trt), method = "lm", se = F, linetype = 4) +
   geom_errorbar(aes(ymax = Percent.Native + se, ymin = Percent.Native - se,
-                    color = Herb.Trt), width = 0.5, position = dodge) +
+                    color = Herb.Trt), width = 0.45, position = dodge) +
   geom_point(aes(fill = Herb.Trt, shape = Herb.Trt), size = 2, position = dodge) +
   labs(x = "Post-Treatment") +
   ylim(0, 70) +
