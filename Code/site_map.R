@@ -7,10 +7,8 @@
   ## Everybody likes a nice clean site map, so that's what this script will give 'em
 
 # Necessary libraries
-library(tidyverse); library(rgdal); library(maps); library(mapdata); library(mapproj); library(devEMF)
-library(raster); library(broom); library(maptools)
-library(ggmap)
-
+library(rgdal); library(sp); library(raster)
+                
 # Set the working directory
 setwd("~/Documents/_Publications/2020_Lyon_Butterfly SnS/Herbicide.WD")
                 
@@ -26,8 +24,6 @@ par(.pardefault)
 ## -------------------------------------------- ##
          # Shapefile Map Creation ####
 ## -------------------------------------------- ##
-library(maps); library(mapdata); library(maptools); library(scales)
-
 # Get shape files
 grg.shape <- readOGR(dsn = "./SnS GRG Map/GRG Shape Files/GRG Borders/", layer = "GRG Boundary")
 ltr.shape <- readOGR(dsn = "./SnS GRG Map/GRG Shape Files/LTR Files/", layer = "LTR")
@@ -163,7 +159,7 @@ plot(grg.geo, add = T, col = "gray75")
 text("GRG", font = 3, cex = 0.4, x = -94.1, y = 41.4)
 
 # Looks great! Now re-run it to save it
-jpeg(filename = "./Figures/GRG_Map.jpeg", width = 6, height = 6, units = "in", res = 720)
+jpeg(filename = "./Figures/Figure 1.jpeg", width = 6, height = 6, units = "in", res = 720)
 par(.pardefault)
 plot(region.states, col = "gray99", xlim = c(-94.16, -94.14), ylim = c(40.545, 40.608))
 box(which = "plot", lty = "solid")
@@ -184,164 +180,6 @@ plot(region.states, col = "gray99", xlim = c(-93.555, -93.55), ylim = c(38, 43.5
 box(which = "plot", lty = "solid")
 plot(grg.geo, add = T, col = "gray75")
 text("GRG", font = 3, cex = 0.4, x = -94.1, y = 41.4)
-dev.off()
-  
-## -------------------------------------------- ##
-          # Shapefile Map Version ####
-## -------------------------------------------- ##
-library(rgdal)
-ltr.t <- readOGR(dsn = "./SnS GRG Map/GRG Shape Files/LTR Files/", layer = "LTR")
-gil.t <- readOGR(dsn = "./SnS GRG Map/GRG Shape Files/GIL Files/", layer = "GIL")
-pyw.t <- readOGR(dsn = "./SnS GRG Map/GRG Shape Files/PYW Files/" , layer = "PYW")
-states.t <- readOGR(dsn = "./SnS GRG Map/GRG Shape Files/State Files/",
-                    layer = "cb_2015_us_state_500k")
-grg.bord.t <- readOGR(dsn = "./SnS GRG Map/GRG Shape Files/GRG Borders/",
-                      layer = "GRG Boundary")
-
-library(raster)
-par(mar = c(0,0,0,0))
-plot(grg.bord.t, xlim = c(400000, 401000), ylim = c(4490000, 4500000))
-plot(ltr.t, col = "#80cdc1", add = T)
-plot(gil.t, col = "#80cdc1", add = T)
-plot(pyw.t, col = "#80cdc1", add = T)
-plot(states.t, add = T)
-
-par(mar = c(0,0,0,0))
-plot(ltr.t, col = "#80cdc1", xlim = c(400000, 401000), ylim = c(4490000, 4500000))
-plot(gil.t, col = "#80cdc1", add = T)
-plot(pyw.t, col = "#80cdc1", add = T)
-plot(states.t, add = T)
-
-## -------------------------------------------- ##
-            # Points Map Version ####
-## -------------------------------------------- ##
-# Pulled GPS point for transect start from one patch of each pasture
-  ## Tried to go with most 'central' patch for each pasture
-  ## Patch and whittaker are listed in the first dataframe
-utms <- read.csv("./SnS GRG Map/mapdata_raw.csv")
-
-# Ditch the sites I no longer use
-utms.v2 <- filter(utms, Pasture == "LTR" |  Pasture == "GIL" |  Pasture == "PYW")
-
-# Get R to see the utm coords as a spatial object
-utmcoor <- SpatialPoints(cbind(utms.v2$UTM.X, utms.v2$UTM.Y), proj4string = CRS("+proj=utm +zone=15"))
-  ## utms$X and utms$Y are corresponding to UTM Easting and Northing, respectively
-  ## zone = UTM zone
-
-# Get latitude and longitude
-longlatcoor <- spTransform(utmcoor, CRS("+proj=longlat"))
-
-# Get it into dataframe form again
-longlat <- as.data.frame(longlatcoor)
-
-# The shapefile is shifted slightly south
-  ## SO need to ammend the points to be on the right side of the IA/MO border
-longlat$coords.x2 <- longlat$coords.x2 + 0.03
-
-# Check the bounding box it assigned
-print(summary(longlatcoor))
-
-# And manually set my box to be just a smidge bigger than that
-y1 <- 40.4
-y2 <- 40.8
-x1 <- -94.3
-x2 <- -93.9
-
-# Add a column for pasture name and another for management
-longlat$Site <- utms.v2$Pasture
-longlat$Mgmt <- c("GB", "GB", "GB")
-
-# Now this next bit is super manual and gross, but it doesn't have to be pretty
-  ## Assign shapes and colors to sites of different treatments
-shapes <- c(23, 23, 23)
-  ## BO = 21 | PBG = 22 | GB = 23 | H+ = 24
-
-colors <- c("#abd9e9", "#abd9e9", "#abd9e9")
-  ## BO = "#d73027", # red | PBG = "#fdae61", # yellow |
-  ## GB = "#abd9e9", # light blue
-
-# Get a map of the counties in which we sample and the state boundaries
-map("state", regions = c('iowa', 'missouri'), ylim = c(y1, y2), xlim = c(x1, x2),
-    col = NA, fill = T, res = 0, lwd = 2.5)
-map("county", regions = c('iowa', 'missouri'), ylim = c(y1, y2), xlim = c(x1, x2),
-    col = NA, fill = T, res = 0, add = T)
-
-map(ltr, add = T)
-
-# Add the site points
-points(longlat, pch = shapes, bg = colors, cex = 0.75)
-#text(longlat, as.vector(longlat$Site), cex = 1)
-
-# Maybe add county names?
-#text(c(-94, 40.5), expression(italic("Ringgold Co.")))
-#text(c(-94, 40.5), expression(italic("Harrison Co.")))
-
-# add sites
-plot(gil, col = "purple", add = T)
-
-# Draw a box around the whole map you just created
-box()
-
-# Set the position of the map inset
-par(plt = c(0.1, 0.375, 0.6, 0.9), new = T)
-
-# And set the extent the inset will cover
-inset.x <- c(-97, -89)
-inset.y <- c(36, 45)
-plot.window(xlim = inset.x, ylim = inset.y)
-
-# Actually put bigger area in here
-map('state', c('iowa', 'missouri', 'nebraska', 'kansas', 'oklahoma', 'illinois', 'minnesota',
-               'wisconsin', 'arkansas', 'south dakota', 'kentucky', 'tennessee'), 
-    xlim = inset.x, ylim = inset.y, interior = F, add = T, fill = T, col = 'gray98')
-box()
-
-# Add a box into the inset showing where the more zoomed-in one is from
-polygon(x = c(x1, x2, x2, x1), y = c(y1, y1, y2, y2), col = "black")
-
-# And re-add state boundaries so the iowa/missouri border is clear in the inset
-map("state", regions = c('iowa', 'missouri'), xlim = inset.x, ylim = inset.y,
-    col = NA, fill = T, res = 0, add = T)
-
-##  ----------------------------------------------------------  ##
-                    # Points Map Saving ####
-##  ----------------------------------------------------------  ##
-# NOTE
-  ## For the plotting, because we have to call all that stuff again
-  ## Let's just agree to do it without any comments (to increase efficiency)
-
-# Stuff a low-res, but checkable, jpeg into the Graphs folder
-jpeg(filename = "./Site Map/GRG_Map.jpeg", width = 6, height = 6, units = "in", res = 720)
-map("state", regions = c('iowa', 'missouri'), ylim = c(y1, y2), xlim = c(x1, x2),
-    col = NA, fill = T, res = 0, lwd = 2.5)
-map("county", regions = c('iowa', 'missouri'), ylim = c(y1, y2), xlim = c(x1, x2),
-    col = NA, fill = T, res = 0, add = T)
-points(longlat, pch = shapes, bg = colors, cex = 1)
-box()
-par(plt = c(0.1, 0.375, 0.6, 0.9), new = T)
-plot.window(xlim = inset.x, ylim = inset.y)
-map('state', c('iowa', 'missouri', 'nebraska', 'kansas', 'oklahoma', 'illinois', 'minnesota',
-               'wisconsin', 'arkansas', 'south dakota', 'kentucky', 'tennessee'), 
-    xlim = inset.x, ylim = inset.y, interior = F, add = T, fill = T, col = 'gray98')
-box()
-polygon(x = c(x1, x2, x2, x1), y = c(y1, y1, y2, y2), col = "black")
-dev.off()
-
-# Get an enhanced metafile (EMF) for actual inclusion in any publication
-emf(file = "./Site Map/GRG_Map.emf", bg = "white", width = 7, height = 7, family = "Calibri", coordDPI = 350)
-map("state", regions = c('iowa', 'missouri'), ylim = c(y1, y2), xlim = c(x1, x2),
-    col = NA, fill = T, res = 0, lwd = 2.5)
-map("county", regions = c('iowa', 'missouri'), ylim = c(y1, y2), xlim = c(x1, x2),
-    col = NA, fill = T, res = 0, add = T)
-points(longlat, pch = shapes, bg = colors, cex = 2)
-box()
-par(plt = c(0.1, 0.375, 0.6, 0.9), new = T)
-plot.window(xlim = inset.x, ylim = inset.y)
-map('state', c('iowa', 'missouri', 'nebraska', 'kansas', 'oklahoma', 'illinois', 'minnesota',
-               'wisconsin', 'arkansas', 'south dakota', 'kentucky', 'tennessee'), 
-    xlim = inset.x, ylim = inset.y, interior = F, add = T, fill = T, col = 'gray98')
-box()
-polygon(x = c(x1, x2, x2, x1), y = c(y1, y1, y2, y2), col = "black")
 dev.off()
 
 # END ####
