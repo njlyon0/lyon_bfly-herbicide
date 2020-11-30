@@ -4,7 +4,8 @@
 # Written by Nicholas Lyon
 
 # Required libraries
-library(dplyr); library(Rmisc); library(ggplot2); library(cowplot); library(gridExtra); library(egg)
+library(tidyverse); library(Rmisc); library(ggplot2); library(cowplot)
+library(gridExtra); library(egg)
 
 # Set working directory
 setwd("~/Documents/_Publications/2020_Lyon_Butterfly SnS/Herbicide.WD")
@@ -161,7 +162,7 @@ bf.dive.fig <- egg::ggarrange(bf.14.dive.plt, bf.dive.plt, nrow = 1, widths = c(
 plot_grid(bf.abun.fig, bf.rich.fig, bf.dive.fig, labels = c("i", "ii", "iii"), ncol = 1, nrow = 3)
 
 # Save it
-ggsave(plot = last_plot(), filename = "./Figures/Figure_2.pdf", width = 7, height = 9, units = "in")
+ggsave(plot = last_plot(), filename = "./Figures/Figure 3.pdf", width = 7, height = 9, units = "in")
 
 ##  ----------------------------------------------------------  ##
                         # Flower Figure ####
@@ -274,7 +275,7 @@ flr.dive.fig <- egg::ggarrange(flr.14.dive.plt, flr.dive.plt, nrow = 1, widths =
 plot_grid(flr.abun.fig, flr.rich.fig, flr.dive.fig, labels = c("i", "ii", "iii"), ncol = 1, nrow = 3)
 
 # Save it
-ggsave(plot = last_plot(), filename = "./Figures/Figure_1.pdf", width = 7, height = 9, units = "in")
+ggsave(plot = last_plot(), filename = "./Figures/Figure 2.pdf", width = 7, height = 9, units = "in")
 
 ##  ----------------------------------------------------------  ##
                       # Seedmix Figure ####
@@ -290,10 +291,11 @@ unique(flr.lng$Herb.Trt)
 # Make a seedmix dataframe too
 sdmx.ver0 <- flr.lng %>%
   filter(Seedmix == "X") %>%
-  select(Year:Patch, Herb.Trt, Seedmix, Number) %>%
+  dplyr::select(Year:Patch, Herb.Trt, Seedmix, Number) %>%
   group_by(Year, Site, Patch, Herb.Trt) %>%
   dplyr::summarise(Abundance = sum(Number),
-            Richness = vegan::specnumber(Number))
+            Richness = vegan::specnumber(Number)) %>%
+  as.data.frame()
 str(sdmx.ver0)
 
 # Fix the year column as above
@@ -376,17 +378,18 @@ sdmx.rich.fig <- egg::ggarrange(sdmx.14.rich.plt, sdmx.rich.plt, nrow = 1, width
 plot_grid(sdmx.abun.fig, sdmx.rich.fig, labels = c("i", "ii"), ncol = 1, nrow = 2)
 
 # Save it
-ggsave(plot = last_plot(), filename = "./Figures/Figure_3.pdf", width = 7, height = 9, units = "in")
+ggsave(plot = last_plot(), filename = "./Figures/Figure 4.pdf", width = 7, height = 9, units = "in")
 
 ##  ----------------------------------------------------------  ##
             # Native/Exotic Analysis & Plotting ####
 ##  ----------------------------------------------------------  ##
 # Make a native/exotic dataframe
 nv.ex.ver0 <- flr.lng %>%
-  select(Year:Patch, Herb.Trt, L48.Status, Number) %>%
+  dplyr::select(Year:Patch, Herb.Trt, L48.Status, Number) %>%
   group_by(Year, Site, Patch, Herb.Trt, L48.Status) %>%
   dplyr::summarise(Number = sum(Number)) %>%
-  tidyr::spread(key = "L48.Status", value = "Number", fill = 0)
+  tidyr::spread(key = "L48.Status", value = "Number", fill = 0) %>%
+  as.data.frame()
 str(nv.ex.ver0)
 
 # Get a Percent Native column
@@ -433,7 +436,7 @@ nv.ex.plt <- ggplot(nv.ex.pltdf, aes(x = Year, y = Percent.Native)) +
 nv.ex.fig <- egg::ggarrange(nv.ex.14.plt, nv.ex.plt, nrow = 1, widths = c(1, 2.5))
 
 # Save it
-ggsave(plot = nv.ex.fig, filename = "./Figures/Figure_4.pdf", width = 8, height = 7, units = "in")
+ggsave(plot = nv.ex.fig, filename = "./Figures/Figure 5.pdf", width = 8, height = 7, units = "in")
 
 
 # END ####
