@@ -1,6 +1,6 @@
-##  --------------------------------------------------------------------------------------------------------------------------------------  ##
-                            # Herbicide Side Project - Floral Resource Code
-##  --------------------------------------------------------------------------------------------------------------------------------------  ##
+##  --------------------------------------------------------------------------------------  ##
+                      # Herbicide Side Project - Floral Resource Code
+##  --------------------------------------------------------------------------------------  ##
 # Written by Nicholas Lyon
 
 # PURPOSE ####
@@ -12,13 +12,13 @@ library(vegan); library(ape); library(RRPP) # Calculate & Analyze
 library(dplyr); library(ggplot2); library(Rmisc) # Plot
 
 # Set working directory
-setwd("~/Documents/School/Iowa State/Collaborations/'Herbicide Project/Herbicide.WD")
+setwd("~/Documents/_Publications/2020_Lyon_Butterfly SnS/Herbicide.WD")
 
 # Clear environment to reduce error chances
 rm(list = ls())
 
 ##  ----------------------------------------------------------  ##
-                # Housekeeping
+                       # Housekeeping ####
 ##  ----------------------------------------------------------  ##
 # Pull in data
 flr.v0 <- read.csv("./Data/flr-wide.csv")
@@ -234,9 +234,9 @@ simp.rrpp <- function (object, test.type = c("dist", "VC", "var"), angle.type = 
   
 }
 
-##  ----------------------------------------------------------------------------------------------------------  ##
-                            # Pre-Treatment Analysis ####
-##  ----------------------------------------------------------------------------------------------------------  ##
+##  --------------------------------------------------------------------------------------  ##
+                              # Pre-Treatment Analysis ####
+##  --------------------------------------------------------------------------------------  ##
 # Cover your bases; any differences among patches pre-treatment?
 
 # ABUNDANCE #
@@ -251,11 +251,11 @@ anova(lm.rrpp(Richness ~ Herb.Trt, data = flr.14, iter = 9999), effect.type = "F
 anova(lm.rrpp(sqrt(Diversity) ~ Herb.Trt, data = flr.14, iter = 9999), effect.type = "F")
   ## NS
 
-##  ----------------------------------------------------------------------------------------------------------  ##
+##  --------------------------------------------------------------------------------------  ##
                           # Univariate Analysis and Plotting ####
-##  ----------------------------------------------------------------------------------------------------------  ##
+##  --------------------------------------------------------------------------------------  ##
 ##  ----------------------------------------------------------  ##
-                 # Abundance ####
+                        # Abundance ####
 ##  ----------------------------------------------------------  ##
 # How does the abundance of flowers vary among herbicide treatment patches and over time?
 anova(lm.rrpp(log(Abundance) ~ Herb.Trt * Year, data = flr, iter = 9999), effect.type = "F")
@@ -281,7 +281,7 @@ ggplot(flr, aes(x = Year, y = Abundance)) +
 ggplot2::ggsave("./Graphs/flr_abun.pdf", plot = last_plot())
 
 ##  ----------------------------------------------------------  ##
-              # Species Richness ####
+                   # Species Richness ####
 ##  ----------------------------------------------------------  ##
 # How does the species density of flowers vary among herbicide treatment patches and over time?
 anova(lm.rrpp(Richness ~ Herb.Trt * Year, data = flr, iter = 9999), effect.type = "F")
@@ -324,7 +324,7 @@ ggplot(flr, aes(x = Herb.Trt, y = Richness, fill = Herb.Trt)) +
 ggplot2::ggsave("./Graphs/flr_rich_2.pdf", plot = last_plot())
 
 ##  ----------------------------------------------------------  ##
-                  # Diversity ####
+                        # Diversity ####
 ##  ----------------------------------------------------------  ##
 # How does the diversity of flowers vary among herbicide treatment patches and over time?
 anova(lm.rrpp(sqrt(Diversity) ~ Herb.Trt * Year, data = flr, iter = 9999), effect.type = "F")
@@ -367,11 +367,11 @@ ggplot(flr, aes(x = Herb.Trt, y = Diversity, fill = Herb.Trt)) +
 # Save it
 ggplot2::ggsave("./Graphs/flr_dive_2.pdf", plot = last_plot())
                 
-##  ----------------------------------------------------------------------------------------------------------  ##
-                  # Native/Exotic/Seed-mix Analysis and Plotting ####
-##  ----------------------------------------------------------------------------------------------------------  ##
+##  --------------------------------------------------------------------------------------  ##
+                      # Native/Exotic/Seed-mix Analysis and Plotting ####
+##  --------------------------------------------------------------------------------------  ##
 ##  ----------------------------------------------------------  ##
-                  # Data Prep ####
+                         # Data Prep ####
 ##  ----------------------------------------------------------  ##
 # Get the long format flower data
 flr.lng <- read.csv("./Data/flr-long.csv")
@@ -385,17 +385,19 @@ unique(flr.lng$Herb.Trt)
 nv.ex.v0 <- flr.lng %>%
   select(Year:Patch, Herb.Trt, L48.Status, Number) %>%
   group_by(Year, Site, Patch, Herb.Trt, L48.Status) %>%
-  summarise(Number = sum(Number)) %>%
-  tidyr::spread(key = "L48.Status", value = "Number", fill = 0)
+  dplyr::summarise(Number = sum(Number)) %>%
+  tidyr::spread(key = "L48.Status", value = "Number", fill = 0) %>%
+  as.data.frame()
 str(nv.ex.v0)
 
 # Make a seedmix dataframe too
 sdmx.v0 <- flr.lng %>%
   filter(Seedmix == "X") %>%
   select(Year:Patch, Herb.Trt, Seedmix, Number) %>%
-  group_by(Year, Site, Patch, Herb.Trt) %>%
+  dplyr::group_by(Year, Site, Patch, Herb.Trt) %>%
   summarise(Abundance = sum(Number),
-            Richness = vegan::specnumber(Number))
+            Richness = vegan::specnumber(Number)) %>%
+  as.data.frame()
 str(sdmx.v0)
 
 # Get a Percent Native column
@@ -408,7 +410,7 @@ sdmx.14 <- subset(sdmx.v0, Year == 14)
 sdmx <- subset(sdmx.v0, Year != 14)
 
 ##  ----------------------------------------------------------  ##
-         # Seed-mix Analysis Plotting ####
+              # Seed-mix Analysis Plotting ####
 ##  ----------------------------------------------------------  ##
 # ABUNDANCE (Seedmix) #
 # Pre-treatment
@@ -456,7 +458,7 @@ ggplot(sdmx, aes(x = Year, y = Richness)) +
 ggplot2::ggsave("./Graphs/flr_sdmx_dens.pdf", plot = last_plot())
 
 ##  ----------------------------------------------------------  ##
-      # Native/Exotic Analysis & Plotting ####
+            # Native/Exotic Analysis & Plotting ####
 ##  ----------------------------------------------------------  ##
 # Does the percent native flowers change with treatment and/or time?
 # Pre-treatment baseline first
@@ -480,9 +482,9 @@ ggplot(nv.ex, aes(x = Year, y = Percent.Native)) +
 
 ggplot2::ggsave("./Graphs/flr_native.pdf", plot = last_plot())
 
-##  ----------------------------------------------------------------------------------------------------------  ##
-                        # Multivariate Analysis and Plotting ####
-##  ----------------------------------------------------------------------------------------------------------  ##
+##  --------------------------------------------------------------------------------------  ##
+                          # Multivariate Analysis and Plotting ####
+##  --------------------------------------------------------------------------------------  ##
 # Clear environment to reduce error chances
 rm(list = ls())
 
@@ -624,9 +626,58 @@ dev.off()
 # Set this back to the default so it doesn't mess up later graphs
 par(mfrow = c(1 , 1))
 
-##  ----------------------------------------------------------------------------------------------------------  ##
+##  --------------------------------------------------------------------------------------  ##
+                                  # Specific Floral Species ####
+##  --------------------------------------------------------------------------------------  ##
+# Clear the environment
+rm(list = ls())
+
+# Get the long format flower data
+flr.lng <- read.csv("./Data/flr-long.csv")
+
+# And get the treatment levels in the right order (alpha order doesn't really make sense here)
+unique(flr.lng$Herb.Trt)
+flr.lng$Herb.Trt <- factor(as.character(flr.lng$Herb.Trt), levels = c("Con", "Spr", "SnS"))
+unique(flr.lng$Herb.Trt)
+
+# Get a single value for each species
+flr.spp <- flr.lng %>%
+  select(Nectar.Common.Name, L48.Status, Number) %>%
+  group_by(Nectar.Common.Name, L48.Status) %>%
+  dplyr::summarise(Number = sum(Number)) %>%
+  as.data.frame()
+
+# Check it out
+str(flr.spp)
+
+# Read in index for floral information
+flr.index <- readxl::read_xlsx("./Data/grg-sns-indexes.xlsx", sheet = "Floral Names")
+str(flr.index)
+
+# Bring over scientific names
+flr.spp$Nectar.Scientific.Name <- flr.index$Nectar.Scientific[match(flr.spp$Nectar.Common.Name, tolower(flr.index$Nectar.Common))]
+
+# Rearrange those columns!
+flr.spp.v2 <- flr.spp %>%
+    ## Rename the columns
+  dplyr::rename(Nectar.Common.Name = Nectar.Common.Name,
+                Nectar.Scientific.Name = Nectar.Scientific.Name,
+                L48.Status = L48.Status, Abundance = Number) %>%
+    ## *then* rearrange them
+  dplyr::select(Nectar.Common.Name, Nectar.Scientific.Name, L48.Status, Abundance) %>%
+    ## return a df (not a tibble)
+  as.data.frame()
+
+# Check the structure
+str(flr.spp.v2)
+
+# Save it!
+write.csv(flr.spp.v2, "./Tables/flr-sns-checklist.csv", row.names = F)
+
+
+##  --------------------------------------------------------------------------------------  ##
                                   # Misc Notes ####
-##  ----------------------------------------------------------------------------------------------------------  ##
+##  --------------------------------------------------------------------------------------  ##
 # NOTE ON STATS:
   ## "marginally sig" means p < 2*critical point
   ## "sig" means p < critical point
