@@ -12,7 +12,7 @@ library(vegan); library(ape); library(RRPP) # Calculate & Analyze
 library(ggplot2); library(Rmisc) # Plot
 
 # Set working directory
-setwd("~/Documents/School/Iowa State/Collaborations/'Herbicide Project/Herbicide.WD")
+setwd("~/Documents/_Publications/2021_Lyon_Butterfly SnS/Herbicide.WD")
 
 # Clear environment to reduce error chances
 rm(list = ls())
@@ -196,7 +196,7 @@ pcoa.3.ord <- function(mod, groupcol, g1, g2, g3, lntp1 = 1, lntp2 = 1, lntp3 = 
 }
 
 # Select your community similarity/distance index (use the style of vegan::vegdist)
-comm.dist <- "jaccard"
+comm.dist <- "bray"
 
 # Subset by year
 bf14 <- subset(bf, bf$Year == 14)
