@@ -8,7 +8,7 @@ library(tidyverse); library(Rmisc); library(ggplot2); library(cowplot)
 library(gridExtra); library(egg)
 
 # Set working directory
-setwd("~/Documents/_Publications/2020_Lyon_Butterfly SnS/Herbicide.WD")
+setwd("~/Documents/_Publications/2021_Lyon_Butterfly SnS/Herbicide.WD")
 
 # Clear environment to reduce error chances
 rm(list = ls())
