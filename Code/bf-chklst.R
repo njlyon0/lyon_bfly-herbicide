@@ -10,7 +10,7 @@
 library(tidyverse)
 
 # Set working directory
-setwd("~/Documents/_Publications/2020_Lyon_Butterfly SnS/Herbicide.WD")
+setwd("~/Documents/_Publications/2021_Lyon_Butterfly SnS/Herbicide.WD")
 
 # Clear environment to reduce error chances
 rm(list = ls())
@@ -54,5 +54,19 @@ summary(bf.v3)
 
 # Looks great, save it out!
 write.csv(bf.v3, "./Tables/bf-sns-checklist.csv", row.names = F)
+
+## -------------------------------------------- ##
+        # Species Relative Abundances ####
+## -------------------------------------------- ##
+# Get the total abundance of each bfly species across the study years
+bf.spp <- bf %>%
+  ## Sum through everything but year and butterfly species
+  group_by(Butterfly.Common.Name) %>%
+  summarise(Number = sum(Number)) %>%
+  ## Pivot to wide format
+  as.data.frame()
+
+str(bf.spp)
+
 
 # END ####
