@@ -110,7 +110,7 @@ bf.14.rich.plt <- ggplot(bf.14.rich.pltdf, aes(x = Herb.Trt, y = Richness)) +
 
   ## Post-Treatment (2015-18)
 bf.rich.plt <- ggplot(bf.rich.pltdf, aes(x = Year, y = Richness)) +
-  geom_smooth(method = "lm", se = F, color = "black") +
+  #geom_smooth(method = "lm", se = F, color = "black") +
   #geom_smooth(aes(color = Herb.Trt), method = "lm", se = F, linetype = 4) +
   geom_errorbar(aes(ymax = Richness + se, ymin = Richness - se,
                     color = Herb.Trt), width = 0.45, position = dodge) +
