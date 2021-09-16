@@ -11,12 +11,14 @@
 rm(list = ls())
 
 # Set working directory
-setwd("~/Documents/School/1. Iowa State/Collaborations/'Herbicide Project/Herbicide.WD")
+myWD <- getwd()
+myWD
+  ## Should end in the project's directory
 
 # Required libraries
-library(plyr); library(dtplyr); library(stringr); library(tidyr) # Clean & Explore
-library(vegan); library(RRPP) # Calculate & Analyze
-library(ggplot2); library(gridExtra); library(cowplot) # Plot
+library(plyr); library(dtplyr); library(stringr); library(tidyr)
+library(vegan); library(RRPP); library(dtplyr)
+library(ggplot2); library(gridExtra); library(cowplot)
 
 # Bomb modeling check custom functions
 resid_boxplot <- function(resid){

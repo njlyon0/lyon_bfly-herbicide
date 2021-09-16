@@ -9,9 +9,11 @@
 # Necessary libraries
 library(rgdal); library(sp); library(raster); library(maps); library(GISTools)  
 
-# Set the working directory
-setwd("~/Documents/_Publications/2021_Lyon_Butterfly SnS/Herbicide.WD")
-
+# Set working directory
+myWD <- getwd()
+myWD
+  ## Should end in the project's directory
+                
 # Clear the environment
 rm(list = ls())
 

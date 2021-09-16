@@ -12,7 +12,9 @@
 library(ggplot2); library(cowplot)
 
 # Set working directory
-setwd("~/Documents/School/Iowa State/Collaborations/'Herbicide Project/Herbicide.WD")
+myWD <- getwd()
+myWD
+  ## Should end in the project's directory
 
 ##  ----------------------------------------------------------------------------------------------------------  ##
                                     # Housekeeping ####

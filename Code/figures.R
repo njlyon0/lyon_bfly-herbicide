@@ -8,7 +8,9 @@ library(tidyverse); library(Rmisc); library(ggplot2); library(cowplot)
 library(gridExtra); library(egg)
 
 # Set working directory
-setwd("~/Documents/_Publications/2021_Lyon_Butterfly SnS/Herbicide.WD")
+myWD <- getwd()
+myWD
+  ## Should end in the project's directory
 
 # Clear environment to reduce error chances
 rm(list = ls())
