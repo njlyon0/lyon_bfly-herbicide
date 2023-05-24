@@ -1,2 +1,9 @@
-# Herbicide-MS-SideProject
-Analyzes patch-level consequences of the herbicide (aka anti-fescue) treatments.
+# Responses of Flowering Plant and Butterfly Communities to Experimental Herbicide and Seeding Treatments for Native Grassland Restoration
+
+### Nicholas J. Lyon, David S. Stein, Diane M. Debinski, James R. Miller and Walter H. Schacht
+
+This repository contains all relevant code to the [Lyon et al. 2021](https://er.uwpress.org/content/39/3/168.short) paper published in Ecological Restoration.
+
+## Paper Abstract
+
+Globally, grasslands are among the most degraded habitats, and within that category tallgrass prairies are especially threatened. To restore native species in tallgrass prairie, it is often necessary to concurrently remove exotic plant species while restoring the disturbance processes that many prairie taxa depend upon. Here, we coupled one herbicide application and seed mixture addition with tri-annual prescribed fire and annual cattle grazing to explore the consequences for floral resource (i.e., nectar-producing) plant communities and butterfly communities up to four years later. Each site was divided into three equally sized patches which were placed into either control, “spray-only”, or “spray-and-seed” treatment groups. We quantified both floral resource plant and butterfly communities in the year prior to herbicide application and the four years following that treatment. In the four years post-treatment, we found that floral resource abundance, richness, and diversity increased over time but did not significantly vary among treatments. No response to treatment was observed in butterflies, but butterfly abundance decreased while richness was stable and diversity increased over time, which may indicate that the changes to floral resources at the patch scale supported more speciose and diverse butterfly communities at the site scale. Butterfly abundance decreasing over time could be an effect of baseline management or unrelated regional factors. Regardless of whether either treatment benefited butterflies, we find support for a one-time herbicide application changing the floral community in desirable ways and at least not harming butterflies.
